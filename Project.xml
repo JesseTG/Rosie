@@ -79,4 +79,5 @@
 	<!-- _________________________________ Custom _______________________________ -->
 
 	<!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
+	<template path="assets/template/index.html" rename="index.html" if="flash"/>
 </project>
