@@ -35,8 +35,6 @@
 
 	<haxelib name="flixel" />
 
-	<haxelib name="ash" />
-
 	<haxelib name="flixel-addons" />
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
