@@ -7,7 +7,9 @@ import flixel.addons.editors.tiled.TiledTileSet;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.math.FlxMath;
+import flixel.graphics.FlxGraphic;
 import flixel.text.FlxText;
 import flixel.tile.FlxBaseTilemap.FlxTilemapAutoTiling;
 import flixel.tile.FlxTilemap;
@@ -20,18 +22,18 @@ class PlayState extends FlxState
 {
   private var _map : TiledMap;
   private var _background : FlxTilemap;
+  private var _sprites : FlxAtlasFrames;
 
   override public function create():Void
   {
     super.create();
-    var b : Block = new Block(0, 0);
-    b.makeGraphic(16, 16, FlxColor.RED);
-    this.add(b);
 
     // TODO: Handle a missing tileset (or invalid data, e.g. unsupported format)
     _map = new TiledMap(AssetPaths.world__tmx);
     _background = new FlxTilemap();
     var bgImage = new FlxSprite();
+
+    _sprites = FlxAtlasFrames.fromTexturePackerJson(AssetPaths.gfx__png, AssetPaths.gfx__json);
 
     // TODO: Store the tiled map on the texture atlas and load from there, instead of a separate image
     // TODO: Handle the layers/tilesets not being named in the way I want them to be
@@ -41,6 +43,7 @@ class PlayState extends FlxState
 
     FlxG.console.registerObject("tiles", tiles);
     FlxG.console.registerObject("tileSet", tileSet);
+    FlxG.console.registerObject("sprites", _sprites);
 
     _background.loadMapFromArray(
       tiles.tileArray,
@@ -57,6 +60,14 @@ class PlayState extends FlxState
 
     this.add(bgImage);
     this.add(_background);
+
+    var b : Block = new Block(0, 0);
+    b.frame = _sprites.getByName("tile-red.png");
+    this.add(b);
+
+    var c = new Block(32, 32);
+    c.frame = _sprites.getByName("tile-orange.png");
+    this.add(c);
   }
 
   override public function update(elapsed:Float):Void
