@@ -1,7 +1,12 @@
 package entities;
 
+using Lambda;
+
 import haxe.EnumTools;
 
+import flixel.math.FlxMath;
+import flixel.FlxObject;
+import flixel.addons.display.FlxExtendedSprite;
 import flixel.graphics.frames.FlxFramesCollection;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.input.mouse.FlxMouseEventManager;
@@ -13,6 +18,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
   public var gridSize(default, null) : Int;
   public var gravity(default, null) : GravityDirection;
+  private var _canClick : Bool;
 
   // TODO: Don't hard-code the block size in this class
   public function new(x:Int, y:Int, size:Int, sprites:FlxFramesCollection) {
@@ -34,6 +40,80 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
       this.add(b);
       return b;
     });
+  }
+
+  private function _updateGrid() {
+    this._blockGrid.forEach(function(b:Block, x:Int, y:Int) {
+      return null;
+    });
+    // TODO: Not sure why I can't use Array2.clear() here (Doing so crashes)
+
+    this.forEachExists(function(block:Block) {
+      var x = Math.round(block.x / block.frameWidth) * block.frameWidth;
+      var y = Math.round(block.y / block.frameHeight) * block.frameHeight;
+
+      x -= Std.int(this.x);
+      y -= Std.int(this.y);
+
+      x = Math.round(x / block.frameWidth);
+      y = Math.round(y / block.frameHeight);
+
+      _blockGrid.set(x, y, block);
+    });
+
+    trace(this._blockGrid);
+  }
+
+  private function _anyMoving() : Bool {
+    return this.members.exists(function(block:Block) {
+      // For each Block on-screen...
+      return block.alive && block.exists && (!FlxMath.equal(block.velocity.x, 0) || !FlxMath.equal(block.velocity.y, 0));
+      // Return true if it's moving horizontally OR vertically
+    });
+  }
+
+  private function _rotateGravity() {
+    // TODO: I'm sure Haxe provides a nicer way to write the following code
+    if (this.gravity == GravityDirection.Down) {
+      this.gravity = GravityDirection.Left;
+    }
+    else if (this.gravity == GravityDirection.Left) {
+      this.gravity = GravityDirection.Up;
+    }
+    else if (this.gravity == GravityDirection.Up) {
+      this.gravity = GravityDirection.Right;
+    }
+    else if (this.gravity == GravityDirection.Right) {
+      this.gravity = GravityDirection.Down;
+    }
+
+    this.forEachExists(function(block:Block) {
+      block.gravity = this.gravity;
+    });
+    // TODO: What if, for some reason, this.gravity isn't one of these?
+  }
+
+  private function _startMovingBlocks(clicked:Block) {
+    var clickedX = Math.floor(clicked.x / clicked.frameWidth) * clicked.frameWidth;
+    var clickedY = Math.floor(clicked.y / clicked.frameHeight) * clicked.frameHeight;
+
+    this._rotateGravity();
+
+    this.forEachExists(function(block:Block) {
+      var x = Math.floor(block.x / block.frameWidth) * block.frameWidth;
+      var y = Math.floor(block.y / block.frameHeight) * block.frameHeight;
+
+      if (!block.isTouching(this.gravity.Direction)) {
+        block.moves = true;
+      }
+
+    });
+  }
+
+  private function _stopMovingBlocks() {
+      trace("All blocks have stopped moving");
+      this._updateGrid();
+      this._canClick = true;
   }
 
   public override function destroy() {
