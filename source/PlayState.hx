@@ -81,6 +81,23 @@ class PlayState extends FlxState
       1 // Tiled uses 0-indexing, but I think FlxTilemap uses 1-indexing
     );
 
+    for (i in 0...tileSet.numTiles) {
+      var props = tileSet.tileProps[i];
+      var gid = tileSet.toGid(i);
+      if (props != null) {
+        // If this tile defines any custom properties...
+        if (props.contains("collidable") && props.get("collidable") == "true") {
+          _background.setTileProperties(gid, FlxObject.ANY, Block);
+        }
+        else {
+          _background.setTileProperties(gid, FlxObject.NONE);
+        }
+      }
+      else {
+        _background.setTileProperties(gid, FlxObject.NONE);
+      }
+    }
+
     bgImage.loadGraphic(AssetPaths.bg__png);
 
     var gridObject : TiledObject = objects.objects.find(function(object:TiledObject) {
