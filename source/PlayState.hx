@@ -23,6 +23,8 @@ class PlayState extends FlxState
   private var _map : TiledMap;
   private var _background : FlxTilemap;
   private var _sprites : FlxAtlasFrames;
+  private var _scene : FlxScene;
+  private var _hud : FlxGroup;
 
   override public function create():Void
   {
@@ -34,6 +36,11 @@ class PlayState extends FlxState
     var bgImage = new FlxSprite();
 
     _sprites = FlxAtlasFrames.fromTexturePackerJson(AssetPaths.gfx__png, AssetPaths.gfx__json);
+
+    _scene = new FlxScene(AssetPaths.game__xml);
+
+    _hud = new FlxGroup();
+    _scene.spawn(_hud, "hud");
 
     // TODO: Store the tiled map on the texture atlas and load from there, instead of a separate image
     // TODO: Handle the layers/tilesets not being named in the way I want them to be
