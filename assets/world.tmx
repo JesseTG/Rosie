@@ -4,37 +4,37 @@
   <image source="images/tile-environment.png" width="96" height="96"/>
   <tile id="4">
    <properties>
-    <property name="collidable" value="true"/>
+    <property name="collidable" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="5">
    <properties>
-    <property name="collidable" value="true"/>
+    <property name="collidable" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="9">
    <properties>
-    <property name="collidable" value="true"/>
+    <property name="collidable" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="10">
    <properties>
-    <property name="collidable" value="true"/>
+    <property name="collidable" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="11">
    <properties>
-    <property name="collidable" value="true"/>
+    <property name="collidable" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="15">
    <properties>
-    <property name="collidable" value="true"/>
+    <property name="collidable" type="bool" value="true"/>
    </properties>
   </tile>
  </tileset>
  <imagelayer name="Background">
-  <image source="images/bg.png"/>
+  <image source="images/bg.png" width="320" height="192"/>
  </imagelayer>
  <layer name="Ground" width="20" height="15">
   <data encoding="base64">
