@@ -35,6 +35,7 @@ class PlayState extends FlxState
   private var _map : TiledMap;
   private var _background : FlxTilemap;
   private var _sprites : FlxAtlasFrames;
+  private var _blockGrid : BlockGrid;
   private var _scene : FlxScene;
   private var _hud : FlxGroup;
 
@@ -58,6 +59,8 @@ class PlayState extends FlxState
     // TODO: Handle the layers/tilesets not being named in the way I want them to be
     var tiles : TiledTileLayer = cast(_map.getLayer("Ground"), TiledTileLayer);
     var bg : TiledImageLayer = cast(_map.getLayer("Background"), TiledImageLayer);
+    var objects : TiledObjectLayer = cast(_map.getLayer("Objects"), TiledObjectLayer);
+
     var tileSet : TiledTileSet = _map.getTileSet("Overworld");
 
     FlxG.console.registerObject("tiles", tiles);
@@ -78,11 +81,20 @@ class PlayState extends FlxState
 
     bgImage.loadGraphic(AssetPaths.bg__png);
 
+    var gridObject : TiledObject = objects.objects.find(function(object:TiledObject) {
+      return object.name == "Grid";
+    });
+    // TODO: Handle the case where this is null
 
+    var size = Std.parseInt(gridObject.properties.get("Size"));
     this.add(bgImage);
     this.add(_background);
 
+    _blockGrid = new BlockGrid(gridObject.x, gridObject.y, size, _sprites);
 
+    FlxG.console.registerObject("blockGrid", _blockGrid);
+
+    this.add(_blockGrid);
   }
 
   override public function update(elapsed:Float):Void
