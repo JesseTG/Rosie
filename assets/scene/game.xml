@@ -3,10 +3,6 @@
 
   <!-- Get these values using FlxScene.const("id") -->
   <constants>
-    <const id="lives" type="Int" value="3" />
-    <const id="precise" type="Float" value="61.75848" />
-    <const id="raining" type="Bool" value="false" />
-    <const id="boss_name" type="String" value="Hades" />
     <const id="gridSize" type="Int" value="8" />
   </constants>
 
@@ -19,13 +15,6 @@
   </layer>
   <!-- FlxText, FlxButton -->
   <layer id="hud">
-    <text text="FlxScene" x="10" y="10" color="black" size="20" />
-
-    <!-- More FlxText properties -->
-    <!-- You can also use FlxSprite properties, e.g. 'alpha' -->
-    <text id="welcome_text" text="FlxText" x="300" y="100" angle="30" size="40" font="font.ttf" color="black" alignment="left" borderStyle="outline" borderColor="red" borderSize="2" wordWrap="false" />
-
-    <button id="reset_state" text="Reset State" alignBottom="10" alignRight="10" />
 
     <!-- Alignment properties (parameter: margin)
     alignBottom, alignRight, alignHorizontal, alignVertical -->
