@@ -37,6 +37,8 @@ class PlayState extends FlxState
   private var _sprites : FlxAtlasFrames;
   private var _blockGrid : BlockGrid;
   private var _scene : FlxScene;
+  private var _mouseControl : FlxMouseControl;
+
   private var _hud : FlxGroup;
 
   override public function create():Void
@@ -87,6 +89,9 @@ class PlayState extends FlxState
     // TODO: Handle the case where this is null
 
     var size = Std.parseInt(gridObject.properties.get("Size"));
+    this._mouseControl = new FlxMouseControl();
+
+    FlxG.plugins.add(_mouseControl);
     this.add(bgImage);
     this.add(_background);
 
@@ -95,6 +100,7 @@ class PlayState extends FlxState
     FlxG.console.registerObject("blockGrid", _blockGrid);
 
     this.add(_blockGrid);
+    this.add(_mouseControl);
   }
 
   override public function update(elapsed:Float):Void
