@@ -70,13 +70,7 @@ class PlayState extends FlxState
     this.add(bgImage);
     this.add(_background);
 
-    var b : Block = new Block(0, 0);
-    b.frame = _sprites.getByName("tile-red.png");
-    this.add(b);
 
-    var c = new Block(32, 32);
-    c.frame = _sprites.getByName("tile-orange.png");
-    this.add(c);
   }
 
   override public function update(elapsed:Float):Void
