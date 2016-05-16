@@ -21,10 +21,16 @@ import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
+import flixel.math.FlxPoint;
 import flixel.tile.FlxBaseTilemap.FlxTilemapAutoTiling;
 import flixel.tile.FlxTilemap;
 import flixel.ui.FlxButton;
 import flixel.util.FlxColor;
+import flixel.util.FlxSpriteUtil.LineStyle;
+import flixel.input.mouse.FlxMouseEventManager;
+import flixel.addons.display.shapes.FlxShapeArrow;
+
+import de.polygonal.Printf;
 
 import entities.Block;
 import entities.BlockColor;
@@ -40,6 +46,10 @@ class PlayState extends FlxState
   private var _mouseControl : FlxMouseControl;
 
   private var _hud : FlxGroup;
+  private var _score : Int;
+  private var _time : Float;
+  private var _timeDisplay : FlxText;
+
 
   override public function create():Void
   {
@@ -53,11 +63,12 @@ class PlayState extends FlxState
     var bgImage = new FlxBackdrop(AssetPaths.bg__png, 0, 0, false, false);
 
     _sprites = FlxAtlasFrames.fromTexturePackerJson(AssetPaths.gfx__png, AssetPaths.gfx__json);
-
     _scene = new FlxScene(AssetPaths.game__xml);
+    _score = 0;
 
     _hud = new FlxGroup();
     _scene.spawn(_hud, "hud");
+    _timeDisplay = _scene.object("time");
 
     // TODO: Store the tiled map on the texture atlas and load from there, instead of a separate image
     // TODO: Handle the layers/tilesets not being named in the way I want them to be
@@ -110,13 +121,22 @@ class PlayState extends FlxState
     var size = Std.parseInt(gridObject.properties.get("Size"));
     this._mouseControl = new FlxMouseControl();
 
+    _time = (size * size);
+
     FlxG.plugins.add(_mouseControl);
 
+
+    var scoreDisplay : FlxText = _scene.object("score");
+
     _blockGrid = new BlockGrid(gridObject.x, gridObject.y, size, _sprites);
+    _blockGrid.OnScore.add(function(score:Int) {
+      this._score += score;
+      FlxG.sound.play(AssetPaths.clear_blocks__wav);
+      scoreDisplay.text = Std.string(this._score);
+    });
 
     FlxG.console.registerObject("blockGrid", _blockGrid);
-
-
+    FlxG.console.registerObject("arrow", _arrow);
 
     this.add(bgImage);
     this.add(_background);
@@ -128,6 +148,14 @@ class PlayState extends FlxState
   override public function update(elapsed:Float):Void
   {
     super.update(elapsed);
+
+    _time -= elapsed;
+    _timeDisplay.text = Printf.format("%.1f", [Math.max(0, _time)]);
+
+
+    if (_time <= 0) {
+      FlxMouseEventManager.removeAll();
+    }
 
     FlxG.collide(_blockGrid, _background, function(block:Block, b:FlxObject) {
       if (block.isTouching(block.gravity.Direction)) {

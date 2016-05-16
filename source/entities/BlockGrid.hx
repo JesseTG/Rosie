@@ -6,11 +6,15 @@ import haxe.EnumTools;
 
 import flixel.math.FlxMath;
 import flixel.FlxObject;
+import flixel.FlxG;
+import flixel.math.FlxPoint;
 import flixel.addons.display.FlxExtendedSprite;
 import flixel.graphics.frames.FlxFramesCollection;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.input.mouse.FlxMouseEventManager;
+import flixel.util.FlxSignal.FlxTypedSignal;
 import de.polygonal.ds.Array2;
+import de.polygonal.ds.ArrayedQueue;
 
 import entities.GravityDirection.Orientation;
 
@@ -21,11 +25,13 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   public var gridSize(default, null) : Int;
   public var gravity(default, null) : GravityDirection;
   private var _canClick : Bool;
+  public var OnScore(default, null) : FlxTypedSignal<Int->Void>;
 
   // TODO: Don't hard-code the block size in this class
   public function new(x:Int, y:Int, size:Int, sprites:FlxFramesCollection) {
     super(x, y - 16, size * size + Std.int(0.5 * size));
 
+    this.OnScore = new FlxTypedSignal<Int->Void>();
     this._canClick = true;
     this._blockGrid = new Array2<Block>(size, size);
     this.gravity = GravityDirection.Right;
@@ -41,9 +47,18 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
       FlxMouseEventManager.add(b, function(block:Block) {
         if (this._canClick) {
           // If no blocks are moving...
-          block.kill();
-          this._canClick = false;
-          this._startMovingBlocks();
+          var blocks = this._getBlockGroup(block);
+
+          if (blocks.length >= 3) {
+            // If the selected block group has at least 3 blocks...
+            blocks.iter(function(toKill:Block) {
+              toKill.kill();
+            });
+
+            this._canClick = false;
+            this._startMovingBlocks();
+            this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
+          }
         }
       }, false, true, false);
 
@@ -74,19 +89,26 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     // TODO: Not sure why I can't use Array2.clear() here (Doing so crashes)
 
     this.forEachExists(function(block:Block) {
-      var x = Math.round(block.x / block.frameWidth) * block.frameWidth;
-      var y = Math.round(block.y / block.frameHeight) * block.frameHeight;
+      // TODO: Put this in a function
+      var indices = this._getGridIndex(block);
 
-      x -= Std.int(this.x);
-      y -= Std.int(this.y);
-
-      x = Math.round(x / block.frameWidth);
-      y = Math.round(y / block.frameHeight);
-
-      _blockGrid.set(x, y, block);
+      _blockGrid.set(Std.int(indices.x), Std.int(indices.y), block);
     });
 
     trace(this._blockGrid);
+  }
+
+  private function _getGridIndex(block:Block) : FlxPoint {
+    var x = Math.round(block.x / block.frameWidth) * block.frameWidth;
+    var y = Math.round(block.y / block.frameHeight) * block.frameHeight;
+
+    x -= Std.int(this.x);
+    y -= Std.int(this.y);
+
+    x = Math.round(x / block.frameWidth);
+    y = Math.round(y / block.frameHeight);
+
+    return new FlxPoint(x, y);
   }
 
   private function _anyMoving() : Bool {
@@ -118,6 +140,47 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     // TODO: What if, for some reason, this.gravity isn't one of these?
   }
 
+  /**
+   * Given a block, return its flood-filled group of the same color.
+   * Resulting array is not in any particular order.
+   */
+  private function _getBlockGroup(clicked:Block) : Array<Block> {
+    var blocks = new Array<Block>();
+    if (clicked == null) return blocks;
+
+    var queue = new ArrayedQueue<Block>();
+    queue.enqueue(clicked);
+
+    while (!queue.isEmpty()) {
+      var current = queue.dequeue();
+
+      if (current.blockColor == clicked.blockColor) {
+        blocks.push(current);
+
+        var indices = _getGridIndex(current);
+        var x = Std.int(indices.x);
+        var y = Std.int(indices.y);
+
+        var west = _blockGrid.inRange(x - 1, y) ? _blockGrid.get(x - 1, y) : null;
+        var east = _blockGrid.inRange(x + 1, y) ? _blockGrid.get(x + 1, y) : null;
+        var north = _blockGrid.inRange(x, y - 1) ? _blockGrid.get(x, y - 1) : null;
+        var south = _blockGrid.inRange(x, y + 1) ? _blockGrid.get(x, y + 1) : null;
+
+        if (west != null && !blocks.has(west)) queue.enqueue(west);
+        if (east != null && !blocks.has(east)) queue.enqueue(east);
+        if (north != null && !blocks.has(north)) queue.enqueue(north);
+        if (south != null && !blocks.has(south)) queue.enqueue(south);
+      }
+
+    }
+
+    return blocks;
+  }
+
+  private function _anyGroupsLeft() : Bool {
+    return false;
+  }
+
   private function _startMovingBlocks() {
     this._rotateGravity();
 
@@ -138,6 +201,15 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
         block.velocity.set(0, 0);
         block.snapToGrid();
       });
+
+      var blockCount = 0;
+      this.forEachExists(function(block:Block) {
+        blockCount++;
+      });
+
+      if (blockCount <= 8) {
+        // Good!  Generate more blocks
+      }
       this._canClick = true;
   }
 
