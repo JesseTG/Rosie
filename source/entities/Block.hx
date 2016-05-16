@@ -1,8 +1,11 @@
 package entities;
 
+import flixel.math.FlxMath;
+import flixel.FlxObject;
 import flixel.FlxBasic.FlxType;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxFramesCollection;
+import flixel.FlxG;
 
 class Block extends FlxSprite {
   public var blockColor(default, null) : BlockColor;
@@ -12,6 +15,7 @@ class Block extends FlxSprite {
   public function new(x:Float = 0, y:Float = 0, sprites:FlxFramesCollection, blockColor:BlockColor) {
     super(x, y);
     this.frame = sprites.getByName(cast(blockColor));
+    this.moves = false;
     this.blockColor = blockColor;
     this.flixelType = FlxType.OBJECT;
     this.updateHitbox();
@@ -29,6 +33,17 @@ class Block extends FlxSprite {
     this.allowCollisions = this.gravity.CollisionSides;
 
     return this.gravity;
+  }
+
+  public override function update(elapsed:Float) {
+    if (this.moves && this.isTouching(this.gravity.Direction)) {
+      this.x = Math.round(this.x / this.frameWidth) * this.frameWidth;
+      this.y = Math.round(this.y / this.frameHeight) * this.frameHeight;
+      this.velocity.set(0, 0);
+      //this.moves = false;
+    }
+
+    super.update(elapsed);
   }
 
   }
