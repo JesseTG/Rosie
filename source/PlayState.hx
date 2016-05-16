@@ -45,6 +45,8 @@ class PlayState extends FlxState
   {
     super.create();
 
+    FlxG.worldDivisions = 4;
+    FlxObject.SEPARATE_BIAS = 8;
     // TODO: Handle a missing tileset (or invalid data, e.g. unsupported format)
     _map = new TiledMap(AssetPaths.world__tmx);
     _background = new FlxTilemap();
