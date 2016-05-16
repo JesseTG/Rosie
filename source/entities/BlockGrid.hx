@@ -25,10 +25,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     super(x, y - 16, size * size + Std.int(0.5 * size));
 
     this._canClick = true;
-    FlxMouseEventManager.add(this, function(grid:BlockGrid) {
-      //trace(this);
-    }, false, true, false);
-
     this._blockGrid = new Array2<Block>(size, size);
     this.gravity = GravityDirection.Right;
     this.gridSize = size;
@@ -42,10 +38,10 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
       FlxMouseEventManager.add(b, function(block:Block) {
         if (this._canClick) {
-          // If this block is NOT moving...
+          // If no blocks are moving...
           block.kill();
           this._canClick = false;
-          this._startMovingBlocks(block);
+          this._startMovingBlocks();
         }
       }, false, true, false);
 
@@ -65,6 +61,10 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     super.update(elapsed);
   }
 
+  /**
+   * Fills the array data structure with every block based on its position.
+   * Called just after all blocks stop moving
+   */
   private function _updateGrid() {
     this._blockGrid.forEach(function(b:Block, x:Int, y:Int) {
       return null;
@@ -116,10 +116,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     // TODO: What if, for some reason, this.gravity isn't one of these?
   }
 
-  private function _startMovingBlocks(clicked:Block) {
-    var clickedX = Math.floor(clicked.x / clicked.frameWidth) * clicked.frameWidth;
-    var clickedY = Math.floor(clicked.y / clicked.frameHeight) * clicked.frameHeight;
-
+  private function _startMovingBlocks() {
     this._rotateGravity();
 
     this.forEachExists(function(block:Block) {
