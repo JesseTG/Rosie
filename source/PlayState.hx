@@ -61,7 +61,7 @@ class PlayState extends FlxState
       AssetPaths.tile_environment__png,
       tileSet.tileWidth,
       tileSet.tileHeight,
-      1 // Tiled uses 0-indexing, but I think FlxTilemap uses 0-indexing
+      1 // Tiled uses 0-indexing, but I think FlxTilemap uses 1-indexing
     );
 
     bgImage.loadGraphic(AssetPaths.bg__png);
