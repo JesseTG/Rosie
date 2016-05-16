@@ -24,22 +24,45 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   public function new(x:Int, y:Int, size:Int, sprites:FlxFramesCollection) {
     super(x, y - 16, size * size + Std.int(0.5 * size));
 
+    this._canClick = true;
     FlxMouseEventManager.add(this, function(grid:BlockGrid) {
-      trace(this);
+      //trace(this);
     }, false, true, false);
 
     this._blockGrid = new Array2<Block>(size, size);
-    this.gravity = GravityDirection.Down;
+    this.gravity = GravityDirection.Right;
     this.gridSize = size;
 
     _blockGrid.forEach(function(block:Block, gridX:Int, gridY:Int) {
-      var blockColor = BlockColor.All[Std.random(BlockColor.All.length - 2)];
       var b = this.recycle(Block, function() {
+        trace("New block created");
+        var blockColor = BlockColor.All[Std.random(BlockColor.All.length - 2)];
         return new Block(gridX * 16, gridY * 16, sprites, blockColor);
       });
+
+      FlxMouseEventManager.add(b, function(block:Block) {
+        if (this._canClick) {
+          // If this block is NOT moving...
+          block.kill();
+          this._canClick = false;
+          this._startMovingBlocks(block);
+        }
+      }, false, true, false);
+
+      b.gravity = this.gravity;
+      b.velocity.set(0, 0);
       this.add(b);
       return b;
     });
+  }
+
+  public override function update(elapsed:Float) {
+    if (!this._canClick && !_anyMoving()) {
+      // If all blocks have stopped moving...
+      this._stopMovingBlocks();
+    }
+
+    super.update(elapsed);
   }
 
   private function _updateGrid() {
