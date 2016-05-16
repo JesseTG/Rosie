@@ -126,6 +126,8 @@ class PlayState extends FlxState
   override public function update(elapsed:Float):Void
   {
     super.update(elapsed);
+
     FlxG.collide(_blockGrid, _background);
+    FlxG.collide(_blockGrid, _blockGrid);
   }
 }
