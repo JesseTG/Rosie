@@ -9,6 +9,7 @@ import flixel.FlxG;
 
 class Block extends FlxSprite {
   public var blockColor(default, null) : BlockColor;
+  // TODO: Make a setter that also sets the image
 
   public var gravity(default, set) : GravityDirection;
 
@@ -18,6 +19,9 @@ class Block extends FlxSprite {
     this.moves = false;
     this.blockColor = blockColor;
     this.flixelType = FlxType.OBJECT;
+    //this.allowCollisions = FlxObject.UP | FlxObject.DOWN;
+    this.pixelPerfectPosition = true;
+    //this.pixelPerfectRender = true;
     this.updateHitbox();
     this.resetSizeFromFrame();
     // TODO: Adjust the hitbox whenever gravity changes
@@ -46,5 +50,7 @@ class Block extends FlxSprite {
     super.update(elapsed);
   }
 
+  public override function toString() : String {
+    return cast(blockColor);
   }
 }
