@@ -37,6 +37,8 @@
 
 	<haxelib name="flixel-addons" />
 
+	<haxelib name="polygonal-ds" version="git" />
+
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
 	<!--Enable the Flixel core recording system-->
