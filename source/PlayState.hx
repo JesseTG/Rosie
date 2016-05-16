@@ -109,14 +109,17 @@ class PlayState extends FlxState
     this._mouseControl = new FlxMouseControl();
 
     FlxG.plugins.add(_mouseControl);
-    this.add(bgImage);
-    this.add(_background);
 
     _blockGrid = new BlockGrid(gridObject.x, gridObject.y, size, _sprites);
 
     FlxG.console.registerObject("blockGrid", _blockGrid);
 
+
+
+    this.add(bgImage);
+    this.add(_background);
     this.add(_blockGrid);
+    this.add(_hud);
     this.add(_mouseControl);
   }
 
