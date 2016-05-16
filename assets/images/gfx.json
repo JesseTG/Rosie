@@ -2,7 +2,7 @@
 
 "tile-blue.png":
 {
-	"frame": {"x":80,"y":0,"w":16,"h":16},
+	"frame": {"x":458,"y":44,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
@@ -10,7 +10,7 @@
 },
 "tile-green.png":
 {
-	"frame": {"x":64,"y":0,"w":16,"h":16},
+	"frame": {"x":332,"y":46,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
@@ -18,7 +18,7 @@
 },
 "tile-orange.png":
 {
-	"frame": {"x":48,"y":0,"w":16,"h":16},
+	"frame": {"x":270,"y":48,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
@@ -26,7 +26,7 @@
 },
 "tile-purple.png":
 {
-	"frame": {"x":32,"y":0,"w":16,"h":16},
+	"frame": {"x":254,"y":48,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
@@ -34,7 +34,7 @@
 },
 "tile-red.png":
 {
-	"frame": {"x":16,"y":0,"w":16,"h":16},
+	"frame": {"x":238,"y":48,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
@@ -42,19 +42,347 @@
 },
 "tile-yellow.png":
 {
-	"frame": {"x":0,"y":0,"w":16,"h":16},
+	"frame": {"x":222,"y":48,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 	"sourceSize": {"w":16,"h":16}
+},
+"witch/witch_angel_1.png":
+{
+	"frame": {"x":282,"y":0,"w":22,"h":28},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":4,"w":22,"h":28},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_angel_2.png":
+{
+	"frame": {"x":336,"y":0,"w":24,"h":26},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":6,"w":24,"h":26},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_angel_3.png":
+{
+	"frame": {"x":268,"y":22,"w":20,"h":26},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":5,"w":20,"h":26},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_angel_4.png":
+{
+	"frame": {"x":202,"y":26,"w":20,"h":26},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":4,"w":20,"h":26},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_angel_5.png":
+{
+	"frame": {"x":390,"y":0,"w":20,"h":28},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":3,"w":20,"h":28},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_angel_6.png":
+{
+	"frame": {"x":182,"y":28,"w":20,"h":26},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":4,"w":20,"h":26},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_angel_7.png":
+{
+	"frame": {"x":222,"y":0,"w":24,"h":28},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":3,"w":24,"h":28},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_angel_8.png":
+{
+	"frame": {"x":362,"y":0,"w":20,"h":28},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":4,"w":20,"h":28},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_death_1.png":
+{
+	"frame": {"x":310,"y":0,"w":26,"h":24},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":12,"y":8,"w":26,"h":24},
+	"sourceSize": {"w":48,"h":32}
+},
+"witch/witch_death_10.png":
+{
+	"frame": {"x":140,"y":0,"w":48,"h":28},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":48,"h":28},
+	"sourceSize": {"w":48,"h":32}
+},
+"witch/witch_death_11.png":
+{
+	"frame": {"x":470,"y":0,"w":16,"h":14},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":18,"y":7,"w":16,"h":14},
+	"sourceSize": {"w":48,"h":32}
+},
+"witch/witch_death_2.png":
+{
+	"frame": {"x":188,"y":0,"w":34,"h":26},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":8,"y":6,"w":34,"h":26},
+	"sourceSize": {"w":48,"h":32}
+},
+"witch/witch_death_3.png":
+{
+	"frame": {"x":140,"y":28,"w":42,"h":30},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":2,"w":42,"h":30},
+	"sourceSize": {"w":48,"h":32}
+},
+"witch/witch_death_4.png":
+{
+	"frame": {"x":48,"y":0,"w":48,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":32},
+	"sourceSize": {"w":48,"h":32}
+},
+"witch/witch_death_5.png":
+{
+	"frame": {"x":94,"y":32,"w":46,"h":32},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":0,"w":46,"h":32},
+	"sourceSize": {"w":48,"h":32}
+},
+"witch/witch_death_6.png":
+{
+	"frame": {"x":48,"y":32,"w":46,"h":32},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":32},
+	"sourceSize": {"w":48,"h":32}
+},
+"witch/witch_death_7.png":
+{
+	"frame": {"x":96,"y":0,"w":44,"h":32},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":44,"h":32},
+	"sourceSize": {"w":48,"h":32}
+},
+"witch/witch_death_8.png":
+{
+	"frame": {"x":0,"y":32,"w":48,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":32},
+	"sourceSize": {"w":48,"h":32}
+},
+"witch/witch_death_9.png":
+{
+	"frame": {"x":0,"y":0,"w":48,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":32},
+	"sourceSize": {"w":48,"h":32}
+},
+"witch/witch_idle_1.png":
+{
+	"frame": {"x":334,"y":24,"w":22,"h":24},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":8,"w":22,"h":24},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_idle_2.png":
+{
+	"frame": {"x":310,"y":24,"w":22,"h":24},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":8,"w":22,"h":24},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_idle_3.png":
+{
+	"frame": {"x":458,"y":20,"w":20,"h":24},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":8,"w":20,"h":24},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_idle_4.png":
+{
+	"frame": {"x":288,"y":22,"w":22,"h":24},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":8,"w":22,"h":24},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_idle_5.png":
+{
+	"frame": {"x":222,"y":24,"w":24,"h":24},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":8,"w":24,"h":24},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_jump_down.png":
+{
+	"frame": {"x":250,"y":0,"w":20,"h":32},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":8,"y":0,"w":20,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_jump_up.png":
+{
+	"frame": {"x":438,"y":40,"w":20,"h":24},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":8,"y":8,"w":20,"h":24},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_run_1.png":
+{
+	"frame": {"x":310,"y":46,"w":18,"h":22},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":7,"y":8,"w":18,"h":22},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_run_2.png":
+{
+	"frame": {"x":418,"y":40,"w":20,"h":24},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":7,"w":20,"h":24},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_run_3.png":
+{
+	"frame": {"x":444,"y":0,"w":20,"h":26},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":6,"w":20,"h":26},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_run_4.png":
+{
+	"frame": {"x":398,"y":40,"w":20,"h":24},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":7,"y":8,"w":20,"h":24},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_run_5.png":
+{
+	"frame": {"x":378,"y":40,"w":20,"h":24},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":6,"w":20,"h":24},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_run_6.png":
+{
+	"frame": {"x":358,"y":40,"w":20,"h":24},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":7,"w":20,"h":24},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_run_7.png":
+{
+	"frame": {"x":418,"y":0,"w":20,"h":26},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":6,"w":20,"h":26},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_run_8.png":
+{
+	"frame": {"x":434,"y":20,"w":20,"h":24},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":7,"y":8,"w":20,"h":24},
+	"sourceSize": {"w":32,"h":32}
+},
+"witch/witch_spinning_1.png":
+{
+	"frame": {"x":410,"y":20,"w":20,"h":24},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":8,"w":20,"h":24},
+	"sourceSize": {"w":48,"h":32}
+},
+"witch/witch_spinning_2.png":
+{
+	"frame": {"x":386,"y":20,"w":20,"h":24},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":12,"y":8,"w":20,"h":24},
+	"sourceSize": {"w":48,"h":32}
+},
+"witch/witch_spinning_3.png":
+{
+	"frame": {"x":288,"y":46,"w":18,"h":22},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":15,"y":10,"w":18,"h":22},
+	"sourceSize": {"w":48,"h":32}
+},
+"witch/witch_spinning_4.png":
+{
+	"frame": {"x":362,"y":20,"w":20,"h":24},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":12,"y":8,"w":20,"h":24},
+	"sourceSize": {"w":48,"h":32}
+},
+"witch/witch_spinning_5.png":
+{
+	"frame": {"x":434,"y":20,"w":20,"h":24},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":8,"w":20,"h":24},
+	"sourceSize": {"w":48,"h":32}
+},
+"witch/witch_spinning_6.png":
+{
+	"frame": {"x":334,"y":24,"w":22,"h":24},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":12,"y":8,"w":22,"h":24},
+	"sourceSize": {"w":48,"h":32}
+},
+"witch/witch_spinning_7.png":
+{
+	"frame": {"x":246,"y":24,"w":22,"h":24},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":13,"y":8,"w":22,"h":24},
+	"sourceSize": {"w":48,"h":32}
 }},
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker ",
 	"version": "1.0",
 	"image": "gfx.png",
 	"format": "RGBA5551",
-	"size": {"w":96,"h":16},
+	"size": {"w":484,"h":64},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:e35f23f74a4c96065a617937dc99dc30:2ee69d493b25d0ac304f2070fa1f9f1e:3d1ab9fc13e1be0b14dbd849cdb94733$"
+	"smartupdate": "$TexturePacker:SmartUpdate:d223948f1079a18611559551d28b5a16:1f2ce54b61e298e37be9c40bb6addea2:3d1ab9fc13e1be0b14dbd849cdb94733$"
 }
 }
