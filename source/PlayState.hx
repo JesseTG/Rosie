@@ -33,7 +33,7 @@ class PlayState extends FlxState
     // TODO: Handle a missing tileset (or invalid data, e.g. unsupported format)
     _map = new TiledMap(AssetPaths.world__tmx);
     _background = new FlxTilemap();
-    var bgImage = new FlxSprite();
+    var bgImage = new FlxBackdrop(AssetPaths.bg__png, 0, 0, false, false);
 
     _sprites = FlxAtlasFrames.fromTexturePackerJson(AssetPaths.gfx__png, AssetPaths.gfx__json);
 
