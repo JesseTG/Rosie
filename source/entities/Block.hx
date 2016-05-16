@@ -48,6 +48,14 @@ class Block extends FlxSprite {
     }
 
     super.update(elapsed);
+
+
+    if (FlxG.debugger.visible && !this.moves) {
+      this.color = 0xFF0000;
+    }
+    else {
+      this.color = 0xFFFFFF;
+    }
   }
 
   public override function toString() : String {
