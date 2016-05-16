@@ -39,6 +39,11 @@ class Block extends FlxSprite {
     return this.gravity;
   }
 
+  public function snapToGrid() {
+    this.x = Math.round(this.x / this.frameWidth) * this.frameWidth;
+    this.y = Math.round(this.y / this.frameHeight) * this.frameHeight;
+  }
+
   public override function update(elapsed:Float) {
     if (this.moves && this.isTouching(this.gravity.Direction)) {
       this.x = Math.round(this.x / this.frameWidth) * this.frameWidth;
