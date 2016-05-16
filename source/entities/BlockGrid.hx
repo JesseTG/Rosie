@@ -59,6 +59,9 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
             this._startMovingBlocks();
             this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
           }
+          else {
+            FlxG.sound.play(AssetPaths.not_allowed__wav);
+          }
         }
       }, false, true, false);
 

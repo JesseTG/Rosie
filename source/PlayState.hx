@@ -50,6 +50,8 @@ class PlayState extends FlxState
   private var _time : Float;
   private var _timeDisplay : FlxText;
 
+  private var _arrow : FlxSprite;
+
 
   override public function create():Void
   {
@@ -69,6 +71,10 @@ class PlayState extends FlxState
     _hud = new FlxGroup();
     _scene.spawn(_hud, "hud");
     _timeDisplay = _scene.object("time");
+
+    _arrow = new FlxSprite(16, 16);
+    _arrow.frame =  _sprites.getByName("arrow.png");
+    _arrow.resetSizeFromFrame();
 
     // TODO: Store the tiled map on the texture atlas and load from there, instead of a separate image
     // TODO: Handle the layers/tilesets not being named in the way I want them to be
@@ -132,9 +138,12 @@ class PlayState extends FlxState
     _blockGrid.OnScore.add(function(score:Int) {
       this._score += score;
       FlxG.sound.play(AssetPaths.clear_blocks__wav);
+      _arrow.angle = _blockGrid.gravity.Degrees;
       scoreDisplay.text = Std.string(this._score);
     });
 
+    _arrow.angle = _blockGrid.gravity.Degrees;
+    _arrow.centerOrigin();
     FlxG.console.registerObject("blockGrid", _blockGrid);
     FlxG.console.registerObject("arrow", _arrow);
 
@@ -142,7 +151,10 @@ class PlayState extends FlxState
     this.add(_background);
     this.add(_blockGrid);
     this.add(_hud);
+    this.add(_arrow);
     this.add(_mouseControl);
+
+    FlxG.sound.playMusic(AssetPaths.music__ogg, 1, true);
   }
 
   override public function update(elapsed:Float):Void
