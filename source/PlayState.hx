@@ -44,6 +44,8 @@ class PlayState extends FlxState
     FlxG.console.registerObject("tiles", tiles);
     FlxG.console.registerObject("tileSet", tileSet);
     FlxG.console.registerObject("sprites", _sprites);
+    FlxG.console.registerObject("log", FlxG.log);
+    FlxG.console.registerObject("tilemap", _background);
 
     _background.loadMapFromArray(
       tiles.tileArray,
