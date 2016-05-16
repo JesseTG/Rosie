@@ -45,12 +45,7 @@ class Block extends FlxSprite {
   }
 
   public override function update(elapsed:Float) {
-    if (this.moves && this.isTouching(this.gravity.Direction)) {
-      this.x = Math.round(this.x / this.frameWidth) * this.frameWidth;
-      this.y = Math.round(this.y / this.frameHeight) * this.frameHeight;
-      this.velocity.set(0, 0);
-      //this.moves = false;
-    }
+
 
     super.update(elapsed);
 

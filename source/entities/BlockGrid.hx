@@ -12,6 +12,8 @@ import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.input.mouse.FlxMouseEventManager;
 import de.polygonal.ds.Array2;
 
+import entities.GravityDirection.Orientation;
+
 class BlockGrid extends FlxTypedSpriteGroup<Block> {
   // 
   private var _blockGrid : Array2<Block>;
@@ -90,8 +92,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   private function _anyMoving() : Bool {
     return this.members.exists(function(block:Block) {
       // For each Block on-screen...
-      return block.alive && block.exists && (!FlxMath.equal(block.velocity.x, 0) || !FlxMath.equal(block.velocity.y, 0));
-      // Return true if it's moving horizontally OR vertically
+      return block.alive && block.exists && block.moves;
+      // Return true if it's moving, alive in-game, and can be considered to be in the game world
     });
   }
 
@@ -119,20 +121,23 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   private function _startMovingBlocks() {
     this._rotateGravity();
 
-    this.forEachExists(function(block:Block) {
-      var x = Math.floor(block.x / block.frameWidth) * block.frameWidth;
-      var y = Math.floor(block.y / block.frameHeight) * block.frameHeight;
-
-      if (!block.isTouching(this.gravity.Direction)) {
-        block.moves = true;
-      }
-
+    // TODO: iterate through all rows or columns (depending on gravity direction)
+    // and make all blocks "above" a gap move "downwards"
+    this.forEachExists(function(b:Block) {
+      b.moves = true;
+      b.snapToGrid();
+      b.velocity.set(this.gravity.Gravity.x, this.gravity.Gravity.y);
     });
   }
 
   private function _stopMovingBlocks() {
       trace("All blocks have stopped moving");
       this._updateGrid();
+      this.forEachExists(function(block:Block) {
+        block.moves = false;
+        block.velocity.set(0, 0);
+        block.snapToGrid();
+      });
       this._canClick = true;
   }
 

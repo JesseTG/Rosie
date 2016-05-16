@@ -129,7 +129,44 @@ class PlayState extends FlxState
   {
     super.update(elapsed);
 
-    FlxG.collide(_blockGrid, _background);
-    FlxG.collide(_blockGrid, _blockGrid);
+    FlxG.collide(_blockGrid, _background, function(block:Block, b:FlxObject) {
+      if (block.isTouching(block.gravity.Direction)) {
+        block.moves = false;
+        block.velocity.set(0, 0);
+        block.snapToGrid();
+
+        // The block that touches the walls is marked as non-moving, and then
+        // any block that tocuhes *that* will be too, and then, and then, etc.
+        // Induction!
+      }
+    });
+
+
+    FlxG.overlap(_blockGrid, _blockGrid,
+      function(a:Block, b:Block) {
+        if (a.moves != b.moves) {
+          // If a moving block is colliding with another that isn't...
+          a.moves = false;
+          b.moves = false;
+
+          a.snapToGrid();
+          b.snapToGrid();
+        }
+      },
+
+      function(a:Block, b:Block) : Bool {
+        // This ensures blocks in different rows or columns won't brush up against
+        // each other when the gravity won't allow it
+
+        if (this._blockGrid.gravity.Orientation == Horizontal) {
+          return FlxObject.separateX(a, b);
+        }
+        else if (this._blockGrid.gravity.Orientation == Vertical) {
+          return FlxObject.separateY(a, b);
+        }
+
+        return false;
+      }
+    );
   }
 }
