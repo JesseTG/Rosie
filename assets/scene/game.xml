@@ -3,7 +3,7 @@
 
   <!-- Get these values using FlxScene.const("id") -->
   <constants>
-    <const id="gridSize" type="Int" value="8" />
+    <const id="gridSize" type="Int" value="10" />
   </constants>
 
   <!--backgrounds id="background">
