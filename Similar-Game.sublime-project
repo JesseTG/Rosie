@@ -1,0 +1,103 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "folder_exclude_patterns": ["export"],
+      "follow_symlinks": true
+    }
+  ],
+  "settings":
+  {
+    "tab_size": 2,
+    "translate_tabs_to_spaces": true
+  },
+  "build_systems":
+  [
+    {
+      "name": "Build (HTML5)",
+      "shell_cmd": "haxelib run lime build $project_path/Project.xml html5"
+    },
+    {
+      "name": "Build (Windows)",
+      "shell_cmd": "haxelib run lime build $project_path/Project.xml windows"
+    },
+    {
+      "name": "Build (Windows Neko)",
+      "shell_cmd": "haxelib run lime build $project_path/Project.xml windows -neko"
+    },
+    {
+      "name": "Build (macOS)",
+      "shell_cmd": "haxelib run lime build $project_path/Project.xml mac -64"
+    },
+    {
+      "name": "Build (macOS Neko)",
+      "shell_cmd": "haxelib run lime build $project_path/Project.xml mac -neko"
+    },
+    {
+      "name": "Build (Linux 64)",
+      "shell_cmd": "haxelib run lime build $project_path/Project.xml linux -64"
+    },
+    {
+      "name": "Build (Linux 64 Neko)",
+      "shell_cmd": "haxelib run lime build $project_path/Project.xml linux -neko"
+    },
+
+    {
+      "name": "Test (HTML5)",
+      "shell_cmd": "haxelib run lime test $project_path/Project.xml html5"
+    },
+    {
+      "name": "Test (Windows)",
+      "shell_cmd": "haxelib run lime test $project_path/Project.xml windows"
+    },
+    {
+      "name": "Test (Windows Neko)",
+      "shell_cmd": "haxelib run lime test $project_path/Project.xml windows -neko"
+    },
+    {
+      "name": "Test (macOS)",
+      "shell_cmd": "haxelib run lime test $project_path/Project.xml mac -64"
+    },
+    {
+      "name": "Test (macOS Neko)",
+      "shell_cmd": "haxelib run lime test $project_path/Project.xml mac -neko"
+    },
+    {
+      "name": "Test (Linux 64)",
+      "shell_cmd": "haxelib run lime test $project_path/Project.xml linux -64"
+    },
+    {
+      "name": "Test (Linux 64 Neko)",
+      "shell_cmd": "haxelib run lime test $project_path/Project.xml linux -neko"
+    },
+
+    {
+      "name": "Debug Test (HTML5)",
+      "shell_cmd": "haxelib run lime test $project_path/Project.xml html5 -debug"
+    },
+    {
+      "name": "Debug Test (Windows)",
+      "shell_cmd": "haxelib run lime test $project_path/Project.xml windows -debug"
+    },
+    {
+      "name": "Debug Test (Windows Neko)",
+      "shell_cmd": "haxelib run lime test $project_path/Project.xml windows -neko -debug"
+    },
+    {
+      "name": "Debug Test (macOS)",
+      "shell_cmd": "haxelib run lime test $project_path/Project.xml mac -64 -debug"
+    },
+    {
+      "name": "Debug Test (macOS Neko)",
+      "shell_cmd": "haxelib run lime test $project_path/Project.xml mac -neko -debug"
+    },
+    {
+      "name": "Debug Test (Linux 64)",
+      "shell_cmd": "haxelib run lime test $project_path/Project.xml linux -64 -debug"
+    },
+    {
+      "name": "Debug Test (Linux 64 Neko)",
+      "shell_cmd": "haxelib run lime test $project_path/Project.xml linux -neko -debug"
+    }
+  ]
+}
