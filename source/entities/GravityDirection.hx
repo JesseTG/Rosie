@@ -9,7 +9,8 @@ class GravityDirection {
   public static var Left = new GravityDirection(FlxObject.LEFT, new FlxPoint(-G, 0), 90, FlxObject.LEFT | FlxObject.RIGHT, Orientation.Horizontal);
   public static var Right = new GravityDirection(FlxObject.RIGHT, new FlxPoint(G, 0), 270, FlxObject.LEFT | FlxObject.RIGHT, Orientation.Horizontal);
 
-  public static inline var G : Float = 48;
+  public static inline var G : Float = 72;
+  // This is the magnitude of gravity
 
   public var Direction(default, null) : Int;
   public var Gravity(default, null) : FlxPoint;
