@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>3.3.4</string>
         <key>fileName</key>
-        <string>/home/jesse/Common/Code/Similar-Game/assets/images/gfx.tps</string>
+        <string>/home/jesse/Common/Code/Rosie/assets/images/gfx.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
