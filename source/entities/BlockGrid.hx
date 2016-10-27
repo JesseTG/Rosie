@@ -178,19 +178,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     // TODO: What if, for some reason, this.gravity isn't one of these?
   }
 
-  private function _startTweeningBlocks() {
-    var newGrid = new Array2<Block>(this.gridSize, this.gridSize);
-
-    // rotate gravity in old grid
-    // for each column in old grid:
-    //   set freeCell = bottom-most cell
-    //   for each block in column from bottom-up:
-    //     if block is not null:
-    //       set gridNew[row][col] = block
-    //       freeCell -= 1
-    //       set block's tween target to new cell
-  }
-
   /**
    * Given a block, return its flood-filled group of the same color.
    * Resulting array is not in any particular order.
@@ -233,6 +220,17 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   }
 
   private function _startMovingBlocks() {
+    var newGrid = new Array2<Block>(this.gridSize, this.gridSize);
+
+    // rotate gravity in old grid
+    // for each column in old grid:
+    //   set freeCell = bottom-most cell
+    //   for each block in column from bottom-up:
+    //     if block is not null:
+    //       set gridNew[row][col] = block
+    //       freeCell -= 1
+    //       set block's tween target to new cell
+
     this._rotateGravity();
 
     // TODO: iterate through all rows or columns (depending on gravity direction)
