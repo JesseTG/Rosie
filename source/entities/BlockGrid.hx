@@ -24,7 +24,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
   public var gridSize(default, null) : Int;
   public var gravity(default, null) : GravityDirection;
-  private var _canClick : Bool;
+  public var canClick(default, null) : Bool;
 
   /**
    * Called when an allowed group of blocks is clicked.  Parameter is the array
@@ -61,7 +61,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.OnStartMoving = new FlxTypedSignal<Void->Void>();
     this.OnStopMoving = new FlxTypedSignal<Void->Void>();
     this.OnScore = new FlxTypedSignal<Int->Void>();
-    this._canClick = true;
+
+    this.canClick = true;
     this._blockGrid = new Array2<Block>(size, size);
     this.gravity = GravityDirection.Right;
     this.gridSize = size;
@@ -76,7 +77,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
       });
 
       FlxMouseEventManager.add(b, function(block:Block) {
-        if (this._canClick) {
+        if (this.canClick) {
           // If no blocks are moving...
           var blocks = this._getBlockGroup(block);
 
@@ -86,7 +87,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
               toKill.kill();
             });
 
-            this._canClick = false;
+            this.canClick = false;
             this._startMovingBlocks();
             this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
           }
@@ -104,7 +105,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   }
 
   public override function update(elapsed:Float) {
-    if (!this._canClick && !_anyMoving()) {
+    if (!this.canClick && !_anyMoving()) {
       // If all blocks have stopped moving...
       this.OnStopMoving.dispatch();
     }
@@ -246,7 +247,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
       if (blockCount <= 8) {
         // Good!  Generate more blocks
       }
-      this._canClick = true;
+      this.canClick = true;
   }
 
   public override function destroy() {
