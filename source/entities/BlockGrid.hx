@@ -129,8 +129,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
       _blockGrid.set(Std.int(indices.x), Std.int(indices.y), block);
     });
-
-    trace(this._blockGrid);
   }
 
   private function _getGridIndex(block:Block) : FlxPoint {
