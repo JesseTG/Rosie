@@ -68,6 +68,9 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.gridSize = size;
 
     this.OnStopMoving.add(this._stopMovingBlocks);
+    this.OnBadClick.add(function(b:Block) {
+      FlxG.sound.play(AssetPaths.not_allowed__wav);
+    });
 
     _blockGrid.forEach(function(block:Block, gridX:Int, gridY:Int) {
       var b = this.recycle(Block, function() {
@@ -92,7 +95,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
             this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
           }
           else {
-            FlxG.sound.play(AssetPaths.not_allowed__wav);
+
+            this.OnBadClick.dispatch(block);
           }
         }
       }, false, true, false);
