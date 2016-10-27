@@ -66,6 +66,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.gravity = GravityDirection.Right;
     this.gridSize = size;
 
+    this.OnStopMoving.add(this._stopMovingBlocks);
+
     _blockGrid.forEach(function(block:Block, gridX:Int, gridY:Int) {
       var b = this.recycle(Block, function() {
         trace("New block created");
@@ -104,7 +106,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   public override function update(elapsed:Float) {
     if (!this._canClick && !_anyMoving()) {
       // If all blocks have stopped moving...
-      this._stopMovingBlocks();
+      this.OnStopMoving.dispatch();
     }
 
     super.update(elapsed);
@@ -223,6 +225,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
       b.snapToGrid();
       b.velocity.set(this.gravity.Gravity.x, this.gravity.Gravity.y);
     });
+
+    this.OnStartMoving.dispatch();
   }
 
   private function _stopMovingBlocks() {
