@@ -25,12 +25,41 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   public var gridSize(default, null) : Int;
   public var gravity(default, null) : GravityDirection;
   private var _canClick : Bool;
+
+  /**
+   * Called when an allowed group of blocks is clicked.  Parameter is the array
+   * of blocks in the group, in no particular order.
+   */
+  public var OnSuccessfulClick(default, null) : FlxTypedSignal<Array<Block>->Void>;
+
+  /**
+   * Called when the player clicks on a block but it's not enough to make a group.
+   */
+  public var OnBadClick(default, null) : FlxTypedSignal<Block->Void>;
+
+  /**
+   * Called when the first block starts moving.
+   */
+  public var OnStartMoving(default, null) : FlxTypedSignal<Void->Void>;
+
+  /**
+   * Called when the last block stops moving.
+   */
+  public var OnStopMoving(default, null) : FlxTypedSignal<Void->Void>;
+
+  /**
+   * Called when the score is computed.  The parameter is the score.
+   */
   public var OnScore(default, null) : FlxTypedSignal<Int->Void>;
 
   // TODO: Don't hard-code the block size in this class
   public function new(x:Int, y:Int, size:Int, sprites:FlxFramesCollection) {
     super(x, y - 16, size * size + Std.int(0.5 * size));
 
+    this.OnSuccessfulClick = new FlxTypedSignal<Array<Block>->Void>();
+    this.OnBadClick = new FlxTypedSignal<Block->Void>();
+    this.OnStartMoving = new FlxTypedSignal<Void->Void>();
+    this.OnStopMoving = new FlxTypedSignal<Void->Void>();
     this.OnScore = new FlxTypedSignal<Int->Void>();
     this._canClick = true;
     this._blockGrid = new Array2<Block>(size, size);
