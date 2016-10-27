@@ -1,6 +1,7 @@
 package entities;
 
 import flixel.math.FlxMath;
+import flixel.math.FlxPoint;
 import flixel.FlxObject;
 import flixel.FlxBasic.FlxType;
 import flixel.FlxSprite;
@@ -13,12 +14,15 @@ class Block extends FlxSprite {
 
   public var gravity(default, set) : GravityDirection;
 
+  public var targetCell: FlxPoint;
+
   public function new(x:Float = 0, y:Float = 0, sprites:FlxFramesCollection, blockColor:BlockColor) {
     super(x, y);
     this.frame = sprites.getByName(cast(blockColor));
     this.moves = false;
     this.blockColor = blockColor;
     this.flixelType = FlxType.OBJECT;
+    this.targetCell = new FlxPoint();
     //this.allowCollisions = FlxObject.UP | FlxObject.DOWN;
     this.pixelPerfectPosition = true;
     //this.pixelPerfectRender = true;
