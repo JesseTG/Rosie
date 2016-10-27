@@ -161,8 +161,10 @@ class PlayState extends FlxState
   {
     super.update(elapsed);
 
-    _time -= elapsed;
-    _timeDisplay.text = Printf.format("%.1f", [Math.max(0, _time)]);
+    if (this._blockGrid.canClick) {
+      _time -= elapsed;
+      _timeDisplay.text = Printf.format("%.1f", [Math.max(0, _time)]);
+    }
 
 
     if (_time <= 0) {
