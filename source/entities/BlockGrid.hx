@@ -19,7 +19,7 @@ import de.polygonal.ds.ArrayedQueue;
 import entities.GravityDirection.Orientation;
 
 class BlockGrid extends FlxTypedSpriteGroup<Block> {
-  // 
+  //
   private var _blockGrid : Array2<Block>;
 
   public var gridSize(default, null) : Int;
@@ -91,8 +91,9 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
             });
 
             this.canClick = false;
-            this._startMovingBlocks();
+            this.OnSuccessfulClick.dispatch(blocks);
             this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
+            this._startMovingBlocks();
           }
           else {
 
@@ -175,6 +176,19 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
       block.gravity = this.gravity;
     });
     // TODO: What if, for some reason, this.gravity isn't one of these?
+  }
+
+  private function _startTweeningBlocks() {
+    var newGrid = new Array2<Block>(this.gridSize, this.gridSize);
+
+    // rotate gravity in old grid
+    // for each column in old grid:
+    //   set freeCell = bottom-most cell
+    //   for each block in column from bottom-up:
+    //     if block is not null:
+    //       set gridNew[row][col] = block
+    //       freeCell -= 1
+    //       set block's tween target to new cell
   }
 
   /**
