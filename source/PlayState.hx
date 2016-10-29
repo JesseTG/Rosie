@@ -134,7 +134,7 @@ class PlayState extends FlxState
 
     _blockGrid = new BlockGrid(gridObject.x, gridObject.y, size, _sprites);
     _blockGrid.OnStopMoving.add(function() {
-      _arrow.angle = _blockGrid.gravity.Degrees;
+      _arrow.angle = cast(_blockGrid.gravity);
     });
     _blockGrid.OnScore.add(function(score:Int) {
       this._score += score;
@@ -142,7 +142,7 @@ class PlayState extends FlxState
       scoreDisplay.text = Std.string(this._score);
     });
 
-    _arrow.angle = _blockGrid.gravity.Degrees;
+    _arrow.angle = cast(_blockGrid.gravity);
     _arrow.centerOrigin();
     FlxG.console.registerObject("blockGrid", _blockGrid);
     FlxG.console.registerObject("arrow", _arrow);
