@@ -38,6 +38,7 @@
 	<haxelib name="flixel-addons" />
 
 	<haxelib name="polygonal-ds" version="git" />
+	<haxelib name="polygonal-core" />
 	<haxelib name="polygonal-printf" />
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
