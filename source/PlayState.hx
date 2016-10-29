@@ -1,7 +1,5 @@
 package;
 
-using Lambda;
-
 import flixel.addons.display.FlxBackdrop;
 import flixel.addons.editors.tiled.TiledImageLayer;
 import flixel.addons.editors.tiled.TiledMap;
@@ -19,22 +17,18 @@ import flixel.FlxState;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup;
-import flixel.math.FlxMath;
 import flixel.text.FlxText;
-import flixel.math.FlxPoint;
 import flixel.tile.FlxBaseTilemap.FlxTilemapAutoTiling;
 import flixel.tile.FlxTilemap;
-import flixel.ui.FlxButton;
-import flixel.util.FlxColor;
-import flixel.util.FlxSpriteUtil.LineStyle;
 import flixel.input.mouse.FlxMouseEventManager;
-import flixel.addons.display.shapes.FlxShapeArrow;
 
 import de.polygonal.Printf;
 
 import entities.Block;
 import entities.BlockColor;
 import entities.BlockGrid;
+
+using Lambda;
 
 class PlayState extends FlxState
 {

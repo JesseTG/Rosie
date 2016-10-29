@@ -1,27 +1,21 @@
 package entities;
 
-using Lambda;
-
 import haxe.EnumTools;
 
-import flixel.math.FlxMath;
-import flixel.FlxObject;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
-import flixel.addons.display.FlxExtendedSprite;
 import flixel.graphics.frames.FlxFramesCollection;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.input.mouse.FlxMouseEventManager;
 import flixel.util.FlxSignal.FlxTypedSignal;
 import de.polygonal.ds.Array2;
 import de.polygonal.ds.ArrayedQueue;
-import de.polygonal.ds.Array2.Array2Cell;
-import de.polygonal.core.util.Assert;
 
-import entities.GravityDirection.Orientation;
 import util.ReverseIterator;
+
+using Lambda;
 
 class BlockGrid extends FlxTypedSpriteGroup<Block> {
   //
