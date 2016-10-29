@@ -8,6 +8,8 @@ import flixel.math.FlxMath;
 import flixel.FlxObject;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 import flixel.addons.display.FlxExtendedSprite;
 import flixel.graphics.frames.FlxFramesCollection;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
@@ -15,8 +17,11 @@ import flixel.input.mouse.FlxMouseEventManager;
 import flixel.util.FlxSignal.FlxTypedSignal;
 import de.polygonal.ds.Array2;
 import de.polygonal.ds.ArrayedQueue;
+import de.polygonal.ds.Array2.Array2Cell;
+import de.polygonal.core.util.Assert;
 
 import entities.GravityDirection.Orientation;
+import util.ReverseIterator;
 
 class BlockGrid extends FlxTypedSpriteGroup<Block> {
   //
@@ -87,6 +92,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
           if (blocks.length >= 3) {
             // If the selected block group has at least 3 blocks...
             blocks.iter(function(toKill:Block) {
+              _blockGrid.remove(toKill);
               toKill.kill();
             });
 
@@ -102,7 +108,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
         }
       }, false, true, false);
 
-      b.gravity = this.gravity;
       b.velocity.set(0, 0);
       this.add(b);
       return b;
@@ -113,6 +118,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     if (!this.canClick && !_anyMoving()) {
       // If all blocks have stopped moving...
       this.OnStopMoving.dispatch();
+      // TODO: Replace just by having each tween report being done at the end
     }
 
     super.update(elapsed);
@@ -221,7 +227,87 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     //       freeCell -= 1
     //       set block's tween target to new cell
 
-    this._rotateGravity();
+    // Last resort: Code each direction individually
+    // Then merge them together later when I notice a pattern
+
+    var tweenIt = function(block:Block, targetPoint:FlxPoint) {
+      FlxTween.linearMotion(
+        block,
+        block.x,
+        block.y,
+        targetPoint.x,
+        targetPoint.y,
+        96,
+        false,
+        { ease: FlxEase.quadIn, type: FlxTween.ONESHOT }
+      );
+    };
+
+    if (this.gravity == GravityDirection.Down) {
+      for (c in 0...this.gridSize) {
+        var bottom = this.gridSize - 1;
+
+        for (r in new ReverseIterator(this.gridSize - 1, 0)) {
+          var block = this._blockGrid.get(c, r);
+
+          if (block != null) {
+            newGrid.set(c, bottom, block);
+            tweenIt(block, this.cellToPoint(c, bottom));
+            bottom--;
+          }
+        }
+      }
+    }
+    else if (this.gravity == GravityDirection.Right) {
+      for (r in new ReverseIterator(this.gridSize - 1, 0)) {
+        var right = this.gridSize - 1;
+
+        for (c in new ReverseIterator(this.gridSize - 1, 0)) {
+          var block = this._blockGrid.get(c, r);
+
+          if (block != null) {
+            newGrid.set(right, r, block);
+            tweenIt(block, this.cellToPoint(right, r));
+            right--;
+          }
+        }
+      }
+    }
+    else if (this.gravity == GravityDirection.Up) {
+      for (c in new ReverseIterator(this.gridSize - 1, 0)) {
+        var top = 0;
+
+        for (r in 0...gridSize) {
+          var block = this._blockGrid.get(c, r);
+
+          if (block != null) {
+            newGrid.set(c, top, block);
+            tweenIt(block, this.cellToPoint(c, top));
+            top++;
+          }
+        }
+      }
+    }
+    else /* this.gravity == GravityDirection.Left */ {
+      for (r in 0...gridSize) {
+        var left = 0;
+
+        for (c in 0...gridSize) {
+          var block = this._blockGrid.get(c, r);
+
+          if (block != null) {
+            newGrid.set(left, r, block);
+            tweenIt(block, this.cellToPoint(left, r));
+            left++;
+          }
+        }
+      }
+    }
+
+    trace(this._blockGrid);
+    trace(newGrid);
+
+    this._blockGrid = newGrid;
 
 
     this.OnStartMoving.dispatch();
