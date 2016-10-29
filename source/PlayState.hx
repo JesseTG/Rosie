@@ -76,12 +76,6 @@ class PlayState extends FlxState
 
     var tileSet : TiledTileSet = _map.getTileSet("Overworld");
 
-    FlxG.console.registerObject("tiles", tiles);
-    FlxG.console.registerObject("tileSet", tileSet);
-    FlxG.console.registerObject("sprites", _sprites);
-    FlxG.console.registerObject("log", FlxG.log);
-    FlxG.console.registerObject("tilemap", _background);
-
     _background.loadMapFromArray(
       tiles.tileArray,
       tiles.width,
@@ -138,8 +132,16 @@ class PlayState extends FlxState
 
     _arrow.angle = cast(_blockGrid.gravity);
     _arrow.centerOrigin();
+
     FlxG.console.registerObject("blockGrid", _blockGrid);
     FlxG.console.registerObject("arrow", _arrow);
+    FlxG.console.registerObject("tiles", tiles);
+    FlxG.console.registerObject("tileSet", tileSet);
+    FlxG.console.registerObject("sprites", _sprites);
+    FlxG.console.registerObject("log", FlxG.log);
+    FlxG.console.registerObject("tilemap", _background);
+    FlxG.watch.add(_blockGrid, "_blocksMoving", "Blocks Moving");
+    FlxG.watch.addExpression("blockGrid.countLiving()", "# Blocks");
 
     this.add(bgImage);
     this.add(_background);
