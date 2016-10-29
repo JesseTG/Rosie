@@ -281,12 +281,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
       }
     }
 
-    trace(this._blockGrid);
-    trace(newGrid);
-
     this._blockGrid = newGrid;
-
-
     this.OnStartMoving.dispatch();
   }
 
