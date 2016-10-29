@@ -77,7 +77,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this._blocksMoving = 0;
     this.immovable = true;
 
-    this.OnStopMoving.add(this._stopMovingBlocks);
+    this.OnStopMoving.add(this._blocksDoneMoving);
     this.OnBadClick.add(function(_) {
       FlxG.sound.play(AssetPaths.not_allowed__wav);
     });
@@ -298,7 +298,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.OnStartMoving.dispatch();
   }
 
-  private function _stopMovingBlocks() {
+  private function _blocksDoneMoving() {
       trace("All blocks have stopped moving");
 
       var blockCount = 0;
