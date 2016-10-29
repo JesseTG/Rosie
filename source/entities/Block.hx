@@ -40,6 +40,6 @@ class Block extends FlxSprite {
   }
 
   public override function toString() : String {
-    return cast(blockColor);
+    return Std.string(blockColor).charAt(5).toUpperCase(); // HACK
   }
 }
