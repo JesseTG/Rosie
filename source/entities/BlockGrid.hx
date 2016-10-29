@@ -67,7 +67,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.gridSize = size;
 
     this.OnStopMoving.add(this._stopMovingBlocks);
-    this.OnBadClick.add(function(b:Block) {
+    this.OnBadClick.add(function(_) {
       FlxG.sound.play(AssetPaths.not_allowed__wav);
     });
 
@@ -152,21 +152,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   }
 
   private function _rotateGravity() {
-    // TODO: I'm sure Haxe provides a nicer way to write the following code
-    if (this.gravity == GravityDirection.Down) {
-      this.gravity = GravityDirection.Right;
-    }
-    else if (this.gravity == GravityDirection.Right) {
-      this.gravity = GravityDirection.Up;
-    }
-    else if (this.gravity == GravityDirection.Up) {
-      this.gravity = GravityDirection.Left;
-    }
-    else if (this.gravity == GravityDirection.Left) {
-      this.gravity = GravityDirection.Down;
-    }
-
-    // TODO: What if, for some reason, this.gravity isn't one of these?
+    this.gravity = GravityDirection.counterClockwise(this.gravity);
   }
 
   /**
@@ -204,10 +190,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     }
 
     return blocks;
-  }
-
-  private function _anyGroupsLeft() : Bool {
-    return false;
   }
 
   private function _startMovingBlocks() {
