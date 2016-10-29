@@ -149,6 +149,14 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     return new FlxPoint(x, y);
   }
 
+  /**
+   * Given absolute cell coordinates, convert it to absolute world coordinates.
+   */
+  private inline function cellToPoint(x:Int, y:Int) : FlxPoint {
+    return new FlxPoint(this.x + x * 16, this.y + y * 16);
+    // TODO: Stop hardcoding block size
+  }
+
   private function _anyMoving() : Bool {
     return this.members.exists(function(block:Block) {
       // For each Block on-screen...
