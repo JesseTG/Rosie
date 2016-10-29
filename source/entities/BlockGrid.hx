@@ -220,62 +220,64 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
       );
     };
 
-    if (this.gravity == GravityDirection.Down) {
-      for (c in 0...this.gridSize) {
-        var bottom = this.gridSize - 1;
+    switch (this.gravity) {
+      case GravityDirection.Down: {
+        for (c in 0...this.gridSize) {
+          var bottom = this.gridSize - 1;
 
+          for (r in new ReverseIterator(this.gridSize - 1, 0)) {
+            var block = this._blockGrid.get(c, r);
+
+            if (block != null) {
+              newGrid.set(c, bottom, block);
+              tweenIt(block, this.cellToPoint(c, bottom));
+              bottom--;
+            }
+          }
+        }
+      }
+      case GravityDirection.Right: {
         for (r in new ReverseIterator(this.gridSize - 1, 0)) {
-          var block = this._blockGrid.get(c, r);
+          var right = this.gridSize - 1;
 
-          if (block != null) {
-            newGrid.set(c, bottom, block);
-            tweenIt(block, this.cellToPoint(c, bottom));
-            bottom--;
+          for (c in new ReverseIterator(this.gridSize - 1, 0)) {
+            var block = this._blockGrid.get(c, r);
+
+            if (block != null) {
+              newGrid.set(right, r, block);
+              tweenIt(block, this.cellToPoint(right, r));
+              right--;
+            }
           }
         }
       }
-    }
-    else if (this.gravity == GravityDirection.Right) {
-      for (r in new ReverseIterator(this.gridSize - 1, 0)) {
-        var right = this.gridSize - 1;
-
+      case GravityDirection.Up: {
         for (c in new ReverseIterator(this.gridSize - 1, 0)) {
-          var block = this._blockGrid.get(c, r);
+          var top = 0;
 
-          if (block != null) {
-            newGrid.set(right, r, block);
-            tweenIt(block, this.cellToPoint(right, r));
-            right--;
+          for (r in 0...gridSize) {
+            var block = this._blockGrid.get(c, r);
+
+            if (block != null) {
+              newGrid.set(c, top, block);
+              tweenIt(block, this.cellToPoint(c, top));
+              top++;
+            }
           }
         }
       }
-    }
-    else if (this.gravity == GravityDirection.Up) {
-      for (c in new ReverseIterator(this.gridSize - 1, 0)) {
-        var top = 0;
-
+      case GravityDirection.Left: {
         for (r in 0...gridSize) {
-          var block = this._blockGrid.get(c, r);
+          var left = 0;
 
-          if (block != null) {
-            newGrid.set(c, top, block);
-            tweenIt(block, this.cellToPoint(c, top));
-            top++;
-          }
-        }
-      }
-    }
-    else /* this.gravity == GravityDirection.Left */ {
-      for (r in 0...gridSize) {
-        var left = 0;
+          for (c in 0...gridSize) {
+            var block = this._blockGrid.get(c, r);
 
-        for (c in 0...gridSize) {
-          var block = this._blockGrid.get(c, r);
-
-          if (block != null) {
-            newGrid.set(left, r, block);
-            tweenIt(block, this.cellToPoint(left, r));
-            left++;
+            if (block != null) {
+              newGrid.set(left, r, block);
+              tweenIt(block, this.cellToPoint(left, r));
+              left++;
+            }
           }
         }
       }
