@@ -53,6 +53,11 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
    */
   public var OnScore(default, null) : FlxTypedSignal<Int->Void>;
 
+  /**
+   * Called when no more moves can be made.
+   */
+  public var OnNoMoreMoves(default, null) : FlxTypedSignal<Void->Void>;
+
   // TODO: Enforce a max size with this.maxSize
   // TODO: Don't hard-code the block size in this class
   public function new(x:Int, y:Int, size:Int, sprites:FlxFramesCollection) {
@@ -63,6 +68,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.OnStartMoving = new FlxTypedSignal<Void->Void>();
     this.OnStopMoving = new FlxTypedSignal<Void->Void>();
     this.OnScore = new FlxTypedSignal<Int->Void>();
+    this.OnNoMoreMoves = new FlxTypedSignal<Void->Void>();
 
     this.canClick = true;
     this._blockGrid = new Array2<Block>(size, size);
