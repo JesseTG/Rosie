@@ -24,6 +24,7 @@ class Block extends FlxSprite {
   }
 
   public override function toString() : String {
-    return Std.string(blockColor).charAt(5).toUpperCase(); // HACK
+    var letter = Std.string(blockColor).charAt(5).toUpperCase(); // HACK
+    return '${letter}-${this.ID}';
   }
 }
