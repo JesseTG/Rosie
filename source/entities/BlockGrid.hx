@@ -119,23 +119,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   }
 
   /**
-   * Fills the array data structure with every block based on its position.
-   * Called just after all blocks stop moving
+   * Given a block, which cell is it in
    */
-  private function _updateGrid() {
-    this._blockGrid.forEach(function(b:Block, x:Int, y:Int) {
-      return null;
-    });
-    // TODO: Not sure why I can't use Array2.clear() here (Doing so crashes)
-
-    this.forEachExists(function(block:Block) {
-      // TODO: Put this in a function
-      var indices = this._getGridIndex(block);
-
-      _blockGrid.set(Std.int(indices.x), Std.int(indices.y), block);
-    });
-  }
-
   private function _getGridIndex(block:Block) : FlxPoint {
     var x = Math.round(block.x / block.frameWidth) * block.frameWidth;
     var y = Math.round(block.y / block.frameHeight) * block.frameHeight;
@@ -180,9 +165,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
       this.gravity = GravityDirection.Down;
     }
 
-    this.forEachExists(function(block:Block) {
-      block.gravity = this.gravity;
-    });
     // TODO: What if, for some reason, this.gravity isn't one of these?
   }
 
@@ -241,25 +223,12 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
     this._rotateGravity();
 
-    // TODO: iterate through all rows or columns (depending on gravity direction)
-    // and make all blocks "above" a gap move "downwards"
-    this.forEachExists(function(b:Block) {
-      b.moves = true;
-      b.snapToGrid();
-      b.velocity.set(this.gravity.Gravity.x, this.gravity.Gravity.y);
-    });
 
     this.OnStartMoving.dispatch();
   }
 
   private function _stopMovingBlocks() {
       trace("All blocks have stopped moving");
-      this._updateGrid();
-      this.forEachExists(function(block:Block) {
-        block.moves = false;
-        block.velocity.set(0, 0);
-        block.snapToGrid();
-      });
 
       var blockCount = 0;
       this.forEachExists(function(block:Block) {
@@ -278,9 +247,5 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     FlxMouseEventManager.remove(this);
     this._blockGrid.clear();
     this._blockGrid = null;
-  }
-
-  private inline function getIndex(x:Int, y:Int) : Int {
-    return y * gridSize + x;
   }
 }
