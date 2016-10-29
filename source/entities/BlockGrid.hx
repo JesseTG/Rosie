@@ -238,8 +238,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
         block.y,
         targetPoint.x,
         targetPoint.y,
-        96,
-        false,
+        0.5,
+        true,
         { ease: FlxEase.quadIn, type: FlxTween.ONESHOT }
       );
     };
