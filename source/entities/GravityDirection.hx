@@ -7,6 +7,12 @@ abstract GravityDirection(Float) {
   var Up = 180;
   var Left = 270;
 
-  public static inline var G : Float = 72;
-  // This is the magnitude of gravity
+  public static inline function counterClockwise(gravity:GravityDirection) {
+    return switch(gravity) {
+      case Down: Right;
+      case Right: Up;
+      case Up: Left;
+      case Left: Down;
+    };
+  }
 }
