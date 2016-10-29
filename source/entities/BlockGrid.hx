@@ -22,6 +22,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   //
   private var _blockGrid : Array2<Block>;
   private var _blocksMoving : Int;
+  private var _blocksCreated : Int;
+  private var _frames:FlxFramesCollection;
 
   public var gridSize(default, null) : Int;
   public var gravity(default, null) : GravityDirection;
@@ -70,11 +72,13 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.OnScore = new FlxTypedSignal<Int->Void>();
     this.OnNoMoreMoves = new FlxTypedSignal<Void->Void>();
 
+    this._frames = sprites;
     this.canClick = true;
     this._blockGrid = new Array2<Block>(size, size);
     this.gravity = GravityDirection.Down;
     this.gridSize = size;
     this._blocksMoving = 0;
+    this._blocksCreated = 0;
     this.immovable = true;
 
     this.OnStopMoving.add(this._blocksDoneMoving);
