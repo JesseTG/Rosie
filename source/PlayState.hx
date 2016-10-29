@@ -135,10 +135,12 @@ class PlayState extends FlxState
     var scoreDisplay : FlxText = _scene.object("score");
 
     _blockGrid = new BlockGrid(gridObject.x, gridObject.y, size, _sprites);
+    _blockGrid.OnStopMoving.add(function() {
+      _arrow.angle = _blockGrid.gravity.Degrees;
+    });
     _blockGrid.OnScore.add(function(score:Int) {
       this._score += score;
       FlxG.sound.play(AssetPaths.clear_blocks__wav);
-      _arrow.angle = _blockGrid.gravity.Degrees;
       scoreDisplay.text = Std.string(this._score);
     });
 
