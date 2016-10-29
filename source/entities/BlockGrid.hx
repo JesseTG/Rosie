@@ -100,6 +100,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
             this.OnSuccessfulClick.dispatch(blocks);
             this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
             this._startMovingBlocks();
+            this._rotateGravity();
           }
           else {
 
