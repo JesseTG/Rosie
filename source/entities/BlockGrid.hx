@@ -160,15 +160,15 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   private function _rotateGravity() {
     // TODO: I'm sure Haxe provides a nicer way to write the following code
     if (this.gravity == GravityDirection.Down) {
-      this.gravity = GravityDirection.Left;
-    }
-    else if (this.gravity == GravityDirection.Left) {
-      this.gravity = GravityDirection.Up;
-    }
-    else if (this.gravity == GravityDirection.Up) {
       this.gravity = GravityDirection.Right;
     }
     else if (this.gravity == GravityDirection.Right) {
+      this.gravity = GravityDirection.Up;
+    }
+    else if (this.gravity == GravityDirection.Up) {
+      this.gravity = GravityDirection.Left;
+    }
+    else if (this.gravity == GravityDirection.Left) {
       this.gravity = GravityDirection.Down;
     }
 
