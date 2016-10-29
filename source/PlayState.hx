@@ -143,6 +143,7 @@ class PlayState extends FlxState
     FlxG.watch.add(_blockGrid, "_blocksMoving", "Blocks Moving");
     FlxG.watch.addExpression("blockGrid.countLiving()", "# Blocks Alive");
     FlxG.watch.addExpression("blockGrid.countDead()", "# Blocks Dead");
+    FlxG.watch.addExpression("blockGrid.length", "# Blocks");
 
     this.add(bgImage);
     this.add(_background);
