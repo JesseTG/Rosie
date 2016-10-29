@@ -63,7 +63,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   // TODO: Enforce a max size with this.maxSize
   // TODO: Don't hard-code the block size in this class
   public function new(x:Int, y:Int, size:Int, sprites:FlxFramesCollection) {
-    super(x, y - 16, size * size + Std.int(0.5 * size));
+    super(x, y - 16, 0);
 
     this.OnSuccessfulClick = new FlxTypedSignal<Array<Block>->Void>();
     this.OnBadClick = new FlxTypedSignal<Block->Void>();
