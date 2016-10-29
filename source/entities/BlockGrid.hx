@@ -12,6 +12,7 @@ import flixel.input.mouse.FlxMouseEventManager;
 import flixel.util.FlxSignal.FlxTypedSignal;
 import de.polygonal.ds.Array2;
 import de.polygonal.ds.ArrayedQueue;
+import de.polygonal.core.util.Assert;
 
 import util.ReverseIterator;
 
@@ -20,6 +21,7 @@ using Lambda;
 class BlockGrid extends FlxTypedSpriteGroup<Block> {
   //
   private var _blockGrid : Array2<Block>;
+  private var _blocksMoving : Int;
 
   public var gridSize(default, null) : Int;
   public var gravity(default, null) : GravityDirection;
@@ -65,6 +67,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this._blockGrid = new Array2<Block>(size, size);
     this.gravity = GravityDirection.Down;
     this.gridSize = size;
+    this._blocksMoving = 0;
 
     this.OnStopMoving.add(this._stopMovingBlocks);
     this.OnBadClick.add(function(_) {
@@ -110,7 +113,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   }
 
   public override function update(elapsed:Float) {
-    if (!this.canClick && !_anyMoving()) {
+    if (!this.canClick && _blocksMoving == 0) {
       // If all blocks have stopped moving...
       this.OnStopMoving.dispatch();
       // TODO: Replace just by having each tween report being done at the end
@@ -141,14 +144,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   private inline function cellToPoint(x:Int, y:Int) : FlxPoint {
     return new FlxPoint(this.x + x * 16, this.y + y * 16);
     // TODO: Stop hardcoding block size
-  }
-
-  private function _anyMoving() : Bool {
-    return this.members.exists(function(block:Block) {
-      // For each Block on-screen...
-      return block.alive && block.exists && block.moves;
-      // Return true if it's moving, alive in-game, and can be considered to be in the game world
-    });
   }
 
   private function _rotateGravity() {
@@ -216,8 +211,17 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
         targetPoint.y,
         0.5,
         true,
-        { ease: FlxEase.quadIn, type: FlxTween.ONESHOT }
+        {
+          ease: FlxEase.quadIn,
+          type: FlxTween.ONESHOT,
+          onComplete: function(_) {
+            this._blocksMoving--;
+            D.assert(this._blocksMoving >= 0);
+            D.assert(this._blocksMoving <= this.group.length);
+          }
+        }
       );
+      this._blocksMoving++;
     };
 
     switch (this.gravity) {
