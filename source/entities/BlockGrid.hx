@@ -124,7 +124,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     if (!this.canClick && _blocksMoving == 0) {
       // If all blocks have stopped moving...
       this.OnStopMoving.dispatch();
-      // TODO: Replace just by having each tween report being done at the end
     }
 
     super.update(elapsed);
