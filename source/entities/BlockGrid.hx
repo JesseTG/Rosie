@@ -68,6 +68,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.gravity = GravityDirection.Down;
     this.gridSize = size;
     this._blocksMoving = 0;
+    this.immovable = true;
 
     this.OnStopMoving.add(this._stopMovingBlocks);
     this.OnBadClick.add(function(_) {
