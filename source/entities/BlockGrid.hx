@@ -78,6 +78,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.immovable = true;
 
     this.OnStopMoving.add(this._blocksDoneMoving);
+    this.OnNoMoreMoves.add(this._noMoreMoves);
     this.OnBadClick.add(function(_) {
       FlxG.sound.play(AssetPaths.not_allowed__wav);
     });
@@ -155,6 +156,21 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
   private function _rotateGravity() {
     this.gravity = GravityDirection.counterClockwise(this.gravity);
+  }
+
+  private function _anyGroupsRemaining() : Bool {
+    var blocks = new Array<Block>();
+    forEachAlive(function(b:Block) { return blocks.push(b); });
+
+    while (blocks.length > 0) {
+      var group = _getBlockGroup(blocks.pop());
+      if (group.length >= 3) return true;
+      for (b in group) {
+        var removed = blocks.remove(b);
+      }
+    }
+
+    return false;
   }
 
   /**
@@ -301,15 +317,27 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   private function _blocksDoneMoving() {
       trace("All blocks have stopped moving");
 
-      var blockCount = 0;
-      this.forEachExists(function(block:Block) {
-        blockCount++;
-      });
-
-      if (blockCount <= 8) {
-        // Good!  Generate more blocks
+      if (!this._anyGroupsRemaining()) {
+        this.OnNoMoreMoves.dispatch();
       }
+
       this.canClick = true;
+  }
+
+  private function _noMoreMoves() {
+    // If the player can't make a move...
+    var blockCount = 0;
+    this.forEachExists(function(block:Block) {
+      blockCount++;
+    });
+
+    if (blockCount <= this.gridSize) {
+      // Good!  Generate more blocks
+      trace("MORE BLOCKS COMING!");
+    }
+    else {
+      trace("GAME OVER");
+    }
   }
 
   public override function destroy() {
