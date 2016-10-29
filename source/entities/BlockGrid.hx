@@ -87,42 +87,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
       FlxG.sound.play(AssetPaths.not_allowed__wav);
     });
 
-    _blockGrid.forEach(function(block:Block, gridX:Int, gridY:Int) {
-      var b = this.recycle(Block, function() {
-        trace("New block created");
-        var blockColor = BlockColor.All[Std.random(BlockColor.All.length - 2)];
-        return new Block(gridX * 16, gridY * 16, sprites, blockColor);
-      });
-
-      FlxMouseEventManager.add(b, function(block:Block) {
-        if (this.canClick) {
-          // If no blocks are moving...
-          var blocks = this._getBlockGroup(block);
-
-          if (blocks.length >= 3) {
-            // If the selected block group has at least 3 blocks...
-            blocks.iter(function(toKill:Block) {
-              _blockGrid.remove(toKill);
-              toKill.kill();
-            });
-
-            this.canClick = false;
-            this.OnSuccessfulClick.dispatch(blocks);
-            this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
-            this._startMovingBlocks();
-            this._rotateGravity();
-          }
-          else {
-
-            this.OnBadClick.dispatch(block);
-          }
-        }
-      }, false, true, false);
-
-      b.velocity.set(0, 0);
-      this.add(b);
-      return b;
-    });
+    this._generateBlocks();
   }
 
   public override function update(elapsed:Float) {
@@ -335,13 +300,69 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
       blockCount++;
     });
 
-    if (blockCount <= this.gridSize) {
-      // Good!  Generate more blocks
-      trace("MORE BLOCKS COMING!");
-    }
-    else {
-      trace("GAME OVER");
-    }
+    this._generateBlocks();
+  }
+
+  /**
+   * Fills all null spaces in the grid with blocks and puts them on-screen.
+   * Returns the number of blocks that were created
+   */
+  private function _generateBlocks() : Int {
+    // TODO: Assign a sequential ID for each block created
+    var created = 0;
+
+    _blockGrid.forEach(function(block:Block, gridX:Int, gridY:Int) {
+      if (block == null) {
+        // If there's no block at this grid cell..
+
+        created++;
+        var b = this.recycle(Block, function() {
+          var blockColor = BlockColor.All[Std.random(BlockColor.All.length - 2)];
+          var bb = new Block(gridX * 16, gridY * 16, this._frames, blockColor);
+          bb.ID = this._blocksCreated++;
+
+          trace('New block $bb created');
+          return bb;
+        });
+
+        b.blockColor = BlockColor.All[Std.random(BlockColor.All.length - 2)];
+        b.setPosition(gridX * 16, gridY * 16);
+
+        FlxMouseEventManager.add(b, function(block:Block) {
+          if (this.canClick) {
+            // If no blocks are moving...
+            var blocks = this._getBlockGroup(block);
+
+            if (blocks.length >= 3) {
+              // If the selected block group has at least 3 blocks...
+              blocks.iter(function(toKill:Block) {
+                FlxMouseEventManager.remove(toKill);
+                _blockGrid.remove(toKill);
+                toKill.kill();
+              });
+
+              this.canClick = false;
+              this.OnSuccessfulClick.dispatch(blocks);
+              this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
+              this._startMovingBlocks();
+              this._rotateGravity();
+            }
+            else {
+
+              this.OnBadClick.dispatch(block);
+            }
+          }
+        }, false, true, false);
+
+        this.add(b);
+        return b;
+      }
+      else {
+        return block;
+      }
+    });
+
+    return created;
   }
 
   public override function destroy() {
