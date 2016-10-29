@@ -53,6 +53,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
    */
   public var OnScore(default, null) : FlxTypedSignal<Int->Void>;
 
+  // TODO: Enforce a max size with this.maxSize
   // TODO: Don't hard-code the block size in this class
   public function new(x:Int, y:Int, size:Int, sprites:FlxFramesCollection) {
     super(x, y - 16, size * size + Std.int(0.5 * size));
@@ -192,9 +193,9 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     var newGrid = new Array2<Block>(this.gridSize, this.gridSize);
 
     // rotate gravity in old grid
-    // for each column in old grid:
-    //   set freeCell = bottom-most cell
-    //   for each block in column from bottom-up:
+    // for each localColumn in old grid:
+    //   set freeCell = localBottom cell
+    //   for each block in localColumn from bottom-up:
     //     if block is not null:
     //       set gridNew[row][col] = block
     //       freeCell -= 1
