@@ -60,6 +60,12 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
    */
   public var OnNoMoreMoves(default, null) : FlxTypedSignal<Void->Void>;
 
+  /**
+   * Called when blocks are generated, except for the first time (i.e. when the
+   * game starts).
+   */
+  public var OnBlocksGenerated(default, null) : FlxTypedSignal<Int->Void>;
+
   // TODO: Enforce a max size with this.maxSize
   // TODO: Don't hard-code the block size in this class
   public function new(x:Int, y:Int, size:Int, sprites:FlxFramesCollection) {
@@ -71,6 +77,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.OnStopMoving = new FlxTypedSignal<Void->Void>();
     this.OnScore = new FlxTypedSignal<Int->Void>();
     this.OnNoMoreMoves = new FlxTypedSignal<Void->Void>();
+    this.OnBlocksGenerated = new FlxTypedSignal<Int->Void>();
 
     this._frames = sprites;
     this.canClick = true;
@@ -300,7 +307,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
       blockCount++;
     });
 
-    this._generateBlocks();
+    this.OnBlocksGenerated.dispatch(this._generateBlocks());
   }
 
   /**

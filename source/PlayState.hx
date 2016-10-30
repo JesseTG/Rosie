@@ -145,6 +145,8 @@ class PlayState extends FlxState
     FlxG.watch.addExpression("blockGrid.countDead()", "# Blocks Dead");
     FlxG.watch.addExpression("blockGrid.length", "# Blocks");
 
+    this._blockGrid.OnBlocksGenerated.add(this._addBonusTime);
+
     this.add(bgImage);
     this.add(_background);
     this.add(_blockGrid);
@@ -168,5 +170,9 @@ class PlayState extends FlxState
     if (_time <= 0) {
       FlxMouseEventManager.removeAll();
     }
+  }
+
+  private function _addBonusTime(blocksCreated:Int) {
+    _time += (blocksCreated * 0.05);
   }
 }
