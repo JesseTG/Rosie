@@ -113,7 +113,7 @@ class PlayState extends FlxState
     var size = Std.parseInt(gridObject.properties.get("Size"));
     this._mouseControl = new FlxMouseControl();
 
-    _time = (size * size);
+    _time = 60.0;
 
     FlxG.plugins.add(_mouseControl);
 
