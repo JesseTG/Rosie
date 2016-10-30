@@ -2,10 +2,10 @@
 
 "arrow.png":
 {
-	"frame": {"x":182,"y":56,"w":9,"h":7},
+	"frame": {"x":228,"y":54,"w":7,"h":9},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":0,"y":1,"w":9,"h":7},
+	"spriteSourceSize": {"x":1,"y":0,"w":7,"h":9},
 	"sourceSize": {"w":9,"h":9}
 },
 "tile-blue.png":
@@ -391,6 +391,6 @@
 	"format": "RGBA5551",
 	"size": {"w":506,"h":64},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:b1dc39b3c182f2b3de3e31000d173379:5449719a482ed4f87ce23f943619e134:3d1ab9fc13e1be0b14dbd849cdb94733$"
+	"smartupdate": "$TexturePacker:SmartUpdate:1178529a02b46ac917e980a4cc26a65f:12999dbc3aa75a365f37e52f7e99174b:3d1ab9fc13e1be0b14dbd849cdb94733$"
 }
 }
