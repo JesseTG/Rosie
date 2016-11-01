@@ -19,10 +19,13 @@ import flixel.tweens.FlxEase;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup;
+import flixel.input.mouse.FlxMouseEventManager;
 import flixel.text.FlxText;
+import flixel.math.FlxPoint;
 import flixel.tile.FlxBaseTilemap.FlxTilemapAutoTiling;
 import flixel.tile.FlxTilemap;
-import flixel.input.mouse.FlxMouseEventManager;
+import flixel.util.FlxSignal.FlxTypedSignal;
+import flixel.util.FlxColor;
 
 import de.polygonal.Printf;
 
@@ -45,6 +48,8 @@ class PlayState extends FlxState
   private var _score : Int;
   private var _time : Float;
   private var _timeDisplay : FlxText;
+  private var _scoreDisplay : FlxText;
+  private var _timeChangeDisplay : FlxText;
 
   private var _arrow : FlxSprite;
 
@@ -69,6 +74,12 @@ class PlayState extends FlxState
     _arrow = new FlxSprite(16, 16);
     _arrow.frame =  _sprites.getByName("arrow.png");
     _arrow.resetSizeFromFrame();
+
+    _timeChangeDisplay = new FlxText(_timeDisplay.x, _timeDisplay.y);
+    _timeChangeDisplay.alignment = FlxTextAlign.RIGHT;
+    _timeChangeDisplay.size = 10;
+    _timeChangeDisplay.borderColor = FlxColor.BLACK;
+    _timeChangeDisplay.borderStyle = FlxTextBorderStyle.OUTLINE_FAST;
 
     // TODO: Store the tiled map on the texture atlas and load from there, instead of a separate image
     // TODO: Handle the layers/tilesets not being named in the way I want them to be
@@ -148,6 +159,8 @@ class PlayState extends FlxState
     this.add(_hud);
     this.add(_arrow);
     this.add(_mouseControl);
+    this.add(_timeChangeDisplay);
+
 
     FlxG.sound.playMusic(AssetPaths.music__ogg, 1, true);
   }
@@ -188,11 +201,71 @@ class PlayState extends FlxState
 
   }
   private function _addBonusTime(blocksCreated:Int) {
-    _time += (blocksCreated * 0.05);
+    var bonus = blocksCreated * 0.05;
+    _time += bonus;
+    _timeChangeDisplay.color = FlxColor.GREEN;
+    _timeChangeDisplay.text = Printf.format("+%.1f", [bonus]);
+    FlxTween.linearMotion(
+      _timeChangeDisplay,
+      _timeDisplay.x,
+      _timeDisplay.y,
+      _timeDisplay.x,
+      _timeDisplay.y - 8,
+      0.5,
+      true
+    );
+
+    FlxTween.color(
+      _timeChangeDisplay,
+      0.5,
+      FlxColor.GREEN,
+      FlxColor.fromRGB(0, 255, 0, 0),
+      {
+        startDelay: 0.1
+      }
+    );
   }
 
   private function _subtractTime(blocks:Array<Block>) {
     _time -= 1.0;
 
+    for (block in blocks) {
+      FlxTween.linearPath(
+        block,
+        [
+          block.getPosition(),
+          new FlxPoint(block.x + block.width / 4, block.y),
+          block.getPosition(),
+          new FlxPoint(block.x - block.width / 4, block.y),
+          block.getPosition()
+        ],
+        0.25,
+        true,
+        {
+          type: FlxTween.ONESHOT
+        }
+      );
+    }
+    _timeChangeDisplay.color = FlxColor.RED;
+    _timeChangeDisplay.text = Printf.format("-%.1f", [1.0]);
+    FlxTween.linearMotion(
+      _timeChangeDisplay,
+      _timeDisplay.x,
+      _timeDisplay.y,
+      _timeDisplay.x,
+      _timeDisplay.y + 8,
+      0.5,
+      true
+    );
+
+    FlxTween.color(
+      _timeChangeDisplay,
+      0.5,
+      FlxColor.RED,
+      FlxColor.fromRGB(255, 0, 0, 0),
+      {
+        startDelay: 0.1
+      }
+    );
   }
 }
