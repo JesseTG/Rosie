@@ -53,10 +53,15 @@ class PlayState extends FlxState
 
   private var _arrow : FlxSprite;
 
+  public var OnGameOver : FlxTypedSignal<Void->Void>;
+  public var gameRunning : Bool;
+
 
   override public function create():Void
   {
     super.create();
+
+    this.OnGameOver = new FlxTypedSignal<Void->Void>();
 
     // TODO: Handle a missing tileset (or invalid data, e.g. unsupported format)
     _map = new TiledMap(AssetPaths.world__tmx);
@@ -161,6 +166,7 @@ class PlayState extends FlxState
     this.add(_mouseControl);
     this.add(_timeChangeDisplay);
 
+    this.gameRunning = true;
 
     FlxG.sound.playMusic(AssetPaths.music__ogg, 1, true);
   }
@@ -169,14 +175,16 @@ class PlayState extends FlxState
   {
     super.update(elapsed);
 
-    if (this._blockGrid.canClick) {
+    if (this._blockGrid.canClick && this.gameRunning) {
       _time -= elapsed;
       _timeDisplay.text = Printf.format("%.1f", [Math.max(0, _time)]);
     }
 
 
-    if (_time <= 0) {
+    if (_time <= 0 && this.gameRunning) {
+      this.gameRunning = false;
       FlxMouseEventManager.removeAll();
+      this.OnGameOver.dispatch();
     }
   }
 
@@ -199,7 +207,11 @@ class PlayState extends FlxState
       FlxG.sound.play(AssetPaths.not_allowed__wav);
     });
 
+    this.OnGameOver.addOnce(function() {
+      FlxG.sound.music.stop();
+    });
   }
+
   private function _addBonusTime(blocksCreated:Int) {
     var bonus = blocksCreated * 0.05;
     _time += bonus;
