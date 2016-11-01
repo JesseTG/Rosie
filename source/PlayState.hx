@@ -14,6 +14,8 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup;
@@ -118,17 +120,12 @@ class PlayState extends FlxState
     FlxG.plugins.add(_mouseControl);
 
 
-    var scoreDisplay : FlxText = _scene.object("score");
+    _scoreDisplay = _scene.object("score");
 
     _blockGrid = new BlockGrid(gridObject.x, gridObject.y, size, _sprites);
-    _blockGrid.OnStopMoving.add(function() {
-      _arrow.angle = cast(_blockGrid.gravity);
-    });
-    _blockGrid.OnScore.add(function(score:Int) {
-      this._score += score;
-      FlxG.sound.play(AssetPaths.clear_blocks__wav);
-      scoreDisplay.text = Std.string(this._score);
-    });
+
+    this._initCallbacks();
+
 
     _arrow.angle = cast(_blockGrid.gravity);
     _arrow.centerOrigin();
@@ -144,8 +141,6 @@ class PlayState extends FlxState
     FlxG.watch.addExpression("blockGrid.countLiving()", "# Blocks Alive");
     FlxG.watch.addExpression("blockGrid.countDead()", "# Blocks Dead");
     FlxG.watch.addExpression("blockGrid.length", "# Blocks");
-
-    this._blockGrid.OnBlocksGenerated.add(this._addBonusTime);
 
     this.add(bgImage);
     this.add(_background);
@@ -172,7 +167,32 @@ class PlayState extends FlxState
     }
   }
 
+  private inline function _initCallbacks() {
+    _blockGrid.OnStopMoving.add(function() {
+      _arrow.angle = cast(_blockGrid.gravity);
+    });
+
+    _blockGrid.OnScore.add(function(score:Int) {
+      this._score += score;
+      FlxG.sound.play(AssetPaths.clear_blocks__wav);
+      _scoreDisplay.text = Std.string(this._score);
+    });
+    // TODO: Tween the score counter with FlxNumTween
+
+    this._blockGrid.OnBlocksGenerated.add(this._addBonusTime);
+
+    this._blockGrid.OnBadClick.add(this._subtractTime);
+    this._blockGrid.OnBadClick.add(function(_) {
+      FlxG.sound.play(AssetPaths.not_allowed__wav);
+    });
+
+  }
   private function _addBonusTime(blocksCreated:Int) {
     _time += (blocksCreated * 0.05);
+  }
+
+  private function _subtractTime(blocks:Array<Block>) {
+    _time -= 1.0;
+
   }
 }

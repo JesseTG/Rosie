@@ -90,9 +90,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
     this.OnStopMoving.add(this._blocksDoneMoving);
     this.OnNoMoreMoves.add(this._noMoreMoves);
-    this.OnBadClick.add(function(_) {
-      FlxG.sound.play(AssetPaths.not_allowed__wav);
-    });
 
     this._generateBlocks();
   }
