@@ -38,7 +38,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   /**
    * Called when the player clicks on a block but it's not enough to make a group.
    */
-  public var OnBadClick(default, null) : FlxTypedSignal<Block->Void>;
+  public var OnBadClick(default, null) : FlxTypedSignal<Array<Block>->Void>;
 
   /**
    * Called when the first block starts moving.
@@ -72,7 +72,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     super(x, y - 16, 0);
 
     this.OnSuccessfulClick = new FlxTypedSignal<Array<Block>->Void>();
-    this.OnBadClick = new FlxTypedSignal<Block->Void>();
+    this.OnBadClick = new FlxTypedSignal<Array<Block>->Void>();
     this.OnStartMoving = new FlxTypedSignal<Void->Void>();
     this.OnStopMoving = new FlxTypedSignal<Void->Void>();
     this.OnScore = new FlxTypedSignal<Int->Void>();
@@ -356,7 +356,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
             }
             else {
 
-              this.OnBadClick.dispatch(block);
+              this.OnBadClick.dispatch(blocks);
             }
           }
         }, false, true, false);
