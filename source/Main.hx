@@ -9,5 +9,6 @@ class Main extends Sprite
   {
     super();
     addChild(new FlxGame(320, 240, PlayState, 2.0));
+    // TODO: Trigger a state change with the PlayState's OnGameOver signal
   }
 }
