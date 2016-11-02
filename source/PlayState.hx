@@ -54,6 +54,12 @@ class PlayState extends FlxState
   private var _arrow : FlxSprite;
 
   public var OnGameOver : FlxTypedSignal<Void->Void>;
+
+  /**
+   * Called when the score is computed.  The parameter is the score.
+   */
+  public var OnScore(default, null) : FlxTypedSignal<Int->Void>;
+
   public var gameRunning : Bool;
 
 
@@ -62,6 +68,7 @@ class PlayState extends FlxState
     super.create();
 
     this.OnGameOver = new FlxTypedSignal<Void->Void>();
+    this.OnScore = new FlxTypedSignal<Int->Void>();
 
     // TODO: Handle a missing tileset (or invalid data, e.g. unsupported format)
     _map = new TiledMap(AssetPaths.world__tmx);
@@ -193,12 +200,16 @@ class PlayState extends FlxState
       _arrow.angle = cast(_blockGrid.gravity);
     });
 
-    _blockGrid.OnScore.add(function(score:Int) {
+    this.OnScore.add(function(score:Int) {
       this._score += score;
       FlxG.sound.play(AssetPaths.clear_blocks__wav);
       _scoreDisplay.text = Std.string(this._score);
     });
     // TODO: Tween the score counter with FlxNumTween
+
+    _blockGrid.OnSuccessfulClick.add(function(blocks:Array<Block>) {
+      this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
+    });
 
     this._blockGrid.OnBlocksGenerated.add(this._addBonusTime);
 

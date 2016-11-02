@@ -51,11 +51,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   public var OnStopMoving(default, null) : FlxTypedSignal<Void->Void>;
 
   /**
-   * Called when the score is computed.  The parameter is the score.
-   */
-  public var OnScore(default, null) : FlxTypedSignal<Int->Void>;
-
-  /**
    * Called when no more moves can be made.
    */
   public var OnNoMoreMoves(default, null) : FlxTypedSignal<Void->Void>;
@@ -75,7 +70,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.OnBadClick = new FlxTypedSignal<Array<Block>->Void>();
     this.OnStartMoving = new FlxTypedSignal<Void->Void>();
     this.OnStopMoving = new FlxTypedSignal<Void->Void>();
-    this.OnScore = new FlxTypedSignal<Int->Void>();
     this.OnNoMoreMoves = new FlxTypedSignal<Void->Void>();
     this.OnBlocksGenerated = new FlxTypedSignal<Int->Void>();
 
@@ -347,7 +341,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
               this.canClick = false;
               this.OnSuccessfulClick.dispatch(blocks);
-              this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
               this._startMovingBlocks();
               this._rotateGravity();
             }
