@@ -202,13 +202,17 @@ class PlayState extends FlxState
 
     this.OnScore.add(function(score:Int) {
       this._score += score;
-      FlxG.sound.play(AssetPaths.clear_blocks__wav);
       _scoreDisplay.text = Std.string(this._score);
     });
     // TODO: Tween the score counter with FlxNumTween
 
     _blockGrid.OnSuccessfulClick.add(function(blocks:Array<Block>) {
-      this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
+      FlxG.sound.play(AssetPaths.clear_blocks__wav);
+
+      if (blocks.length > 3) {
+        // If we cleared MORE than three blocks... (3 will clear but not score)
+        this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
+      }
     });
 
     this._blockGrid.OnBlocksGenerated.add(this._addBonusTime);
