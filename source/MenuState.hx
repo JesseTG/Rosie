@@ -20,6 +20,7 @@ import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxBitmapFont;
 import flixel.group.FlxGroup;
+import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.input.mouse.FlxMouseEventManager;
 import flixel.text.FlxText;
 import flixel.text.FlxBitmapText;
@@ -28,6 +29,7 @@ import flixel.tile.FlxBaseTilemap.FlxTilemapAutoTiling;
 import flixel.tile.FlxTilemap;
 import flixel.util.FlxSignal.FlxTypedSignal;
 import flixel.util.FlxColor;
+import flixel.ui.FlxButton;
 
 using Lambda;
 
@@ -39,6 +41,8 @@ class MenuState extends FlxState
   private var _scene : FlxScene;
   private var _mouseControl : FlxMouseControl;
   private var _font : FlxBitmapFont;
+  private var _start : FlxButton;
+  private var _titleLetters : FlxTypedSpriteGroup<FlxBitmapText>;
 
 
   override public function create():Void
@@ -50,6 +54,11 @@ class MenuState extends FlxState
     _background = new FlxTilemap();
     var bgImage = new FlxBackdrop(AssetPaths.bg__png, 0, 0, false, false);
 
+    _start = new FlxButton(160, 180, "Start", function() {
+      FlxG.switchState(new PlayState());
+    });
+    _start.setPosition(160 - _start.width / 2, 180);
+
     _sprites = FlxAtlasFrames.fromTexturePackerJson(AssetPaths.gfx__png, AssetPaths.gfx__json);
     _scene = new FlxScene(AssetPaths.main_menu__xml);
     _font = FlxBitmapFont.fromMonospace(
@@ -59,8 +68,9 @@ class MenuState extends FlxState
       null,
       new FlxPoint(1, 0)
     );
-//    _font.minOffsetX = 1;
-    //_font.spaceWidth = 0;//1;
+
+    _titleLetters = new FlxTypedSpriteGroup<FlxBitmapText>(5);
+
     // TODO: Store the tiled map on the texture atlas and load from there, instead of a separate image
     // TODO: Handle the layers/tilesets not being named in the way I want them to be
     var tiles : TiledTileLayer = cast(_map.getLayer("Ground"), TiledTileLayer);
@@ -110,14 +120,37 @@ class MenuState extends FlxState
     this.add(bgImage);
     this.add(_mouseControl);
     this.add(_background);
+    this.add(_start);
 
-    var text = new FlxBitmapText(_font);
-    text.text = "Rosie";
-    text.setPosition(16, 16);
-    this.add(text);
+
+    this._titleLetters.setPosition(160 - (18.0 * 5.0) / 2.0, 32);
+    for (i in 0..."Rosie".length) {
+      var text = new FlxBitmapText(_font);
+      text.text = "Rosie".charAt(i);
+      text.setPosition(18*i, 0);
+
+      FlxTween.linearPath(
+        text,
+        [
+          new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y),
+          new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y - 8),
+          new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y),
+          new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y + 8),
+          new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y)
+        ],
+        0.75,
+        true,
+        {
+          startDelay: i * 0.1,
+          type: FlxTween.LOOPING
+        }
+      );
+      this._titleLetters.add(text);
+    }
+
+    this.add(this._titleLetters);
 
 
     FlxG.console.registerObject("font", _font);
-    FlxG.console.registerObject("text", text);
   }
 }

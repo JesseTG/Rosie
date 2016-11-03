@@ -247,6 +247,8 @@ class PlayState extends FlxState
         // If there's music playing...
         FlxG.sound.music.stop();
       }
+
+      FlxG.switchState(new MenuState());
     });
   }
 

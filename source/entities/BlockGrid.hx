@@ -394,7 +394,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     super.destroy();
 
     FlxMouseEventManager.remove(this);
-    this._blockGrid.clear();
     this._blockGrid = null;
   }
 }
