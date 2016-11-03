@@ -221,6 +221,16 @@ class PlayState extends FlxState
       }
     });
 
+    this._blockGrid.OnBeforeBlocksGenerated.add(function() {
+      this.round++;
+
+      this._blockGrid.numColors = switch (this.round) {
+        case 1 | 2: 4;
+        case 3 | 4: 5;
+        default: 6;
+      };
+    });
+
     this._blockGrid.OnBlocksGenerated.add(this._addBonusTime);
 
     this._blockGrid.OnBadClick.add(this._subtractTime);
