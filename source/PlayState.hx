@@ -219,6 +219,10 @@ class PlayState extends FlxState
         // If we cleared MORE than three blocks... (3 will clear but not score)
         this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
       }
+
+      if (blocks.length >= 6) {
+        this._addBonusTime(Std.int(blocks.length * 0.25));
+      }
     });
 
     this._blockGrid.OnBeforeBlocksGenerated.add(function() {
