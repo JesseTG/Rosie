@@ -18,15 +18,18 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.graphics.frames.FlxBitmapFont;
 import flixel.group.FlxGroup;
 import flixel.group.FlxSpriteGroup;
 import flixel.input.mouse.FlxMouseEventManager;
 import flixel.text.FlxText;
+import flixel.text.FlxBitmapText;
 import flixel.math.FlxPoint;
 import flixel.tile.FlxBaseTilemap.FlxTilemapAutoTiling;
 import flixel.tile.FlxTilemap;
 import flixel.util.FlxSignal.FlxTypedSignal;
 import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
 
 import de.polygonal.Printf;
 
@@ -44,6 +47,7 @@ class PlayState extends FlxState
   private var _blockGrid : BlockGrid;
   private var _scene : FlxScene;
   private var _mouseControl : FlxMouseControl;
+  private var _font : FlxBitmapFont;
 
   private var _hud : FlxGroup;
   private var _score : Int;
@@ -53,6 +57,7 @@ class PlayState extends FlxState
   private var _timeChangeDisplay : FlxText;
   private var _hints : FlxSpriteGroup;
   private var _arrow : FlxSprite;
+  // TODO: Organize this crap
 
   public var OnGameOver(default, null) : FlxTypedSignal<Void->Void>;
 
@@ -83,6 +88,13 @@ class PlayState extends FlxState
     _scene = new FlxScene(AssetPaths.game__xml);
     _score = 0;
 
+    _font = FlxBitmapFont.fromMonospace(
+      _sprites.getByName("block-font.png"),
+      FlxBitmapFont.DEFAULT_CHARS,
+      new FlxPoint(17, 28),
+      null,
+      new FlxPoint(1, 0)
+    );
 
     _hud = new FlxGroup();
     _scene.spawn(_hud, "hud");
@@ -258,8 +270,21 @@ class PlayState extends FlxState
         FlxG.sound.music.stop();
       }
 
-      FlxG.switchState(new MenuState());
+      _displayGameOver();
+
+      // TODO: Wait for use input
+      new FlxTimer().start(3.0, function(_) {
+        FlxG.switchState(new MenuState());
+      }, 1);
     });
+  }
+
+  private function _displayGameOver() {
+    var gameOver = new FlxBitmapText(_font);
+    gameOver.text = "Game Over";
+    gameOver.screenCenter();
+
+    this.add(gameOver);
   }
 
   private inline function _initHints() {
