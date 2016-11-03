@@ -215,8 +215,8 @@ class PlayState extends FlxState
     _blockGrid.OnSuccessfulClick.add(function(blocks:Array<Block>) {
       FlxG.sound.play(AssetPaths.clear_blocks__wav);
 
-      if (blocks.length > 3) {
-        // If we cleared MORE than three blocks... (3 will clear but not score)
+      if (blocks.length >= 3) {
+        // If we cleared at least 3 blocks...
         this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
       }
 
