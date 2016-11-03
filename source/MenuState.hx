@@ -145,6 +145,7 @@ class MenuState extends FlxState
         true,
         {
           startDelay: i * 0.1,
+          loopDelay: 1,
           type: FlxTween.LOOPING
         }
       );
