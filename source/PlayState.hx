@@ -53,7 +53,7 @@ class PlayState extends FlxState
 
   private var _arrow : FlxSprite;
 
-  public var OnGameOver : FlxTypedSignal<Void->Void>;
+  public var OnGameOver(default, null) : FlxTypedSignal<Void->Void>;
 
   /**
    * Called when the score is computed.  The parameter is the score.
