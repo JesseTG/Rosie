@@ -244,6 +244,7 @@ class PlayState extends FlxState
       };
     });
 
+    // TODO: Handle the case where the grid is full and no groups exist
     this._blockGrid.OnBlocksGenerated.add(this._addBonusTime);
 
     this._blockGrid.OnBadClick.add(this._subtractTime);
