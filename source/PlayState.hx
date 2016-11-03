@@ -239,7 +239,10 @@ class PlayState extends FlxState
     });
 
     this.OnGameOver.addOnce(function() {
-      FlxG.sound.music.stop();
+      if (FlxG.sound.music != null) {
+        // If there's music playing...
+        FlxG.sound.music.stop();
+      }
     });
   }
 
