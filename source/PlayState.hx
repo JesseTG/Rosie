@@ -60,6 +60,7 @@ class PlayState extends FlxState
    */
   public var OnScore(default, null) : FlxTypedSignal<Int->Void>;
 
+  public var round(default, null) : Int;
   public var gameRunning(default, null) : Bool;
 
 
@@ -174,6 +175,7 @@ class PlayState extends FlxState
     this.add(_timeChangeDisplay);
 
     this.gameRunning = true;
+    this.round = 1;
 
     FlxG.sound.playMusic(AssetPaths.music__ogg, 1, true);
   }
