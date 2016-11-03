@@ -132,14 +132,15 @@ class MenuState extends FlxState
       text.text = "Rosie".charAt(i);
       text.setPosition(18*i, 0);
 
+      var currentPoint = new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y);
       FlxTween.linearPath(
         text,
         [
-          new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y),
+          currentPoint,
           new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y - 8),
-          new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y),
+          currentPoint,
           new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y + 8),
-          new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y)
+          currentPoint
         ],
         0.75,
         true,
