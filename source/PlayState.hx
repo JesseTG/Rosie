@@ -30,6 +30,7 @@ import flixel.tile.FlxTilemap;
 import flixel.util.FlxSignal.FlxTypedSignal;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import flixel.util.FlxAxes;
 
 import de.polygonal.Printf;
 
@@ -144,6 +145,7 @@ class PlayState extends FlxState
 
 
     _scoreDisplay = _scene.object("score");
+    _scoreDisplay.screenCenter(FlxAxes.X);
 
     _blockGrid = new BlockGrid(gridObject.x, gridObject.y, size, _sprites);
 
@@ -214,6 +216,7 @@ class PlayState extends FlxState
     this.OnScore.add(function(score:Int) {
       this._score += score;
       _scoreDisplay.text = Std.string(this._score);
+      _scoreDisplay.screenCenter(FlxAxes.X);
     });
     // TODO: Tween the score counter with FlxNumTween
     // TODO: Use that nice-looking bitmap font
