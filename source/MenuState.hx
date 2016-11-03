@@ -30,6 +30,7 @@ import flixel.tile.FlxTilemap;
 import flixel.util.FlxSignal.FlxTypedSignal;
 import flixel.util.FlxColor;
 import flixel.ui.FlxButton;
+import flixel.util.FlxAxes;
 
 using Lambda;
 
@@ -57,7 +58,7 @@ class MenuState extends FlxState
     _start = new FlxButton(160, 180, "Start", function() {
       FlxG.switchState(new PlayState());
     });
-    _start.setPosition(160 - _start.width / 2, 180);
+    _start.screenCenter(FlxAxes.X);
 
     _sprites = FlxAtlasFrames.fromTexturePackerJson(AssetPaths.gfx__png, AssetPaths.gfx__json);
     _scene = new FlxScene(AssetPaths.main_menu__xml);
@@ -129,6 +130,7 @@ class MenuState extends FlxState
       );
       this._titleLetters.add(text);
     }
+    this._titleLetters.screenCenter(FlxAxes.X);
 
     this.add(this._titleLetters);
 
