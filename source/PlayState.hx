@@ -60,7 +60,7 @@ class PlayState extends FlxState
    */
   public var OnScore(default, null) : FlxTypedSignal<Int->Void>;
 
-  public var gameRunning : Bool;
+  public var gameRunning(default, null) : Bool;
 
 
   override public function create():Void
