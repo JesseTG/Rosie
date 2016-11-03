@@ -8,7 +8,7 @@ class Main extends Sprite
   public function new()
   {
     super();
-    addChild(new FlxGame(320, 240, PlayState, 2.0));
+    addChild(new FlxGame(320, 240, MenuState, 2.0));
     // TODO: Trigger a state change with the PlayState's OnGameOver signal
   }
 }
