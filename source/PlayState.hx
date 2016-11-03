@@ -19,6 +19,7 @@ import flixel.tweens.FlxEase;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup;
+import flixel.group.FlxSpriteGroup;
 import flixel.input.mouse.FlxMouseEventManager;
 import flixel.text.FlxText;
 import flixel.math.FlxPoint;
@@ -50,7 +51,7 @@ class PlayState extends FlxState
   private var _timeDisplay : FlxText;
   private var _scoreDisplay : FlxText;
   private var _timeChangeDisplay : FlxText;
-
+  private var _hints : FlxSpriteGroup;
   private var _arrow : FlxSprite;
 
   public var OnGameOver(default, null) : FlxTypedSignal<Void->Void>;
@@ -79,6 +80,8 @@ class PlayState extends FlxState
     _sprites = FlxAtlasFrames.fromTexturePackerJson(AssetPaths.gfx__png, AssetPaths.gfx__json);
     _scene = new FlxScene(AssetPaths.game__xml);
     _score = 0;
+
+    this._hints = new FlxSpriteGroup();
 
     _hud = new FlxGroup();
     _scene.spawn(_hud, "hud");
@@ -148,6 +151,23 @@ class PlayState extends FlxState
 
     _blockGrid = new BlockGrid(gridObject.x, gridObject.y, size, _sprites);
 
+    _hints.setPosition(24, 96);
+    var hint_yes = new FlxSprite(16, 0);
+    hint_yes.frame = _sprites.getByName("icon-clear-yes.png");
+    _hints.add(hint_yes);
+
+    var hand1 = new FlxSprite(0, 0);
+    hand1.frame = _sprites.getByName("hand.png");
+    _hints.add(hand1);
+
+    var hint_no = new FlxSprite(16, 24);
+    hint_no.frame = _sprites.getByName("icon-clear-no.png");
+    _hints.add(hint_no);
+
+    var hand2 = new FlxSprite(0, 24);
+    hand2.frame = _sprites.getByName("hand.png");
+    _hints.add(hand2);
+
     this._initCallbacks();
 
 
@@ -174,6 +194,7 @@ class PlayState extends FlxState
     this.add(_background);
     this.add(_blockGrid);
     this.add(_hud);
+    this.add(_hints);
     this.add(_arrow);
     this.add(_mouseControl);
     this.add(_timeChangeDisplay);
