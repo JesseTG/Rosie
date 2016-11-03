@@ -6,7 +6,7 @@
         <key>texturePackerVersion</key>
         <string>3.3.4</string>
         <key>fileName</key>
-        <string>/home/jesse/Common/Code/Rosie/assets/images/gfx.tps</string>
+        <string>/home/jesse/Common/Code/Rosie/assets-raw/gfx.tps</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -38,7 +38,7 @@
         <key>dataFormat</key>
         <string>json</string>
         <key>textureFileName</key>
-        <filename>gfx.png</filename>
+        <filename>../assets/images/gfx.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>ditherType</key>
@@ -131,7 +131,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>gfx.json</filename>
+                <filename>../assets/images/gfx.json</filename>
             </struct>
             <key>json</key>
             <struct type="DataFile">
