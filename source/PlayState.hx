@@ -243,12 +243,10 @@ class PlayState extends FlxState
     });
   }
 
-  private function _grantBonusTime(blocksCreated:Int) {
-    this._addBonusTime(blocksCreated * 0.05);
-  }
+  private function _addBonusTime(blocksCreated:Int) {
+    var bonus = blocksCreated * 0.05;
 
-  private function _addBonusTime(bonus:Float) {
-    _time += bonus;
+    _time = Math.min(_time + bonus, _scene.const("starting-time"));
     _timeChangeDisplay.color = FlxColor.GREEN;
     _timeChangeDisplay.text = Printf.format("+%.1f", [bonus]);
     FlxTween.linearMotion(
