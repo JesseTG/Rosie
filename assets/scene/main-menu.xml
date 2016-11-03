@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scene width="320" height="240" bgColor="gray" name="In-Game" description="Similar Game" version="1.0">
+
+  <!--backgrounds id="background">
+    <backdrop graphics="images/bg.png" x="0" y="0" repeatX="false" repeatY="false" scrollFactorX="0" scrollFactorY="0"/>
+  </backgrounds-->
+
+  <layer id="title">
+    <text
+      id="r"
+      text="R"
+      font="block-font.png"
+      x="160" y="8" alignment="center"/>
+
+  </layer>
+</scene>

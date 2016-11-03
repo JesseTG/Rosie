@@ -34,6 +34,8 @@ ApplicationMain.create = function() {
 	types.push("MUSIC");
 	urls.push("assets/scene/game.xml");
 	types.push("TEXT");
+	urls.push("assets/scene/main-menu.xml");
+	types.push("TEXT");
 	urls.push("assets/sounds/clear-blocks.ogg");
 	types.push("SOUND");
 	urls.push("assets/sounds/clear-blocks.wav");
@@ -80,7 +82,7 @@ ApplicationMain.init = function() {
 	}
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "2", company : "Corundum Games", file : "Rosie", fps : 60, name : "Rosie", orientation : "", packageName : "com.corundumgames.rosie", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : true, hardware : false, height : 480, parameters : "{}", resizable : true, stencilBuffer : true, title : "Rosie", vsync : true, width : 640, x : null, y : null}]};
+	ApplicationMain.config = { build : "1", company : "Corundum Games", file : "Rosie", fps : 60, name : "Rosie", orientation : "", packageName : "com.corundumgames.rosie", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : true, hardware : false, height : 480, parameters : "{}", resizable : true, stencilBuffer : true, title : "Rosie", vsync : true, width : 640, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -2015,7 +2017,7 @@ openfl_display_Sprite.prototype = $extend(openfl_display_DisplayObjectContainer.
 });
 var Main = function() {
 	openfl_display_Sprite.call(this);
-	this.addChild(new flixel_FlxGame(320,240,PlayState,2.0));
+	this.addChild(new flixel_FlxGame(320,240,MenuState,2.0));
 };
 $hxClasses["Main"] = Main;
 Main.__name__ = ["Main"];
@@ -2206,175 +2208,188 @@ var DefaultAssetLibrary = function() {
 		_this11.h["assets/scene/game.xml"] = value5;
 	}
 	var _this12 = this.path;
-	if(__map_reserved["assets/sounds/clear-blocks.ogg"] != null) {
-		_this12.setReserved("assets/sounds/clear-blocks.ogg","assets/sounds/clear-blocks.ogg");
+	if(__map_reserved["assets/scene/main-menu.xml"] != null) {
+		_this12.setReserved("assets/scene/main-menu.xml","assets/scene/main-menu.xml");
 	} else {
-		_this12.h["assets/sounds/clear-blocks.ogg"] = "assets/sounds/clear-blocks.ogg";
+		_this12.h["assets/scene/main-menu.xml"] = "assets/scene/main-menu.xml";
 	}
 	var _this13 = this.type;
-	var value6 = "SOUND";
-	if(__map_reserved["assets/sounds/clear-blocks.ogg"] != null) {
-		_this13.setReserved("assets/sounds/clear-blocks.ogg",value6);
+	var value6 = "TEXT";
+	if(__map_reserved["assets/scene/main-menu.xml"] != null) {
+		_this13.setReserved("assets/scene/main-menu.xml",value6);
 	} else {
-		_this13.h["assets/sounds/clear-blocks.ogg"] = value6;
+		_this13.h["assets/scene/main-menu.xml"] = value6;
 	}
 	var _this14 = this.path;
-	if(__map_reserved["assets/sounds/clear-blocks.wav"] != null) {
-		_this14.setReserved("assets/sounds/clear-blocks.wav","assets/sounds/clear-blocks.wav");
+	if(__map_reserved["assets/sounds/clear-blocks.ogg"] != null) {
+		_this14.setReserved("assets/sounds/clear-blocks.ogg","assets/sounds/clear-blocks.ogg");
 	} else {
-		_this14.h["assets/sounds/clear-blocks.wav"] = "assets/sounds/clear-blocks.wav";
+		_this14.h["assets/sounds/clear-blocks.ogg"] = "assets/sounds/clear-blocks.ogg";
 	}
 	var _this15 = this.type;
 	var value7 = "SOUND";
-	if(__map_reserved["assets/sounds/clear-blocks.wav"] != null) {
-		_this15.setReserved("assets/sounds/clear-blocks.wav",value7);
+	if(__map_reserved["assets/sounds/clear-blocks.ogg"] != null) {
+		_this15.setReserved("assets/sounds/clear-blocks.ogg",value7);
 	} else {
-		_this15.h["assets/sounds/clear-blocks.wav"] = value7;
+		_this15.h["assets/sounds/clear-blocks.ogg"] = value7;
 	}
 	var _this16 = this.path;
-	if(__map_reserved["assets/sounds/not-allowed.ogg"] != null) {
-		_this16.setReserved("assets/sounds/not-allowed.ogg","assets/sounds/not-allowed.ogg");
+	if(__map_reserved["assets/sounds/clear-blocks.wav"] != null) {
+		_this16.setReserved("assets/sounds/clear-blocks.wav","assets/sounds/clear-blocks.wav");
 	} else {
-		_this16.h["assets/sounds/not-allowed.ogg"] = "assets/sounds/not-allowed.ogg";
+		_this16.h["assets/sounds/clear-blocks.wav"] = "assets/sounds/clear-blocks.wav";
 	}
 	var _this17 = this.type;
 	var value8 = "SOUND";
-	if(__map_reserved["assets/sounds/not-allowed.ogg"] != null) {
-		_this17.setReserved("assets/sounds/not-allowed.ogg",value8);
+	if(__map_reserved["assets/sounds/clear-blocks.wav"] != null) {
+		_this17.setReserved("assets/sounds/clear-blocks.wav",value8);
 	} else {
-		_this17.h["assets/sounds/not-allowed.ogg"] = value8;
+		_this17.h["assets/sounds/clear-blocks.wav"] = value8;
 	}
 	var _this18 = this.path;
-	if(__map_reserved["assets/sounds/not-allowed.wav"] != null) {
-		_this18.setReserved("assets/sounds/not-allowed.wav","assets/sounds/not-allowed.wav");
+	if(__map_reserved["assets/sounds/not-allowed.ogg"] != null) {
+		_this18.setReserved("assets/sounds/not-allowed.ogg","assets/sounds/not-allowed.ogg");
 	} else {
-		_this18.h["assets/sounds/not-allowed.wav"] = "assets/sounds/not-allowed.wav";
+		_this18.h["assets/sounds/not-allowed.ogg"] = "assets/sounds/not-allowed.ogg";
 	}
 	var _this19 = this.type;
 	var value9 = "SOUND";
-	if(__map_reserved["assets/sounds/not-allowed.wav"] != null) {
-		_this19.setReserved("assets/sounds/not-allowed.wav",value9);
+	if(__map_reserved["assets/sounds/not-allowed.ogg"] != null) {
+		_this19.setReserved("assets/sounds/not-allowed.ogg",value9);
 	} else {
-		_this19.h["assets/sounds/not-allowed.wav"] = value9;
+		_this19.h["assets/sounds/not-allowed.ogg"] = value9;
 	}
 	var _this20 = this.path;
-	if(__map_reserved["assets/sounds/sounds-go-here.txt"] != null) {
-		_this20.setReserved("assets/sounds/sounds-go-here.txt","assets/sounds/sounds-go-here.txt");
+	if(__map_reserved["assets/sounds/not-allowed.wav"] != null) {
+		_this20.setReserved("assets/sounds/not-allowed.wav","assets/sounds/not-allowed.wav");
 	} else {
-		_this20.h["assets/sounds/sounds-go-here.txt"] = "assets/sounds/sounds-go-here.txt";
+		_this20.h["assets/sounds/not-allowed.wav"] = "assets/sounds/not-allowed.wav";
 	}
 	var _this21 = this.type;
-	var value10 = "TEXT";
-	if(__map_reserved["assets/sounds/sounds-go-here.txt"] != null) {
-		_this21.setReserved("assets/sounds/sounds-go-here.txt",value10);
+	var value10 = "SOUND";
+	if(__map_reserved["assets/sounds/not-allowed.wav"] != null) {
+		_this21.setReserved("assets/sounds/not-allowed.wav",value10);
 	} else {
-		_this21.h["assets/sounds/sounds-go-here.txt"] = value10;
+		_this21.h["assets/sounds/not-allowed.wav"] = value10;
 	}
 	var _this22 = this.path;
-	if(__map_reserved["assets/template/index.html"] != null) {
-		_this22.setReserved("assets/template/index.html","assets/template/index.html");
+	if(__map_reserved["assets/sounds/sounds-go-here.txt"] != null) {
+		_this22.setReserved("assets/sounds/sounds-go-here.txt","assets/sounds/sounds-go-here.txt");
 	} else {
-		_this22.h["assets/template/index.html"] = "assets/template/index.html";
+		_this22.h["assets/sounds/sounds-go-here.txt"] = "assets/sounds/sounds-go-here.txt";
 	}
 	var _this23 = this.type;
 	var value11 = "TEXT";
-	if(__map_reserved["assets/template/index.html"] != null) {
-		_this23.setReserved("assets/template/index.html",value11);
+	if(__map_reserved["assets/sounds/sounds-go-here.txt"] != null) {
+		_this23.setReserved("assets/sounds/sounds-go-here.txt",value11);
 	} else {
-		_this23.h["assets/template/index.html"] = value11;
+		_this23.h["assets/sounds/sounds-go-here.txt"] = value11;
 	}
 	var _this24 = this.path;
-	if(__map_reserved["assets/world.tmx"] != null) {
-		_this24.setReserved("assets/world.tmx","assets/world.tmx");
+	if(__map_reserved["assets/template/index.html"] != null) {
+		_this24.setReserved("assets/template/index.html","assets/template/index.html");
 	} else {
-		_this24.h["assets/world.tmx"] = "assets/world.tmx";
+		_this24.h["assets/template/index.html"] = "assets/template/index.html";
 	}
 	var _this25 = this.type;
 	var value12 = "TEXT";
-	if(__map_reserved["assets/world.tmx"] != null) {
-		_this25.setReserved("assets/world.tmx",value12);
+	if(__map_reserved["assets/template/index.html"] != null) {
+		_this25.setReserved("assets/template/index.html",value12);
 	} else {
-		_this25.h["assets/world.tmx"] = value12;
+		_this25.h["assets/template/index.html"] = value12;
 	}
 	var _this26 = this.path;
-	if(__map_reserved["flixel/sounds/flixel.ogg"] != null) {
-		_this26.setReserved("flixel/sounds/flixel.ogg","flixel/sounds/flixel.ogg");
+	if(__map_reserved["assets/world.tmx"] != null) {
+		_this26.setReserved("assets/world.tmx","assets/world.tmx");
 	} else {
-		_this26.h["flixel/sounds/flixel.ogg"] = "flixel/sounds/flixel.ogg";
+		_this26.h["assets/world.tmx"] = "assets/world.tmx";
 	}
 	var _this27 = this.type;
-	var value13 = "SOUND";
-	if(__map_reserved["flixel/sounds/flixel.ogg"] != null) {
-		_this27.setReserved("flixel/sounds/flixel.ogg",value13);
+	var value13 = "TEXT";
+	if(__map_reserved["assets/world.tmx"] != null) {
+		_this27.setReserved("assets/world.tmx",value13);
 	} else {
-		_this27.h["flixel/sounds/flixel.ogg"] = value13;
+		_this27.h["assets/world.tmx"] = value13;
 	}
 	var _this28 = this.path;
-	if(__map_reserved["flixel/sounds/beep.ogg"] != null) {
-		_this28.setReserved("flixel/sounds/beep.ogg","flixel/sounds/beep.ogg");
+	if(__map_reserved["flixel/sounds/flixel.ogg"] != null) {
+		_this28.setReserved("flixel/sounds/flixel.ogg","flixel/sounds/flixel.ogg");
 	} else {
-		_this28.h["flixel/sounds/beep.ogg"] = "flixel/sounds/beep.ogg";
+		_this28.h["flixel/sounds/flixel.ogg"] = "flixel/sounds/flixel.ogg";
 	}
 	var _this29 = this.type;
 	var value14 = "SOUND";
-	if(__map_reserved["flixel/sounds/beep.ogg"] != null) {
-		_this29.setReserved("flixel/sounds/beep.ogg",value14);
+	if(__map_reserved["flixel/sounds/flixel.ogg"] != null) {
+		_this29.setReserved("flixel/sounds/flixel.ogg",value14);
 	} else {
-		_this29.h["flixel/sounds/beep.ogg"] = value14;
+		_this29.h["flixel/sounds/flixel.ogg"] = value14;
 	}
-	var _this30 = this.className;
-	var value15 = _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf;
-	if(__map_reserved["flixel/fonts/nokiafc22.ttf"] != null) {
-		_this30.setReserved("flixel/fonts/nokiafc22.ttf",value15);
+	var _this30 = this.path;
+	if(__map_reserved["flixel/sounds/beep.ogg"] != null) {
+		_this30.setReserved("flixel/sounds/beep.ogg","flixel/sounds/beep.ogg");
 	} else {
-		_this30.h["flixel/fonts/nokiafc22.ttf"] = value15;
+		_this30.h["flixel/sounds/beep.ogg"] = "flixel/sounds/beep.ogg";
 	}
 	var _this31 = this.type;
-	var value16 = "FONT";
-	if(__map_reserved["flixel/fonts/nokiafc22.ttf"] != null) {
-		_this31.setReserved("flixel/fonts/nokiafc22.ttf",value16);
+	var value15 = "SOUND";
+	if(__map_reserved["flixel/sounds/beep.ogg"] != null) {
+		_this31.setReserved("flixel/sounds/beep.ogg",value15);
 	} else {
-		_this31.h["flixel/fonts/nokiafc22.ttf"] = value16;
+		_this31.h["flixel/sounds/beep.ogg"] = value15;
 	}
 	var _this32 = this.className;
-	var value17 = _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf;
-	if(__map_reserved["flixel/fonts/monsterrat.ttf"] != null) {
-		_this32.setReserved("flixel/fonts/monsterrat.ttf",value17);
+	var value16 = _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf;
+	if(__map_reserved["flixel/fonts/nokiafc22.ttf"] != null) {
+		_this32.setReserved("flixel/fonts/nokiafc22.ttf",value16);
 	} else {
-		_this32.h["flixel/fonts/monsterrat.ttf"] = value17;
+		_this32.h["flixel/fonts/nokiafc22.ttf"] = value16;
 	}
 	var _this33 = this.type;
-	var value18 = "FONT";
-	if(__map_reserved["flixel/fonts/monsterrat.ttf"] != null) {
-		_this33.setReserved("flixel/fonts/monsterrat.ttf",value18);
+	var value17 = "FONT";
+	if(__map_reserved["flixel/fonts/nokiafc22.ttf"] != null) {
+		_this33.setReserved("flixel/fonts/nokiafc22.ttf",value17);
 	} else {
-		_this33.h["flixel/fonts/monsterrat.ttf"] = value18;
+		_this33.h["flixel/fonts/nokiafc22.ttf"] = value17;
 	}
-	var _this34 = this.path;
-	if(__map_reserved["flixel/images/ui/button.png"] != null) {
-		_this34.setReserved("flixel/images/ui/button.png","flixel/images/ui/button.png");
+	var _this34 = this.className;
+	var value18 = _$_$ASSET_$_$flixel_$fonts_$monsterrat_$ttf;
+	if(__map_reserved["flixel/fonts/monsterrat.ttf"] != null) {
+		_this34.setReserved("flixel/fonts/monsterrat.ttf",value18);
 	} else {
-		_this34.h["flixel/images/ui/button.png"] = "flixel/images/ui/button.png";
+		_this34.h["flixel/fonts/monsterrat.ttf"] = value18;
 	}
 	var _this35 = this.type;
-	var value19 = "IMAGE";
-	if(__map_reserved["flixel/images/ui/button.png"] != null) {
-		_this35.setReserved("flixel/images/ui/button.png",value19);
+	var value19 = "FONT";
+	if(__map_reserved["flixel/fonts/monsterrat.ttf"] != null) {
+		_this35.setReserved("flixel/fonts/monsterrat.ttf",value19);
 	} else {
-		_this35.h["flixel/images/ui/button.png"] = value19;
+		_this35.h["flixel/fonts/monsterrat.ttf"] = value19;
 	}
 	var _this36 = this.path;
-	if(__map_reserved["flixel/images/logo/default.png"] != null) {
-		_this36.setReserved("flixel/images/logo/default.png","flixel/images/logo/default.png");
+	if(__map_reserved["flixel/images/ui/button.png"] != null) {
+		_this36.setReserved("flixel/images/ui/button.png","flixel/images/ui/button.png");
 	} else {
-		_this36.h["flixel/images/logo/default.png"] = "flixel/images/logo/default.png";
+		_this36.h["flixel/images/ui/button.png"] = "flixel/images/ui/button.png";
 	}
 	var _this37 = this.type;
 	var value20 = "IMAGE";
-	if(__map_reserved["flixel/images/logo/default.png"] != null) {
-		_this37.setReserved("flixel/images/logo/default.png",value20);
+	if(__map_reserved["flixel/images/ui/button.png"] != null) {
+		_this37.setReserved("flixel/images/ui/button.png",value20);
 	} else {
-		_this37.h["flixel/images/logo/default.png"] = value20;
+		_this37.h["flixel/images/ui/button.png"] = value20;
+	}
+	var _this38 = this.path;
+	if(__map_reserved["flixel/images/logo/default.png"] != null) {
+		_this38.setReserved("flixel/images/logo/default.png","flixel/images/logo/default.png");
+	} else {
+		_this38.h["flixel/images/logo/default.png"] = "flixel/images/logo/default.png";
+	}
+	var _this39 = this.type;
+	var value21 = "IMAGE";
+	if(__map_reserved["flixel/images/logo/default.png"] != null) {
+		_this39.setReserved("flixel/images/logo/default.png",value21);
+	} else {
+		_this39.h["flixel/images/logo/default.png"] = value21;
 	}
 	var assetsPrefix = null;
 	if(ApplicationMain.config != null && Object.prototype.hasOwnProperty.call(ApplicationMain.config,"assetsPrefix")) {
@@ -2384,13 +2399,13 @@ var DefaultAssetLibrary = function() {
 		var k = this.path.keys();
 		while(k.hasNext()) {
 			var k1 = k.next();
-			var _this38 = this.path;
-			var value21 = assetsPrefix + (__map_reserved[k1] != null?_this38.getReserved(k1):_this38.h[k1]);
-			var _this39 = this.path;
+			var _this40 = this.path;
+			var value22 = assetsPrefix + (__map_reserved[k1] != null?_this40.getReserved(k1):_this40.h[k1]);
+			var _this41 = this.path;
 			if(__map_reserved[k1] != null) {
-				_this39.setReserved(k1,value21);
+				_this41.setReserved(k1,value22);
 			} else {
-				_this39.h[k1] = value21;
+				_this41.h[k1] = value22;
 			}
 		}
 	}
@@ -2898,56 +2913,6 @@ _$List_ListIterator.prototype = {
 	,__class__: _$List_ListIterator
 };
 Math.__name__ = ["Math"];
-var NMEPreloader = function() {
-	openfl_display_Sprite.call(this);
-	var backgroundColor = this.getBackgroundColor();
-	var color = 0;
-	if(0.299 * (backgroundColor >> 16 & 255) + 0.587 * (backgroundColor >> 8 & 255) + 0.114 * (backgroundColor & 255) < 70) {
-		color = 16777215;
-	}
-	var y = this.getHeight() / 2 - 3.5;
-	var width = this.getWidth() - 60;
-	this.outline = new openfl_display_Sprite();
-	this.outline.get_graphics().beginFill(color,0.07);
-	this.outline.get_graphics().drawRect(0,0,width,7);
-	this.outline.set_x(30);
-	this.outline.set_y(y);
-	this.addChild(this.outline);
-	this.progress = new openfl_display_Sprite();
-	this.progress.get_graphics().beginFill(color,0.35);
-	this.progress.get_graphics().drawRect(0,0,width - 4,3);
-	this.progress.set_x(32);
-	this.progress.set_y(y + 2);
-	this.progress.set_scaleX(0);
-	this.addChild(this.progress);
-};
-$hxClasses["NMEPreloader"] = NMEPreloader;
-NMEPreloader.__name__ = ["NMEPreloader"];
-NMEPreloader.__super__ = openfl_display_Sprite;
-NMEPreloader.prototype = $extend(openfl_display_Sprite.prototype,{
-	getBackgroundColor: function() {
-		return 0;
-	}
-	,getHeight: function() {
-		return 480;
-	}
-	,getWidth: function() {
-		return 640;
-	}
-	,onInit: function() {
-	}
-	,onLoaded: function() {
-		this.dispatchEvent(new openfl_events_Event("complete"));
-	}
-	,onUpdate: function(bytesLoaded,bytesTotal) {
-		var percentLoaded = bytesLoaded / bytesTotal;
-		if(percentLoaded > 1) {
-			percentLoaded = 1;
-		}
-		this.progress.set_scaleX(percentLoaded);
-	}
-	,__class__: NMEPreloader
-});
 var flixel_util_IFlxDestroyable = function() { };
 $hxClasses["flixel.util.IFlxDestroyable"] = flixel_util_IFlxDestroyable;
 flixel_util_IFlxDestroyable.__name__ = ["flixel","util","IFlxDestroyable"];
@@ -3598,6 +3563,108 @@ flixel_FlxState.prototype = $extend(flixel_group_FlxTypedGroup.prototype,{
 	,__class__: flixel_FlxState
 	,__properties__: $extend(flixel_group_FlxTypedGroup.prototype.__properties__,{set_bgColor:"set_bgColor",get_bgColor:"get_bgColor"})
 });
+var MenuState = function(MaxSize) {
+	flixel_FlxState.call(this,MaxSize);
+};
+$hxClasses["MenuState"] = MenuState;
+MenuState.__name__ = ["MenuState"];
+MenuState.__super__ = flixel_FlxState;
+MenuState.prototype = $extend(flixel_FlxState.prototype,{
+	create: function() {
+		flixel_FlxState.prototype.create.call(this);
+		this._map = new flixel_addons_editors_tiled_TiledMap("assets/world.tmx");
+		this._background = new flixel_tile_FlxTilemap();
+		var bgImage = new flixel_addons_display_FlxBackdrop("assets/images/bg.png",0,0,false,false);
+		this._start = new flixel_ui_FlxButton(160,180,"Start",function() {
+			var nextState = new PlayState();
+			if(flixel_FlxG.game._state.switchTo(nextState)) {
+				flixel_FlxG.game._requestedState = nextState;
+			}
+		});
+		this._start.screenCenter(flixel_util_FlxAxes.X);
+		this._sprites = flixel_graphics_frames_FlxAtlasFrames.fromTexturePackerJson("assets/images/gfx.png","assets/images/gfx.json");
+		this._scene = new flixel_addons_util_FlxScene("assets/scene/main-menu.xml");
+		this._font = flixel_graphics_frames_FlxBitmapFont.fromMonospace(this._sprites.framesHash.get("block-font.png")," !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",new flixel_math_FlxPoint(17,28),null,new flixel_math_FlxPoint(1,0));
+		this._titleLetters = new flixel_group_FlxTypedSpriteGroup(5);
+		var tiles = js_Boot.__cast(this._map.getLayer("Ground") , flixel_addons_editors_tiled_TiledTileLayer);
+		js_Boot.__cast(this._map.getLayer("Background") , flixel_addons_editors_tiled_TiledImageLayer);
+		js_Boot.__cast(this._map.getLayer("Objects") , flixel_addons_editors_tiled_TiledObjectLayer);
+		var tileSet = this._map.getTileSet("Overworld");
+		this._background.loadMapFromArray(tiles.get_tileArray(),tiles.width,tiles.height,"assets/images/tile-environment.png",tileSet.tileWidth,tileSet.tileHeight,null,1);
+		bgImage.loadGraphic("assets/images/bg.png");
+		this._mouseControl = new flixel_addons_plugin_FlxMouseControl();
+		flixel_FlxG.plugins.add_flixel_addons_plugin_FlxMouseControl(this._mouseControl);
+		this.add(bgImage);
+		this.add(this._mouseControl);
+		this.add(this._background);
+		this.add(this._start);
+		this._titleLetters.setPosition(115.,32);
+		var _g1 = 0;
+		var _g = "Rosie".length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			var text = new flixel_text_FlxBitmapText(this._font);
+			text.set_text("Rosie".charAt(i));
+			text.setPosition(18 * i,0);
+			var currentPoint = new flixel_math_FlxPoint(this._titleLetters.x + text.x,this._titleLetters.y + text.y);
+			flixel_tweens_FlxTween.linearPath(text,[currentPoint,new flixel_math_FlxPoint(this._titleLetters.x + text.x,this._titleLetters.y + text.y - 8),currentPoint,new flixel_math_FlxPoint(this._titleLetters.x + text.x,this._titleLetters.y + text.y + 8),currentPoint],0.75,true,{ startDelay : i * 0.1, loopDelay : 1, type : 2});
+			this._titleLetters.add(text);
+		}
+		this._titleLetters.screenCenter(flixel_util_FlxAxes.X);
+		this.add(this._titleLetters);
+	}
+	,__class__: MenuState
+});
+var NMEPreloader = function() {
+	openfl_display_Sprite.call(this);
+	var backgroundColor = this.getBackgroundColor();
+	var color = 0;
+	if(0.299 * (backgroundColor >> 16 & 255) + 0.587 * (backgroundColor >> 8 & 255) + 0.114 * (backgroundColor & 255) < 70) {
+		color = 16777215;
+	}
+	var y = this.getHeight() / 2 - 3.5;
+	var width = this.getWidth() - 60;
+	this.outline = new openfl_display_Sprite();
+	this.outline.get_graphics().beginFill(color,0.07);
+	this.outline.get_graphics().drawRect(0,0,width,7);
+	this.outline.set_x(30);
+	this.outline.set_y(y);
+	this.addChild(this.outline);
+	this.progress = new openfl_display_Sprite();
+	this.progress.get_graphics().beginFill(color,0.35);
+	this.progress.get_graphics().drawRect(0,0,width - 4,3);
+	this.progress.set_x(32);
+	this.progress.set_y(y + 2);
+	this.progress.set_scaleX(0);
+	this.addChild(this.progress);
+};
+$hxClasses["NMEPreloader"] = NMEPreloader;
+NMEPreloader.__name__ = ["NMEPreloader"];
+NMEPreloader.__super__ = openfl_display_Sprite;
+NMEPreloader.prototype = $extend(openfl_display_Sprite.prototype,{
+	getBackgroundColor: function() {
+		return 0;
+	}
+	,getHeight: function() {
+		return 480;
+	}
+	,getWidth: function() {
+		return 640;
+	}
+	,onInit: function() {
+	}
+	,onLoaded: function() {
+		this.dispatchEvent(new openfl_events_Event("complete"));
+	}
+	,onUpdate: function(bytesLoaded,bytesTotal) {
+		var percentLoaded = bytesLoaded / bytesTotal;
+		if(percentLoaded > 1) {
+			percentLoaded = 1;
+		}
+		this.progress.set_scaleX(percentLoaded);
+	}
+	,__class__: NMEPreloader
+});
 var PlayState = function(MaxSize) {
 	flixel_FlxState.call(this,MaxSize);
 };
@@ -3606,14 +3673,16 @@ PlayState.__name__ = ["PlayState"];
 PlayState.__super__ = flixel_FlxState;
 PlayState.prototype = $extend(flixel_FlxState.prototype,{
 	create: function() {
-		var _gthis = this;
 		flixel_FlxState.prototype.create.call(this);
+		this.OnGameOver = new flixel_util__$FlxSignal_FlxSignal0();
+		this.OnScore = new flixel_util__$FlxSignal_FlxSignal1();
 		this._map = new flixel_addons_editors_tiled_TiledMap("assets/world.tmx");
 		this._background = new flixel_tile_FlxTilemap();
 		var bgImage = new flixel_addons_display_FlxBackdrop("assets/images/bg.png",0,0,false,false);
 		this._sprites = flixel_graphics_frames_FlxAtlasFrames.fromTexturePackerJson("assets/images/gfx.png","assets/images/gfx.json");
 		this._scene = new flixel_addons_util_FlxScene("assets/scene/game.xml");
 		this._score = 0;
+		this._font = flixel_graphics_frames_FlxBitmapFont.fromMonospace(this._sprites.framesHash.get("block-font.png")," !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",new flixel_math_FlxPoint(17,28),null,new flixel_math_FlxPoint(1,0));
 		this._hud = new flixel_group_FlxTypedGroup();
 		this._scene.spawn(this._hud,"hud");
 		this._timeDisplay = this._scene.object("time");
@@ -3622,69 +3691,244 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		var _this = this._arrow;
 		_this.set_width(_this.frameWidth);
 		_this.set_height(_this.frameHeight);
+		this._timeChangeDisplay = new flixel_text_FlxText(this._timeDisplay.x,this._timeDisplay.y);
+		this._timeChangeDisplay.set_alignment("right");
+		this._timeChangeDisplay.set_size(10);
+		this._timeChangeDisplay.set_borderColor(-16777216);
+		this._timeChangeDisplay.set_borderStyle(flixel_text_FlxTextBorderStyle.OUTLINE_FAST);
 		var tiles = js_Boot.__cast(this._map.getLayer("Ground") , flixel_addons_editors_tiled_TiledTileLayer);
 		js_Boot.__cast(this._map.getLayer("Background") , flixel_addons_editors_tiled_TiledImageLayer);
 		var objects = js_Boot.__cast(this._map.getLayer("Objects") , flixel_addons_editors_tiled_TiledObjectLayer);
 		var tileSet = this._map.getTileSet("Overworld");
 		this._background.loadMapFromArray(tiles.get_tileArray(),tiles.width,tiles.height,"assets/images/tile-environment.png",tileSet.tileWidth,tileSet.tileHeight,null,1);
-		var _g1 = 0;
-		var _g = tileSet.numTiles;
-		while(_g1 < _g) {
-			var i = _g1++;
-			var props = tileSet.tileProps[i];
-			var gid = tileSet.firstGID + i;
-			if(props != null) {
-				if(props.keys.exists("collidable") && props.keys.get("collidable") == "true") {
-					this._background.setTileProperties(gid,4369,null,entities_Block);
-				} else {
-					this._background.setTileProperties(gid,0);
-				}
-			} else {
-				this._background.setTileProperties(gid,0);
-			}
-		}
 		bgImage.loadGraphic("assets/images/bg.png");
 		var gridObject = Lambda.find(objects.objects,function(object) {
 			return object.name == "Grid";
 		});
 		var size = Std.parseInt(gridObject.properties.keys.get("Size"));
 		this._mouseControl = new flixel_addons_plugin_FlxMouseControl();
-		this._time = 60.0;
+		this._time = this._scene["const"]("starting-time");
 		flixel_FlxG.plugins.add_flixel_addons_plugin_FlxMouseControl(this._mouseControl);
-		var scoreDisplay = this._scene.object("score");
+		this._scoreDisplay = this._scene.object("score");
+		this._scoreDisplay.screenCenter(flixel_util_FlxAxes.X);
 		this._blockGrid = new entities_BlockGrid(gridObject.x,gridObject.y,size,this._sprites);
+		this._hints = new flixel_group_FlxTypedSpriteGroup();
+		this._hints.setPosition(8,96);
+		var hint_yes = new flixel_FlxSprite(16,0);
+		hint_yes.set_frame(this._sprites.framesHash.get("icon-clear-yes.png"));
+		this._hints.add(hint_yes);
+		var hand1 = new flixel_FlxSprite(0,0);
+		hand1.set_frame(this._sprites.framesHash.get("hand.png"));
+		this._hints.add(hand1);
+		var yes = new flixel_FlxSprite(36,0);
+		yes.set_frame(this._sprites.framesHash.get("ok.png"));
+		this._hints.add(yes);
+		var hint_no = new flixel_FlxSprite(16,24);
+		hint_no.set_frame(this._sprites.framesHash.get("icon-clear-no.png"));
+		this._hints.add(hint_no);
+		var hand2 = new flixel_FlxSprite(0,24);
+		hand2.set_frame(this._sprites.framesHash.get("hand.png"));
+		this._hints.add(hand2);
+		var no = new flixel_FlxSprite(36,24);
+		no.set_frame(this._sprites.framesHash.get("no.png"));
+		this._hints.add(no);
+		var _gthis = this;
 		this._blockGrid.OnStopMoving.add(function() {
 			_gthis._arrow.set_angle(_gthis._blockGrid.gravity);
 		});
-		this._blockGrid.OnScore.add(function(score) {
+		this.OnScore.add(function(score) {
 			_gthis._score += score;
+			_gthis._scoreDisplay.set_text(_gthis._score == null?"null":"" + _gthis._score);
+			_gthis._scoreDisplay.screenCenter(flixel_util_FlxAxes.X);
+		});
+		this._blockGrid.OnSuccessfulClick.add(function(blocks) {
 			flixel_FlxG.sound.play("assets/sounds/clear-blocks.wav");
-			scoreDisplay.set_text(_gthis._score == null?"null":"" + _gthis._score);
+			if(blocks.length >= 3) {
+				_gthis.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
+			}
+			if(blocks.length >= 6) {
+				_gthis._addBonusTime(blocks.length * 0.25 | 0);
+			}
+		});
+		this._blockGrid.OnBeforeBlocksGenerated.add(function() {
+			_gthis.round++;
+			var tmp;
+			switch(_gthis.round) {
+			case 1:case 2:
+				tmp = 4;
+				break;
+			case 3:case 4:
+				tmp = 5;
+				break;
+			default:
+				tmp = 6;
+			}
+			_gthis._blockGrid.set_numColors(tmp);
+		});
+		this._blockGrid.OnBlocksGenerated.add($bind(this,this._addBonusTime));
+		this._blockGrid.OnBadClick.add($bind(this,this._subtractTime));
+		this._blockGrid.OnBadClick.add(function(_) {
+			flixel_FlxG.sound.play("assets/sounds/not-allowed.wav");
+		});
+		this.OnGameOver.addOnce(function() {
+			if(flixel_FlxG.sound.music != null) {
+				var _this1 = flixel_FlxG.sound.music;
+				_this1.cleanup(_this1.autoDestroy,true);
+			}
+			_gthis._displayGameOver();
+			new flixel_util_FlxTimer().start(3.0,function(_1) {
+				var nextState = new MenuState();
+				if(flixel_FlxG.game._state.switchTo(nextState)) {
+					flixel_FlxG.game._requestedState = nextState;
+				}
+			},1);
 		});
 		this._arrow.set_angle(this._blockGrid.gravity);
-		var _this1 = this._arrow;
-		_this1.origin.set(_this1.frameWidth * 0.5,_this1.frameHeight * 0.5);
-		this._blockGrid.OnBlocksGenerated.add($bind(this,this._addBonusTime));
+		var _this2 = this._arrow;
+		_this2.origin.set(_this2.frameWidth * 0.5,_this2.frameHeight * 0.5);
 		this.add(bgImage);
 		this.add(this._background);
 		this.add(this._blockGrid);
 		this.add(this._hud);
+		this.add(this._hints);
 		this.add(this._arrow);
 		this.add(this._mouseControl);
+		this.add(this._timeChangeDisplay);
+		this.gameRunning = true;
+		this.round = 1;
 		flixel_FlxG.sound.playMusic("assets/music/music.ogg",1,true);
 	}
 	,update: function(elapsed) {
 		flixel_FlxState.prototype.update.call(this,elapsed);
-		if(this._blockGrid.canClick) {
+		if(this._blockGrid.canClick && this.gameRunning) {
 			this._time -= elapsed;
 			this._timeDisplay.set_text(de_polygonal_Printf.format("%.1f",[Math.max(0,this._time)]));
 		}
-		if(this._time <= 0) {
+		if(this._time <= 0 && this.gameRunning) {
+			this.gameRunning = false;
 			flixel_input_mouse_FlxMouseEventManager.removeAll();
+			this.OnGameOver.dispatch();
 		}
 	}
+	,_initCallbacks: function() {
+		var _gthis = this;
+		this._blockGrid.OnStopMoving.add(function() {
+			_gthis._arrow.set_angle(_gthis._blockGrid.gravity);
+		});
+		this.OnScore.add(function(score) {
+			_gthis._score += score;
+			_gthis._scoreDisplay.set_text(_gthis._score == null?"null":"" + _gthis._score);
+			_gthis._scoreDisplay.screenCenter(flixel_util_FlxAxes.X);
+		});
+		this._blockGrid.OnSuccessfulClick.add(function(blocks) {
+			flixel_FlxG.sound.play("assets/sounds/clear-blocks.wav");
+			if(blocks.length >= 3) {
+				_gthis.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
+			}
+			if(blocks.length >= 6) {
+				_gthis._addBonusTime(blocks.length * 0.25 | 0);
+			}
+		});
+		this._blockGrid.OnBeforeBlocksGenerated.add(function() {
+			_gthis.round++;
+			var tmp;
+			switch(_gthis.round) {
+			case 1:case 2:
+				tmp = 4;
+				break;
+			case 3:case 4:
+				tmp = 5;
+				break;
+			default:
+				tmp = 6;
+			}
+			_gthis._blockGrid.set_numColors(tmp);
+		});
+		this._blockGrid.OnBlocksGenerated.add($bind(this,this._addBonusTime));
+		this._blockGrid.OnBadClick.add($bind(this,this._subtractTime));
+		this._blockGrid.OnBadClick.add(function(_) {
+			flixel_FlxG.sound.play("assets/sounds/not-allowed.wav");
+		});
+		this.OnGameOver.addOnce(function() {
+			if(flixel_FlxG.sound.music != null) {
+				var _this = flixel_FlxG.sound.music;
+				_this.cleanup(_this.autoDestroy,true);
+			}
+			_gthis._displayGameOver();
+			new flixel_util_FlxTimer().start(3.0,function(_1) {
+				var nextState = new MenuState();
+				if(flixel_FlxG.game._state.switchTo(nextState)) {
+					flixel_FlxG.game._requestedState = nextState;
+				}
+			},1);
+		});
+	}
+	,_displayGameOver: function() {
+		var gameOver = new flixel_text_FlxBitmapText(this._font);
+		gameOver.set_text("Game Over");
+		gameOver.screenCenter();
+		this.add(gameOver);
+	}
+	,_initHints: function() {
+		this._hints = new flixel_group_FlxTypedSpriteGroup();
+		this._hints.setPosition(8,96);
+		var hint_yes = new flixel_FlxSprite(16,0);
+		hint_yes.set_frame(this._sprites.framesHash.get("icon-clear-yes.png"));
+		this._hints.add(hint_yes);
+		var hand1 = new flixel_FlxSprite(0,0);
+		hand1.set_frame(this._sprites.framesHash.get("hand.png"));
+		this._hints.add(hand1);
+		var yes = new flixel_FlxSprite(36,0);
+		yes.set_frame(this._sprites.framesHash.get("ok.png"));
+		this._hints.add(yes);
+		var hint_no = new flixel_FlxSprite(16,24);
+		hint_no.set_frame(this._sprites.framesHash.get("icon-clear-no.png"));
+		this._hints.add(hint_no);
+		var hand2 = new flixel_FlxSprite(0,24);
+		hand2.set_frame(this._sprites.framesHash.get("hand.png"));
+		this._hints.add(hand2);
+		var no = new flixel_FlxSprite(36,24);
+		no.set_frame(this._sprites.framesHash.get("no.png"));
+		this._hints.add(no);
+	}
 	,_addBonusTime: function(blocksCreated) {
-		this._time += blocksCreated * 0.05;
+		var bonus = blocksCreated * 0.05;
+		this._time = Math.min(this._time + bonus,this._scene["const"]("starting-time"));
+		this._timeChangeDisplay.set_color(-16744448);
+		this._timeChangeDisplay.set_text(de_polygonal_Printf.format("+%.1f",[bonus]));
+		flixel_tweens_FlxTween.linearMotion(this._timeChangeDisplay,this._timeDisplay.x,this._timeDisplay.y,this._timeDisplay.x,this._timeDisplay.y - 8,0.5,true);
+		var color = flixel_util__$FlxColor_FlxColor_$Impl_$._new();
+		color &= -16711681;
+		color |= 0;
+		color &= -65281;
+		color |= 65280;
+		color &= -256;
+		color |= 0;
+		color &= 16777215;
+		color |= 0;
+		flixel_tweens_FlxTween.color(this._timeChangeDisplay,0.5,-16744448,color,{ startDelay : 0.1});
+	}
+	,_subtractTime: function(blocks) {
+		this._time -= 1.0;
+		var _g = 0;
+		while(_g < blocks.length) {
+			var block = blocks[_g];
+			++_g;
+			flixel_tweens_FlxTween.linearPath(block,[block.getPosition(),new flixel_math_FlxPoint(block.x + block.get_width() / 4,block.y),block.getPosition(),new flixel_math_FlxPoint(block.x - block.get_width() / 4,block.y),block.getPosition()],0.25,true,{ type : 8});
+		}
+		this._timeChangeDisplay.set_color(-65536);
+		this._timeChangeDisplay.set_text(de_polygonal_Printf.format("-%.1f",[1.0]));
+		flixel_tweens_FlxTween.linearMotion(this._timeChangeDisplay,this._timeDisplay.x,this._timeDisplay.y,this._timeDisplay.x,this._timeDisplay.y + 8,0.5,true);
+		var color = flixel_util__$FlxColor_FlxColor_$Impl_$._new();
+		color &= -16711681;
+		color |= 16711680;
+		color &= -65281;
+		color |= 0;
+		color &= -256;
+		color |= 0;
+		color &= 16777215;
+		color |= 0;
+		flixel_tweens_FlxTween.color(this._timeChangeDisplay,0.5,-65536,color,{ startDelay : 0.1});
 	}
 	,__class__: PlayState
 });
@@ -8552,7 +8796,7 @@ var entities_Block = function(x,y,sprites,blockColor) {
 		x = 0;
 	}
 	flixel_FlxSprite.call(this,x,y);
-	this.sprites = sprites;
+	this.set_frames(sprites);
 	this.set_frame(sprites.framesHash.get(blockColor));
 	this.set_blockColor(blockColor);
 	this.updateHitbox();
@@ -8565,7 +8809,7 @@ entities_Block.__super__ = flixel_FlxSprite;
 entities_Block.prototype = $extend(flixel_FlxSprite.prototype,{
 	set_blockColor: function(blockColor) {
 		this.blockColor = blockColor;
-		this.set_frame(this.sprites.framesHash.get(blockColor));
+		this.set_frame(this.frames.framesHash.get(blockColor));
 		return blockColor;
 	}
 	,toString: function() {
@@ -9339,8 +9583,8 @@ var entities_BlockGrid = function(x,y,size,sprites) {
 	this.OnBadClick = new flixel_util__$FlxSignal_FlxSignal1();
 	this.OnStartMoving = new flixel_util__$FlxSignal_FlxSignal0();
 	this.OnStopMoving = new flixel_util__$FlxSignal_FlxSignal0();
-	this.OnScore = new flixel_util__$FlxSignal_FlxSignal1();
 	this.OnNoMoreMoves = new flixel_util__$FlxSignal_FlxSignal0();
+	this.OnBeforeBlocksGenerated = new flixel_util__$FlxSignal_FlxSignal0();
 	this.OnBlocksGenerated = new flixel_util__$FlxSignal_FlxSignal1();
 	this._frames = sprites;
 	this.canClick = true;
@@ -9350,11 +9594,10 @@ var entities_BlockGrid = function(x,y,size,sprites) {
 	this._blocksMoving = 0;
 	this._blocksCreated = 0;
 	this.set_immovable(true);
+	this.set_numColors(4);
 	this.OnStopMoving.add($bind(this,this._blocksDoneMoving));
+	this.OnNoMoreMoves.add(this.OnBeforeBlocksGenerated.dispatch);
 	this.OnNoMoreMoves.add($bind(this,this._noMoreMoves));
-	this.OnBadClick.add(function(_) {
-		flixel_FlxG.sound.play("assets/sounds/not-allowed.wav");
-	});
 	this._generateBlocks();
 };
 $hxClasses["entities.BlockGrid"] = entities_BlockGrid;
@@ -9366,6 +9609,10 @@ entities_BlockGrid.prototype = $extend(flixel_group_FlxTypedSpriteGroup.prototyp
 			this.OnStopMoving.dispatch();
 		}
 		flixel_group_FlxTypedSpriteGroup.prototype.update.call(this,elapsed);
+	}
+	,set_numColors: function(numColors) {
+		this.numColors = numColors > entities__$BlockColor_BlockColor_$Impl_$.All.length?entities__$BlockColor_BlockColor_$Impl_$.All.length:numColors <= 0?1:numColors;
+		return this.numColors;
 	}
 	,_getGridIndex: function(block) {
 		var x = Math.round(block.x / block.frameWidth) * block.frameWidth;
@@ -9588,7 +9835,6 @@ entities_BlockGrid.prototype = $extend(flixel_group_FlxTypedSpriteGroup.prototyp
 		this.OnStartMoving.dispatch();
 	}
 	,_blocksDoneMoving: function() {
-		haxe_Log.trace("All blocks have stopped moving",{ fileName : "BlockGrid.hx", lineNumber : 296, className : "entities.BlockGrid", methodName : "_blocksDoneMoving"});
 		if(!this._anyGroupsRemaining()) {
 			this.OnNoMoreMoves.dispatch();
 		}
@@ -9608,13 +9854,13 @@ entities_BlockGrid.prototype = $extend(flixel_group_FlxTypedSpriteGroup.prototyp
 			if(block == null) {
 				created += 1;
 				var b = _gthis.group.recycle(entities_Block,function() {
-					var blockColor = entities__$BlockColor_BlockColor_$Impl_$.All[Std.random(entities__$BlockColor_BlockColor_$Impl_$.All.length - 2)];
+					var blockColor = entities__$BlockColor_BlockColor_$Impl_$.All[Std.random(_gthis.numColors)];
 					var bb = new entities_Block(gridX * 16,gridY * 16,_gthis._frames,blockColor);
 					bb.ID = _gthis._blocksCreated++;
-					haxe_Log.trace("New block " + Std.string(bb) + " created",{ fileName : "BlockGrid.hx", lineNumber : 333, className : "entities.BlockGrid", methodName : "_generateBlocks"});
+					haxe_Log.trace("New block " + Std.string(bb) + " created",{ fileName : "BlockGrid.hx", lineNumber : 364, className : "entities.BlockGrid", methodName : "_generateBlocks"});
 					return bb;
 				},false);
-				b.set_blockColor(entities__$BlockColor_BlockColor_$Impl_$.All[Std.random(entities__$BlockColor_BlockColor_$Impl_$.All.length - 2)]);
+				b.set_blockColor(entities__$BlockColor_BlockColor_$Impl_$.All[Std.random(_gthis.numColors)]);
 				b.setPosition(gridX * 16,gridY * 16);
 				flixel_input_mouse_FlxMouseEventManager.add(b,function(block1) {
 					if(_gthis.canClick) {
@@ -9627,11 +9873,25 @@ entities_BlockGrid.prototype = $extend(flixel_group_FlxTypedSpriteGroup.prototyp
 							});
 							_gthis.canClick = false;
 							_gthis.OnSuccessfulClick.dispatch(blocks);
-							_gthis.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
 							_gthis._startMovingBlocks();
-							_gthis._rotateGravity();
+							var tmp;
+							switch(_gthis.gravity) {
+							case 0:
+								tmp = 90;
+								break;
+							case 90:
+								tmp = 180;
+								break;
+							case 180:
+								tmp = 270;
+								break;
+							case 270:
+								tmp = 0;
+								break;
+							}
+							_gthis.gravity = tmp;
 						} else {
-							_gthis.OnBadClick.dispatch(block1);
+							_gthis.OnBadClick.dispatch(blocks);
 						}
 					}
 				},null,null,null,false,true,false);
@@ -9646,10 +9906,10 @@ entities_BlockGrid.prototype = $extend(flixel_group_FlxTypedSpriteGroup.prototyp
 	,destroy: function() {
 		flixel_group_FlxTypedSpriteGroup.prototype.destroy.call(this);
 		flixel_input_mouse_FlxMouseEventManager.remove(this);
-		this._blockGrid.clear();
 		this._blockGrid = null;
 	}
 	,__class__: entities_BlockGrid
+	,__properties__: $extend(flixel_group_FlxTypedSpriteGroup.prototype.__properties__,{set_numColors:"set_numColors"})
 });
 var entities__$GravityDirection_GravityDirection_$Impl_$ = {};
 $hxClasses["entities._GravityDirection.GravityDirection_Impl_"] = entities__$GravityDirection_GravityDirection_$Impl_$;
@@ -18444,6 +18704,851 @@ flixel_graphics_frames_FlxAtlasFrames.prototype = $extend(flixel_graphics_frames
 		return atlasFrames;
 	}
 	,__class__: flixel_graphics_frames_FlxAtlasFrames
+});
+var openfl_geom_Rectangle = function(x,y,width,height) {
+	if(height == null) {
+		height = 0;
+	}
+	if(width == null) {
+		width = 0;
+	}
+	if(y == null) {
+		y = 0;
+	}
+	if(x == null) {
+		x = 0;
+	}
+	this.x = x;
+	this.y = y;
+	this.width = width;
+	this.height = height;
+};
+$hxClasses["openfl.geom.Rectangle"] = openfl_geom_Rectangle;
+openfl_geom_Rectangle.__name__ = ["openfl","geom","Rectangle"];
+openfl_geom_Rectangle.prototype = {
+	clone: function() {
+		return new openfl_geom_Rectangle(this.x,this.y,this.width,this.height);
+	}
+	,contains: function(x,y) {
+		if(x >= this.x && y >= this.y && x < this.get_right()) {
+			return y < this.get_bottom();
+		} else {
+			return false;
+		}
+	}
+	,containsPoint: function(point) {
+		return this.contains(point.x,point.y);
+	}
+	,containsRect: function(rect) {
+		if(rect.width <= 0 || rect.height <= 0) {
+			if(rect.x > this.x && rect.y > this.y && rect.get_right() < this.get_right()) {
+				return rect.get_bottom() < this.get_bottom();
+			} else {
+				return false;
+			}
+		} else if(rect.x >= this.x && rect.y >= this.y && rect.get_right() <= this.get_right()) {
+			return rect.get_bottom() <= this.get_bottom();
+		} else {
+			return false;
+		}
+	}
+	,copyFrom: function(sourceRect) {
+		this.x = sourceRect.x;
+		this.y = sourceRect.y;
+		this.width = sourceRect.width;
+		this.height = sourceRect.height;
+	}
+	,equals: function(toCompare) {
+		if(toCompare != null && this.x == toCompare.x && this.y == toCompare.y && this.width == toCompare.width) {
+			return this.height == toCompare.height;
+		} else {
+			return false;
+		}
+	}
+	,inflate: function(dx,dy) {
+		this.x -= dx;
+		this.width += dx * 2;
+		this.y -= dy;
+		this.height += dy * 2;
+	}
+	,inflatePoint: function(point) {
+		this.inflate(point.x,point.y);
+	}
+	,intersection: function(toIntersect) {
+		var x0 = this.x < toIntersect.x?toIntersect.x:this.x;
+		var x1 = this.get_right() > toIntersect.get_right()?toIntersect.get_right():this.get_right();
+		if(x1 <= x0) {
+			return new openfl_geom_Rectangle();
+		}
+		var y0 = this.y < toIntersect.y?toIntersect.y:this.y;
+		var y1 = this.get_bottom() > toIntersect.get_bottom()?toIntersect.get_bottom():this.get_bottom();
+		if(y1 <= y0) {
+			return new openfl_geom_Rectangle();
+		}
+		return new openfl_geom_Rectangle(x0,y0,x1 - x0,y1 - y0);
+	}
+	,intersects: function(toIntersect) {
+		if((this.get_right() > toIntersect.get_right()?toIntersect.get_right():this.get_right()) <= (this.x < toIntersect.x?toIntersect.x:this.x)) {
+			return false;
+		}
+		return (this.get_bottom() > toIntersect.get_bottom()?toIntersect.get_bottom():this.get_bottom()) > (this.y < toIntersect.y?toIntersect.y:this.y);
+	}
+	,isEmpty: function() {
+		if(!(this.width <= 0)) {
+			return this.height <= 0;
+		} else {
+			return true;
+		}
+	}
+	,offset: function(dx,dy) {
+		this.x += dx;
+		this.y += dy;
+	}
+	,offsetPoint: function(point) {
+		this.x += point.x;
+		this.y += point.y;
+	}
+	,setEmpty: function() {
+		this.x = this.y = this.width = this.height = 0;
+	}
+	,setTo: function(xa,ya,widtha,heighta) {
+		this.x = xa;
+		this.y = ya;
+		this.width = widtha;
+		this.height = heighta;
+	}
+	,toString: function() {
+		return "(x=" + this.x + ", y=" + this.y + ", width=" + this.width + ", height=" + this.height + ")";
+	}
+	,union: function(toUnion) {
+		if(this.width == 0 || this.height == 0) {
+			return toUnion.clone();
+		} else if(toUnion.width == 0 || toUnion.height == 0) {
+			return this.clone();
+		}
+		var x0 = this.x > toUnion.x?toUnion.x:this.x;
+		var y0 = this.y > toUnion.y?toUnion.y:this.y;
+		return new openfl_geom_Rectangle(x0,y0,(this.get_right() < toUnion.get_right()?toUnion.get_right():this.get_right()) - x0,(this.get_bottom() < toUnion.get_bottom()?toUnion.get_bottom():this.get_bottom()) - y0);
+	}
+	,__contract: function(x,y,width,height) {
+		if(this.width == 0 && this.height == 0) {
+			return;
+		}
+		if(this.x < x) {
+			this.x = x;
+		}
+		if(this.y < y) {
+			this.y = y;
+		}
+		if(this.get_right() > x + width) {
+			this.width = x + width - this.x;
+		}
+		if(this.get_bottom() > y + height) {
+			this.height = y + height - this.y;
+		}
+	}
+	,__expand: function(x,y,width,height) {
+		if(this.width == 0 && this.height == 0) {
+			this.x = x;
+			this.y = y;
+			this.width = width;
+			this.height = height;
+			return;
+		}
+		var cacheRight = this.get_right();
+		var cacheBottom = this.get_bottom();
+		if(this.x > x) {
+			this.x = x;
+			this.width = cacheRight - x;
+		}
+		if(this.y > y) {
+			this.y = y;
+			this.height = cacheBottom - y;
+		}
+		if(cacheRight < x + width) {
+			this.width = x + width - this.x;
+		}
+		if(cacheBottom < y + height) {
+			this.height = y + height - this.y;
+		}
+	}
+	,__toLimeRectangle: function() {
+		return new lime_math_Rectangle(this.x,this.y,this.width,this.height);
+	}
+	,__transform: function(rect,m) {
+		var tx0 = m.a * this.x + m.c * this.y;
+		var tx1 = tx0;
+		var ty0 = m.b * this.x + m.d * this.y;
+		var ty1 = ty0;
+		var tx = m.a * (this.x + this.width) + m.c * this.y;
+		var ty = m.b * (this.x + this.width) + m.d * this.y;
+		if(tx < tx0) {
+			tx0 = tx;
+		}
+		if(ty < ty0) {
+			ty0 = ty;
+		}
+		if(tx > tx1) {
+			tx1 = tx;
+		}
+		if(ty > ty1) {
+			ty1 = ty;
+		}
+		tx = m.a * (this.x + this.width) + m.c * (this.y + this.height);
+		ty = m.b * (this.x + this.width) + m.d * (this.y + this.height);
+		if(tx < tx0) {
+			tx0 = tx;
+		}
+		if(ty < ty0) {
+			ty0 = ty;
+		}
+		if(tx > tx1) {
+			tx1 = tx;
+		}
+		if(ty > ty1) {
+			ty1 = ty;
+		}
+		tx = m.a * this.x + m.c * (this.y + this.height);
+		ty = m.b * this.x + m.d * (this.y + this.height);
+		if(tx < tx0) {
+			tx0 = tx;
+		}
+		if(ty < ty0) {
+			ty0 = ty;
+		}
+		if(tx > tx1) {
+			tx1 = tx;
+		}
+		if(ty > ty1) {
+			ty1 = ty;
+		}
+		rect.setTo(tx0 + m.tx,ty0 + m.ty,tx1 - tx0,ty1 - ty0);
+	}
+	,get_bottom: function() {
+		return this.y + this.height;
+	}
+	,set_bottom: function(b) {
+		this.height = b - this.y;
+		return b;
+	}
+	,get_bottomRight: function() {
+		return new openfl_geom_Point(this.x + this.width,this.y + this.height);
+	}
+	,set_bottomRight: function(p) {
+		this.width = p.x - this.x;
+		this.height = p.y - this.y;
+		return p.clone();
+	}
+	,get_left: function() {
+		return this.x;
+	}
+	,set_left: function(l) {
+		this.width -= l - this.x;
+		this.x = l;
+		return l;
+	}
+	,get_right: function() {
+		return this.x + this.width;
+	}
+	,set_right: function(r) {
+		this.width = r - this.x;
+		return r;
+	}
+	,get_size: function() {
+		return new openfl_geom_Point(this.width,this.height);
+	}
+	,set_size: function(p) {
+		this.width = p.x;
+		this.height = p.y;
+		return p.clone();
+	}
+	,get_top: function() {
+		return this.y;
+	}
+	,set_top: function(t) {
+		this.height -= t - this.y;
+		this.y = t;
+		return t;
+	}
+	,get_topLeft: function() {
+		return new openfl_geom_Point(this.x,this.y);
+	}
+	,set_topLeft: function(p) {
+		this.x = p.x;
+		this.y = p.y;
+		return p.clone();
+	}
+	,__class__: openfl_geom_Rectangle
+	,__properties__: {set_topLeft:"set_topLeft",get_topLeft:"get_topLeft",set_top:"set_top",get_top:"get_top",set_size:"set_size",get_size:"get_size",set_right:"set_right",get_right:"get_right",set_left:"set_left",get_left:"get_left",set_bottomRight:"set_bottomRight",get_bottomRight:"get_bottomRight",set_bottom:"set_bottom",get_bottom:"get_bottom"}
+};
+var flixel_graphics_frames_FlxBitmapFont = function(frame,border) {
+	this.spaceWidth = 0;
+	this.minOffsetX = 0;
+	this.numLetters = 0;
+	this.italic = false;
+	this.bold = false;
+	this.lineHeight = 0;
+	this.size = 0;
+	flixel_graphics_frames_FlxFramesCollection.call(this,frame.parent,flixel_graphics_frames_FlxFrameCollectionType.FONT,border);
+	this.frame = frame;
+	this.parent.persist = true;
+	this.parent.set_destroyOnNoUse(false);
+	this.charMap = new haxe_ds_IntMap();
+	this.charAdvance = new haxe_ds_IntMap();
+};
+$hxClasses["flixel.graphics.frames.FlxBitmapFont"] = flixel_graphics_frames_FlxBitmapFont;
+flixel_graphics_frames_FlxBitmapFont.__name__ = ["flixel","graphics","frames","FlxBitmapFont"];
+flixel_graphics_frames_FlxBitmapFont.getDefaultFont = function() {
+	var graphic = flixel_FlxG.bitmap._cache.get("DEFAULT_FONT_KEY");
+	if(graphic != null) {
+		var font = flixel_graphics_frames_FlxBitmapFont.findFont(graphic.get_imageFrame().get_frame());
+		if(font != null) {
+			return font;
+		}
+	}
+	var letters = "";
+	var bd = new openfl_display_BitmapData(700,9,true,-7829368);
+	graphic = flixel_FlxG.bitmap.add(bd,false,"DEFAULT_FONT_KEY");
+	var letterPos = 0;
+	var i = 0;
+	while(i < " 36000000000000000000!26101010001000\"46101010100000000000000000#66010100111110010100111110010100000000$56001000111011000001101110000100%66100100000100001000010000010010000000&66011000100000011010100100011010000000'26101000000000(36010100100100010000)36100010010010100000*46000010100100101000000000+46000001001110010000000000,36000000000000010100-46000000001110000000000000.26000000001000/66000010000100001000010000100000000000056011001001010010100100110000000156011000010000100001000010000000256111000001001100100001111000000356111000001001100000101110000000456100101001010010011100001000000556111101000011100000101110000000656011001000011100100100110000000756111000001000010001100001000000856011001001001100100100110000000956011001001010010011100001000000:26001000100000;26001000101000<46001001001000010000100000=46000011100000111000000000>46100001000010010010000000?56111000001001100000000100000000@66011100100010101110101010011100000000A56011001001010010111101001000000B56111001001011100100101110000000C56011001001010000100100110000000D56111001001010010100101110000000E56111101000011000100001111000000F56111101000010000110001000000000G56011001000010110100100111000000H56100101001011110100101001000000I26101010101000J56000100001000010100100110000000K56100101001010010111001001000000L46100010001000100011100000M66100010100010110110101010100010000000N56100101001011010101101001000000O56011001001010010100100110000000P56111001001010010111001000000000Q56011001001010010100100110000010R56111001001010010111001001000000S56011101000001100000101110000000T46111001000100010001000000U56100101001010010100100110000000V56100101001010010101000100000000W66100010100010101010110110100010000000X56100101001001100100101001000000Y56100101001010010011100001001100Z56111100001001100100001111000000[36110100100100110000}46110001000010010011000000]36110010010010110000^46010010100000000000000000_46000000000000000011110000'26101000000000a56000000111010010100100111000000b56100001110010010100101110000000c46000001101000100001100000d56000100111010010100100111000000e56000000110010110110000110000000f46011010001000110010000000g5700000011001001010010011100001001100h56100001110010010100101001000000i26100010101000j37010000010010010010100k56100001001010010111001001000000l26101010101000m66000000111100101010101010101010000000n56000001110010010100101001000000o56000000110010010100100110000000p5700000111001001010010111001000010000q5700000011101001010010011100001000010r46000010101100100010000000s56000000111011000001101110000000t46100011001000100001100000u56000001001010010100100111000000v56000001001010010101000100000000w66000000101010101010101010011110000000x56000001001010010011001001000000y5700000100101001010010011100001001100z56000001111000100010001111000000{46011001001000010001100000|26101010101000}46110001000010010011000000~56010101010000000000000000000000\\46111010101010101011100000".length) {
+		letters += HxOverrides.substr(" 36000000000000000000!26101010001000\"46101010100000000000000000#66010100111110010100111110010100000000$56001000111011000001101110000100%66100100000100001000010000010010000000&66011000100000011010100100011010000000'26101000000000(36010100100100010000)36100010010010100000*46000010100100101000000000+46000001001110010000000000,36000000000000010100-46000000001110000000000000.26000000001000/66000010000100001000010000100000000000056011001001010010100100110000000156011000010000100001000010000000256111000001001100100001111000000356111000001001100000101110000000456100101001010010011100001000000556111101000011100000101110000000656011001000011100100100110000000756111000001000010001100001000000856011001001001100100100110000000956011001001010010011100001000000:26001000100000;26001000101000<46001001001000010000100000=46000011100000111000000000>46100001000010010010000000?56111000001001100000000100000000@66011100100010101110101010011100000000A56011001001010010111101001000000B56111001001011100100101110000000C56011001001010000100100110000000D56111001001010010100101110000000E56111101000011000100001111000000F56111101000010000110001000000000G56011001000010110100100111000000H56100101001011110100101001000000I26101010101000J56000100001000010100100110000000K56100101001010010111001001000000L46100010001000100011100000M66100010100010110110101010100010000000N56100101001011010101101001000000O56011001001010010100100110000000P56111001001010010111001000000000Q56011001001010010100100110000010R56111001001010010111001001000000S56011101000001100000101110000000T46111001000100010001000000U56100101001010010100100110000000V56100101001010010101000100000000W66100010100010101010110110100010000000X56100101001001100100101001000000Y56100101001010010011100001001100Z56111100001001100100001111000000[36110100100100110000}46110001000010010011000000]36110010010010110000^46010010100000000000000000_46000000000000000011110000'26101000000000a56000000111010010100100111000000b56100001110010010100101110000000c46000001101000100001100000d56000100111010010100100111000000e56000000110010110110000110000000f46011010001000110010000000g5700000011001001010010011100001001100h56100001110010010100101001000000i26100010101000j37010000010010010010100k56100001001010010111001001000000l26101010101000m66000000111100101010101010101010000000n56000001110010010100101001000000o56000000110010010100100110000000p5700000111001001010010111001000010000q5700000011101001010010011100001000010r46000010101100100010000000s56000000111011000001101110000000t46100011001000100001100000u56000001001010010100100111000000v56000001001010010101000100000000w66000000101010101010101010011110000000x56000001001010010011001001000000y5700000100101001010010011100001001100z56000001111000100010001111000000{46011001001000010001100000|26101010101000}46110001000010010011000000~56010101010000000000000000000000\\46111010101010101011100000",i,1);
+		var gw = Std.parseInt(HxOverrides.substr(" 36000000000000000000!26101010001000\"46101010100000000000000000#66010100111110010100111110010100000000$56001000111011000001101110000100%66100100000100001000010000010010000000&66011000100000011010100100011010000000'26101000000000(36010100100100010000)36100010010010100000*46000010100100101000000000+46000001001110010000000000,36000000000000010100-46000000001110000000000000.26000000001000/66000010000100001000010000100000000000056011001001010010100100110000000156011000010000100001000010000000256111000001001100100001111000000356111000001001100000101110000000456100101001010010011100001000000556111101000011100000101110000000656011001000011100100100110000000756111000001000010001100001000000856011001001001100100100110000000956011001001010010011100001000000:26001000100000;26001000101000<46001001001000010000100000=46000011100000111000000000>46100001000010010010000000?56111000001001100000000100000000@66011100100010101110101010011100000000A56011001001010010111101001000000B56111001001011100100101110000000C56011001001010000100100110000000D56111001001010010100101110000000E56111101000011000100001111000000F56111101000010000110001000000000G56011001000010110100100111000000H56100101001011110100101001000000I26101010101000J56000100001000010100100110000000K56100101001010010111001001000000L46100010001000100011100000M66100010100010110110101010100010000000N56100101001011010101101001000000O56011001001010010100100110000000P56111001001010010111001000000000Q56011001001010010100100110000010R56111001001010010111001001000000S56011101000001100000101110000000T46111001000100010001000000U56100101001010010100100110000000V56100101001010010101000100000000W66100010100010101010110110100010000000X56100101001001100100101001000000Y56100101001010010011100001001100Z56111100001001100100001111000000[36110100100100110000}46110001000010010011000000]36110010010010110000^46010010100000000000000000_46000000000000000011110000'26101000000000a56000000111010010100100111000000b56100001110010010100101110000000c46000001101000100001100000d56000100111010010100100111000000e56000000110010110110000110000000f46011010001000110010000000g5700000011001001010010011100001001100h56100001110010010100101001000000i26100010101000j37010000010010010010100k56100001001010010111001001000000l26101010101000m66000000111100101010101010101010000000n56000001110010010100101001000000o56000000110010010100100110000000p5700000111001001010010111001000010000q5700000011101001010010011100001000010r46000010101100100010000000s56000000111011000001101110000000t46100011001000100001100000u56000001001010010100100111000000v56000001001010010101000100000000w66000000101010101010101010011110000000x56000001001010010011001001000000y5700000100101001010010011100001001100z56000001111000100010001111000000{46011001001000010001100000|26101010101000}46110001000010010011000000~56010101010000000000000000000000\\46111010101010101011100000",++i,1));
+		var gh = Std.parseInt(HxOverrides.substr(" 36000000000000000000!26101010001000\"46101010100000000000000000#66010100111110010100111110010100000000$56001000111011000001101110000100%66100100000100001000010000010010000000&66011000100000011010100100011010000000'26101000000000(36010100100100010000)36100010010010100000*46000010100100101000000000+46000001001110010000000000,36000000000000010100-46000000001110000000000000.26000000001000/66000010000100001000010000100000000000056011001001010010100100110000000156011000010000100001000010000000256111000001001100100001111000000356111000001001100000101110000000456100101001010010011100001000000556111101000011100000101110000000656011001000011100100100110000000756111000001000010001100001000000856011001001001100100100110000000956011001001010010011100001000000:26001000100000;26001000101000<46001001001000010000100000=46000011100000111000000000>46100001000010010010000000?56111000001001100000000100000000@66011100100010101110101010011100000000A56011001001010010111101001000000B56111001001011100100101110000000C56011001001010000100100110000000D56111001001010010100101110000000E56111101000011000100001111000000F56111101000010000110001000000000G56011001000010110100100111000000H56100101001011110100101001000000I26101010101000J56000100001000010100100110000000K56100101001010010111001001000000L46100010001000100011100000M66100010100010110110101010100010000000N56100101001011010101101001000000O56011001001010010100100110000000P56111001001010010111001000000000Q56011001001010010100100110000010R56111001001010010111001001000000S56011101000001100000101110000000T46111001000100010001000000U56100101001010010100100110000000V56100101001010010101000100000000W66100010100010101010110110100010000000X56100101001001100100101001000000Y56100101001010010011100001001100Z56111100001001100100001111000000[36110100100100110000}46110001000010010011000000]36110010010010110000^46010010100000000000000000_46000000000000000011110000'26101000000000a56000000111010010100100111000000b56100001110010010100101110000000c46000001101000100001100000d56000100111010010100100111000000e56000000110010110110000110000000f46011010001000110010000000g5700000011001001010010011100001001100h56100001110010010100101001000000i26100010101000j37010000010010010010100k56100001001010010111001001000000l26101010101000m66000000111100101010101010101010000000n56000001110010010100101001000000o56000000110010010100100110000000p5700000111001001010010111001000010000q5700000011101001010010011100001000010r46000010101100100010000000s56000000111011000001101110000000t46100011001000100001100000u56000001001010010100100111000000v56000001001010010101000100000000w66000000101010101010101010011110000000x56000001001010010011001001000000y5700000100101001010010011100001001100z56000001111000100010001111000000{46011001001000010001100000|26101010101000}46110001000010010011000000~56010101010000000000000000000000\\46111010101010101011100000",++i,1));
+		var _g1 = 0;
+		while(_g1 < gh) {
+			var py = _g1++;
+			var _g3 = 0;
+			while(_g3 < gw) {
+				var px = _g3++;
+				++i;
+				if(HxOverrides.substr(" 36000000000000000000!26101010001000\"46101010100000000000000000#66010100111110010100111110010100000000$56001000111011000001101110000100%66100100000100001000010000010010000000&66011000100000011010100100011010000000'26101000000000(36010100100100010000)36100010010010100000*46000010100100101000000000+46000001001110010000000000,36000000000000010100-46000000001110000000000000.26000000001000/66000010000100001000010000100000000000056011001001010010100100110000000156011000010000100001000010000000256111000001001100100001111000000356111000001001100000101110000000456100101001010010011100001000000556111101000011100000101110000000656011001000011100100100110000000756111000001000010001100001000000856011001001001100100100110000000956011001001010010011100001000000:26001000100000;26001000101000<46001001001000010000100000=46000011100000111000000000>46100001000010010010000000?56111000001001100000000100000000@66011100100010101110101010011100000000A56011001001010010111101001000000B56111001001011100100101110000000C56011001001010000100100110000000D56111001001010010100101110000000E56111101000011000100001111000000F56111101000010000110001000000000G56011001000010110100100111000000H56100101001011110100101001000000I26101010101000J56000100001000010100100110000000K56100101001010010111001001000000L46100010001000100011100000M66100010100010110110101010100010000000N56100101001011010101101001000000O56011001001010010100100110000000P56111001001010010111001000000000Q56011001001010010100100110000010R56111001001010010111001001000000S56011101000001100000101110000000T46111001000100010001000000U56100101001010010100100110000000V56100101001010010101000100000000W66100010100010101010110110100010000000X56100101001001100100101001000000Y56100101001010010011100001001100Z56111100001001100100001111000000[36110100100100110000}46110001000010010011000000]36110010010010110000^46010010100000000000000000_46000000000000000011110000'26101000000000a56000000111010010100100111000000b56100001110010010100101110000000c46000001101000100001100000d56000100111010010100100111000000e56000000110010110110000110000000f46011010001000110010000000g5700000011001001010010011100001001100h56100001110010010100101001000000i26100010101000j37010000010010010010100k56100001001010010111001001000000l26101010101000m66000000111100101010101010101010000000n56000001110010010100101001000000o56000000110010010100100110000000p5700000111001001010010111001000010000q5700000011101001010010011100001000010r46000010101100100010000000s56000000111011000001101110000000t46100011001000100001100000u56000001001010010100100111000000v56000001001010010101000100000000w66000000101010101010101010011110000000x56000001001010010011001001000000y5700000100101001010010011100001001100z56000001111000100010001111000000{46011001001000010001100000|26101010101000}46110001000010010011000000~56010101010000000000000000000000\\46111010101010101011100000",i,1) == "1") {
+					bd.setPixel32(1 + letterPos * 7 + px,1 + py,-1);
+				} else {
+					bd.setPixel32(1 + letterPos * 7 + px,1 + py,0);
+				}
+			}
+		}
+		++i;
+		++letterPos;
+	}
+	return flixel_graphics_frames_FlxBitmapFont.fromXNA(graphic,letters);
+};
+flixel_graphics_frames_FlxBitmapFont.fromAngelCode = function(Source,Data) {
+	var graphic = null;
+	var frame = null;
+	if(js_Boot.__instanceof(Source,flixel_graphics_frames_FlxFrame)) {
+		frame = Source;
+		graphic = frame.parent;
+	} else {
+		graphic = flixel_FlxG.bitmap.add(Source);
+		frame = graphic.get_imageFrame().get_frame();
+	}
+	var font = flixel_graphics_frames_FlxBitmapFont.findFont(frame);
+	if(font != null) {
+		return font;
+	}
+	var fontData = null;
+	if(Data != null) {
+		if(js_Boot.__instanceof(Data,Xml)) {
+			fontData = Data;
+		} else {
+			var data = Std.string(Data);
+			if(openfl_Assets.exists(data)) {
+				data = openfl_Assets.getText(data);
+			}
+			fontData = Xml.parse(data);
+		}
+	}
+	font = new flixel_graphics_frames_FlxBitmapFont(frame);
+	var fast = new haxe_xml_Fast(fontData.firstElement());
+	font.lineHeight = Std.parseInt(fast.node.resolve("common").att.resolve("lineHeight"));
+	font.size = Std.parseInt(fast.node.resolve("info").att.resolve("size"));
+	font.fontName = Std.string(fast.node.resolve("info").att.resolve("face"));
+	font.bold = Std.parseInt(fast.node.resolve("info").att.resolve("bold")) != 0;
+	font.italic = Std.parseInt(fast.node.resolve("info").att.resolve("italic")) != 0;
+	var frameHeight;
+	var charStr;
+	var charCode;
+	var xOffset;
+	var yOffset;
+	var xAdvance;
+	var _g_head = fast.node.resolve("chars").nodes.resolve("char").h;
+	while(_g_head != null) {
+		var val = _g_head.item;
+		_g_head = _g_head.next;
+		var _this = flixel_math_FlxRect._pool.get();
+		_this.x = 0;
+		_this.y = 0;
+		_this.width = 0;
+		_this.height = 0;
+		_this._inPool = false;
+		_this.x = Std.parseInt(val.att.resolve("x"));
+		_this.y = Std.parseInt(val.att.resolve("y"));
+		_this.width = Std.parseInt(val.att.resolve("width"));
+		frameHeight = Std.parseInt(val.att.resolve("height"));
+		_this.height = frameHeight;
+		if(val.has.resolve("xoffset")) {
+			xOffset = Std.parseInt(val.att.resolve("xoffset"));
+		} else {
+			xOffset = 0;
+		}
+		if(val.has.resolve("yoffset")) {
+			yOffset = Std.parseInt(val.att.resolve("yoffset"));
+		} else {
+			yOffset = 0;
+		}
+		if(val.has.resolve("xadvance")) {
+			xAdvance = Std.parseInt(val.att.resolve("xadvance"));
+		} else {
+			xAdvance = 0;
+		}
+		var point = flixel_math_FlxPoint._pool.get().set(xOffset,yOffset);
+		point._inPool = false;
+		font.minOffsetX = font.minOffsetX < -xOffset?-xOffset:font.minOffsetX;
+		charCode = -1;
+		charStr = null;
+		if(val.has.resolve("letter")) {
+			charStr = val.att.resolve("letter");
+		} else if(val.has.resolve("id")) {
+			charCode = Std.parseInt(val.att.resolve("id"));
+		}
+		if(charCode == -1 && charStr == null) {
+			throw new js__$Boot_HaxeError("Invalid font xml data!");
+		}
+		if(charStr != null) {
+			switch(charStr) {
+			case "&amp;":
+				charStr = "&";
+				break;
+			case "&gt;":
+				charStr = ">";
+				break;
+			case "&lt;":
+				charStr = "<";
+				break;
+			case "&quot;":
+				charStr = "\"";
+				break;
+			case "space":
+				charStr = " ";
+				break;
+			default:
+				charStr = charStr;
+			}
+			charCode = HxOverrides.cca(charStr,0);
+		}
+		font.addCharFrame(charCode,_this,point,xAdvance);
+		if(charCode == 32) {
+			font.spaceWidth = xAdvance;
+		} else {
+			font.lineHeight = font.lineHeight > frameHeight + yOffset?font.lineHeight:frameHeight + yOffset;
+		}
+	}
+	font.updateSourceHeight();
+	return font;
+};
+flixel_graphics_frames_FlxBitmapFont.fromXNA = function(source,letters,charBGColor) {
+	if(charBGColor == null) {
+		charBGColor = 0;
+	}
+	var graphic = null;
+	var frame = null;
+	if(js_Boot.__instanceof(source,flixel_graphics_frames_FlxFrame)) {
+		frame = source;
+		graphic = frame.parent;
+	} else {
+		graphic = flixel_FlxG.bitmap.add(source);
+		frame = graphic.get_imageFrame().get_frame();
+	}
+	var font = flixel_graphics_frames_FlxBitmapFont.findFont(frame);
+	if(font != null) {
+		return font;
+	}
+	if(letters == null) {
+		letters = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+	} else {
+		letters = letters;
+	}
+	font = new flixel_graphics_frames_FlxBitmapFont(frame);
+	font.fontName = graphic.key;
+	var bmd = graphic.bitmap;
+	var p = new openfl_geom_Point();
+	p.setTo(0,0);
+	var x = p.x;
+	var y = p.y;
+	if(frame.angle == -90) {
+		p.x = frame.frame.width - y;
+		p.y = x;
+	} else if(frame.angle == 90) {
+		p.x = y;
+		p.y = frame.frame.height - x;
+	}
+	p.x += frame.frame.x;
+	p.y += frame.frame.y;
+	var globalBGColor = bmd.getPixel(p.x | 0,p.y | 0);
+	var frameWidth = frame.frame.width | 0;
+	var frameHeight = frame.frame.height | 0;
+	var letterIdx = 0;
+	var charCode;
+	var numLetters = letters.length;
+	var cy = 0;
+	var cx;
+	var gx;
+	var gy;
+	var gw;
+	var gh;
+	while(cy < frameHeight && letterIdx < numLetters) {
+		var rowHeight = 0;
+		cx = 0;
+		while(cx < frameWidth && letterIdx < numLetters) {
+			p.setTo(cx,cy);
+			var x1 = p.x;
+			var y1 = p.y;
+			if(frame.angle == -90) {
+				p.x = frame.frame.width - y1;
+				p.y = x1;
+			} else if(frame.angle == 90) {
+				p.x = y1;
+				p.y = frame.frame.height - x1;
+			}
+			p.x += frame.frame.x;
+			p.y += frame.frame.y;
+			if(bmd.getPixel(p.x | 0,p.y | 0) != globalBGColor) {
+				gx = cx;
+				gy = cy;
+				p.setTo(gx,gy);
+				var x2 = p.x;
+				var y2 = p.y;
+				if(frame.angle == -90) {
+					p.x = frame.frame.width - y2;
+					p.y = x2;
+				} else if(frame.angle == 90) {
+					p.x = y2;
+					p.y = frame.frame.height - x2;
+				}
+				p.x += frame.frame.x;
+				p.y += frame.frame.y;
+				while(bmd.getPixel(p.x | 0,p.y | 0) != globalBGColor) {
+					++gx;
+					p.setTo(gx,cy);
+					var x3 = p.x;
+					var y3 = p.y;
+					if(frame.angle == -90) {
+						p.x = frame.frame.width - y3;
+						p.y = x3;
+					} else if(frame.angle == 90) {
+						p.x = y3;
+						p.y = frame.frame.height - x3;
+					}
+					p.x += frame.frame.x;
+					p.y += frame.frame.y;
+				}
+				p.setTo(gx - 1,gy);
+				var x4 = p.x;
+				var y4 = p.y;
+				if(frame.angle == -90) {
+					p.x = frame.frame.width - y4;
+					p.y = x4;
+				} else if(frame.angle == 90) {
+					p.x = y4;
+					p.y = frame.frame.height - x4;
+				}
+				p.x += frame.frame.x;
+				p.y += frame.frame.y;
+				while(bmd.getPixel(p.x | 0,p.y | 0) != globalBGColor) {
+					++gy;
+					p.setTo(cx,gy);
+					var x5 = p.x;
+					var y5 = p.y;
+					if(frame.angle == -90) {
+						p.x = frame.frame.width - y5;
+						p.y = x5;
+					} else if(frame.angle == 90) {
+						p.x = y5;
+						p.y = frame.frame.height - x5;
+					}
+					p.x += frame.frame.x;
+					p.y += frame.frame.y;
+				}
+				gw = gx - cx;
+				gh = gy - cy;
+				charCode = HxOverrides.cca(letters,letterIdx);
+				var _this = flixel_math_FlxRect._pool.get();
+				_this.x = cx;
+				_this.y = cy;
+				_this.width = gw;
+				_this.height = gh;
+				_this._inPool = false;
+				var point = flixel_math_FlxPoint._pool.get().set(0,0);
+				point._inPool = false;
+				font.addCharFrame(charCode,_this,point,gw);
+				if(charCode == 32) {
+					font.spaceWidth = gw;
+				}
+				if(gh > rowHeight) {
+					rowHeight = gh;
+				}
+				if(gh > font.size) {
+					font.size = gh;
+				}
+				cx += gw;
+				++letterIdx;
+			}
+			++cx;
+		}
+		cy += rowHeight + 1;
+	}
+	font.lineHeight = font.size;
+	font.updateSourceHeight();
+	flixel_graphics_frames_FlxBitmapFont.point.setTo(frame.frame.x | 0,frame.frame.y | 0);
+	var frameRect = flixel_graphics_frames_FlxBitmapFont.flashRect;
+	var _this1 = frame.frame;
+	var FlashRect = frameRect;
+	if(frameRect == null) {
+		FlashRect = new openfl_geom_Rectangle();
+	}
+	FlashRect.x = _this1.x;
+	FlashRect.y = _this1.y;
+	FlashRect.width = _this1.width;
+	FlashRect.height = _this1.height;
+	if(charBGColor != 0) {
+		bmd.threshold(bmd,frameRect,flixel_graphics_frames_FlxBitmapFont.point,"==",charBGColor,0,-1,true);
+	}
+	return font;
+};
+flixel_graphics_frames_FlxBitmapFont.transformPoint = function(point,frame) {
+	var x = point.x;
+	var y = point.y;
+	if(frame.angle == -90) {
+		point.x = frame.frame.width - y;
+		point.y = x;
+	} else if(frame.angle == 90) {
+		point.x = y;
+		point.y = frame.frame.height - x;
+	}
+	point.x += frame.frame.x;
+	point.y += frame.frame.y;
+	return point;
+};
+flixel_graphics_frames_FlxBitmapFont.fromMonospace = function(source,letters,charSize,region,spacing) {
+	var graphic = null;
+	var frame = null;
+	if(js_Boot.__instanceof(source,flixel_graphics_frames_FlxFrame)) {
+		frame = source;
+		graphic = frame.parent;
+	} else {
+		graphic = flixel_FlxG.bitmap.add(source);
+		frame = graphic.get_imageFrame().get_frame();
+	}
+	var font = flixel_graphics_frames_FlxBitmapFont.findFont(frame);
+	if(font != null) {
+		return font;
+	}
+	if(letters == null) {
+		letters = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+	} else {
+		letters = letters;
+	}
+	if(region == null) {
+		var Width = frame.sourceSize.x;
+		var Height = frame.sourceSize.y;
+		var _this = flixel_math_FlxRect._pool.get();
+		_this.x = 0;
+		_this.y = 0;
+		_this.width = Width;
+		_this.height = Height;
+		_this._inPool = false;
+		_this._weak = true;
+		region = _this;
+	} else {
+		region = region;
+	}
+	if(spacing == null) {
+		var point = flixel_math_FlxPoint._pool.get().set(0,0);
+		point._inPool = false;
+		spacing = point;
+	} else {
+		spacing = spacing;
+	}
+	var bitmapWidth = region.width | 0;
+	var bitmapHeight = region.height | 0;
+	var startX = region.x | 0;
+	var startY = region.y | 0;
+	if(region._weak) {
+		if(!region._inPool) {
+			region._inPool = true;
+			region._weak = false;
+			flixel_math_FlxRect._pool.putUnsafe(region);
+		}
+	}
+	var xSpacing = spacing.x | 0;
+	var ySpacing = spacing.y | 0;
+	var charWidth = charSize.x | 0;
+	var charHeight = charSize.y | 0;
+	var spacedWidth = charWidth + xSpacing;
+	var spacedHeight = charHeight + ySpacing;
+	var numCols = charWidth == 0?1:(bitmapWidth + xSpacing) / spacedWidth | 0;
+	font = new flixel_graphics_frames_FlxBitmapFont(frame);
+	font.fontName = graphic.key;
+	font.lineHeight = font.size = charHeight;
+	font.spaceWidth = charWidth;
+	var letterIndex = 0;
+	var numLetters = letters.length;
+	var _g1 = 0;
+	var _g = charHeight == 0?1:(bitmapHeight + ySpacing) / spacedHeight | 0;
+	while(_g1 < _g) {
+		var j = _g1++;
+		var _g3 = 0;
+		var _g2 = numCols;
+		while(_g3 < _g2) {
+			var _this1 = flixel_math_FlxRect._pool.get();
+			_this1.x = startX + _g3++ * spacedWidth;
+			_this1.y = startY + j * spacedHeight;
+			_this1.width = charWidth;
+			_this1.height = charHeight;
+			_this1._inPool = false;
+			var point1 = flixel_math_FlxPoint._pool.get().set(0,0);
+			point1._inPool = false;
+			font.addCharFrame(HxOverrides.cca(letters,letterIndex),_this1,point1,charWidth);
+			++letterIndex;
+			if(letterIndex >= numLetters) {
+				return font;
+			}
+		}
+	}
+	font.updateSourceHeight();
+	return font;
+};
+flixel_graphics_frames_FlxBitmapFont.findFont = function(frame,border) {
+	if(border == null) {
+		var point = flixel_math_FlxPoint._pool.get().set(0,0);
+		point._inPool = false;
+		point._weak = true;
+		border = point;
+	}
+	var _this = frame.parent;
+	var type = flixel_graphics_frames_FlxFrameCollectionType.FONT;
+	var collections = _this.frameCollections.get(type);
+	if(collections == null) {
+		collections = [];
+		_this.frameCollections.set(type,collections);
+	}
+	var bitmapFonts = collections;
+	var _g = 0;
+	while(_g < bitmapFonts.length) {
+		var font = bitmapFonts[_g];
+		++_g;
+		var tmp;
+		if(font.frame == frame) {
+			var _this1 = font.border;
+			var result = Math.abs(_this1.x - border.x) <= 0.0000001 && Math.abs(_this1.y - border.y) <= 0.0000001;
+			if(border._weak) {
+				border.put();
+			}
+			tmp = result;
+		} else {
+			tmp = false;
+		}
+		if(tmp) {
+			return font;
+		}
+	}
+	return null;
+};
+flixel_graphics_frames_FlxBitmapFont.__super__ = flixel_graphics_frames_FlxFramesCollection;
+flixel_graphics_frames_FlxBitmapFont.prototype = $extend(flixel_graphics_frames_FlxFramesCollection.prototype,{
+	destroy: function() {
+		flixel_graphics_frames_FlxFramesCollection.prototype.destroy.call(this);
+		this.frame = null;
+		this.fontName = null;
+		this.charMap = null;
+		this.charAdvance = null;
+	}
+	,addCharFrame: function(charCode,frame,offset,xAdvance) {
+		var utf8 = new haxe_Utf8();
+		var charName = utf8.__b += String.fromCharCode(charCode);
+		if(frame.width == 0 || frame.height == 0 || this.framesHash.get(charName) != null) {
+			return;
+		}
+		var charFrame = this.frame.subFrameTo(frame);
+		var w = charFrame.sourceSize.x;
+		var h = charFrame.sourceSize.y;
+		w += offset.x > 0?offset.x:0;
+		h += offset.y > 0?offset.y:0;
+		charFrame.sourceSize.set(w,h);
+		charFrame.offset.addPoint(offset);
+		charFrame.name = charName;
+		this.pushFrame(charFrame);
+		this.charMap.h[charCode] = charFrame;
+		this.charAdvance.h[charCode] = xAdvance;
+		offset.put();
+	}
+	,updateSourceHeight: function() {
+		var _g = 0;
+		var _g1 = this.frames;
+		while(_g < _g1.length) {
+			var frame = _g1[_g];
+			++_g;
+			frame.sourceSize.set_y(this.lineHeight);
+			frame.cacheFrameMatrix();
+		}
+	}
+	,charExists: function(charCode) {
+		return this.charMap.h.hasOwnProperty(charCode);
+	}
+	,getCharFrame: function(charCode) {
+		return this.charMap.h[charCode];
+	}
+	,getCharAdvance: function(charCode) {
+		if(this.charAdvance.h.hasOwnProperty(charCode)) {
+			return this.charAdvance.h[charCode];
+		} else {
+			return 0;
+		}
+	}
+	,getCharWidth: function(charCode) {
+		if(this.charMap.h.hasOwnProperty(charCode)) {
+			return this.charMap.h[charCode].sourceSize.x;
+		} else {
+			return 0;
+		}
+	}
+	,addBorder: function(border) {
+		var point = flixel_math_FlxPoint._pool.get().set(0,0);
+		point._inPool = false;
+		point._weak = true;
+		var resultBorder = point.addPoint(this.border).addPoint(border);
+		var font = flixel_graphics_frames_FlxBitmapFont.findFont(this.frame,resultBorder);
+		if(font != null) {
+			return font;
+		}
+		font = new flixel_graphics_frames_FlxBitmapFont(this.frame,border);
+		font.spaceWidth = this.spaceWidth;
+		font.fontName = this.fontName;
+		font.numLetters = this.numLetters;
+		font.minOffsetX = this.minOffsetX;
+		font.size = this.size;
+		font.lineHeight = this.lineHeight;
+		font.italic = this.italic;
+		font.bold = this.bold;
+		var charWithBorder;
+		var code;
+		var _g = 0;
+		var _g1 = this.frames;
+		while(_g < _g1.length) {
+			var $char = _g1[_g];
+			++_g;
+			charWithBorder = $char.setBorderTo(border);
+			font.pushFrame(charWithBorder);
+			code = HxOverrides.cca($char.name,0);
+			font.charMap.h[code] = charWithBorder;
+			font.charAdvance.h[code] = this.charAdvance.h[code];
+		}
+		font.updateSourceHeight();
+		return font;
+	}
+	,__class__: flixel_graphics_frames_FlxBitmapFont
 });
 var flixel_graphics_frames_FlxFrame = function(parent,angle,flipX,flipY) {
 	if(flipY == null) {
@@ -28607,6 +29712,1220 @@ flixel_system_ui_FlxSystemButton.prototype = $extend(openfl_display_Sprite.proto
 	,__class__: flixel_system_ui_FlxSystemButton
 	,__properties__: $extend(openfl_display_Sprite.prototype.__properties__,{set_toggled:"set_toggled"})
 });
+var flixel_text_FlxBitmapText = function(font) {
+	this.pendingPixelsChange = true;
+	this.pendingTextBitmapChange = true;
+	this.pendingTextChange = true;
+	this.numLines = 0;
+	this.multiLine = true;
+	this.backgroundColor = 0;
+	this.background = false;
+	this.borderQuality = 0;
+	this.borderSize = 1;
+	this.borderColor = -16777216;
+	this.borderStyle = flixel_text_FlxTextBorderStyle.NONE;
+	this.useTextColor = false;
+	this.textColor = -1;
+	this.numSpacesInTab = 4;
+	this.padding = 0;
+	this.autoSize = true;
+	this.wrapByWord = true;
+	this.wordWrap = true;
+	this.autoUpperCase = false;
+	this.letterSpacing = 0;
+	this.lineSpacing = 0;
+	this.alignment = "left";
+	this._linesWidth = [];
+	this._lines = [];
+	this._colorParams = new openfl_geom_ColorTransform();
+	this.text = "";
+	flixel_FlxSprite.call(this);
+	this.set_width(this.set_fieldWidth(2));
+	this.set_alpha(1);
+	this.set_font(font == null?flixel_graphics_frames_FlxBitmapFont.getDefaultFont():font);
+	var point = flixel_math_FlxPoint._pool.get().set(1,1);
+	point._inPool = false;
+	this.shadowOffset = point;
+	if(flixel_FlxG.renderBlit) {
+		this.set_pixels(new openfl_display_BitmapData(1,1,true,0));
+	} else {
+		this.textData = [];
+		this.textDrawData = [];
+		this.borderDrawData = [];
+	}
+};
+$hxClasses["flixel.text.FlxBitmapText"] = flixel_text_FlxBitmapText;
+flixel_text_FlxBitmapText.__name__ = ["flixel","text","FlxBitmapText"];
+flixel_text_FlxBitmapText.__super__ = flixel_FlxSprite;
+flixel_text_FlxBitmapText.prototype = $extend(flixel_FlxSprite.prototype,{
+	destroy: function() {
+		this.set_font(null);
+		this.set_text(null);
+		this._lines = null;
+		this._linesWidth = null;
+		this.shadowOffset = flixel_util_FlxDestroyUtil.put(this.shadowOffset);
+		this.textBitmap = flixel_util_FlxDestroyUtil.dispose(this.textBitmap);
+		this._colorParams = null;
+		if(flixel_FlxG.renderTile) {
+			this.textData = null;
+			this.textDrawData = null;
+			this.borderDrawData = null;
+		}
+		flixel_FlxSprite.prototype.destroy.call(this);
+	}
+	,drawFrame: function(Force) {
+		if(Force == null) {
+			Force = false;
+		}
+		if(flixel_FlxG.renderTile) {
+			Force = true;
+		}
+		this.pendingTextBitmapChange = this.pendingTextBitmapChange || Force;
+		if(this.pendingTextChange) {
+			this.updateText();
+			this.pendingTextBitmapChange = true;
+		}
+		if(this.pendingTextBitmapChange) {
+			this.updateTextBitmap(false);
+			this.pendingPixelsChange = true;
+		}
+		if(this.pendingPixelsChange) {
+			this.updatePixels(false);
+		}
+		if(flixel_FlxG.renderBlit) {
+			flixel_FlxSprite.prototype.drawFrame.call(this,Force);
+		}
+	}
+	,checkPendingChanges: function(useTiles) {
+		if(useTiles == null) {
+			useTiles = false;
+		}
+		if(flixel_FlxG.renderBlit) {
+			useTiles = false;
+		}
+		if(this.pendingTextChange) {
+			this.updateText();
+			this.pendingTextBitmapChange = true;
+		}
+		if(this.pendingTextBitmapChange) {
+			this.updateTextBitmap(useTiles);
+			this.pendingPixelsChange = true;
+		}
+		if(this.pendingPixelsChange) {
+			this.updatePixels(useTiles);
+		}
+	}
+	,draw: function() {
+		if(flixel_FlxG.renderBlit) {
+			if(this.pendingTextChange) {
+				this.updateText();
+				this.pendingTextBitmapChange = true;
+			}
+			if(this.pendingTextBitmapChange) {
+				this.updateTextBitmap(false);
+				this.pendingPixelsChange = true;
+			}
+			if(this.pendingPixelsChange) {
+				this.updatePixels(false);
+			}
+			flixel_FlxSprite.prototype.draw.call(this);
+		} else {
+			var useTiles = true;
+			if(flixel_FlxG.renderBlit) {
+				useTiles = false;
+			}
+			if(this.pendingTextChange) {
+				this.updateText();
+				this.pendingTextBitmapChange = true;
+			}
+			if(this.pendingTextBitmapChange) {
+				this.updateTextBitmap(useTiles);
+				this.pendingPixelsChange = true;
+			}
+			if(this.pendingPixelsChange) {
+				this.updatePixels(useTiles);
+			}
+			var textLength = this.textDrawData.length / 3 | 0;
+			var borderLength = this.borderDrawData.length / 3 | 0;
+			var dataPos;
+			var cr = (this.color >> 16 & 255) / 255;
+			var cg = (this.color >> 8 & 255) / 255;
+			var cb = (this.color & 255) / 255;
+			var borderRed = (this.borderColor >> 16 & 255) / 255 * cr;
+			var borderGreen = (this.borderColor >> 8 & 255) / 255 * cg;
+			var borderBlue = (this.borderColor & 255) / 255 * cb;
+			var bAlpha = (this.borderColor >> 24 & 255) / 255 * this.alpha;
+			var textRed = cr;
+			var textGreen = cg;
+			var textBlue = cb;
+			var tAlpha = this.alpha;
+			if(this.useTextColor) {
+				textRed = cr * ((this.textColor >> 16 & 255) / 255);
+				textGreen = cg * ((this.textColor >> 8 & 255) / 255);
+				textBlue = cb * ((this.textColor & 255) / 255);
+				tAlpha *= this.textColor >> 24 & 255;
+			}
+			var bgRed = cr;
+			var bgGreen = cg;
+			var bgBlue = cb;
+			var bgAlpha = this.alpha;
+			if(this.background) {
+				bgRed = cr * ((this.backgroundColor >> 16 & 255) / 255);
+				bgGreen = cg * ((this.backgroundColor >> 8 & 255) / 255);
+				bgBlue = cb * ((this.backgroundColor & 255) / 255);
+				bgAlpha *= (this.backgroundColor >> 24 & 255) / 255;
+			}
+			var drawItem;
+			var currFrame = null;
+			var currTileX = 0;
+			var currTileY = 0;
+			var sx = this.scale.x * this._facingHorizontalMult;
+			var sy = this.scale.y * this._facingVerticalMult;
+			var ox = this.origin.x;
+			var oy = this.origin.y;
+			if(this._facingHorizontalMult != 1) {
+				ox = this.frameWidth - ox;
+			}
+			if(this._facingVerticalMult != 1) {
+				oy = this.frameHeight - oy;
+			}
+			var _g = 0;
+			var _g1 = this.get_cameras();
+			while(_g < _g1.length) {
+				var camera = _g1[_g];
+				++_g;
+				if(!camera.visible || !camera.exists || !this.isOnScreen(camera)) {
+					continue;
+				}
+				this.getScreenPosition(this._point,camera).subtractPoint(this.offset);
+				if(this.isPixelPerfectRender(camera)) {
+					var _this = this._point;
+					_this.set_x(Math.floor(_this.x));
+					_this.set_y(Math.floor(_this.y));
+				}
+				if(this._angleChanged) {
+					var radians = this.angle * (Math.PI / 180);
+					this._sinAngle = Math.sin(radians);
+					this._cosAngle = Math.cos(radians);
+					this._angleChanged = false;
+				}
+				if(this.background) {
+					currFrame = flixel_FlxG.bitmap.get_whitePixel();
+					this._matrix.identity();
+					this._matrix.scale(0.1 * this.frameWidth,0.1 * this.frameHeight);
+					this._matrix.translate(-ox,-oy);
+					this._matrix.scale(sx,sy);
+					if(this.angle != 0) {
+						var _this1 = this._matrix;
+						var cos = this._cosAngle;
+						var sin = this._sinAngle;
+						var a1 = _this1.a * cos - _this1.b * sin;
+						_this1.b = _this1.a * sin + _this1.b * cos;
+						_this1.a = a1;
+						var c1 = _this1.c * cos - _this1.d * sin;
+						_this1.d = _this1.c * sin + _this1.d * cos;
+						_this1.c = c1;
+						var tx1 = _this1.tx * cos - _this1.ty * sin;
+						_this1.ty = _this1.tx * sin + _this1.ty * cos;
+						_this1.tx = tx1;
+					}
+					this._matrix.translate(this._point.x + ox,this._point.y + oy);
+					flixel_util_FlxColorTransformUtil.setMultipliers(this._colorParams,bgRed,bgGreen,bgBlue,bgAlpha);
+					camera.drawPixels(currFrame,null,this._matrix,this._colorParams,this.blend,this.antialiasing);
+				}
+				drawItem = camera.startQuadBatch(this.font.parent,true,this.colorTransform != null && flixel_util_FlxColorTransformUtil.hasRGBAOffsets(this.colorTransform),this.blend,this.antialiasing,this.shader);
+				var _g3 = 0;
+				while(_g3 < borderLength) {
+					dataPos = _g3++ * 3;
+					currFrame = this.font.charMap.get(this.borderDrawData[dataPos] | 0);
+					currTileX = this.borderDrawData[dataPos + 1];
+					currTileY = this.borderDrawData[dataPos + 2];
+					currFrame.prepareMatrix(this._matrix);
+					this._matrix.translate(currTileX - ox,currTileY - oy);
+					this._matrix.scale(sx,sy);
+					if(this.angle != 0) {
+						var _this2 = this._matrix;
+						var cos1 = this._cosAngle;
+						var sin1 = this._sinAngle;
+						var a11 = _this2.a * cos1 - _this2.b * sin1;
+						_this2.b = _this2.a * sin1 + _this2.b * cos1;
+						_this2.a = a11;
+						var c11 = _this2.c * cos1 - _this2.d * sin1;
+						_this2.d = _this2.c * sin1 + _this2.d * cos1;
+						_this2.c = c11;
+						var tx11 = _this2.tx * cos1 - _this2.ty * sin1;
+						_this2.ty = _this2.tx * sin1 + _this2.ty * cos1;
+						_this2.tx = tx11;
+					}
+					this._matrix.translate(this._point.x + ox,this._point.y + oy);
+					flixel_util_FlxColorTransformUtil.setMultipliers(this._colorParams,borderRed,borderGreen,borderBlue,bAlpha);
+					drawItem.addQuad(currFrame,this._matrix,this._colorParams);
+				}
+				var _g31 = 0;
+				while(_g31 < textLength) {
+					dataPos = _g31++ * 3;
+					currFrame = this.font.charMap.get(this.textDrawData[dataPos] | 0);
+					currTileX = this.textDrawData[dataPos + 1];
+					currTileY = this.textDrawData[dataPos + 2];
+					currFrame.prepareMatrix(this._matrix);
+					this._matrix.translate(currTileX - ox,currTileY - oy);
+					this._matrix.scale(sx,sy);
+					if(this.angle != 0) {
+						var _this3 = this._matrix;
+						var cos2 = this._cosAngle;
+						var sin2 = this._sinAngle;
+						var a12 = _this3.a * cos2 - _this3.b * sin2;
+						_this3.b = _this3.a * sin2 + _this3.b * cos2;
+						_this3.a = a12;
+						var c12 = _this3.c * cos2 - _this3.d * sin2;
+						_this3.d = _this3.c * sin2 + _this3.d * cos2;
+						_this3.c = c12;
+						var tx12 = _this3.tx * cos2 - _this3.ty * sin2;
+						_this3.ty = _this3.tx * sin2 + _this3.ty * cos2;
+						_this3.tx = tx12;
+					}
+					this._matrix.translate(this._point.x + ox,this._point.y + oy);
+					flixel_util_FlxColorTransformUtil.setMultipliers(this._colorParams,textRed,textGreen,textBlue,tAlpha);
+					drawItem.addQuad(currFrame,this._matrix,this._colorParams);
+				}
+			}
+		}
+	}
+	,set_color: function(Color) {
+		flixel_FlxSprite.prototype.set_color.call(this,Color);
+		if(flixel_FlxG.renderBlit) {
+			this.pendingTextBitmapChange = true;
+		}
+		return this.color;
+	}
+	,set_alpha: function(value) {
+		flixel_FlxSprite.prototype.set_alpha.call(this,value);
+		if(flixel_FlxG.renderBlit) {
+			this.pendingTextBitmapChange = true;
+		}
+		return value;
+	}
+	,set_textColor: function(value) {
+		if(this.textColor != value) {
+			this.textColor = value;
+			if(flixel_FlxG.renderBlit) {
+				this.pendingPixelsChange = true;
+			}
+		}
+		return value;
+	}
+	,set_useTextColor: function(value) {
+		if(this.useTextColor != value) {
+			this.useTextColor = value;
+			if(flixel_FlxG.renderBlit) {
+				this.pendingPixelsChange = true;
+			}
+		}
+		return value;
+	}
+	,calcFrame: function(RunOnCpp) {
+		if(RunOnCpp == null) {
+			RunOnCpp = false;
+		}
+		if(flixel_FlxG.renderTile) {
+			this.drawFrame(RunOnCpp);
+		} else {
+			flixel_FlxSprite.prototype.calcFrame.call(this,RunOnCpp);
+		}
+	}
+	,set_text: function(value) {
+		if(value != this.text) {
+			this.text = value;
+			this.pendingTextChange = true;
+		}
+		return value;
+	}
+	,updateText: function() {
+		this._lines = (this.autoUpperCase?this.text.toUpperCase():this.text).split("\n");
+		if(!this.autoSize) {
+			if(this.wordWrap) {
+				this.wrap();
+			} else {
+				this.cutLines();
+			}
+		}
+		if(!this.multiLine) {
+			this._lines = [this._lines[0]];
+		}
+		var numLines = this._lines.length;
+		var _g1 = 0;
+		while(_g1 < numLines) {
+			var i = _g1++;
+			this._lines[i] = StringTools.rtrim(this._lines[i]);
+		}
+		this.pendingTextChange = false;
+		this.pendingTextBitmapChange = true;
+	}
+	,computeTextSize: function() {
+		var txtWidth = this.get_textWidth();
+		var txtHeight = this.get_textHeight() + 2 * this.padding;
+		if(this.autoSize) {
+			txtWidth += 2 * this.padding;
+		} else {
+			txtWidth = this.get_fieldWidth();
+		}
+		this.frameWidth = txtWidth == 0?1:txtWidth;
+		this.frameHeight = txtHeight == 0?1:txtHeight;
+	}
+	,getLineWidth: function(lineIndex) {
+		if(lineIndex < 0 || lineIndex >= this._lines.length) {
+			return 0;
+		}
+		return this.getStringWidth(this._lines[lineIndex]);
+	}
+	,getStringWidth: function(str) {
+		var spaceWidth = this.font.spaceWidth;
+		var tabWidth = spaceWidth * this.numSpacesInTab;
+		var lineLength = str.length;
+		var lineWidth = this.font.minOffsetX;
+		var charCode;
+		var charWidth;
+		var charFrame;
+		var _g1 = 0;
+		while(_g1 < lineLength) {
+			var c = _g1++;
+			charCode = HxOverrides.cca(str,c);
+			charWidth = 0;
+			if(charCode == 32) {
+				charWidth = spaceWidth;
+			} else if(charCode == 9) {
+				charWidth = tabWidth;
+			} else if(this.font.charMap.exists(charCode)) {
+				var _this = this.font;
+				if(_this.charAdvance.exists(charCode)) {
+					charWidth = _this.charAdvance.get(charCode);
+				} else {
+					charWidth = 0;
+				}
+				if(c == lineLength - 1) {
+					charFrame = this.font.charMap.get(charCode);
+					charWidth = charFrame.sourceSize.x | 0;
+				}
+			}
+			lineWidth += charWidth + this.letterSpacing;
+		}
+		if(lineLength > 0) {
+			lineWidth -= this.letterSpacing;
+		}
+		return lineWidth | 0;
+	}
+	,cutLines: function() {
+		var newLines = [];
+		var lineLength;
+		var c;
+		var charCode;
+		var charWidth;
+		var subLine;
+		var subLineWidth;
+		var spaceWidth = this.font.spaceWidth;
+		var tabWidth = spaceWidth * this.numSpacesInTab;
+		var startX = this.font.minOffsetX;
+		var _g = 0;
+		var _g1 = this._lines;
+		while(_g < _g1.length) {
+			var line = _g1[_g];
+			++_g;
+			lineLength = line.length;
+			subLine = new haxe_Utf8();
+			subLineWidth = startX;
+			c = 0;
+			while(c < lineLength) {
+				charCode = HxOverrides.cca(line,c);
+				if(charCode == 32) {
+					charWidth = spaceWidth;
+				} else if(charCode == 9) {
+					charWidth = tabWidth;
+				} else {
+					var _this = this.font;
+					if(_this.charAdvance.exists(charCode)) {
+						charWidth = _this.charAdvance.get(charCode);
+					} else {
+						charWidth = 0;
+					}
+				}
+				charWidth += this.letterSpacing;
+				if(subLineWidth + charWidth > this._fieldWidth - 2 * this.padding) {
+					subLine.__b += String.fromCharCode(charCode);
+					newLines.push(subLine.__b);
+					subLine = new haxe_Utf8();
+					subLineWidth = startX;
+					c = lineLength;
+				} else {
+					subLine.__b += String.fromCharCode(charCode);
+					subLineWidth += charWidth;
+				}
+				++c;
+			}
+		}
+		this._lines = newLines;
+	}
+	,wrap: function() {
+		var newLines = [];
+		var words;
+		var _g = 0;
+		var _g1 = this._lines;
+		while(_g < _g1.length) {
+			var line = _g1[_g];
+			++_g;
+			words = [];
+			this.splitLineIntoWords(line,words);
+			if(this.wrapByWord) {
+				this.wrapLineByWord(words,newLines);
+			} else {
+				this.wrapLineByCharacter(words,newLines);
+			}
+		}
+		this._lines = newLines;
+	}
+	,splitLineIntoWords: function(line,words) {
+		var word = "";
+		var wordUtf8 = new haxe_Utf8();
+		var isSpaceWord = false;
+		var lineLength = line.length;
+		var hyphenCode = HxOverrides.cca("-",0);
+		var c = 0;
+		var charCode;
+		var charUtf8;
+		while(c < lineLength) {
+			charCode = HxOverrides.cca(line,c);
+			word = wordUtf8.__b;
+			if(charCode == 32 || charCode == 9) {
+				if(!isSpaceWord) {
+					isSpaceWord = true;
+					if(word != "") {
+						words.push(word);
+						wordUtf8 = new haxe_Utf8();
+					}
+				}
+				wordUtf8.__b += String.fromCharCode(charCode);
+			} else if(charCode == hyphenCode) {
+				if(isSpaceWord && word != "") {
+					isSpaceWord = false;
+					words.push(word);
+					words.push("-");
+				} else if(!isSpaceWord) {
+					charUtf8 = new haxe_Utf8();
+					charUtf8.__b += String.fromCharCode(charCode);
+					words.push(word + charUtf8.__b);
+				}
+				wordUtf8 = new haxe_Utf8();
+			} else {
+				if(isSpaceWord && word != "") {
+					isSpaceWord = false;
+					words.push(word);
+					wordUtf8 = new haxe_Utf8();
+				}
+				wordUtf8.__b += String.fromCharCode(charCode);
+			}
+			++c;
+		}
+		word = wordUtf8.__b;
+		if(word != "") {
+			words.push(word);
+		}
+	}
+	,wrapLineByWord: function(words,newLines) {
+		var numWords = words.length;
+		var w;
+		var word;
+		var wordWidth;
+		var wordLength;
+		var isSpaceWord = false;
+		var charCode;
+		var charWidth = 0;
+		var subLines = [];
+		var subLine;
+		var subLineWidth;
+		var spaceWidth = this.font.spaceWidth;
+		var tabWidth = spaceWidth * this.numSpacesInTab;
+		var startX = this.font.minOffsetX;
+		if(numWords > 0) {
+			w = 0;
+			subLineWidth = startX;
+			subLine = "";
+			while(w < numWords) {
+				wordWidth = 0;
+				word = words[w];
+				wordLength = word.length;
+				charCode = HxOverrides.cca(word,0);
+				if(charCode != 32) {
+					isSpaceWord = charCode == 9;
+				} else {
+					isSpaceWord = true;
+				}
+				var _g1 = 0;
+				while(_g1 < wordLength) {
+					charCode = HxOverrides.cca(word,_g1++);
+					if(charCode == 32) {
+						charWidth = spaceWidth;
+					} else if(charCode == 9) {
+						charWidth = tabWidth;
+					} else {
+						var _this = this.font;
+						if(_this.charAdvance.exists(charCode)) {
+							charWidth = _this.charAdvance.get(charCode);
+						} else {
+							charWidth = 0;
+						}
+					}
+					wordWidth += charWidth;
+				}
+				wordWidth += (wordLength - 1) * this.letterSpacing;
+				if(subLineWidth + wordWidth > this._fieldWidth - 2 * this.padding) {
+					if(isSpaceWord) {
+						subLines.push(subLine);
+						subLine = "";
+						subLineWidth = startX;
+					} else if(subLine != "") {
+						subLines.push(subLine);
+						subLine = word;
+						subLineWidth = startX + wordWidth + this.letterSpacing;
+					} else {
+						subLine = word;
+						subLineWidth = startX + wordWidth + this.letterSpacing;
+					}
+				} else {
+					subLine += word;
+					subLineWidth += wordWidth + this.letterSpacing;
+				}
+				++w;
+			}
+			if(subLine != "") {
+				subLines.push(subLine);
+			}
+		}
+		var _g = 0;
+		while(_g < subLines.length) {
+			var subline = subLines[_g];
+			++_g;
+			newLines.push(subline);
+		}
+	}
+	,wrapLineByCharacter: function(words,newLines) {
+		var numWords = words.length;
+		var w;
+		var word;
+		var wordLength;
+		var isSpaceWord = false;
+		var charCode;
+		var c;
+		var charWidth = 0;
+		var subLines = [];
+		var subLine;
+		var subLineUtf8;
+		var subLineWidth;
+		var spaceWidth = this.font.spaceWidth;
+		var tabWidth = spaceWidth * this.numSpacesInTab;
+		var startX = this.font.minOffsetX;
+		if(numWords > 0) {
+			w = 0;
+			subLineWidth = startX;
+			subLineUtf8 = new haxe_Utf8();
+			while(w < numWords) {
+				word = words[w];
+				wordLength = word.length;
+				charCode = HxOverrides.cca(word,0);
+				if(charCode != 32) {
+					isSpaceWord = charCode == 9;
+				} else {
+					isSpaceWord = true;
+				}
+				c = 0;
+				while(c < wordLength) {
+					charCode = HxOverrides.cca(word,c);
+					if(charCode == 32) {
+						charWidth = spaceWidth;
+					} else if(charCode == 9) {
+						charWidth = tabWidth;
+					} else {
+						var _this = this.font;
+						if(_this.charAdvance.exists(charCode)) {
+							charWidth = _this.charAdvance.get(charCode);
+						} else {
+							charWidth = 0;
+						}
+					}
+					if(subLineWidth + charWidth > this._fieldWidth - 2 * this.padding) {
+						subLine = subLineUtf8.__b;
+						if(isSpaceWord) {
+							subLines.push(subLine);
+							c = wordLength;
+							subLineUtf8 = new haxe_Utf8();
+							subLineWidth = startX;
+						} else if(subLine != "") {
+							subLines.push(subLine);
+							subLineUtf8 = new haxe_Utf8();
+							subLineUtf8.__b += String.fromCharCode(charCode);
+							subLineWidth = startX + charWidth + this.letterSpacing;
+						} else {
+							subLineUtf8 = new haxe_Utf8();
+							subLineUtf8.__b += String.fromCharCode(charCode);
+							subLineWidth = startX + charWidth + this.letterSpacing;
+						}
+					} else {
+						subLineUtf8.__b += String.fromCharCode(charCode);
+						subLineWidth += charWidth + this.letterSpacing;
+					}
+					++c;
+				}
+				++w;
+			}
+			subLine = subLineUtf8.__b;
+			if(subLine != "") {
+				subLines.push(subLine);
+			}
+		}
+		var _g = 0;
+		while(_g < subLines.length) {
+			var subline = subLines[_g];
+			++_g;
+			newLines.push(subline);
+		}
+	}
+	,updateTextBitmap: function(useTiles) {
+		if(useTiles == null) {
+			useTiles = false;
+		}
+		this.computeTextSize();
+		if(flixel_FlxG.renderBlit) {
+			useTiles = false;
+		}
+		if(!useTiles) {
+			this.textBitmap = flixel_util_FlxDestroyUtil.disposeIfNotEqual(this.textBitmap,this.frameWidth,this.frameHeight);
+			if(this.textBitmap == null) {
+				this.textBitmap = new openfl_display_BitmapData(this.frameWidth,this.frameHeight,true,0);
+			} else {
+				this.textBitmap.fillRect(this.textBitmap.rect,0);
+			}
+		} else if(flixel_FlxG.renderTile) {
+			this.textData.splice(0,this.textData.length);
+		}
+		this._fieldWidth = this.frameWidth;
+		var numLines = this._lines.length;
+		var lineWidth;
+		var ox;
+		var oy;
+		var _g1 = 0;
+		while(_g1 < numLines) {
+			var i = _g1++;
+			lineWidth = this._linesWidth[i];
+			ox = this.font.minOffsetX;
+			oy = i * (this.font.lineHeight + this.lineSpacing) + this.padding;
+			if(this.alignment == "center") {
+				ox += (this.frameWidth - lineWidth) / 2 | 0;
+			} else if(this.alignment == "right") {
+				ox += this.frameWidth - lineWidth - this.padding;
+			} else {
+				ox += this.padding;
+			}
+			this.drawLine(i,ox,oy,useTiles);
+		}
+		this.pendingTextBitmapChange = false;
+	}
+	,drawLine: function(lineIndex,posX,posY,useTiles) {
+		if(useTiles == null) {
+			useTiles = false;
+		}
+		if(flixel_FlxG.renderBlit) {
+			useTiles = false;
+		}
+		if(useTiles) {
+			this.tileLine(lineIndex,posX,posY);
+		} else {
+			this.blitLine(lineIndex,posX,posY);
+		}
+	}
+	,blitLine: function(lineIndex,startX,startY) {
+		var charFrame;
+		var charCode;
+		var curX = startX;
+		var line = this._lines[lineIndex];
+		var spaceWidth = this.font.spaceWidth;
+		var lineLength = line.length;
+		var textWidth = this.get_textWidth();
+		if(this.alignment == "justify") {
+			var numSpaces = 0;
+			var _g1 = 0;
+			while(_g1 < lineLength) {
+				charCode = HxOverrides.cca(line,_g1++);
+				if(charCode == 32) {
+					++numSpaces;
+				} else if(charCode == 9) {
+					numSpaces += this.numSpacesInTab;
+				}
+			}
+			spaceWidth = (textWidth - this.getStringWidth(line) + numSpaces * this.font.spaceWidth) / numSpaces | 0;
+		}
+		var tabWidth = spaceWidth * this.numSpacesInTab;
+		var _g11 = 0;
+		while(_g11 < lineLength) {
+			charCode = HxOverrides.cca(line,_g11++);
+			if(charCode == 32) {
+				curX += spaceWidth;
+			} else if(charCode == 9) {
+				curX += tabWidth;
+			} else {
+				charFrame = this.font.charMap.get(charCode);
+				if(charFrame != null) {
+					this._flashPoint.setTo(curX,startY);
+					charFrame.paint(this.textBitmap,this._flashPoint,true);
+					new haxe_Utf8().__b += String.fromCharCode(charCode);
+					var _this = this.font;
+					curX += _this.charAdvance.exists(charCode)?_this.charAdvance.get(charCode):0;
+				}
+			}
+			curX += this.letterSpacing;
+		}
+	}
+	,tileLine: function(lineIndex,startX,startY) {
+		if(!flixel_FlxG.renderTile) {
+			return;
+		}
+		var charFrame;
+		var pos = this.textData.length;
+		var charCode;
+		var curX = startX;
+		var line = this._lines[lineIndex];
+		var spaceWidth = this.font.spaceWidth;
+		var lineLength = line.length;
+		var textWidth = this.get_textWidth();
+		if(this.alignment == "justify") {
+			var numSpaces = 0;
+			var _g1 = 0;
+			while(_g1 < lineLength) {
+				charCode = HxOverrides.cca(line,_g1++);
+				if(charCode == 32) {
+					++numSpaces;
+				} else if(charCode == 9) {
+					numSpaces += this.numSpacesInTab;
+				}
+			}
+			spaceWidth = (textWidth - this.getStringWidth(line) + numSpaces * this.font.spaceWidth) / numSpaces | 0;
+		}
+		var tabWidth = spaceWidth * this.numSpacesInTab;
+		var _g11 = 0;
+		while(_g11 < lineLength) {
+			charCode = HxOverrides.cca(line,_g11++);
+			if(charCode == 32) {
+				curX += spaceWidth;
+			} else if(charCode == 9) {
+				curX += tabWidth;
+			} else {
+				charFrame = this.font.charMap.get(charCode);
+				if(charFrame != null) {
+					this.textData[pos++] = charCode;
+					this.textData[pos++] = curX;
+					this.textData[pos++] = startY;
+					var _this = this.font;
+					curX += _this.charAdvance.exists(charCode)?_this.charAdvance.get(charCode):0;
+				}
+			}
+			curX += this.letterSpacing;
+		}
+	}
+	,updatePixels: function(useTiles) {
+		if(useTiles == null) {
+			useTiles = false;
+		}
+		var colorForFill = this.background?this.backgroundColor:0;
+		var bitmap = null;
+		if(flixel_FlxG.renderBlit) {
+			if(this.get_pixels() == null || (this.frameWidth != this.get_pixels().width || this.frameHeight != this.get_pixels().height)) {
+				this.set_pixels(new openfl_display_BitmapData(this.frameWidth,this.frameHeight,true,colorForFill));
+			} else {
+				this.get_pixels().fillRect(this.graphic.bitmap.rect,colorForFill);
+			}
+			bitmap = this.get_pixels();
+		} else {
+			if(!useTiles) {
+				if(this.framePixels == null || (this.frameWidth != this.framePixels.width || this.frameHeight != this.framePixels.height)) {
+					this.framePixels = flixel_util_FlxDestroyUtil.dispose(this.framePixels);
+					this.framePixels = new openfl_display_BitmapData(this.frameWidth,this.frameHeight,true,colorForFill);
+				} else {
+					this.framePixels.fillRect(this.framePixels.rect,colorForFill);
+				}
+				bitmap = this.framePixels;
+			} else {
+				this.textDrawData.splice(0,this.textDrawData.length);
+				this.borderDrawData.splice(0,this.borderDrawData.length);
+			}
+			this.set_width(this.frameWidth);
+			this.set_height(this.frameHeight);
+			this.origin.set_x(this.frameWidth * 0.5);
+			this.origin.set_y(this.frameHeight * 0.5);
+		}
+		var iterations = this.borderSize * this.borderQuality | 0;
+		if(iterations <= 0) {
+			iterations = 1;
+		} else {
+			iterations = iterations;
+		}
+		var delta = this.borderSize / iterations | 0;
+		var iterationsX = 1;
+		var iterationsY = 1;
+		var deltaX = 1;
+		var deltaY = 1;
+		if(this.borderStyle == flixel_text_FlxTextBorderStyle.SHADOW) {
+			iterationsX = Math.round(Math.abs(this.shadowOffset.x) * this.borderQuality);
+			if(iterationsX <= 0) {
+				iterationsX = 1;
+			} else {
+				iterationsX = iterationsX;
+			}
+			iterationsY = Math.round(Math.abs(this.shadowOffset.y) * this.borderQuality);
+			if(iterationsY <= 0) {
+				iterationsY = 1;
+			} else {
+				iterationsY = iterationsY;
+			}
+			deltaX = Math.round(this.shadowOffset.x / iterationsX);
+			deltaY = Math.round(this.shadowOffset.y / iterationsY);
+		}
+		switch(this.borderStyle[1]) {
+		case 0:
+			break;
+		case 1:
+			var _g1 = 0;
+			var _g = iterationsY;
+			while(_g1 < _g) {
+				var iterY = _g1++;
+				var _g3 = 0;
+				var _g2 = iterationsX;
+				while(_g3 < _g2) this.drawText(deltaX * (_g3++ + 1),deltaY * (iterY + 1),false,bitmap,useTiles);
+			}
+			break;
+		case 2:
+			var itd = 0;
+			var _g11 = 0;
+			var _g4 = iterations;
+			while(_g11 < _g4) {
+				itd = delta * (_g11++ + 1);
+				this.drawText(-itd,-itd,false,bitmap,useTiles);
+				this.drawText(0,-itd,false,bitmap,useTiles);
+				this.drawText(itd,-itd,false,bitmap,useTiles);
+				this.drawText(-itd,0,false,bitmap,useTiles);
+				this.drawText(itd,0,false,bitmap,useTiles);
+				this.drawText(-itd,itd,false,bitmap,useTiles);
+				this.drawText(0,itd,false,bitmap,useTiles);
+				this.drawText(itd,itd,false,bitmap,useTiles);
+			}
+			break;
+		case 3:
+			var itd1 = 0;
+			var _g12 = 0;
+			var _g5 = iterations;
+			while(_g12 < _g5) {
+				itd1 = delta * (_g12++ + 1);
+				this.drawText(-itd1,-itd1,false,bitmap,useTiles);
+				this.drawText(itd1,-itd1,false,bitmap,useTiles);
+				this.drawText(-itd1,itd1,false,bitmap,useTiles);
+				this.drawText(itd1,itd1,false,bitmap,useTiles);
+			}
+			break;
+		}
+		this.drawText(0,0,true,bitmap,useTiles);
+		if(flixel_FlxG.renderBlit) {
+			this.dirty = true;
+		}
+		this.pendingPixelsChange = false;
+	}
+	,drawText: function(posX,posY,isFront,bitmap,useTiles) {
+		if(useTiles == null) {
+			useTiles = false;
+		}
+		if(isFront == null) {
+			isFront = true;
+		}
+		if(flixel_FlxG.renderBlit) {
+			useTiles = false;
+		}
+		if(useTiles) {
+			this.tileText(posX,posY,isFront);
+		} else {
+			this.blitText(posX,posY,isFront,bitmap);
+		}
+	}
+	,blitText: function(posX,posY,isFront,bitmap) {
+		if(isFront == null) {
+			isFront = true;
+		}
+		this._matrix.identity();
+		this._matrix.translate(posX,posY);
+		var colorToApply = -1;
+		if(isFront && this.useTextColor) {
+			colorToApply = this.textColor;
+		} else if(!isFront) {
+			colorToApply = this.borderColor;
+		}
+		flixel_util_FlxColorTransformUtil.setMultipliers(this._colorParams,(colorToApply >> 16 & 255) / 255,(colorToApply >> 8 & 255) / 255,(colorToApply & 255) / 255,(colorToApply >> 24 & 255) / 255);
+		if(isFront && !this.useTextColor) {
+			this._flashRect.setTo(0,0,this.textBitmap.width,this.textBitmap.height);
+			bitmap.copyPixels(this.textBitmap,this._flashRect,this._flashPointZero,null,null,true);
+		} else {
+			bitmap.draw(this.textBitmap,this._matrix,this._colorParams);
+		}
+	}
+	,tileText: function(posX,posY,isFront) {
+		if(isFront == null) {
+			isFront = true;
+		}
+		if(!flixel_FlxG.renderTile) {
+			return;
+		}
+		var data = isFront?this.textDrawData:this.borderDrawData;
+		var pos = data.length;
+		var textPos;
+		var textLen = this.textData.length / 3 | 0;
+		var _g1 = 0;
+		while(_g1 < textLen) {
+			textPos = 3 * _g1++;
+			data[pos++] = this.textData[textPos];
+			data[pos++] = this.textData[textPos + 1] + posX;
+			data[pos++] = this.textData[textPos + 2] + posY;
+		}
+	}
+	,setBorderStyle: function(Style,Color,Size,Quality) {
+		if(Quality == null) {
+			Quality = 1;
+		}
+		if(Size == null) {
+			Size = 1;
+		}
+		if(Color == null) {
+			Color = 0;
+		}
+		this.set_borderStyle(Style);
+		this.set_borderColor(Color);
+		this.set_borderSize(Size);
+		this.set_borderQuality(Quality);
+		if(this.borderStyle == flixel_text_FlxTextBorderStyle.SHADOW) {
+			this.shadowOffset.set(this.borderSize,this.borderSize);
+		}
+		this.pendingTextBitmapChange = true;
+	}
+	,get_fieldWidth: function() {
+		if(this.autoSize) {
+			return this.get_textWidth();
+		} else {
+			return this._fieldWidth;
+		}
+	}
+	,set_fieldWidth: function(value) {
+		if(value > 1) {
+			value = value;
+		} else {
+			value = 1;
+		}
+		if(value != this._fieldWidth) {
+			if(value <= 0) {
+				this.set_autoSize(true);
+				this.set_wordWrap(false);
+			}
+			this.pendingTextChange = true;
+		}
+		return this._fieldWidth = value;
+	}
+	,set_alignment: function(value) {
+		if(this.alignment != value && this.alignment != "justify") {
+			this.alignment = value;
+			this.pendingTextBitmapChange = true;
+		}
+		return value;
+	}
+	,set_multiLine: function(value) {
+		if(this.multiLine != value) {
+			this.multiLine = value;
+			this.pendingTextChange = true;
+		}
+		return value;
+	}
+	,set_font: function(value) {
+		if(this.font != value) {
+			this.font = value;
+			this.pendingTextChange = true;
+		}
+		return value;
+	}
+	,set_lineSpacing: function(value) {
+		if(this.lineSpacing != value) {
+			this.lineSpacing = value >= 0?value:-value;
+			this.pendingTextBitmapChange = true;
+		}
+		return this.lineSpacing;
+	}
+	,set_letterSpacing: function(value) {
+		if(value != this.letterSpacing) {
+			this.letterSpacing = value;
+			this.pendingTextChange = true;
+		}
+		return this.letterSpacing;
+	}
+	,set_autoUpperCase: function(value) {
+		if(this.autoUpperCase != value) {
+			this.autoUpperCase = value;
+			this.pendingTextChange = true;
+		}
+		return this.autoUpperCase;
+	}
+	,set_wordWrap: function(value) {
+		if(this.wordWrap != value) {
+			this.wordWrap = value;
+			this.pendingTextChange = true;
+		}
+		return this.wordWrap;
+	}
+	,set_wrapByWord: function(value) {
+		if(this.wrapByWord != value) {
+			this.wrapByWord = value;
+			this.pendingTextChange = true;
+		}
+		return value;
+	}
+	,set_autoSize: function(value) {
+		if(this.autoSize != value) {
+			this.autoSize = value;
+			this.pendingTextChange = true;
+		}
+		return this.autoSize;
+	}
+	,set_padding: function(value) {
+		if(value != this.padding) {
+			this.padding = value;
+			this.pendingTextChange = true;
+		}
+		return value;
+	}
+	,set_numSpacesInTab: function(value) {
+		if(this.numSpacesInTab != value && value > 0) {
+			this.numSpacesInTab = value;
+			this.pendingTextChange = true;
+		}
+		return value;
+	}
+	,set_background: function(value) {
+		if(this.background != value) {
+			this.background = value;
+			if(flixel_FlxG.renderBlit) {
+				this.pendingPixelsChange = true;
+			}
+		}
+		return value;
+	}
+	,set_backgroundColor: function(value) {
+		if(this.backgroundColor != value) {
+			this.backgroundColor = value;
+			if(flixel_FlxG.renderBlit) {
+				this.pendingPixelsChange = true;
+			}
+		}
+		return value;
+	}
+	,set_borderStyle: function(style) {
+		if(style != this.borderStyle) {
+			this.borderStyle = style;
+			this.pendingTextBitmapChange = true;
+		}
+		return this.borderStyle;
+	}
+	,set_borderColor: function(value) {
+		if(this.borderColor != value) {
+			this.borderColor = value;
+			if(flixel_FlxG.renderBlit) {
+				this.pendingPixelsChange = true;
+			}
+		}
+		return value;
+	}
+	,set_borderSize: function(value) {
+		if(value != this.borderSize) {
+			this.borderSize = value;
+			if(this.borderStyle != flixel_text_FlxTextBorderStyle.NONE) {
+				this.pendingTextBitmapChange = true;
+			}
+		}
+		return value;
+	}
+	,set_borderQuality: function(value) {
+		value = Math.min(1,Math.max(0,value));
+		if(value != this.borderQuality) {
+			this.borderQuality = value;
+			if(this.borderStyle != flixel_text_FlxTextBorderStyle.NONE) {
+				this.pendingTextBitmapChange = true;
+			}
+		}
+		return value;
+	}
+	,get_numLines: function() {
+		return this._lines.length;
+	}
+	,get_textWidth: function() {
+		var max = 0;
+		var numLines = this._lines.length;
+		var lineWidth;
+		this._linesWidth = [];
+		var _g1 = 0;
+		while(_g1 < numLines) {
+			var i = _g1++;
+			lineWidth = this.getLineWidth(i);
+			this._linesWidth[i] = lineWidth;
+			if(max > lineWidth) {
+				max = max;
+			} else {
+				max = lineWidth;
+			}
+		}
+		return max;
+	}
+	,get_textHeight: function() {
+		return (this.get_lineHeight() + this.lineSpacing) * this._lines.length - this.lineSpacing;
+	}
+	,get_lineHeight: function() {
+		return this.font.lineHeight;
+	}
+	,get_width: function() {
+		var useTiles = true;
+		if(flixel_FlxG.renderBlit) {
+			useTiles = false;
+		}
+		if(this.pendingTextChange) {
+			this.updateText();
+			this.pendingTextBitmapChange = true;
+		}
+		if(this.pendingTextBitmapChange) {
+			this.updateTextBitmap(useTiles);
+			this.pendingPixelsChange = true;
+		}
+		if(this.pendingPixelsChange) {
+			this.updatePixels(useTiles);
+		}
+		return flixel_FlxSprite.prototype.get_width.call(this);
+	}
+	,get_height: function() {
+		var useTiles = true;
+		if(flixel_FlxG.renderBlit) {
+			useTiles = false;
+		}
+		if(this.pendingTextChange) {
+			this.updateText();
+			this.pendingTextBitmapChange = true;
+		}
+		if(this.pendingTextBitmapChange) {
+			this.updateTextBitmap(useTiles);
+			this.pendingPixelsChange = true;
+		}
+		if(this.pendingPixelsChange) {
+			this.updatePixels(useTiles);
+		}
+		return flixel_FlxSprite.prototype.get_height.call(this);
+	}
+	,__class__: flixel_text_FlxBitmapText
+	,__properties__: $extend(flixel_FlxSprite.prototype.__properties__,{set_fieldWidth:"set_fieldWidth",get_fieldWidth:"get_fieldWidth",get_numLines:"get_numLines",set_multiLine:"set_multiLine",set_backgroundColor:"set_backgroundColor",set_background:"set_background",set_borderQuality:"set_borderQuality",set_borderSize:"set_borderSize",set_borderColor:"set_borderColor",set_borderStyle:"set_borderStyle",set_useTextColor:"set_useTextColor",set_textColor:"set_textColor",set_numSpacesInTab:"set_numSpacesInTab",get_lineHeight:"get_lineHeight",get_textHeight:"get_textHeight",get_textWidth:"get_textWidth",set_padding:"set_padding",set_autoSize:"set_autoSize",set_wrapByWord:"set_wrapByWord",set_wordWrap:"set_wordWrap",set_autoUpperCase:"set_autoUpperCase",set_letterSpacing:"set_letterSpacing",set_lineSpacing:"set_lineSpacing",set_alignment:"set_alignment",set_text:"set_text",set_font:"set_font"})
+});
 var flixel_text_FlxText = function(X,Y,FieldWidth,Text,Size,EmbeddedFont) {
 	if(EmbeddedFont == null) {
 		EmbeddedFont = true;
@@ -33590,282 +35909,6 @@ flixel_util_FlxAxes.Y.__enum__ = flixel_util_FlxAxes;
 flixel_util_FlxAxes.XY = ["XY",2];
 flixel_util_FlxAxes.XY.toString = $estr;
 flixel_util_FlxAxes.XY.__enum__ = flixel_util_FlxAxes;
-var openfl_geom_Rectangle = function(x,y,width,height) {
-	if(height == null) {
-		height = 0;
-	}
-	if(width == null) {
-		width = 0;
-	}
-	if(y == null) {
-		y = 0;
-	}
-	if(x == null) {
-		x = 0;
-	}
-	this.x = x;
-	this.y = y;
-	this.width = width;
-	this.height = height;
-};
-$hxClasses["openfl.geom.Rectangle"] = openfl_geom_Rectangle;
-openfl_geom_Rectangle.__name__ = ["openfl","geom","Rectangle"];
-openfl_geom_Rectangle.prototype = {
-	clone: function() {
-		return new openfl_geom_Rectangle(this.x,this.y,this.width,this.height);
-	}
-	,contains: function(x,y) {
-		if(x >= this.x && y >= this.y && x < this.get_right()) {
-			return y < this.get_bottom();
-		} else {
-			return false;
-		}
-	}
-	,containsPoint: function(point) {
-		return this.contains(point.x,point.y);
-	}
-	,containsRect: function(rect) {
-		if(rect.width <= 0 || rect.height <= 0) {
-			if(rect.x > this.x && rect.y > this.y && rect.get_right() < this.get_right()) {
-				return rect.get_bottom() < this.get_bottom();
-			} else {
-				return false;
-			}
-		} else if(rect.x >= this.x && rect.y >= this.y && rect.get_right() <= this.get_right()) {
-			return rect.get_bottom() <= this.get_bottom();
-		} else {
-			return false;
-		}
-	}
-	,copyFrom: function(sourceRect) {
-		this.x = sourceRect.x;
-		this.y = sourceRect.y;
-		this.width = sourceRect.width;
-		this.height = sourceRect.height;
-	}
-	,equals: function(toCompare) {
-		if(toCompare != null && this.x == toCompare.x && this.y == toCompare.y && this.width == toCompare.width) {
-			return this.height == toCompare.height;
-		} else {
-			return false;
-		}
-	}
-	,inflate: function(dx,dy) {
-		this.x -= dx;
-		this.width += dx * 2;
-		this.y -= dy;
-		this.height += dy * 2;
-	}
-	,inflatePoint: function(point) {
-		this.inflate(point.x,point.y);
-	}
-	,intersection: function(toIntersect) {
-		var x0 = this.x < toIntersect.x?toIntersect.x:this.x;
-		var x1 = this.get_right() > toIntersect.get_right()?toIntersect.get_right():this.get_right();
-		if(x1 <= x0) {
-			return new openfl_geom_Rectangle();
-		}
-		var y0 = this.y < toIntersect.y?toIntersect.y:this.y;
-		var y1 = this.get_bottom() > toIntersect.get_bottom()?toIntersect.get_bottom():this.get_bottom();
-		if(y1 <= y0) {
-			return new openfl_geom_Rectangle();
-		}
-		return new openfl_geom_Rectangle(x0,y0,x1 - x0,y1 - y0);
-	}
-	,intersects: function(toIntersect) {
-		if((this.get_right() > toIntersect.get_right()?toIntersect.get_right():this.get_right()) <= (this.x < toIntersect.x?toIntersect.x:this.x)) {
-			return false;
-		}
-		return (this.get_bottom() > toIntersect.get_bottom()?toIntersect.get_bottom():this.get_bottom()) > (this.y < toIntersect.y?toIntersect.y:this.y);
-	}
-	,isEmpty: function() {
-		if(!(this.width <= 0)) {
-			return this.height <= 0;
-		} else {
-			return true;
-		}
-	}
-	,offset: function(dx,dy) {
-		this.x += dx;
-		this.y += dy;
-	}
-	,offsetPoint: function(point) {
-		this.x += point.x;
-		this.y += point.y;
-	}
-	,setEmpty: function() {
-		this.x = this.y = this.width = this.height = 0;
-	}
-	,setTo: function(xa,ya,widtha,heighta) {
-		this.x = xa;
-		this.y = ya;
-		this.width = widtha;
-		this.height = heighta;
-	}
-	,toString: function() {
-		return "(x=" + this.x + ", y=" + this.y + ", width=" + this.width + ", height=" + this.height + ")";
-	}
-	,union: function(toUnion) {
-		if(this.width == 0 || this.height == 0) {
-			return toUnion.clone();
-		} else if(toUnion.width == 0 || toUnion.height == 0) {
-			return this.clone();
-		}
-		var x0 = this.x > toUnion.x?toUnion.x:this.x;
-		var y0 = this.y > toUnion.y?toUnion.y:this.y;
-		return new openfl_geom_Rectangle(x0,y0,(this.get_right() < toUnion.get_right()?toUnion.get_right():this.get_right()) - x0,(this.get_bottom() < toUnion.get_bottom()?toUnion.get_bottom():this.get_bottom()) - y0);
-	}
-	,__contract: function(x,y,width,height) {
-		if(this.width == 0 && this.height == 0) {
-			return;
-		}
-		if(this.x < x) {
-			this.x = x;
-		}
-		if(this.y < y) {
-			this.y = y;
-		}
-		if(this.get_right() > x + width) {
-			this.width = x + width - this.x;
-		}
-		if(this.get_bottom() > y + height) {
-			this.height = y + height - this.y;
-		}
-	}
-	,__expand: function(x,y,width,height) {
-		if(this.width == 0 && this.height == 0) {
-			this.x = x;
-			this.y = y;
-			this.width = width;
-			this.height = height;
-			return;
-		}
-		var cacheRight = this.get_right();
-		var cacheBottom = this.get_bottom();
-		if(this.x > x) {
-			this.x = x;
-			this.width = cacheRight - x;
-		}
-		if(this.y > y) {
-			this.y = y;
-			this.height = cacheBottom - y;
-		}
-		if(cacheRight < x + width) {
-			this.width = x + width - this.x;
-		}
-		if(cacheBottom < y + height) {
-			this.height = y + height - this.y;
-		}
-	}
-	,__toLimeRectangle: function() {
-		return new lime_math_Rectangle(this.x,this.y,this.width,this.height);
-	}
-	,__transform: function(rect,m) {
-		var tx0 = m.a * this.x + m.c * this.y;
-		var tx1 = tx0;
-		var ty0 = m.b * this.x + m.d * this.y;
-		var ty1 = ty0;
-		var tx = m.a * (this.x + this.width) + m.c * this.y;
-		var ty = m.b * (this.x + this.width) + m.d * this.y;
-		if(tx < tx0) {
-			tx0 = tx;
-		}
-		if(ty < ty0) {
-			ty0 = ty;
-		}
-		if(tx > tx1) {
-			tx1 = tx;
-		}
-		if(ty > ty1) {
-			ty1 = ty;
-		}
-		tx = m.a * (this.x + this.width) + m.c * (this.y + this.height);
-		ty = m.b * (this.x + this.width) + m.d * (this.y + this.height);
-		if(tx < tx0) {
-			tx0 = tx;
-		}
-		if(ty < ty0) {
-			ty0 = ty;
-		}
-		if(tx > tx1) {
-			tx1 = tx;
-		}
-		if(ty > ty1) {
-			ty1 = ty;
-		}
-		tx = m.a * this.x + m.c * (this.y + this.height);
-		ty = m.b * this.x + m.d * (this.y + this.height);
-		if(tx < tx0) {
-			tx0 = tx;
-		}
-		if(ty < ty0) {
-			ty0 = ty;
-		}
-		if(tx > tx1) {
-			tx1 = tx;
-		}
-		if(ty > ty1) {
-			ty1 = ty;
-		}
-		rect.setTo(tx0 + m.tx,ty0 + m.ty,tx1 - tx0,ty1 - ty0);
-	}
-	,get_bottom: function() {
-		return this.y + this.height;
-	}
-	,set_bottom: function(b) {
-		this.height = b - this.y;
-		return b;
-	}
-	,get_bottomRight: function() {
-		return new openfl_geom_Point(this.x + this.width,this.y + this.height);
-	}
-	,set_bottomRight: function(p) {
-		this.width = p.x - this.x;
-		this.height = p.y - this.y;
-		return p.clone();
-	}
-	,get_left: function() {
-		return this.x;
-	}
-	,set_left: function(l) {
-		this.width -= l - this.x;
-		this.x = l;
-		return l;
-	}
-	,get_right: function() {
-		return this.x + this.width;
-	}
-	,set_right: function(r) {
-		this.width = r - this.x;
-		return r;
-	}
-	,get_size: function() {
-		return new openfl_geom_Point(this.width,this.height);
-	}
-	,set_size: function(p) {
-		this.width = p.x;
-		this.height = p.y;
-		return p.clone();
-	}
-	,get_top: function() {
-		return this.y;
-	}
-	,set_top: function(t) {
-		this.height -= t - this.y;
-		this.y = t;
-		return t;
-	}
-	,get_topLeft: function() {
-		return new openfl_geom_Point(this.x,this.y);
-	}
-	,set_topLeft: function(p) {
-		this.x = p.x;
-		this.y = p.y;
-		return p.clone();
-	}
-	,__class__: openfl_geom_Rectangle
-	,__properties__: {set_topLeft:"set_topLeft",get_topLeft:"get_topLeft",set_top:"set_top",get_top:"get_top",set_size:"set_size",get_size:"get_size",set_right:"set_right",get_right:"get_right",set_left:"set_left",get_left:"get_left",set_bottomRight:"set_bottomRight",get_bottomRight:"get_bottomRight",set_bottom:"set_bottom",get_bottom:"get_bottom"}
-};
 var flixel_util_FlxBitmapDataPool = function() { };
 $hxClasses["flixel.util.FlxBitmapDataPool"] = flixel_util_FlxBitmapDataPool;
 flixel_util_FlxBitmapDataPool.__name__ = ["flixel","util","FlxBitmapDataPool"];
@@ -39195,7 +41238,9 @@ haxe__$Unserializer_NullResolver.prototype = {
 	}
 	,__class__: haxe__$Unserializer_NullResolver
 };
-var haxe_Utf8 = function() { };
+var haxe_Utf8 = function(size) {
+	this.__b = "";
+};
 $hxClasses["haxe.Utf8"] = haxe_Utf8;
 haxe_Utf8.__name__ = ["haxe","Utf8"];
 haxe_Utf8.compare = function(a,b) {
@@ -39206,6 +41251,9 @@ haxe_Utf8.compare = function(a,b) {
 	} else {
 		return -1;
 	}
+};
+haxe_Utf8.prototype = {
+	__class__: haxe_Utf8
 };
 var haxe_crypto_Base64 = function() { };
 $hxClasses["haxe.crypto.Base64"] = haxe_crypto_Base64;
@@ -76192,6 +78240,7 @@ AssetPaths.gfx__png = "assets/images/gfx.png";
 AssetPaths.tile_environment__png = "assets/images/tile-environment.png";
 AssetPaths.music__ogg = "assets/music/music.ogg";
 AssetPaths.game__xml = "assets/scene/game.xml";
+AssetPaths.main_menu__xml = "assets/scene/main-menu.xml";
 AssetPaths.clear_blocks__ogg = "assets/sounds/clear-blocks.ogg";
 AssetPaths.clear_blocks__wav = "assets/sounds/clear-blocks.wav";
 AssetPaths.not_allowed__ogg = "assets/sounds/not-allowed.ogg";
@@ -76363,6 +78412,15 @@ flixel_graphics_atlas_FlxAtlas.point = new openfl_geom_Point();
 flixel_graphics_atlas_FlxAtlas.matrix = new openfl_geom_Matrix();
 flixel_graphics_atlas_FlxAtlas.defaultMinSize = new flixel_math_FlxPoint(128,128);
 flixel_graphics_atlas_FlxAtlas.defaultMaxSize = new flixel_math_FlxPoint(1024,1024);
+openfl_geom_Rectangle.__temp = new openfl_geom_Rectangle();
+flixel_graphics_frames_FlxBitmapFont.SPACE_CODE = 32;
+flixel_graphics_frames_FlxBitmapFont.TAB_CODE = 9;
+flixel_graphics_frames_FlxBitmapFont.NEW_LINE_CODE = 10;
+flixel_graphics_frames_FlxBitmapFont.DEFAULT_FONT_KEY = "DEFAULT_FONT_KEY";
+flixel_graphics_frames_FlxBitmapFont.DEFAULT_FONT_DATA = " 36000000000000000000!26101010001000\"46101010100000000000000000#66010100111110010100111110010100000000$56001000111011000001101110000100%66100100000100001000010000010010000000&66011000100000011010100100011010000000'26101000000000(36010100100100010000)36100010010010100000*46000010100100101000000000+46000001001110010000000000,36000000000000010100-46000000001110000000000000.26000000001000/66000010000100001000010000100000000000056011001001010010100100110000000156011000010000100001000010000000256111000001001100100001111000000356111000001001100000101110000000456100101001010010011100001000000556111101000011100000101110000000656011001000011100100100110000000756111000001000010001100001000000856011001001001100100100110000000956011001001010010011100001000000:26001000100000;26001000101000<46001001001000010000100000=46000011100000111000000000>46100001000010010010000000?56111000001001100000000100000000@66011100100010101110101010011100000000A56011001001010010111101001000000B56111001001011100100101110000000C56011001001010000100100110000000D56111001001010010100101110000000E56111101000011000100001111000000F56111101000010000110001000000000G56011001000010110100100111000000H56100101001011110100101001000000I26101010101000J56000100001000010100100110000000K56100101001010010111001001000000L46100010001000100011100000M66100010100010110110101010100010000000N56100101001011010101101001000000O56011001001010010100100110000000P56111001001010010111001000000000Q56011001001010010100100110000010R56111001001010010111001001000000S56011101000001100000101110000000T46111001000100010001000000U56100101001010010100100110000000V56100101001010010101000100000000W66100010100010101010110110100010000000X56100101001001100100101001000000Y56100101001010010011100001001100Z56111100001001100100001111000000[36110100100100110000}46110001000010010011000000]36110010010010110000^46010010100000000000000000_46000000000000000011110000'26101000000000a56000000111010010100100111000000b56100001110010010100101110000000c46000001101000100001100000d56000100111010010100100111000000e56000000110010110110000110000000f46011010001000110010000000g5700000011001001010010011100001001100h56100001110010010100101001000000i26100010101000j37010000010010010010100k56100001001010010111001001000000l26101010101000m66000000111100101010101010101010000000n56000001110010010100101001000000o56000000110010010100100110000000p5700000111001001010010111001000010000q5700000011101001010010011100001000010r46000010101100100010000000s56000000111011000001101110000000t46100011001000100001100000u56000001001010010100100111000000v56000001001010010101000100000000w66000000101010101010101010011110000000x56000001001010010011001001000000y5700000100101001010010011100001001100z56000001111000100010001111000000{46011001001000010001100000|26101010101000}46110001000010010011000000~56010101010000000000000000000000\\46111010101010101011100000";
+flixel_graphics_frames_FlxBitmapFont.DEFAULT_CHARS = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+flixel_graphics_frames_FlxBitmapFont.point = new openfl_geom_Point();
+flixel_graphics_frames_FlxBitmapFont.flashRect = new openfl_geom_Rectangle();
 flixel_graphics_tile_FlxDrawTrianglesItem.point = (function($this) {
 	var $r;
 	var point = flixel_math_FlxPoint._pool.get().set(0,0);
@@ -77194,7 +79252,6 @@ flixel_tweens_FlxTween.BACKWARD = 16;
 flixel_ui_FlxButton.NORMAL = 0;
 flixel_ui_FlxButton.HIGHLIGHT = 1;
 flixel_ui_FlxButton.PRESSED = 2;
-openfl_geom_Rectangle.__temp = new openfl_geom_Rectangle();
 flixel_util_FlxBitmapDataPool.maxLength = 8;
 flixel_util_FlxBitmapDataPool.$length = 0;
 flixel_util_FlxBitmapDataPool._head = null;
