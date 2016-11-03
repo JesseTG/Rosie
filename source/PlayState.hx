@@ -204,6 +204,8 @@ class PlayState extends FlxState
     }
   }
 
+  // TODO: Unregister everything in the console, somehow
+
   private inline function _initCallbacks() {
     _blockGrid.OnStopMoving.add(function() {
       _arrow.angle = cast(_blockGrid.gravity);
