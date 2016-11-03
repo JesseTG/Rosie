@@ -28,6 +28,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   public var gridSize(default, null) : Int;
   public var gravity(default, null) : GravityDirection;
   public var canClick(default, null) : Bool;
+  public var numColors(default, set) : Int;
 
   /**
    * Called when an allowed group of blocks is clicked.  Parameter is the array
@@ -97,8 +98,11 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this._blocksMoving = 0;
     this._blocksCreated = 0;
     this.immovable = true;
+    this.numColors = 4;
+
 
     this.OnStopMoving.add(this._blocksDoneMoving);
+    this.OnNoMoreMoves.add(this.OnBeforeBlocksGenerated.dispatch);
     this.OnNoMoreMoves.add(this._noMoreMoves);
 
     this._generateBlocks();
@@ -111,6 +115,16 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     }
 
     super.update(elapsed);
+  }
+
+  public function set_numColors(numColors:Int) {
+    this.numColors = switch (numColors) {
+      case n if (n > BlockColor.All.length): BlockColor.All.length;
+      case n if (n <= 0): 1;
+      case n: n;
+    };
+
+    return this.numColors;
   }
 
   /**
@@ -329,7 +343,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
         created++;
         var b = this.recycle(Block, function() {
-          var blockColor = BlockColor.All[Std.random(BlockColor.All.length - 2)];
+          var blockColor = BlockColor.All[Std.random(this.numColors)];
           var bb = new Block(gridX * 16, gridY * 16, this._frames, blockColor);
           bb.ID = this._blocksCreated++;
 
@@ -337,7 +351,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
           return bb;
         });
 
-        b.blockColor = BlockColor.All[Std.random(BlockColor.All.length - 2)];
+        b.blockColor = BlockColor.All[Std.random(this.numColors)];
         b.setPosition(gridX * 16, gridY * 16);
 
         FlxMouseEventManager.add(b, function(block:Block) {
