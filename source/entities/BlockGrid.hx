@@ -56,6 +56,11 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   public var OnNoMoreMoves(default, null) : FlxTypedSignal<Void->Void>;
 
   /**
+   * Called just before the blocks are generated.
+   */
+  public var OnBeforeBlocksGenerated(default, null) : FlxTypedSignal<Void->Void>;
+
+  /**
    * Called when blocks are generated, except for the first time (i.e. when the
    * game starts).
    */
@@ -71,6 +76,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.OnStartMoving = new FlxTypedSignal<Void->Void>();
     this.OnStopMoving = new FlxTypedSignal<Void->Void>();
     this.OnNoMoreMoves = new FlxTypedSignal<Void->Void>();
+    this.OnBeforeBlocksGenerated = new FlxTypedSignal<Void->Void>();
     this.OnBlocksGenerated = new FlxTypedSignal<Int->Void>();
 
     this._frames = sprites;
