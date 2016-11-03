@@ -9,5 +9,5 @@ abstract BlockColor(String) {
   var Orange = "tile-orange.png";
   var Purple = "tile-purple.png";
 
-  public static var All = [Red, Blue, Green, Yellow, Orange, Purple];
+  public static var All(default, null) = [Red, Blue, Green, Yellow, Orange, Purple];
 }
