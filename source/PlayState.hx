@@ -62,6 +62,8 @@ class PlayState extends FlxState
   public var OnScore(default, null) : FlxTypedSignal<Int->Void>;
 
   public var round(default, null) : Int;
+
+  // TODO: Clarify the semantics
   public var gameRunning(default, null) : Bool;
 
 
@@ -196,6 +198,7 @@ class PlayState extends FlxState
     if (this._blockGrid.canClick && this.gameRunning) {
       _time -= elapsed;
       _timeDisplay.text = Printf.format("%.1f", [Math.max(0, _time)]);
+      // TODO: Come up with a better placement for the text
     }
 
 
@@ -216,6 +219,7 @@ class PlayState extends FlxState
       _scoreDisplay.text = Std.string(this._score);
     });
     // TODO: Tween the score counter with FlxNumTween
+    // TODO: Use that nice-looking bitmap font
 
     _blockGrid.OnSuccessfulClick.add(function(blocks:Array<Block>) {
       FlxG.sound.play(AssetPaths.clear_blocks__wav);
