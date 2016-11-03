@@ -18,6 +18,7 @@ class Block extends FlxSprite {
   public function set_blockColor(blockColor:BlockColor) {
     this.blockColor = blockColor;
     this.frame = this.frames.getByName(cast(blockColor));
+    // TODO: Figure out if this is a runtime cast or a compile-time cast
 
     return blockColor;
   }
@@ -25,5 +26,6 @@ class Block extends FlxSprite {
   public override function toString() : String {
     var letter = Std.string(blockColor).charAt(5).toUpperCase(); // HACK
     return '${letter}-${this.ID}';
+    // TODO: Come up with a better string representation that doesn't rely on filename
   }
 }
