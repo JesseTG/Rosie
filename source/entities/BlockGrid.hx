@@ -22,6 +22,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   private var _blockGrid : Array2<Block>;
   private var _blocksMoving : Int;
   private var _blocksCreated : Int;
+  private var _frames: FlxFramesCollection;
 
   public var gridSize(default, null) : Int;
   public var gravity(default, null) : GravityDirection;
@@ -88,7 +89,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.OnBlocksGenerated.add(function(_) trace("OnBlocksGenerated"));
 #end
 
-    this.frames = sprites;
+    this._frames = sprites;
+    // TODO: Why doesn't this.frames (note the lack of _) work?  Is it overridden?
 
     this.canClick = true;
     // TODO: Come up with a better name and clarify semantics
