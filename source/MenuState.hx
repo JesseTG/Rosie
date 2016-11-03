@@ -62,7 +62,7 @@ class MenuState extends FlxState
     _sprites = FlxAtlasFrames.fromTexturePackerJson(AssetPaths.gfx__png, AssetPaths.gfx__json);
     _scene = new FlxScene(AssetPaths.main_menu__xml);
     _font = FlxBitmapFont.fromMonospace(
-      AssetPaths.block_font__png,
+      _sprites.getByName("block-font.png"),
       FlxBitmapFont.DEFAULT_CHARS,
       new FlxPoint(17, 28),
       null,
