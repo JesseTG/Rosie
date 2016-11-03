@@ -18,7 +18,7 @@
 },
 "hand.png":
 {
-	"frame": {"x":1072,"y":44,"w":15,"h":11},
+	"frame": {"x":1088,"y":43,"w":15,"h":11},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":11},
@@ -26,7 +26,7 @@
 },
 "icon-clear-no.png":
 {
-	"frame": {"x":1056,"y":46,"w":16,"h":16},
+	"frame": {"x":1072,"y":30,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
@@ -34,11 +34,27 @@
 },
 "icon-clear-yes.png":
 {
+	"frame": {"x":1056,"y":46,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"no.png":
+{
 	"frame": {"x":1056,"y":30,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
 	"sourceSize": {"w":16,"h":16}
+},
+"ok.png":
+{
+	"frame": {"x":1088,"y":30,"w":16,"h":13},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":13},
+	"sourceSize": {"w":16,"h":13}
 },
 "tile-blue.png":
 {
@@ -170,7 +186,7 @@
 },
 "witch/witch_death_11.png":
 {
-	"frame": {"x":1072,"y":30,"w":16,"h":14},
+	"frame": {"x":1072,"y":46,"w":16,"h":14},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":18,"y":7,"w":16,"h":14},
@@ -423,6 +439,6 @@
 	"format": "RGBA5551",
 	"size": {"w":1688,"h":62},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:ee3b54834eed49cb49ec5cbb12bc0bd5:9e56fb743e842c5bc2d856b9e49f8486:3d1ab9fc13e1be0b14dbd849cdb94733$"
+	"smartupdate": "$TexturePacker:SmartUpdate:54988bd0e81e5549c58c03b948321dca:3b027829134707fb82d24e7b94fb60e1:3d1ab9fc13e1be0b14dbd849cdb94733$"
 }
 }

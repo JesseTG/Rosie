@@ -13,3 +13,4 @@ Rest in peace, Rosie.  You are not forgotten.
 - [Pixel Block Font](http://opengameart.org/content/pixel-block-font) by [Joshua Robinson](http://j-robotson.tumblr.com/)
 - [Match 3](http://opengameart.org/content/match-3) by [Michele Bucelli](http://opengameart.org/users/buch) and [usr_share](http://opengameart.org/users/usrshare)
 - [Roguelike/RPG Icons](http://opengameart.org/content/roguelikerpg-icons) by [Joe Williamson](http://joecreates.co.uk/)
+- [140 Military Icons Set (fixed)](http://opengameart.org/content/140-military-icons-set-fixed) by [AngryMeteor.com](http://angrymeteor.com/2012/01/31/the-meteor-vault-vol-1/)

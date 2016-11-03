@@ -81,7 +81,6 @@ class PlayState extends FlxState
     _scene = new FlxScene(AssetPaths.game__xml);
     _score = 0;
 
-    this._hints = new FlxSpriteGroup();
 
     _hud = new FlxGroup();
     _scene.spawn(_hud, "hud");
@@ -151,22 +150,7 @@ class PlayState extends FlxState
 
     _blockGrid = new BlockGrid(gridObject.x, gridObject.y, size, _sprites);
 
-    _hints.setPosition(24, 96);
-    var hint_yes = new FlxSprite(16, 0);
-    hint_yes.frame = _sprites.getByName("icon-clear-yes.png");
-    _hints.add(hint_yes);
-
-    var hand1 = new FlxSprite(0, 0);
-    hand1.frame = _sprites.getByName("hand.png");
-    _hints.add(hand1);
-
-    var hint_no = new FlxSprite(16, 24);
-    hint_no.frame = _sprites.getByName("icon-clear-no.png");
-    _hints.add(hint_no);
-
-    var hand2 = new FlxSprite(0, 24);
-    hand2.frame = _sprites.getByName("hand.png");
-    _hints.add(hand2);
+    this._initHints();
 
     this._initCallbacks();
 
@@ -271,6 +255,35 @@ class PlayState extends FlxState
 
       FlxG.switchState(new MenuState());
     });
+  }
+
+  private inline function _initHints() {
+    this._hints = new FlxSpriteGroup();
+
+    _hints.setPosition(8, 96);
+    var hint_yes = new FlxSprite(16, 0);
+    hint_yes.frame = _sprites.getByName("icon-clear-yes.png");
+    _hints.add(hint_yes);
+
+    var hand1 = new FlxSprite(0, 0);
+    hand1.frame = _sprites.getByName("hand.png");
+    _hints.add(hand1);
+
+    var yes = new FlxSprite(36, 0);
+    yes.frame = _sprites.getByName("ok.png");
+    _hints.add(yes);
+
+    var hint_no = new FlxSprite(16, 24);
+    hint_no.frame = _sprites.getByName("icon-clear-no.png");
+    _hints.add(hint_no);
+
+    var hand2 = new FlxSprite(0, 24);
+    hand2.frame = _sprites.getByName("hand.png");
+    _hints.add(hand2);
+
+    var no = new FlxSprite(36, 24);
+    no.frame = _sprites.getByName("no.png");
+    _hints.add(no);
   }
 
   private function _addBonusTime(blocksCreated:Int) {
