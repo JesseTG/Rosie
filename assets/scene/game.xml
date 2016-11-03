@@ -4,6 +4,7 @@
   <!-- Get these values using FlxScene.const("id") -->
   <constants>
     <const id="gridSize" type="Int" value="10" />
+    <const id="starting-time" type="Float" value="60.0" />
   </constants>
 
   <!--backgrounds id="background">
@@ -15,9 +16,19 @@
   </layer>
   <!-- FlxText, FlxButton -->
   <layer id="hud">
-    <text id="score" text="0" x="160" y="8" color="white" size="20" alignment="CENTER" borderColor="black" borderStyle="shadow" />
-    <text id="time" text="32" x="274" y="8" color="white" size="10" alignment="RIGHT" borderColor="black" borderStyle="shadow" />
+    <text id="score" text="0" x="160" y="8" color="white" size="24" alignment="center" borderColor="black" borderStyle="shadow" />
+    <text id="time" text="32" x="274" y="8" color="white" size="10" alignment="right" borderColor="black" borderStyle="shadow" />
 
+    <text id="group-note"
+      text="Clear 4 or more to score!"
+      color="white"
+      x="160"
+      y="224"
+      size="8"
+      alignment="center"
+      borderColor="black"
+      borderStyle="shadow"
+    />
     <!-- Alignment properties (parameter: margin)
     alignBottom, alignRight, alignHorizontal, alignVertical -->
   </layer>
