@@ -161,10 +161,14 @@ class PlayState extends FlxState
     FlxG.console.registerObject("sprites", _sprites);
     FlxG.console.registerObject("log", FlxG.log);
     FlxG.console.registerObject("tilemap", _background);
+    FlxG.console.registerFunction("sceneObject", _scene.object);
     FlxG.watch.add(_blockGrid, "_blocksMoving", "Blocks Moving");
     FlxG.watch.addExpression("blockGrid.countLiving()", "# Blocks Alive");
     FlxG.watch.addExpression("blockGrid.countDead()", "# Blocks Dead");
     FlxG.watch.addExpression("blockGrid.length", "# Blocks");
+    FlxG.watch.add(_blockGrid, "numColors", "# Colors");
+    FlxG.watch.add(this, "round", "Round");
+    FlxG.watch.add(this, "_score", "Score");
 
     this.add(bgImage);
     this.add(_background);
