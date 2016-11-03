@@ -4,22 +4,20 @@ import flixel.FlxSprite;
 import flixel.graphics.frames.FlxFramesCollection;
 
 class Block extends FlxSprite {
-  private var sprites:FlxFramesCollection;
   public var blockColor(default, set) : BlockColor;
 
   public function new(x:Float = 0, y:Float = 0, sprites:FlxFramesCollection, blockColor:BlockColor) {
     super(x, y);
-    this.sprites = sprites;
+    this.frames = sprites;
     this.frame = sprites.getByName(cast(blockColor));
     this.blockColor = blockColor;
     this.updateHitbox();
     this.resetSizeFromFrame();
-    // TODO: Use this.frames instead of this.sprites
   }
 
   public function set_blockColor(blockColor:BlockColor) {
     this.blockColor = blockColor;
-    this.frame = sprites.getByName(cast(blockColor));
+    this.frame = this.frames.getByName(cast(blockColor));
 
     return blockColor;
   }
