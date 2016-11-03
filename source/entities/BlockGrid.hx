@@ -79,6 +79,16 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.OnBeforeBlocksGenerated = new FlxTypedSignal<Void->Void>();
     this.OnBlocksGenerated = new FlxTypedSignal<Int->Void>();
 
+#if debug
+    this.OnSuccessfulClick.add(function(_) trace("OnSuccessfulClick"));
+    this.OnBadClick.add(function(_) trace("OnBadClick"));
+    this.OnStartMoving.add(function() trace("OnStartMoving"));
+    this.OnStopMoving.add(function() trace("OnStopMoving"));
+    this.OnNoMoreMoves.add(function() trace("OnNoMoreMoves"));
+    this.OnBeforeBlocksGenerated.add(function() trace("OnBeforeBlocksGenerated"));
+    this.OnBlocksGenerated.add(function(_) trace("OnBlocksGenerated"));
+#end
+
     this._frames = sprites;
     this.canClick = true;
     this._blockGrid = new Array2<Block>(size, size);
@@ -288,8 +298,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   }
 
   private function _blocksDoneMoving() {
-      trace("All blocks have stopped moving");
-
       if (!this._anyGroupsRemaining()) {
         this.OnNoMoreMoves.dispatch();
       }
