@@ -61,6 +61,9 @@ class MenuState extends FlxState
 
     _sprites = FlxAtlasFrames.fromTexturePackerJson(AssetPaths.gfx__png, AssetPaths.gfx__json);
     _scene = new FlxScene(AssetPaths.main_menu__xml);
+    // TODO: Abandon FlxScene, it's crap
+
+    // TODO: Stop creating new FlxPoint's, I think there's a factory
     _font = FlxBitmapFont.fromMonospace(
       _sprites.getByName("block-font.png"),
       FlxBitmapFont.DEFAULT_CHARS,

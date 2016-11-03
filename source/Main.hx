@@ -9,6 +9,11 @@ class Main extends Sprite
   {
     super();
     addChild(new FlxGame(320, 240, MenuState, 2.0));
-    // TODO: Trigger a state change with the PlayState's OnGameOver signal
+    // TODO: Make a base State class that holds the background and make
+    // everything else a SubState
+
+    // TODO: Run the garbage collector between state transitions
+
+    // TODO: Make a proper package hierarchy
   }
 }

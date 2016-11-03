@@ -19,11 +19,9 @@ import util.ReverseIterator;
 using Lambda;
 
 class BlockGrid extends FlxTypedSpriteGroup<Block> {
-  //
   private var _blockGrid : Array2<Block>;
   private var _blocksMoving : Int;
   private var _blocksCreated : Int;
-  private var _frames:FlxFramesCollection;
 
   public var gridSize(default, null) : Int;
   public var gravity(default, null) : GravityDirection;
@@ -90,8 +88,11 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.OnBlocksGenerated.add(function(_) trace("OnBlocksGenerated"));
 #end
 
-    this._frames = sprites;
+    this.frames = sprites;
+
     this.canClick = true;
+    // TODO: Come up with a better name and clarify semantics
+
     this._blockGrid = new Array2<Block>(size, size);
     this.gravity = GravityDirection.Down;
     this.gridSize = size;
@@ -99,13 +100,15 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this._blocksCreated = 0;
     this.immovable = true;
     this.numColors = 4;
-
+    // TODO: Look at how Array2 does cleanup
+    // TODO: See what Flx properties I can set to take advantage of BlockGrid's nature
 
     this.OnStopMoving.add(this._blocksDoneMoving);
     this.OnNoMoreMoves.add(this.OnBeforeBlocksGenerated.dispatch);
     this.OnNoMoreMoves.add(this._noMoreMoves);
 
     this._generateBlocks();
+    // TODO: This doesn't feel right; mull it over
   }
 
   public override function update(elapsed:Float) {
@@ -131,6 +134,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
    * Given a block, which cell is it in
    */
   private function _getGridIndex(block:Block) : FlxPoint {
+    // TODO: Convert to an Array2Cell
+
     var x = Math.round(block.x / block.frameWidth) * block.frameWidth;
     var y = Math.round(block.y / block.frameHeight) * block.frameHeight;
 
@@ -151,14 +156,17 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     // TODO: Stop hardcoding block size
   }
 
-  private function _rotateGravity() {
+  private inline function _rotateGravity() {
+    // TODO: Do I even need this function?
     this.gravity = GravityDirection.counterClockwise(this.gravity);
   }
 
   private function _anyGroupsRemaining() : Bool {
     var blocks = new Array<Block>();
     forEachAlive(function(b:Block) { return blocks.push(b); });
+    // TODO: Can I pre-allocate memory?
 
+    // TODO: Document this loop
     while (blocks.length > 0) {
       var group = _getBlockGroup(blocks.pop());
       if (group.length >= 3) return true;
@@ -181,6 +189,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     var queue = new ArrayedQueue<Block>();
     queue.enqueue(clicked);
 
+    // TODO: Better document this loop
     while (!queue.isEmpty()) {
       var current = queue.dequeue();
 
@@ -244,6 +253,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
       this._blocksMoving++;
     };
 
+    // TODO: Ask on #haxe if this part can be made better
     switch (this.gravity) {
       case GravityDirection.Down: {
         for (c in 0...this.gridSize) {
@@ -308,6 +318,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     }
 
     this._blockGrid = newGrid;
+    // TODO: Think about doing this in-place so I don't need to allocate memory
     this.OnStartMoving.dispatch();
   }
 
@@ -325,6 +336,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.forEachExists(function(block:Block) {
       blockCount++;
     });
+    // TODO: Keep a block count instead of doing linear iteration like this
 
     this.OnBlocksGenerated.dispatch(this._generateBlocks());
   }
@@ -334,9 +346,9 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
    * Returns the number of blocks that were created
    */
   private function _generateBlocks() : Int {
-    // TODO: Assign a sequential ID for each block created
     var created = 0;
 
+    // TODO: Simplify this function
     _blockGrid.forEach(function(block:Block, gridX:Int, gridY:Int) {
       if (block == null) {
         // If there's no block at this grid cell..
@@ -352,6 +364,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
         });
 
         b.blockColor = BlockColor.All[Std.random(this.numColors)];
+        // TODO: Don't do Std.random twice, just do it out here
+
         b.setPosition(gridX * 16, gridY * 16);
 
         FlxMouseEventManager.add(b, function(block:Block) {
@@ -365,6 +379,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
                 FlxMouseEventManager.remove(toKill);
                 _blockGrid.remove(toKill);
                 toKill.kill();
+                // TODO: Avoid a linear lookup whenever removing a block
               });
 
               this.canClick = false;
@@ -380,6 +395,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
         }, false, true, false);
 
         this.add(b);
+        // TODO: Ensure I'm not adding the same block twice
+
         return b;
       }
       else {
@@ -394,6 +411,9 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     super.destroy();
 
     FlxMouseEventManager.remove(this);
+    // TODO: Revisit the semantics of this function and see if I can move parts
+    // of it to another file
+
     this._blockGrid = null;
   }
 }
