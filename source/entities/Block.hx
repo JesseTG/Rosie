@@ -14,6 +14,7 @@ class Block extends FlxSprite {
     this.blockColor = blockColor;
     this.updateHitbox();
     this.resetSizeFromFrame();
+    // TODO: Use this.frames instead of this.sprites
   }
 
   public function set_blockColor(blockColor:BlockColor) {
