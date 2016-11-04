@@ -92,9 +92,9 @@ class PlayState extends FlxState
     _font = FlxBitmapFont.fromMonospace(
       _sprites.getByName("block-font.png"),
       FlxBitmapFont.DEFAULT_CHARS,
-      new FlxPoint(17, 28),
+      new FlxPoint(16, 28),
       null,
-      new FlxPoint(1, 0)
+      new FlxPoint(0, 0)
     );
 
     _hud = new FlxGroup();

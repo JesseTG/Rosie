@@ -68,9 +68,9 @@ class MenuState extends FlxState
     _font = FlxBitmapFont.fromMonospace(
       _sprites.getByName("block-font.png"),
       FlxBitmapFont.DEFAULT_CHARS,
-      new FlxPoint(17, 28),
+      new FlxPoint(16, 32),
       null,
-      new FlxPoint(1, 0)
+      new FlxPoint(2, 0)
     );
 
     _titleLetters = new FlxTypedSpriteGroup<FlxBitmapText>(5);

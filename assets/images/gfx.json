@@ -13,7 +13,7 @@
 	"frame": {"x":0,"y":0,"w":1688,"h":30},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":20,"y":0,"w":1688,"h":30},
+	"spriteSourceSize": {"x":19,"y":0,"w":1688,"h":30},
 	"sourceSize": {"w":1708,"h":32}
 },
 "hand.png":
@@ -439,6 +439,6 @@
 	"format": "RGBA5551",
 	"size": {"w":1688,"h":62},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:54988bd0e81e5549c58c03b948321dca:3b027829134707fb82d24e7b94fb60e1:3d1ab9fc13e1be0b14dbd849cdb94733$"
+	"smartupdate": "$TexturePacker:SmartUpdate:eee8b9368a63a4d40087f3d789e478e9:24653c8e3e72aed109b6f144487e111c:3d1ab9fc13e1be0b14dbd849cdb94733$"
 }
 }
