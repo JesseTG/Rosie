@@ -16,7 +16,6 @@
   </layer>
   <!-- FlxText, FlxButton -->
   <layer id="hud">
-    <text id="score" text="0" x="160" y="8" color="white" size="24" alignment="center" borderColor="black" borderStyle="shadow" />
     <text id="time" text="32" x="274" y="8" color="white" size="10" alignment="right" borderColor="black" borderStyle="shadow" />
 
     <text id="group-note"

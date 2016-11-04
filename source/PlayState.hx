@@ -54,7 +54,7 @@ class PlayState extends FlxState
   private var _score : Int;
   private var _time : Float;
   private var _timeDisplay : FlxText;
-  private var _scoreDisplay : FlxText;
+  private var _scoreDisplay : FlxBitmapText;
   private var _timeChangeDisplay : FlxText;
   private var _hints : FlxSpriteGroup;
   private var _arrow : FlxSprite;
@@ -143,9 +143,11 @@ class PlayState extends FlxState
 
     FlxG.plugins.add(_mouseControl);
 
-
-    _scoreDisplay = _scene.object("score");
+    _scoreDisplay = new FlxBitmapText(_font);
+    _scoreDisplay.text = "0";
     _scoreDisplay.screenCenter(FlxAxes.X);
+    _scoreDisplay.y = 8;
+    _scoreDisplay.letterSpacing = 2;
 
     _blockGrid = new BlockGrid(gridObject.x, gridObject.y, size, _sprites);
 
@@ -180,6 +182,7 @@ class PlayState extends FlxState
     this.add(_hints);
     this.add(_arrow);
     this.add(_mouseControl);
+    this.add(_scoreDisplay);
     this.add(_timeChangeDisplay);
 
     this.gameRunning = true;
