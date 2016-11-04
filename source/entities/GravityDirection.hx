@@ -1,6 +1,7 @@
 package entities;
 
 @:enum
+@:notNull
 abstract GravityDirection(Float) {
   var Down = 0;
   var Right = 270;

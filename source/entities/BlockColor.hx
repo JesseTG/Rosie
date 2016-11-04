@@ -1,6 +1,7 @@
 package entities;
 
 @:enum
+@:notNull
 abstract BlockColor(String) {
   var Red = "tile-red.png";
   var Blue = "tile-blue.png";
