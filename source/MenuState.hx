@@ -104,7 +104,7 @@ class MenuState extends FlxState
     this.add(_start);
 
 
-    this._titleLetters.setPosition(160 - (18.0 * 5.0) / 2.0, 32);
+    this._titleLetters.setPosition(160 - (18.0 * "Rosie".length) / 2.0, 32);
     for (i in 0..."Rosie".length) {
       var text = new FlxBitmapText(_font);
       text.text = "Rosie".charAt(i);
