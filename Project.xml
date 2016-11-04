@@ -33,6 +33,7 @@
 
 	<haxedef name="analyzer"/>
 	<haxedef name="generic"/>
+	<haxeflag name="--times"/>
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="hxcpp" version="git" />
