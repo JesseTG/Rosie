@@ -31,6 +31,8 @@
 	<classpath name="source" />
 	<assets path="assets" />
 
+	<haxedef name="analyzer"/>
+	<haxedef name="generic"/>
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="hxcpp" version="git" />
@@ -38,7 +40,6 @@
 
 	<haxelib name="flixel-addons" />
 
-	<haxedef name="generic"/>
 
 	<haxelib name="polygonal-ds" version="git" />
 	<haxelib name="polygonal-core" />
