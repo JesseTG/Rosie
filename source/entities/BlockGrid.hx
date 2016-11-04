@@ -122,7 +122,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     super.update(elapsed);
   }
 
-  public function set_numColors(numColors:Int) {
+  private function set_numColors(numColors:Int) {
     this.numColors = switch (numColors) {
       case n if (n > BlockColor.All.length): BlockColor.All.length;
       case n if (n <= 0): 1;
