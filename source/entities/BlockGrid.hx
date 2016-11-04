@@ -234,25 +234,27 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     // Then merge them together later when I notice a pattern
 
     var tweenIt = function(block:Block, targetPoint:FlxPoint) {
-      FlxTween.linearMotion(
-        block,
-        block.x,
-        block.y,
-        targetPoint.x,
-        targetPoint.y,
-        0.5,
-        true,
-        {
-          ease: FlxEase.quadIn,
-          type: FlxTween.ONESHOT,
-          onComplete: function(_) {
-            this._blocksMoving--;
-            D.assert(this._blocksMoving >= 0);
-            D.assert(this._blocksMoving <= this.group.length);
+      if (!block.getPosition().equals(targetPoint)) {
+        FlxTween.linearMotion(
+          block,
+          block.x,
+          block.y,
+          targetPoint.x,
+          targetPoint.y,
+          0.5,
+          true,
+          {
+            ease: FlxEase.quadIn,
+            type: FlxTween.ONESHOT,
+            onComplete: function(_) {
+              this._blocksMoving--;
+              D.assert(this._blocksMoving >= 0);
+              D.assert(this._blocksMoving <= this.group.length);
+            }
           }
-        }
-      );
-      this._blocksMoving++;
+        );
+        this._blocksMoving++;
+      }
     };
 
     // TODO: Ask on #haxe if this part can be made better
