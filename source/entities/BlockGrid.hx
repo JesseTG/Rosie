@@ -26,7 +26,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
   public var gridSize(default, null) : Int;
   public var gravity(default, null) : GravityDirection;
-  public var canClick(default, null) : Bool;
+  public var readyForInput(default, null) : Bool;
   public var numColors(default, set) : Int;
 
   /**
@@ -92,7 +92,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this._frames = sprites;
     // TODO: Why doesn't this.frames (note the lack of _) work?  Is it overridden?
 
-    this.canClick = true;
+    this.readyForInput = true;
     // TODO: Come up with a better name and clarify semantics
 
     this._blockGrid = new Array2<Block>(size, size);
@@ -114,7 +114,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   }
 
   public override function update(elapsed:Float) {
-    if (!this.canClick && _blocksMoving == 0) {
+    if (!this.readyForInput && _blocksMoving == 0) {
       // If all blocks have stopped moving...
       this.OnStopMoving.dispatch();
     }
@@ -331,7 +331,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
         this.OnNoMoreMoves.dispatch();
       }
 
-      this.canClick = true;
+      this.readyForInput = true;
   }
 
   private function _noMoreMoves() {
@@ -373,9 +373,10 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
         b.setPosition(gridX * 16, gridY * 16);
 
         FlxMouseEventManager.add(b, function(block:Block) {
-          if (this.canClick) {
+          if (this.readyForInput) {
             // If no blocks are moving...
             var blocks = this._getBlockGroup(block);
+            this.readyForInput = false;
 
             if (blocks.length >= 3) {
               // If the selected block group has at least 3 blocks...
@@ -386,7 +387,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
                 // TODO: Avoid a linear lookup whenever removing a block
               });
 
-              this.canClick = false;
               this.OnSuccessfulClick.dispatch(blocks);
               this._startMovingBlocks();
               this._rotateGravity();

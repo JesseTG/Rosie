@@ -195,7 +195,7 @@ class PlayState extends FlxState
   {
     super.update(elapsed);
 
-    if (this._blockGrid.canClick && this.gameRunning) {
+    if (this._blockGrid.readyForInput && this.gameRunning) {
       _time -= elapsed;
       _timeDisplay.text = Printf.format("%.1f", [Math.max(0, _time)]);
       // TODO: Come up with a better placement for the text
