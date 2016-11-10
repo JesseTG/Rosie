@@ -11,6 +11,7 @@ import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.input.mouse.FlxMouseEventManager;
 import flixel.util.FlxSignal.FlxTypedSignal;
 import de.polygonal.ds.Array2;
+import de.polygonal.ds.Array2.Array2Cell;
 import de.polygonal.ds.ArrayedQueue;
 import de.polygonal.core.util.Assert;
 
@@ -136,7 +137,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   /**
    * Given a block, which cell is it in
    */
-  private function _getGridIndex(block:Block) : FlxPoint {
+  private function _getGridIndex(block:Block) : Array2Cell {
     // TODO: Convert to an Array2Cell
 
     var x = Math.round(block.x / block.frameWidth) * block.frameWidth;
@@ -148,7 +149,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     x = Math.round(x / block.frameWidth);
     y = Math.round(y / block.frameHeight);
 
-    return new FlxPoint(x, y);
+    return new Array2Cell(x, y);
   }
 
   /**
@@ -200,8 +201,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
         blocks.push(current);
 
         var indices = _getGridIndex(current);
-        var x = Std.int(indices.x);
-        var y = Std.int(indices.y);
+        var x = indices.x;
+        var y = indices.y;
 
         var west = _blockGrid.inRange(x - 1, y) ? _blockGrid.get(x - 1, y) : null;
         var east = _blockGrid.inRange(x + 1, y) ? _blockGrid.get(x + 1, y) : null;
