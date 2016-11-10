@@ -337,23 +337,6 @@ class PlayState extends FlxState
   private function _subtractTime(blocks:Array<Block>) {
     _time -= 1.0;
 
-    for (block in blocks) {
-      FlxTween.linearPath(
-        block,
-        [
-          block.getPosition(),
-          new FlxPoint(block.x + block.width / 4, block.y),
-          block.getPosition(),
-          new FlxPoint(block.x - block.width / 4, block.y),
-          block.getPosition()
-        ],
-        0.25,
-        true,
-        {
-          type: FlxTween.ONESHOT
-        }
-      );
-    }
     _timeChangeDisplay.color = FlxColor.RED;
     _timeChangeDisplay.text = Printf.format("-%.1f", [1.0]);
     FlxTween.linearMotion(

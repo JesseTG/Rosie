@@ -108,6 +108,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.OnStopMoving.add(this._blocksDoneMoving);
     this.OnNoMoreMoves.add(this.OnBeforeBlocksGenerated.dispatch);
     this.OnNoMoreMoves.add(this._noMoreMoves);
+    this.OnBadClick.add(this._shakeBlocks);
 
     this._generateBlocks();
     // TODO: This doesn't feel right; mull it over
@@ -392,7 +393,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
               this._rotateGravity();
             }
             else {
-
               this.OnBadClick.dispatch(blocks);
             }
           }
@@ -419,5 +419,33 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     // of it to another file
 
     this._blockGrid = null;
+  }
+
+  private function _shakeBlocks(blocks:Array<Block>) {
+    for (block in blocks) {
+      FlxTween.linearPath(
+        block,
+        [
+          block.getPosition(),
+          new FlxPoint(block.x + block.width / 4, block.y),
+          block.getPosition(),
+          new FlxPoint(block.x - block.width / 4, block.y),
+          block.getPosition()
+        ],
+        0.25,
+        true,
+        {
+          type: FlxTween.ONESHOT,
+          onComplete: function(_) {
+            this._blocksMoving--;
+            this.readyForInput = true;
+          },
+          onStart: function(_) {
+            this._blocksMoving++;
+            this.readyForInput = false;
+          }
+        }
+      );
+    }
   }
 }
