@@ -270,6 +270,10 @@ class PlayState extends FlxState
     });
   }
 
+  public override function onFocusLost() {
+    FlxG.camera.fill(FlxColor.BLACK, false);
+  }
+
   private function _displayGameOver() {
     var gameOver = new FlxBitmapText(_font);
     gameOver.text = "Game Over";
