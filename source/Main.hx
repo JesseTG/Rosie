@@ -4,6 +4,12 @@ import flixel.FlxGame;
 import flixel.FlxG;
 import openfl.display.Sprite;
 
+#if cpp
+import cpp.vm.Gc;
+#elseif neko
+import neko.vm.Gc;
+#end
+
 class Main extends Sprite
 {
   public function new()
@@ -14,6 +20,10 @@ class Main extends Sprite
     FlxG.signals.focusGained.add(function() trace("focusGained"));
     FlxG.signals.focusLost.add(function() trace("focusLost"));
     FlxG.signals.stateSwitched.add(function() trace("stateSwitched"));
+#end
+
+#if cpp || neko
+    FlxG.signals.stateSwitched.add(function() Gc.run(true));
 #end
 
     FlxG.fixedTimestep = false;
