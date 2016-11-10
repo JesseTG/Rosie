@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxGame;
+import flixel.FlxG;
 import openfl.display.Sprite;
 
 class Main extends Sprite
@@ -8,6 +9,8 @@ class Main extends Sprite
   public function new()
   {
     super();
+
+    FlxG.fixedTimestep = false;
     addChild(new FlxGame(320, 240, MenuState, 2.0));
     // TODO: Make a base State class that holds the background and make
     // everything else a SubState
