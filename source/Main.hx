@@ -33,12 +33,10 @@ class Main extends Sprite
     FlxG.signals.gameStarted.add(function() {
       FlxG.camera.pixelPerfectRender = true;
     });
+
     addChild(new FlxGame(320, 240, MenuState, 2.0));
-    // TODO: Make a base State class that holds the background and make
-    // everything else a SubState
 
-    // TODO: Run the garbage collector between state transitions
-
+    // TODO: Make exceptions bring the player to an error screen gracefully
     // TODO: Make a proper package hierarchy
   }
 }
