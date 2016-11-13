@@ -8,7 +8,6 @@ import flixel.addons.editors.tiled.TiledObjectLayer;
 import flixel.addons.editors.tiled.TiledPropertySet;
 import flixel.addons.editors.tiled.TiledTileLayer;
 import flixel.addons.editors.tiled.TiledTileSet;
-import flixel.addons.util.FlxScene;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;

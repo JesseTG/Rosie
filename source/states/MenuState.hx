@@ -1,6 +1,5 @@
 package states;
 
-import flixel.addons.util.FlxScene;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
