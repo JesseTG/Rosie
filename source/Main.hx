@@ -38,5 +38,6 @@ class Main extends Sprite
 
     // TODO: Make exceptions bring the player to an error screen gracefully
     // TODO: Make a proper package hierarchy
+    // TODO: Re-add the mouse control plugin, turns out that was the cursor
   }
 }
