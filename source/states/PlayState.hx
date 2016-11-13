@@ -44,7 +44,6 @@ class PlayState extends CommonState
 
   private var _blockGrid : BlockGrid;
 
-  private var _hud : FlxGroup;
   private var _score : Int;
   private var _time : Float;
   private var _timeDisplay : FlxText;
@@ -74,9 +73,11 @@ class PlayState extends CommonState
     this.OnGameOver = new FlxTypedSignal<Void->Void>();
     this.OnScore = new FlxTypedSignal<Int->Void>();
 
-    _hud = new FlxGroup();
-    scene.spawn(_hud, "hud");
-    _timeDisplay = scene.object("time");
+    _timeDisplay = new FlxText(274, 8, 32, "32", 10);
+    _timeDisplay.color = FlxColor.WHITE;
+    _timeDisplay.alignment = FlxTextAlign.RIGHT;
+    _timeDisplay.borderColor = FlxColor.BLACK;
+    _timeDisplay.borderStyle = FlxTextBorderStyle.SHADOW;
 
     _arrow = new FlxSprite(16, 16);
     _arrow.frame = this.sprites.getByName("arrow.png");
@@ -96,7 +97,7 @@ class PlayState extends CommonState
     var size = Std.parseInt(gridObject.properties.get("Size"));
 
     _score = 0;
-    _time = scene.const("starting-time");
+    _time = 60;
 
     _scoreDisplay = new FlxBitmapText(this.font);
     _scoreDisplay.text = "0";
@@ -119,7 +120,6 @@ class PlayState extends CommonState
     FlxG.console.registerObject("tileSet", tileSet);
     FlxG.console.registerObject("sprites", sprites);
     FlxG.console.registerObject("log", FlxG.log);
-    FlxG.console.registerFunction("sceneObject", scene.object);
     FlxG.watch.add(_blockGrid, "_blocksMoving", "Blocks Moving");
     FlxG.watch.addExpression("blockGrid.countLiving()", "# Blocks Alive");
     FlxG.watch.addExpression("blockGrid.countDead()", "# Blocks Dead");
@@ -129,7 +129,7 @@ class PlayState extends CommonState
     FlxG.watch.add(this, "_score", "Score");
 
     this.add(_blockGrid);
-    this.add(_hud);
+    this.add(_timeDisplay);
     this.add(_hints);
     this.add(_arrow);
     this.add(_scoreDisplay);
@@ -275,7 +275,7 @@ class PlayState extends CommonState
   private function _addBonusTime(blocksCreated:Int) {
     var bonus = blocksCreated * 0.05;
 
-    _time = Math.min(_time + bonus, scene.const("starting-time"));
+    _time = Math.min(_time + bonus, 60);
     _timeChangeDisplay.color = FlxColor.GREEN;
     _timeChangeDisplay.text = Printf.format("+%.1f", [bonus]);
     FlxTween.linearMotion(

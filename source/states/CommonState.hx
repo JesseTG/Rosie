@@ -24,7 +24,6 @@ class CommonState extends FlxState {
   private var tilemap : FlxTilemap;
   private var bgImage : FlxBackdrop;
   private var sprites : FlxAtlasFrames;
-  private var scene : FlxScene;
   private var font : FlxBitmapFont;
   private var groundLayer : TiledTileLayer;
   private var bgLayer : TiledImageLayer;
@@ -45,8 +44,6 @@ class CommonState extends FlxState {
 
     // TODO: Handle a missing tileset (or invalid data, e.g. unsupported format)
     this.map = new TiledMap(AssetPaths.world__tmx);
-    this.scene = new FlxScene(AssetPaths.game__xml);
-
 
     // TODO: Store the tiled map on the texture atlas and load from there, instead of a separate image
     // TODO: Handle the layers/tilesets not being named in the way I want them to be
