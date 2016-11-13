@@ -116,11 +116,9 @@ class PlayState extends CommonState
 
     FlxG.console.registerObject("blockGrid", _blockGrid);
     FlxG.console.registerObject("arrow", _arrow);
-    FlxG.console.registerObject("tiles", tiles);
     FlxG.console.registerObject("tileSet", tileSet);
     FlxG.console.registerObject("sprites", sprites);
     FlxG.console.registerObject("log", FlxG.log);
-    FlxG.console.registerObject("tilemap", tilemap);
     FlxG.console.registerFunction("sceneObject", scene.object);
     FlxG.watch.add(_blockGrid, "_blocksMoving", "Blocks Moving");
     FlxG.watch.addExpression("blockGrid.countLiving()", "# Blocks Alive");
