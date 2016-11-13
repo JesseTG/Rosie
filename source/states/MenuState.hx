@@ -1,4 +1,4 @@
-package;
+package states;
 
 import flixel.addons.display.FlxBackdrop;
 import flixel.addons.editors.tiled.TiledImageLayer;
