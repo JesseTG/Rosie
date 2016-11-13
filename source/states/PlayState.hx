@@ -8,7 +8,6 @@ import flixel.addons.editors.tiled.TiledObjectLayer;
 import flixel.addons.editors.tiled.TiledPropertySet;
 import flixel.addons.editors.tiled.TiledTileLayer;
 import flixel.addons.editors.tiled.TiledTileSet;
-import flixel.addons.plugin.FlxMouseControl;
 import flixel.addons.util.FlxScene;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -40,15 +39,10 @@ import entities.BlockGrid;
 
 using Lambda;
 
-class PlayState extends FlxState
+class PlayState extends CommonState
 {
-  private var _map : TiledMap;
-  private var _background : FlxTilemap;
-  private var _sprites : FlxAtlasFrames;
+
   private var _blockGrid : BlockGrid;
-  private var _scene : FlxScene;
-  private var _mouseControl : FlxMouseControl;
-  private var _font : FlxBitmapFont;
 
   private var _hud : FlxGroup;
   private var _score : Int;
@@ -80,29 +74,12 @@ class PlayState extends FlxState
     this.OnGameOver = new FlxTypedSignal<Void->Void>();
     this.OnScore = new FlxTypedSignal<Int->Void>();
 
-    // TODO: Handle a missing tileset (or invalid data, e.g. unsupported format)
-    _map = new TiledMap(AssetPaths.world__tmx);
-    _background = new FlxTilemap();
-    var bgImage = new FlxBackdrop(AssetPaths.bg__png, 0, 0, false, false);
-
-    _sprites = FlxAtlasFrames.fromTexturePackerJson(AssetPaths.gfx__png, AssetPaths.gfx__json);
-    _scene = new FlxScene(AssetPaths.game__xml);
-    _score = 0;
-
-    _font = FlxBitmapFont.fromMonospace(
-      _sprites.getByName("block-font.png"),
-      FlxBitmapFont.DEFAULT_CHARS,
-      new FlxPoint(16, 28),
-      null,
-      new FlxPoint(0, 0)
-    );
-
     _hud = new FlxGroup();
-    _scene.spawn(_hud, "hud");
-    _timeDisplay = _scene.object("time");
+    scene.spawn(_hud, "hud");
+    _timeDisplay = scene.object("time");
 
     _arrow = new FlxSprite(16, 16);
-    _arrow.frame =  _sprites.getByName("arrow.png");
+    _arrow.frame = this.sprites.getByName("arrow.png");
     _arrow.resetSizeFromFrame();
 
     _timeChangeDisplay = new FlxText(_timeDisplay.x, _timeDisplay.y);
@@ -111,45 +88,23 @@ class PlayState extends FlxState
     _timeChangeDisplay.borderColor = FlxColor.BLACK;
     _timeChangeDisplay.borderStyle = FlxTextBorderStyle.OUTLINE_FAST;
 
-    // TODO: Store the tiled map on the texture atlas and load from there, instead of a separate image
-    // TODO: Handle the layers/tilesets not being named in the way I want them to be
-    var tiles : TiledTileLayer = cast(_map.getLayer("Ground"), TiledTileLayer);
-    var bg : TiledImageLayer = cast(_map.getLayer("Background"), TiledImageLayer);
-    var objects : TiledObjectLayer = cast(_map.getLayer("Objects"), TiledObjectLayer);
-
-    var tileSet : TiledTileSet = _map.getTileSet("Overworld");
-
-    _background.loadMapFromArray(
-      tiles.tileArray,
-      tiles.width,
-      tiles.height,
-      AssetPaths.tile_environment__png,
-      tileSet.tileWidth,
-      tileSet.tileHeight,
-      1 // Tiled uses 0-indexing, but I think FlxTilemap uses 1-indexing
-    );
-
-    bgImage.loadGraphic(AssetPaths.bg__png);
-
-    var gridObject : TiledObject = objects.objects.find(function(object:TiledObject) {
+    var gridObject : TiledObject = this.objectLayer.objects.find(function(object:TiledObject) {
       return object.name == "Grid";
     });
     // TODO: Handle the case where this is null
 
     var size = Std.parseInt(gridObject.properties.get("Size"));
-    this._mouseControl = new FlxMouseControl();
 
-    _time = _scene.const("starting-time");
+    _score = 0;
+    _time = scene.const("starting-time");
 
-    FlxG.plugins.add(_mouseControl);
-
-    _scoreDisplay = new FlxBitmapText(_font);
+    _scoreDisplay = new FlxBitmapText(this.font);
     _scoreDisplay.text = "0";
     _scoreDisplay.screenCenter(FlxAxes.X);
     _scoreDisplay.y = 8;
     _scoreDisplay.letterSpacing = 2;
 
-    _blockGrid = new BlockGrid(gridObject.x, gridObject.y, size, _sprites);
+    _blockGrid = new BlockGrid(gridObject.x, gridObject.y, size, sprites);
 
     this._initHints();
 
@@ -163,10 +118,10 @@ class PlayState extends FlxState
     FlxG.console.registerObject("arrow", _arrow);
     FlxG.console.registerObject("tiles", tiles);
     FlxG.console.registerObject("tileSet", tileSet);
-    FlxG.console.registerObject("sprites", _sprites);
+    FlxG.console.registerObject("sprites", sprites);
     FlxG.console.registerObject("log", FlxG.log);
-    FlxG.console.registerObject("tilemap", _background);
-    FlxG.console.registerFunction("sceneObject", _scene.object);
+    FlxG.console.registerObject("tilemap", tilemap);
+    FlxG.console.registerFunction("sceneObject", scene.object);
     FlxG.watch.add(_blockGrid, "_blocksMoving", "Blocks Moving");
     FlxG.watch.addExpression("blockGrid.countLiving()", "# Blocks Alive");
     FlxG.watch.addExpression("blockGrid.countDead()", "# Blocks Dead");
@@ -175,13 +130,10 @@ class PlayState extends FlxState
     FlxG.watch.add(this, "round", "Round");
     FlxG.watch.add(this, "_score", "Score");
 
-    this.add(bgImage);
-    this.add(_background);
     this.add(_blockGrid);
     this.add(_hud);
     this.add(_hints);
     this.add(_arrow);
-    this.add(_mouseControl);
     this.add(_scoreDisplay);
     this.add(_timeChangeDisplay);
 
@@ -222,7 +174,6 @@ class PlayState extends FlxState
       _scoreDisplay.screenCenter(FlxAxes.X);
     });
     // TODO: Tween the score counter with FlxNumTween
-    // TODO: Use that nice-looking bitmap font
 
     _blockGrid.OnSuccessfulClick.add(function(blocks:Array<Block>) {
       FlxG.sound.play(AssetPaths.clear_blocks__wav);
@@ -275,7 +226,7 @@ class PlayState extends FlxState
   }
 
   private function _displayGameOver() {
-    var gameOver = new FlxBitmapText(_font);
+    var gameOver = new FlxBitmapText(font);
     gameOver.text = "Game Over";
     gameOver.screenCenter();
 
@@ -287,34 +238,34 @@ class PlayState extends FlxState
 
     _hints.setPosition(8, 96);
     var hint_yes = new FlxSprite(16, 0);
-    hint_yes.frame = _sprites.getByName("icon-clear-yes.png");
+    hint_yes.frame = sprites.getByName("icon-clear-yes.png");
     _hints.add(hint_yes);
 
     var hand1 = new FlxSprite(0, 0);
-    hand1.frame = _sprites.getByName("hand.png");
+    hand1.frame = sprites.getByName("hand.png");
     _hints.add(hand1);
 
     var yes = new FlxSprite(36, 0);
-    yes.frame = _sprites.getByName("ok.png");
+    yes.frame = sprites.getByName("ok.png");
     _hints.add(yes);
 
     var hint_no = new FlxSprite(16, 24);
-    hint_no.frame = _sprites.getByName("icon-clear-no.png");
+    hint_no.frame = sprites.getByName("icon-clear-no.png");
     _hints.add(hint_no);
 
     var hand2 = new FlxSprite(0, 24);
-    hand2.frame = _sprites.getByName("hand.png");
+    hand2.frame = sprites.getByName("hand.png");
     _hints.add(hand2);
 
     var no = new FlxSprite(36, 24);
-    no.frame = _sprites.getByName("no.png");
+    no.frame = sprites.getByName("no.png");
     _hints.add(no);
   }
 
   private function _addBonusTime(blocksCreated:Int) {
     var bonus = blocksCreated * 0.05;
 
-    _time = Math.min(_time + bonus, _scene.const("starting-time"));
+    _time = Math.min(_time + bonus, scene.const("starting-time"));
     _timeChangeDisplay.color = FlxColor.GREEN;
     _timeChangeDisplay.text = Printf.format("+%.1f", [bonus]);
     FlxTween.linearMotion(
