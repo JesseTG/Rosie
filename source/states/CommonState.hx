@@ -26,7 +26,7 @@ class CommonState extends FlxState {
   private var sprites : FlxAtlasFrames;
   private var scene : FlxScene;
   private var font : FlxBitmapFont;
-  private var tiles : TiledTileLayer;
+  private var groundLayer : TiledTileLayer;
   private var bgLayer : TiledImageLayer;
   private var objectLayer : TiledObjectLayer;
   private var tileSet : TiledTileSet;
@@ -45,35 +45,35 @@ class CommonState extends FlxState {
 
     // TODO: Handle a missing tileset (or invalid data, e.g. unsupported format)
     this.map = new TiledMap(AssetPaths.world__tmx);
-    this.tilemap = new FlxTilemap();
-    this.bgImage = new FlxBackdrop(AssetPaths.bg__png, 0, 0, false, false);
     this.scene = new FlxScene(AssetPaths.game__xml);
 
 
     // TODO: Store the tiled map on the texture atlas and load from there, instead of a separate image
     // TODO: Handle the layers/tilesets not being named in the way I want them to be
-    this.tiles = cast(map.getLayer("Ground"), TiledTileLayer);
+    this.groundLayer = cast(map.getLayer("Ground"), TiledTileLayer);
     this.bgLayer = cast(map.getLayer("Background"), TiledImageLayer);
     this.objectLayer = cast(map.getLayer("Objects"), TiledObjectLayer);
     this.tileSet = map.getTileSet("Overworld");
-
-    tilemap.loadMapFromArray(
-      tiles.tileArray,
-      tiles.width,
-      tiles.height,
-      AssetPaths.tile_environment__png,
+    this.tilemap = cast new FlxTilemap().loadMapFromArray(
+      groundLayer.tileArray,
+      groundLayer.width,
+      groundLayer.height,
+      'assets/${tileSet.imageSource}',
       tileSet.tileWidth,
       tileSet.tileHeight,
       1 // Tiled uses 0-indexing, but I think FlxTilemap uses 1-indexing
     );
 
-    this.bgImage.loadGraphic(AssetPaths.bg__png);
+    this.bgImage = new FlxBackdrop('assets/${bgLayer.imagePath}', 0, 0, false, false);
+    this.bgImage.useScaleHack = false;
+    this.tilemap.useScaleHack = false;
+    // Game looks like ass with this scale hack on
+
     this.add(bgImage);
     this.add(tilemap);
   }
 
   override public function destroy() {
     super.destroy();
-
   }
 }
