@@ -159,6 +159,18 @@ class PlayState extends CommonState
     }
   }
 
+  override public function destroy() {
+    super.destroy();
+
+    FlxG.watch.remove(_blockGrid, "_blocksMoving");
+    FlxG.watch.removeExpression("blockGrid.countLiving()");
+    FlxG.watch.removeExpression("blockGrid.countDead()");
+    FlxG.watch.removeExpression("blockGrid.length");
+    FlxG.watch.remove(_blockGrid, "numColors");
+    FlxG.watch.remove(this, "round");
+    FlxG.watch.remove(this, "_score");
+  }
+
   // TODO: Unregister everything in the console, somehow
 
   private inline function _initCallbacks() {
