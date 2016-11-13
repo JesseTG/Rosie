@@ -3,6 +3,7 @@ package;
 import flixel.FlxGame;
 import flixel.FlxG;
 import openfl.display.Sprite;
+import flixel.system.scaleModes.PixelPerfectScaleMode;
 
 #if cpp
 import cpp.vm.Gc;
@@ -27,6 +28,9 @@ class Main extends Sprite
 #end
 
     FlxG.fixedTimestep = false;
+    FlxG.signals.gameStarted.add(function() {
+      FlxG.camera.pixelPerfectRender = true;
+    });
     addChild(new FlxGame(320, 240, MenuState, 2.0));
     // TODO: Make a base State class that holds the background and make
     // everything else a SubState
