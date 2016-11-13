@@ -41,7 +41,6 @@ class MenuState extends CommonState
     _start.screenCenter(FlxAxes.X);
     _titleLetters = new FlxTypedSpriteGroup<FlxBitmapText>(5);
 
-    this.add(_start);
 
     this._titleLetters.setPosition(160 - (18.0 * "Rosie".length) / 2.0, 32);
     for (i in 0..."Rosie".length) {
@@ -71,6 +70,7 @@ class MenuState extends CommonState
     }
     this._titleLetters.screenCenter(FlxAxes.X);
 
+    this.add(_start);
     this.add(this._titleLetters);
   }
 }
