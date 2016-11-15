@@ -45,9 +45,9 @@ class PlayState extends CommonState
 
   private var _score : Int;
   private var _time : Float;
-  private var _timeDisplay : FlxText;
+  private var _timeDisplay : FlxBitmapText;
   private var _scoreDisplay : FlxBitmapText;
-  private var _timeChangeDisplay : FlxText;
+  private var _timeChangeDisplay : FlxBitmapText;
   private var _hints : FlxSpriteGroup;
   private var _arrow : FlxSprite;
   // TODO: Organize this crap
@@ -72,21 +72,19 @@ class PlayState extends CommonState
     this.OnGameOver = new FlxTypedSignal<Void->Void>();
     this.OnScore = new FlxTypedSignal<Int->Void>();
 
-    _timeDisplay = new FlxText(274, 8, 32, "32", 10);
-    _timeDisplay.color = FlxColor.WHITE;
+    _timeDisplay = new FlxBitmapText(this.textFont);
+    _timeDisplay.setPosition(260, 8);
     _timeDisplay.alignment = FlxTextAlign.RIGHT;
-    _timeDisplay.borderColor = FlxColor.BLACK;
-    _timeDisplay.borderStyle = FlxTextBorderStyle.SHADOW;
+    _timeDisplay.letterSpacing = -3;
 
     _arrow = new FlxSprite(16, 16);
     _arrow.frame = this.sprites.getByName("arrow.png");
     _arrow.resetSizeFromFrame();
 
-    _timeChangeDisplay = new FlxText(_timeDisplay.x, _timeDisplay.y);
+    _timeChangeDisplay = new FlxBitmapText(this.textFont);
+    _timeChangeDisplay.setPosition(_timeDisplay.x, _timeDisplay.y);
     _timeChangeDisplay.alignment = FlxTextAlign.RIGHT;
-    _timeChangeDisplay.size = 10;
-    _timeChangeDisplay.borderColor = FlxColor.BLACK;
-    _timeChangeDisplay.borderStyle = FlxTextBorderStyle.OUTLINE_FAST;
+    _timeChangeDisplay.letterSpacing = -3;
 
     var gridObject : TiledObject = this.objectLayer.objects.find(function(object:TiledObject) {
       return object.name == "Grid";
