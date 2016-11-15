@@ -37,6 +37,7 @@ import entities.BlockColor;
 import entities.BlockGrid;
 
 using Lambda;
+using ObjectInit;
 
 class PlayState extends CommonState
 {
@@ -72,45 +73,46 @@ class PlayState extends CommonState
     this.OnGameOver = new FlxTypedSignal<Void->Void>();
     this.OnScore = new FlxTypedSignal<Int->Void>();
 
-    _timeDisplay = new FlxBitmapText(this.textFont);
-    _timeDisplay.setPosition(260, 8);
-    _timeDisplay.alignment = FlxTextAlign.RIGHT;
-    _timeDisplay.letterSpacing = -3;
-
-    _arrow = new FlxSprite(16, 16);
-    _arrow.frame = this.sprites.getByName("arrow.png");
-    _arrow.resetSizeFromFrame();
-
-    _timeChangeDisplay = new FlxBitmapText(this.textFont);
-    _timeChangeDisplay.setPosition(_timeDisplay.x, _timeDisplay.y);
-    _timeChangeDisplay.alignment = FlxTextAlign.RIGHT;
-    _timeChangeDisplay.letterSpacing = -3;
-
     var gridObject : TiledObject = this.objectLayer.objects.find(function(object:TiledObject) {
       return object.name == "Grid";
     });
     // TODO: Handle the case where this is null
-
     var size = Std.parseInt(gridObject.properties.get("Size"));
+
+    _blockGrid = new BlockGrid(gridObject.x, gridObject.y, size, sprites);
+    _timeDisplay = new FlxBitmapText(this.textFont).init(
+      x = 260,
+      y = 8,
+      alignment = FlxTextAlign.RIGHT,
+      letterSpacing = -3
+    );
+
+    _timeChangeDisplay = new FlxBitmapText(this.textFont).init(
+      x = _timeDisplay.x,
+      y = _timeDisplay.y,
+      alignment = _timeDisplay.alignment,
+      letterSpacing = _timeDisplay.letterSpacing
+    );
+
+    _arrow = new FlxSprite(16, 16).init(
+      frame = this.sprites.getByName("arrow.png"),
+      angle = cast(_blockGrid.gravity)
+    );
+    _arrow.resetSizeFromFrame();
+    _arrow.centerOrigin();
 
     _score = 0;
     _time = 60;
 
-    _scoreDisplay = new FlxBitmapText(this.font);
-    _scoreDisplay.text = "0";
+    _scoreDisplay = new FlxBitmapText(this.font).init(
+      text = "0",
+      y = 8,
+      letterSpacing = 2
+    );
     _scoreDisplay.screenCenter(FlxAxes.X);
-    _scoreDisplay.y = 8;
-    _scoreDisplay.letterSpacing = 2;
-
-    _blockGrid = new BlockGrid(gridObject.x, gridObject.y, size, sprites);
 
     this._initHints();
-
     this._initCallbacks();
-
-
-    _arrow.angle = cast(_blockGrid.gravity);
-    _arrow.centerOrigin();
 
     FlxG.console.registerObject("blockGrid", _blockGrid);
     FlxG.console.registerObject("arrow", _arrow);
@@ -244,28 +246,34 @@ class PlayState extends CommonState
     this._hints = new FlxSpriteGroup();
 
     _hints.setPosition(8, 96);
-    var hint_yes = new FlxSprite(16, 0);
-    hint_yes.frame = sprites.getByName("icon-clear-yes.png");
+    var hint_yes = new FlxSprite(16, 0).init(
+      frame = sprites.getByName("icon-clear-yes.png")
+    );
     _hints.add(hint_yes);
 
-    var hand1 = new FlxSprite(0, 0);
-    hand1.frame = sprites.getByName("hand.png");
+    var hand1 = new FlxSprite(0, 0).init(
+      frame = sprites.getByName("hand.png")
+    );
     _hints.add(hand1);
 
-    var yes = new FlxSprite(36, 0);
-    yes.frame = sprites.getByName("ok.png");
+    var yes = new FlxSprite(36, 0).init(
+      frame = sprites.getByName("ok.png")
+    );
     _hints.add(yes);
 
-    var hint_no = new FlxSprite(16, 24);
-    hint_no.frame = sprites.getByName("icon-clear-no.png");
+    var hint_no = new FlxSprite(16, 24).init(
+      frame = sprites.getByName("icon-clear-no.png")
+    );
     _hints.add(hint_no);
 
-    var hand2 = new FlxSprite(0, 24);
-    hand2.frame = sprites.getByName("hand.png");
+    var hand2 = new FlxSprite(0, 24).init(
+      frame = sprites.getByName("hand.png")
+    );
     _hints.add(hand2);
 
-    var no = new FlxSprite(36, 24);
-    no.frame = sprites.getByName("no.png");
+    var no = new FlxSprite(36, 24).init(
+      frame = sprites.getByName("no.png")
+    );
     _hints.add(no);
   }
 

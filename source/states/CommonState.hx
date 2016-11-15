@@ -15,6 +15,8 @@ import flixel.graphics.frames.FlxBitmapFont;
 import flixel.math.FlxPoint;
 import flixel.tile.FlxTilemap;
 
+using ObjectInit;
+
 class CommonState extends FlxState {
   private static var BLOCK_FONT_SIZE = new FlxPoint(16, 32);
   private static var BLOCK_FONT_SPACING = new FlxPoint(2, 0);
@@ -72,8 +74,9 @@ class CommonState extends FlxState {
       1 // Tiled uses 0-indexing, but I think FlxTilemap uses 1-indexing
     );
 
-    this.bgImage = new FlxBackdrop('assets/${bgLayer.imagePath}', 0, 0, false, false);
-    this.bgImage.useScaleHack = false;
+    this.bgImage = new FlxBackdrop('assets/${bgLayer.imagePath}', 0, 0, false, false).init(
+      useScaleHack = false
+    );
     this.tilemap.useScaleHack = false;
     // Game looks like ass with this scale hack on
 

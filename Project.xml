@@ -41,6 +41,7 @@
 	<haxelib name="hxcpp" version="git" />
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
+	<haxelib name="objectinit" />
 
 
 	<haxelib name="polygonal-ds" version="git" />
