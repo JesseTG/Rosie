@@ -34,7 +34,9 @@ import de.polygonal.Printf;
 
 import entities.Block;
 import entities.BlockColor;
+import entities.GravityIndicator;
 import entities.BlockGrid;
+import entities.GravityDirection;
 
 using Lambda;
 using ObjectInit;
@@ -78,6 +80,16 @@ class PlayState extends CommonState
     });
     // TODO: Handle the case where this is null
     var size = Std.parseInt(gridObject.properties.get("Size"));
+
+    var gravityIndicators : Array<GravityIndicator> = this.objectLayer.objects.filter(function(object:TiledObject) {
+      return object.name == "Gravity Indicator";
+    }).map(function(object:TiledObject) : GravityIndicator {
+      return new GravityIndicator(object.x, object.y, sprites, GravityDirection.Down).init(
+        angle = object.angle,
+        flipX = object.flippedHorizontally,
+        flipY = object.flippedVertically
+      );
+    });
 
     _blockGrid = new BlockGrid(gridObject.x, gridObject.y, size, sprites);
     _timeDisplay = new FlxBitmapText(this.textFont).init(
@@ -128,6 +140,9 @@ class PlayState extends CommonState
     FlxG.watch.add(this, "_score", "Score");
 
     this.add(_blockGrid);
+    for (g in gravityIndicators) {
+      this.add(g);
+    }
     this.add(_timeDisplay);
     this.add(_hints);
     this.add(_arrow);
