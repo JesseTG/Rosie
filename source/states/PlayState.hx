@@ -31,15 +31,21 @@ import flixel.util.FlxTimer;
 import flixel.util.FlxAxes;
 
 import de.polygonal.Printf;
+import de.polygonal.core.util.Assert.D;
 
 import entities.Block;
 import entities.BlockColor;
 import entities.GravityIndicator;
 import entities.BlockGrid;
+import entities.GravityIndicator.GravityIndicatorState;
+import entities.GravityPanel;
+import entities.GravityPanel.GravityPanelState;
 import entities.GravityDirection;
+import haxe.ds.ObjectMap;
 
 using Lambda;
 using ObjectInit;
+using entities.GravityDirection;
 
 class PlayState extends CommonState
 {
@@ -53,6 +59,8 @@ class PlayState extends CommonState
   private var _timeChangeDisplay : FlxBitmapText;
   private var _hints : FlxSpriteGroup;
   private var _arrow : FlxSprite;
+  private var _gravityIndicators : Array<GravityIndicator>;
+  private var _gravityPanels : Array<FlxTypedGroup<GravityPanel>>;
   // TODO: Organize this crap
 
   public var OnGameOver(default, null) : FlxTypedSignal<Void->Void>;
@@ -75,23 +83,45 @@ class PlayState extends CommonState
     this.OnGameOver = new FlxTypedSignal<Void->Void>();
     this.OnScore = new FlxTypedSignal<Int->Void>();
 
+
     var gridObject : TiledObject = this.objectLayer.objects.find(function(object:TiledObject) {
       return object.name == "Grid";
     });
     // TODO: Handle the case where this is null
     var size = Std.parseInt(gridObject.properties.get("Size"));
 
-    var gravityIndicators : Array<GravityIndicator> = this.objectLayer.objects.filter(function(object:TiledObject) {
-      return object.name == "Gravity Indicator";
-    }).map(function(object:TiledObject) : GravityIndicator {
-      return new GravityIndicator(object.x, object.y, sprites, GravityDirection.Down).init(
-        angle = object.angle,
-        flipX = object.flippedHorizontally,
-        flipY = object.flippedVertically
+    this._gravityIndicators = [for (i in 0...4) null];
+    this.objectLayer.objects.iter(function(object:TiledObject) {
+      if (object.name == "Gravity Indicator") {
+        var direction = GravityDirection.createByName(object.type);
+        var index = GravityDirection.getIndex(direction);
+        this._gravityIndicators[index] = new GravityIndicator(object.x, object.y, sprites, direction).init(
+          angle = object.angle,
+          flipX = object.flippedHorizontally,
+          flipY = object.flippedVertically
+        );
+      }
+    });
+    D.assert(!this._gravityIndicators.has(null));
+
+    this._gravityPanels = [for (i in 0...this._gravityIndicators.length) {
+      new FlxTypedGroup<GravityPanel>().init(
+        visible = false
       );
+    }];
+    this.objectLayer.objects.iter(function(object:TiledObject) {
+      if (object.name == "Gravity Panel") {
+        var direction = GravityDirection.createByName(object.type);
+        var index = GravityDirection.getIndex(direction);
+        this._gravityPanels[index].add(new GravityPanel(object.x, object.y, sprites));
+      }
     });
 
     _blockGrid = new BlockGrid(gridObject.x, gridObject.y, size, sprites);
+
+    this._gravityIndicators[_blockGrid.gravity.getIndex()].state = GravityIndicatorState.On;
+    this._gravityIndicators[_blockGrid.gravity.getIndex()].visible = true;
+
     _timeDisplay = new FlxBitmapText(this.textFont).init(
       x = 260,
       y = 8,
@@ -139,8 +169,11 @@ class PlayState extends CommonState
     FlxG.watch.add(this, "round", "Round");
     FlxG.watch.add(this, "_score", "Score");
 
+    for (p in _gravityPanels) {
+      this.add(p);
+    }
     this.add(_blockGrid);
-    for (g in gravityIndicators) {
+    for (g in _gravityIndicators) {
       this.add(g);
     }
     this.add(_timeDisplay);
@@ -220,6 +253,17 @@ class PlayState extends CommonState
         case 3 | 4: 5;
         default: 6;
       };
+    });
+
+    this._blockGrid.OnStopMoving.add(function() {
+      var prevIndex = this._blockGrid.gravity.previous().getIndex();
+      var index = _blockGrid.gravity.getIndex();
+
+      this._gravityIndicators[prevIndex].state = GravityIndicatorState.Off;
+      this._gravityIndicators[index].state = GravityIndicatorState.On;
+
+      this._gravityPanels[prevIndex].visible = false;
+      this._gravityPanels[index].visible = true;
     });
 
     // TODO: Handle the case where the grid is full and no groups exist
