@@ -146,8 +146,8 @@ class PlayState extends CommonState
     this.add(_timeDisplay);
     this.add(_hints);
     this.add(_arrow);
-    this.add(_scoreDisplay);
     this.add(_timeChangeDisplay);
+    this.add(_scoreDisplay);
 
     this.gameRunning = true;
     this.round = 1;
