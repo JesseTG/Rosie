@@ -47,10 +47,10 @@
     <property name="Size" type="int" value="10"/>
    </properties>
   </object>
-  <object id="10" name="Gravity Indicator" type="Left" gid="1073741831" x="80" y="96" width="32" rotation="90"/>
-  <object id="12" name="Gravity Indicator" type="Right" gid="1073741831" x="256" y="96" width="32" rotation="90"/>
-  <object id="14" name="Gravity Indicator" type="Up" gid="7" x="144" y="16" width="32"/>
-  <object id="15" name="Gravity Indicator" type="Down" gid="7" x="144" y="192" width="32"/>
+  <object id="10" name="Gravity Indicator" type="Left" gid="1073741831" x="80" y="96" width="32" height="16" rotation="90"/>
+  <object id="12" name="Gravity Indicator" type="Right" gid="1073741831" x="256" y="96" width="32" height="16" rotation="90"/>
+  <object id="14" name="Gravity Indicator" type="Up" gid="7" x="144" y="16" width="32" height="16"/>
+  <object id="15" name="Gravity Indicator" type="Down" gid="7" x="144" y="192" width="32" height="16"/>
   <object id="20" name="Gravity Panel" type="Left" gid="40" x="80" y="112" width="16" height="16"/>
   <object id="22" name="Gravity Panel" type="Left" gid="40" x="96" y="112" width="16" height="16"/>
   <object id="23" name="Gravity Panel" type="Left" gid="40" x="112" y="112" width="16" height="16"/>
