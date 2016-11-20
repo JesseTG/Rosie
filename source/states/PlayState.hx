@@ -39,7 +39,6 @@ import entities.GravityIndicator;
 import entities.BlockGrid;
 import entities.GravityIndicator.GravityIndicatorState;
 import entities.GravityPanel;
-import entities.GravityPanel.GravityPanelState;
 import entities.GravityDirection;
 import haxe.ds.ObjectMap;
 
