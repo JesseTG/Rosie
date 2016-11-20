@@ -16,3 +16,5 @@ Rest in peace, Rosie.  You are not forgotten.
 - [140 Military Icons Set (fixed)](http://opengameart.org/content/140-military-icons-set-fixed) by [AngryMeteor.com](http://angrymeteor.com/2012/01/31/the-meteor-vault-vol-1/)
 - [Seasonal Platformer Tiles](http://opengameart.org/content/seasonal-platformer-tiles) by [GrafxKid](http://grafxkid.tumblr.com/)
 - [Melancholy Melody](http://opengameart.org/content/melancholy-melody) by [Patrick Maney](http://opengameart.org/users/bbandrage)
+- [More NES-like Tiles](http://opengameart.org/content/more-nes-like-tiles) by [Carl Olsson](http://pixeljoint.com/p/2254.htm)
+- [Simple light graysacle cursors (16x16)](http://opengameart.org/content/simple-light-graysacle-cursors-16x16) by [Iwan Gabovitch](http://qubodup.net/)
