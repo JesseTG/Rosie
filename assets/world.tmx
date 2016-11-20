@@ -47,9 +47,9 @@
     <property name="Size" type="int" value="10"/>
    </properties>
   </object>
-  <object id="10" name="Gravity Indicator" type="Left" gid="7" x="64" y="128" width="16" height="32"/>
-  <object id="12" name="Gravity Indicator" type="Right" gid="7" x="240" y="128" width="16" height="32"/>
-  <object id="14" name="Gravity Indicator" type="Up" gid="7" x="176" y="32" width="16" height="32" rotation="270"/>
-  <object id="15" name="Gravity Indicator" type="Down" gid="7" x="176" y="208" width="16" height="32" rotation="270"/>
+  <object id="10" name="Gravity Indicator" type="Left" gid="1073741831" x="80" y="96" width="32" rotation="90"/>
+  <object id="12" name="Gravity Indicator" type="Right" gid="1073741831" x="256" y="96" width="32" rotation="90"/>
+  <object id="14" name="Gravity Indicator" type="Up" gid="7" x="144" y="16" width="32"/>
+  <object id="15" name="Gravity Indicator" type="Down" gid="7" x="144" y="192" width="32"/>
  </objectgroup>
 </map>
