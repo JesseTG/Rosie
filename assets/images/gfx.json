@@ -1,13 +1,5 @@
 {"frames": {
 
-"arrow.png":
-{
-	"frame": {"x":1688,"y":0,"w":7,"h":9},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":1,"y":0,"w":7,"h":9},
-	"sourceSize": {"w":9,"h":9}
-},
 "block-font.png":
 {
 	"frame": {"x":0,"y":0,"w":1688,"h":30},
@@ -1055,6 +1047,6 @@
 	"format": "RGBA5551",
 	"size": {"w":1697,"h":63},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:906240144edb30914b5d6bd8cfed4261:5c078ca26a507bb128914f67b81c7649:3d1ab9fc13e1be0b14dbd849cdb94733$"
+	"smartupdate": "$TexturePacker:SmartUpdate:b7c84198bab0c0c5e4d31cc71bbde199:1c61f222512a52d3be24df4a25e09cfb:3d1ab9fc13e1be0b14dbd849cdb94733$"
 }
 }

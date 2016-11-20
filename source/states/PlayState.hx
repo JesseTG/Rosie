@@ -58,7 +58,6 @@ class PlayState extends CommonState
   private var _scoreDisplay : FlxBitmapText;
   private var _timeChangeDisplay : FlxBitmapText;
   private var _hints : FlxSpriteGroup;
-  private var _arrow : FlxSprite;
   private var _gravityIndicators : Array<GravityIndicator>;
   private var _gravityPanels : Array<FlxTypedGroup<GravityPanel>>;
   // TODO: Organize this crap
@@ -136,13 +135,6 @@ class PlayState extends CommonState
       letterSpacing = _timeDisplay.letterSpacing
     );
 
-    _arrow = new FlxSprite(16, 16).init(
-      frame = this.sprites.getByName("arrow.png"),
-      angle = cast(_blockGrid.gravity)
-    );
-    _arrow.resetSizeFromFrame();
-    _arrow.centerOrigin();
-
     _score = 0;
     _time = 60;
 
@@ -157,7 +149,6 @@ class PlayState extends CommonState
     this._initCallbacks();
 
     FlxG.console.registerObject("blockGrid", _blockGrid);
-    FlxG.console.registerObject("arrow", _arrow);
     FlxG.console.registerObject("tileSet", tileSet);
     FlxG.console.registerObject("sprites", sprites);
     FlxG.console.registerObject("log", FlxG.log);
@@ -178,7 +169,6 @@ class PlayState extends CommonState
     }
     this.add(_timeDisplay);
     this.add(_hints);
-    this.add(_arrow);
     this.add(_timeChangeDisplay);
     this.add(_scoreDisplay);
 
@@ -221,10 +211,6 @@ class PlayState extends CommonState
   // TODO: Unregister everything in the console, somehow
 
   private inline function _initCallbacks() {
-    _blockGrid.OnStopMoving.add(function() {
-      _arrow.angle = cast(_blockGrid.gravity);
-    });
-
     this.OnScore.add(function(score:Int) {
       this._score += score;
       _scoreDisplay.text = Std.string(this._score);
