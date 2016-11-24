@@ -1,31 +1,35 @@
 package states;
 
+import flixel.addons.editors.tiled.TiledObject;
+import flixel.addons.editors.tiled.TiledObjectLayer;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
-import flixel.tweens.FlxTween;
-import flixel.tweens.FlxEase;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxBitmapFont;
 import flixel.group.FlxGroup;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.input.mouse.FlxMouseEventManager;
-import flixel.text.FlxText;
-import flixel.text.FlxBitmapText;
 import flixel.math.FlxPoint;
+import flixel.text.FlxBitmapText;
+import flixel.text.FlxText;
 import flixel.tile.FlxBaseTilemap.FlxTilemapAutoTiling;
 import flixel.tile.FlxTilemap;
-import flixel.util.FlxSignal.FlxTypedSignal;
-import flixel.util.FlxColor;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 import flixel.ui.FlxButton;
 import flixel.util.FlxAxes;
+import flixel.util.FlxColor;
+import flixel.util.FlxSignal.FlxTypedSignal;
 
 using Lambda;
+using ObjectInit;
 
 class MenuState extends CommonState
 {
+  private var menuGuiLayer : TiledObjectLayer;
   private var _start : FlxButton;
   private var _titleLetters : FlxTypedSpriteGroup<FlxBitmapText>;
 
@@ -34,10 +38,25 @@ class MenuState extends CommonState
   {
     super.create();
 
-    _start = new FlxButton(160, 180, "Start", function() {
-      FlxG.switchState(new PlayState());
+    this.menuGuiLayer = cast(this.map.getLayer("MenuState GUI"));
+
+    this.menuGuiLayer.objects.iter(function(object) {
+      switch (object.name) {
+        case "Play Button":
+          this._start = new FlxButton(function() {
+              FlxG.switchState(new PlayState());
+          }).init(
+            x = object.x,
+            y = object.y - object.height,
+            width = object.width,
+            height = object.height,
+            text = object.properties.text
+          );
+        default:
+          // nop
+      }
     });
-    _start.screenCenter(FlxAxes.X);
+
     _titleLetters = new FlxTypedSpriteGroup<FlxBitmapText>(5);
 
 

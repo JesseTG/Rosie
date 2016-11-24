@@ -82,40 +82,40 @@ class PlayState extends CommonState
     this.OnScore = new FlxTypedSignal<Int->Void>();
 
 
-    var gridObject : TiledObject = this.objectLayer.objects.find(function(object:TiledObject) {
-      return object.name == "Grid";
-    });
-    // TODO: Handle the case where this is null
-    var size = Std.parseInt(gridObject.properties.get("Size"));
-
-    this._gravityIndicators = [for (i in 0...4) null];
-    this.objectLayer.objects.iter(function(object:TiledObject) {
-      if (object.name == "Gravity Indicator") {
-        var direction = GravityDirection.createByName(object.type);
-        var index = GravityDirection.getIndex(direction);
-        this._gravityIndicators[index] = new GravityIndicator(object.x, object.y, sprites, direction).init(
-          angle = object.angle,
-          flipX = object.flippedHorizontally,
-          flipY = object.flippedVertically
-        );
-      }
-    });
-    D.assert(!this._gravityIndicators.has(null));
-
-    this._gravityPanels = [for (i in 0...this._gravityIndicators.length) {
+    this._gravityIndicators = [for (i in 0...GravityDirection.Count) null];
+    this._gravityPanels = [for (i in 0...GravityDirection.Count) {
       new FlxTypedGroup<GravityPanel>().init(
         visible = false
       );
     }];
+
     this.objectLayer.objects.iter(function(object:TiledObject) {
-      if (object.name == "Gravity Panel") {
-        var direction = GravityDirection.createByName(object.type);
-        var index = GravityDirection.getIndex(direction);
-        this._gravityPanels[index].add(new GravityPanel(object.x, object.y, sprites));
+      switch (object.name) {
+        case "Gravity Indicator":
+          var direction = GravityDirection.createByName(object.type);
+          var index = GravityDirection.getIndex(direction);
+          this._gravityIndicators[index] = new GravityIndicator(object.x, object.y, sprites, direction).init(
+            angle = object.angle,
+            flipX = object.flippedHorizontally,
+            flipY = object.flippedVertically
+          );
+        case "Gravity Panel":
+          var direction = GravityDirection.createByName(object.type);
+          var index = GravityDirection.getIndex(direction);
+          var panel = new GravityPanel(object.x, object.y - object.height, sprites);
+          this._gravityPanels[index].add(panel);
+        case "Grid":
+          _blockGrid = new BlockGrid(
+            object.x,
+            object.y - 16,
+            Std.parseInt(object.properties.size),
+            sprites
+          );
+        default:
+          // nop
       }
     });
-
-    _blockGrid = new BlockGrid(gridObject.x, gridObject.y, size, sprites);
+    D.assert(!this._gravityIndicators.has(null));
 
     this._gravityIndicators[_blockGrid.gravity.getIndex()].state = GravityIndicatorState.On;
     this._gravityIndicators[_blockGrid.gravity.getIndex()].visible = true;

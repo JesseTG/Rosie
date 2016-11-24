@@ -7,6 +7,7 @@ abstract GravityDirection(Float) {
   var Right = 270;
   var Up = 180;
   var Left = 90;
+  public static inline var Count = 4;
 
   public static inline function counterClockwise(gravity:GravityDirection) {
     return switch(gravity) {
