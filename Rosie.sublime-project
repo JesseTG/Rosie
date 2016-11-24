@@ -3,7 +3,7 @@
     {
       "path": ".",
       "folder_exclude_patterns": ["export"],
-      "file_exclude_patterns": ["tags", ".tags", ".tags_sorted_by_file"],
+      "file_exclude_patterns": ["tags", ".tags", ".tags_sorted_by_file", ".fuse*"],
       "follow_symlinks": true
     }
   ],
