@@ -13,6 +13,8 @@ import flixel.FlxState;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxBitmapFont;
 import flixel.math.FlxPoint;
+import flixel.text.FlxBitmapText;
+import flixel.text.FlxText.FlxTextAlign;
 import flixel.tile.FlxTilemap;
 
 using ObjectInit;
@@ -30,6 +32,7 @@ class CommonState extends FlxState {
   private var sprites : FlxAtlasFrames;
   private var font : FlxBitmapFont;
   private var textFont : FlxBitmapFont;
+  private var highScoreLabel : FlxBitmapText;
   private var groundLayer : TiledTileLayer;
   private var bgLayer : TiledImageLayer;
   private var objectLayer : TiledObjectLayer;
@@ -80,8 +83,22 @@ class CommonState extends FlxState {
     this.tilemap.useScaleHack = false;
     // Game looks like ass with this scale hack on
 
+    var highScore = 0;
+    if (FlxG.save.data.highScore != null) {
+      highScore = cast(FlxG.save.data.highScore, Int);
+    }
+
+    this.highScoreLabel = new FlxBitmapText(this.textFont).init(
+      x = 260,
+      y = 32,
+      alignment = FlxTextAlign.RIGHT,
+      letterSpacing = -3,
+      text = Std.string(highScore)
+    );
+
     this.add(bgImage);
     this.add(tilemap);
+    this.add(highScoreLabel);
   }
 
   override public function destroy() {

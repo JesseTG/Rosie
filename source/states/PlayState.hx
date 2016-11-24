@@ -267,6 +267,18 @@ class PlayState extends CommonState
 
       _displayGameOver();
 
+      var highScore = 0;
+      if (FlxG.save.data.highScore != null) {
+        highScore = cast(FlxG.save.data.highScore, Int);
+      }
+
+      if (this._score > highScore) {
+        FlxG.save.data.highScore = this._score;
+        FlxG.save.flush(function(_) {
+          trace('Saved high score of ${this._score}');
+        });
+      }
+
       // TODO: Wait for use input
       new FlxTimer().start(3.0, function(_) {
         FlxG.switchState(new MenuState());
