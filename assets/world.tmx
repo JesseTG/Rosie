@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="62">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="70">
  <tileset firstgid="1" name="Overworld" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="images/tile-environment.png" width="128" height="128"/>
   <tile id="4">
@@ -38,50 +38,58 @@
  </imagelayer>
  <layer name="Ground" width="20" height="15">
   <data encoding="base64">
-   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAA0AAAAOAAAADgAAAA8AAAAxAAAAMgAAAA0AAAAOAAAADgAAAA8AAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAAABAAAAAQAAAAEAAAABAAAACAAAAAgAAAABAAAAAQAAAAEAAAABAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAAAAEAAAABAAAAAQAAAAEAAAAIAAAACAAAAAEAAAABAAAAAQAAAAEAAAAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAQAAAAEAAAABAAAAAQAAAAgAAAAIAAAAAQAAAAEAAAABAAAAAQAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAABAAAAAQAAAAEAAAABAAAACAAAAAgAAAABAAAAAQAAAAEAAAABAAAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAgAAAAIAAAACAAAAAgAAAAOgAAADoAAAAgAAAAIAAAACAAAAAgAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAAAACAAAAAgAAAAIAAAACAAAAA6AAAAOgAAACAAAAAgAAAAIAAAACAAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAAABAAAAAQAAAAEAAAABAAAACAAAAAgAAAABAAAAAQAAAAEAAAABAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAAAAEAAAABAAAAAQAAAAEAAAAIAAAACAAAAAEAAAABAAAAAQAAAAEAAAAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAQAAAAEAAAABAAAAAQAAAAgAAAAIAAAAAQAAAAEAAAABAAAAAQAAAAcAAAAAAAAAAAAAAACAAAAAwAAACoAAAAAAAAAEQAAABIAAAAkAAAABAAAAAQAAAAEAAAABAAAACAAAAAgAAAABAAAAAQAAAAEAAAABAAAACQAAAATAAAAAAAAAAoAAAALAAAAGgAAABoAAAAaAAAAGwAAAAwAAAANAAAADgAAAA4AAAAPAAAAMQAAADIAAAANAAAADgAAAA4AAAAPAAAADAAAABkAAAAaAAAAGgAAABoAAAAiAAAAIgAAACIAAAArAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAKQAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAA
+   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAA0AAAAOAAAADgAAAA4AAAAPAAAAMQAAADIAAAANAAAADgAAAA4AAAAOAAAADwAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAAABAAAAAQAAAAEAAAABAAAAAQAAAAgAAAAIAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAAAAEAAAABAAAAAQAAAAEAAAABAAAACAAAAAgAAAABAAAAAQAAAAEAAAABAAAAAQAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAIAAAACAAAAAEAAAABAAAAAQAAAAEAAAABAAAABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAAABAAAAAQAAAAEAAAABAAAAAQAAAAgAAAAIAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAEAAAABAAAAAQAAAAEAAAABAAAACAAAAAgAAAABAAAAAQAAAAEAAAABAAAAAQAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAACAAAAAgAAAAIAAAACAAAAAgAAAAOgAAADoAAAAgAAAAIAAAACAAAAAgAAAAIAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAAIAAAACAAAAAgAAAAIAAAACAAAAA6AAAAOgAAACAAAAAgAAAAIAAAACAAAAAgAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAEAAAABAAAAAQAAAAEAAAABAAAACAAAAAgAAAABAAAAAQAAAAEAAAABAAAAAQAAAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAIAAAACAAAAAEAAAABAAAAAQAAAAEAAAABAAAABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAAABAAAAAQAAAAEAAAABAAAAAQAAAAgAAAAIAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAHAAAACoAAAAAAAAAEQAAABIAAAATAAAAAAAAABwAAAAEAAAABAAAAAQAAAAEAAAABAAAACAAAAAgAAAABAAAAAQAAAAEAAAABAAAAAQAAAAcAAAAGgAAABoAAAAaAAAAGgAAABoAAAAbAAAAJAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAIAAAACAAAAAEAAAABAAAAAQAAAAEAAAABAAAACQAAAAiAAAAIgAAACIAAAAiAAAAIgAAACMAAAAMAAAADQAAAA4AAAAOAAAADgAAAA8AAAAxAAAAMgAAAA0AAAAOAAAADgAAAA4AAAAPAAAADAAAACIAAAAiAAAAIgAAACIAAAAiAAAAKwAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAA
   </data>
  </layer>
  <objectgroup name="Objects">
-  <object id="6" name="Grid" gid="7" x="80" y="48" width="16" height="16">
+  <object id="6" name="Grid" gid="7" x="112" y="32" width="16" height="16">
    <properties>
-    <property name="Size" type="int" value="10"/>
+    <property name="Size" type="int" value="12"/>
    </properties>
   </object>
-  <object id="10" name="Gravity Indicator" type="Left" gid="1073741831" x="80" y="96" width="32" height="16" rotation="90"/>
-  <object id="12" name="Gravity Indicator" type="Right" gid="1073741831" x="256" y="96" width="32" height="16" rotation="90"/>
-  <object id="14" name="Gravity Indicator" type="Up" gid="7" x="144" y="16" width="32" height="16"/>
-  <object id="15" name="Gravity Indicator" type="Down" gid="7" x="144" y="192" width="32" height="16"/>
-  <object id="20" name="Gravity Panel" type="Left" gid="40" x="80" y="112" width="16" height="16"/>
-  <object id="22" name="Gravity Panel" type="Left" gid="40" x="96" y="112" width="16" height="16"/>
-  <object id="23" name="Gravity Panel" type="Left" gid="40" x="112" y="112" width="16" height="16"/>
-  <object id="24" name="Gravity Panel" type="Left" gid="40" x="128" y="112" width="16" height="16"/>
-  <object id="30" name="Gravity Panel" type="Left" gid="40" x="80" y="128" width="16" height="16"/>
-  <object id="31" name="Gravity Panel" type="Left" gid="40" x="96" y="128" width="16" height="16"/>
-  <object id="32" name="Gravity Panel" type="Left" gid="40" x="112" y="128" width="16" height="16"/>
-  <object id="33" name="Gravity Panel" type="Left" gid="40" x="128" y="128" width="16" height="16"/>
-  <object id="34" name="Gravity Panel" type="Right" gid="40" x="224" y="128" width="16" height="16"/>
-  <object id="35" name="Gravity Panel" type="Right" gid="40" x="208" y="112" width="16" height="16"/>
-  <object id="36" name="Gravity Panel" type="Right" gid="40" x="224" y="112" width="16" height="16"/>
-  <object id="37" name="Gravity Panel" type="Right" gid="40" x="176" y="128" width="16" height="16"/>
-  <object id="38" name="Gravity Panel" type="Right" gid="40" x="192" y="112" width="16" height="16"/>
-  <object id="39" name="Gravity Panel" type="Right" gid="40" x="208" y="128" width="16" height="16"/>
-  <object id="40" name="Gravity Panel" type="Right" gid="40" x="176" y="112" width="16" height="16"/>
-  <object id="41" name="Gravity Panel" type="Right" gid="40" x="192" y="128" width="16" height="16"/>
-  <object id="42" name="Gravity Panel" type="Up" gid="40" x="144" y="48" width="16" height="16"/>
-  <object id="43" name="Gravity Panel" type="Up" gid="40" x="160" y="48" width="16" height="16"/>
-  <object id="48" name="Gravity Panel" type="Up" gid="40" x="144" y="64" width="16" height="16"/>
-  <object id="49" name="Gravity Panel" type="Up" gid="40" x="160" y="64" width="16" height="16"/>
-  <object id="50" name="Gravity Panel" type="Up" gid="40" x="144" y="80" width="16" height="16"/>
-  <object id="51" name="Gravity Panel" type="Up" gid="40" x="160" y="80" width="16" height="16"/>
-  <object id="52" name="Gravity Panel" type="Up" gid="40" x="144" y="96" width="16" height="16"/>
-  <object id="53" name="Gravity Panel" type="Up" gid="40" x="160" y="96" width="16" height="16"/>
-  <object id="54" name="Gravity Panel" type="Down" gid="40" x="160" y="192" width="16" height="16"/>
-  <object id="55" name="Gravity Panel" type="Down" gid="40" x="160" y="176" width="16" height="16"/>
-  <object id="56" name="Gravity Panel" type="Down" gid="40" x="144" y="176" width="16" height="16"/>
-  <object id="57" name="Gravity Panel" type="Down" gid="40" x="160" y="160" width="16" height="16"/>
-  <object id="58" name="Gravity Panel" type="Down" gid="40" x="144" y="160" width="16" height="16"/>
-  <object id="59" name="Gravity Panel" type="Down" gid="40" x="144" y="192" width="16" height="16"/>
-  <object id="60" name="Gravity Panel" type="Down" gid="40" x="144" y="144" width="16" height="16"/>
-  <object id="61" name="Gravity Panel" type="Down" gid="40" x="160" y="144" width="16" height="16"/>
+  <object id="10" name="Gravity Indicator" type="Left" gid="1073741831" x="112" y="96" width="32" rotation="90"/>
+  <object id="12" name="Gravity Indicator" type="Right" gid="1073741831" x="320" y="96" width="32" rotation="90"/>
+  <object id="14" name="Gravity Indicator" type="Up" gid="7" x="192" y="0" width="32"/>
+  <object id="15" name="Gravity Indicator" type="Down" gid="7" x="192" y="208" width="32"/>
+  <object id="20" name="Gravity Panel" type="Left" gid="40" x="112" y="112" width="16" height="16"/>
+  <object id="22" name="Gravity Panel" type="Left" gid="40" x="128" y="112" width="16" height="16"/>
+  <object id="23" name="Gravity Panel" type="Left" gid="40" x="144" y="112" width="16" height="16"/>
+  <object id="24" name="Gravity Panel" type="Left" gid="40" x="160" y="112" width="16" height="16"/>
+  <object id="30" name="Gravity Panel" type="Left" gid="40" x="112" y="128" width="16" height="16"/>
+  <object id="31" name="Gravity Panel" type="Left" gid="40" x="128" y="128" width="16" height="16"/>
+  <object id="32" name="Gravity Panel" type="Left" gid="40" x="144" y="128" width="16" height="16"/>
+  <object id="33" name="Gravity Panel" type="Left" gid="40" x="160" y="128" width="16" height="16"/>
+  <object id="34" name="Gravity Panel" type="Right" gid="40" x="288" y="128" width="16" height="16"/>
+  <object id="35" name="Gravity Panel" type="Right" gid="40" x="272" y="112" width="16" height="16"/>
+  <object id="36" name="Gravity Panel" type="Right" gid="40" x="288" y="112" width="16" height="16"/>
+  <object id="37" name="Gravity Panel" type="Right" gid="40" x="240" y="128" width="16" height="16"/>
+  <object id="38" name="Gravity Panel" type="Right" gid="40" x="256" y="112" width="16" height="16"/>
+  <object id="39" name="Gravity Panel" type="Right" gid="40" x="272" y="128" width="16" height="16"/>
+  <object id="40" name="Gravity Panel" type="Right" gid="40" x="240" y="112" width="16" height="16"/>
+  <object id="41" name="Gravity Panel" type="Right" gid="40" x="256" y="128" width="16" height="16"/>
+  <object id="42" name="Gravity Panel" type="Up" gid="40" x="192" y="48" width="16" height="16"/>
+  <object id="43" name="Gravity Panel" type="Up" gid="40" x="208" y="48" width="16" height="16"/>
+  <object id="48" name="Gravity Panel" type="Up" gid="40" x="192" y="64" width="16" height="16"/>
+  <object id="49" name="Gravity Panel" type="Up" gid="40" x="208" y="64" width="16" height="16"/>
+  <object id="50" name="Gravity Panel" type="Up" gid="40" x="192" y="80" width="16" height="16"/>
+  <object id="51" name="Gravity Panel" type="Up" gid="40" x="208" y="80" width="16" height="16"/>
+  <object id="52" name="Gravity Panel" type="Up" gid="40" x="208" y="96" width="16" height="16"/>
+  <object id="53" name="Gravity Panel" type="Up" gid="40" x="192" y="96" width="16" height="16"/>
+  <object id="54" name="Gravity Panel" type="Down" gid="40" x="208" y="208" width="16" height="16"/>
+  <object id="55" name="Gravity Panel" type="Down" gid="40" x="208" y="192" width="16" height="16"/>
+  <object id="56" name="Gravity Panel" type="Down" gid="40" x="192" y="192" width="16" height="16"/>
+  <object id="57" name="Gravity Panel" type="Down" gid="40" x="208" y="176" width="16" height="16"/>
+  <object id="58" name="Gravity Panel" type="Down" gid="40" x="192" y="176" width="16" height="16"/>
+  <object id="59" name="Gravity Panel" type="Down" gid="40" x="192" y="208" width="16" height="16"/>
+  <object id="60" name="Gravity Panel" type="Down" gid="40" x="192" y="160" width="16" height="16"/>
+  <object id="61" name="Gravity Panel" type="Down" gid="40" x="208" y="160" width="16" height="16"/>
+  <object id="62" name="Gravity Panel" type="Left" gid="40" x="176" y="128" width="16" height="16"/>
+  <object id="63" name="Gravity Panel" type="Left" gid="40" x="176" y="112" width="16" height="16"/>
+  <object id="64" name="Gravity Panel" type="Up" gid="40" x="192" y="32" width="16" height="16"/>
+  <object id="65" name="Gravity Panel" type="Up" gid="40" x="208" y="32" width="16" height="16"/>
+  <object id="66" name="Gravity Panel" type="Right" gid="40" x="224" y="128" width="16" height="16"/>
+  <object id="67" name="Gravity Panel" type="Right" gid="40" x="224" y="112" width="16" height="16"/>
+  <object id="68" name="Gravity Panel" type="Down" gid="40" x="208" y="144" width="16" height="16"/>
+  <object id="69" name="Gravity Panel" type="Down" gid="40" x="192" y="144" width="16" height="16"/>
  </objectgroup>
 </map>
