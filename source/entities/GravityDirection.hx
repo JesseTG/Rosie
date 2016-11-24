@@ -42,7 +42,7 @@ abstract GravityDirection(Float) {
       case "Up": Up;
       case "Left": Left;
       case _: {
-        trace("Warning: Invalid gravity direction ${gravity} given");
+        trace('Warning: Invalid gravity direction ${gravity} given');
         null;
       }
     };
