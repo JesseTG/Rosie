@@ -81,6 +81,10 @@ class PlayState extends CommonState
     this.OnGameOver = new FlxTypedSignal<Void->Void>();
     this.OnScore = new FlxTypedSignal<Int->Void>();
 
+#if debug
+    this.OnGameOver.add(function() trace("OnGameOver"));
+    this.OnScore.add(function(score) trace('OnScore(${score})'));
+#end
 
     this._gravityIndicators = [for (i in 0...GravityDirection.Count) null];
     this._gravityPanels = [for (i in 0...GravityDirection.Count) {

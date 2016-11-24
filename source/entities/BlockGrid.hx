@@ -87,7 +87,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.OnStopMoving.add(function() trace("OnStopMoving"));
     this.OnNoMoreMoves.add(function() trace("OnNoMoreMoves"));
     this.OnBeforeBlocksGenerated.add(function() trace("OnBeforeBlocksGenerated"));
-    this.OnBlocksGenerated.add(function(_) trace("OnBlocksGenerated"));
+    this.OnBlocksGenerated.add(function(blocks) trace("OnBlocksGenerated(${blocks})"));
 #end
 
     this._frames = sprites;
