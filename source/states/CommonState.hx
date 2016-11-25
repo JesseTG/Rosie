@@ -17,6 +17,7 @@ import flixel.text.FlxBitmapText;
 import flixel.text.FlxText.FlxTextAlign;
 import flixel.tile.FlxTilemap;
 
+using Lambda;
 using ObjectInit;
 
 class CommonState extends FlxState {
@@ -36,6 +37,7 @@ class CommonState extends FlxState {
   private var groundLayer : TiledTileLayer;
   private var bgLayer : TiledImageLayer;
   private var objectLayer : TiledObjectLayer;
+  private var guiLayer : TiledObjectLayer;
   private var tileSet : TiledTileSet;
   private var spriteSet : TiledTileSet;
 
@@ -53,7 +55,7 @@ class CommonState extends FlxState {
 
     this.textFont = FlxBitmapFont.fromMonospace(
       this.sprites.getByName("text-font.png"),
-      FlxBitmapFont.DEFAULT_CHARS,
+      '${FlxBitmapFont.DEFAULT_CHARS}⌚',
       TEXT_FONT_SIZE,
       null,
       TEXT_FONT_SPACING
@@ -67,6 +69,8 @@ class CommonState extends FlxState {
     this.groundLayer = cast(map.getLayer("Ground"), TiledTileLayer);
     this.bgLayer = cast(map.getLayer("Background"), TiledImageLayer);
     this.objectLayer = cast(map.getLayer("Objects"), TiledObjectLayer);
+    this.guiLayer = cast(map.getLayer("GUI"), TiledObjectLayer);
+
     this.tileSet = map.getTileSet("Overworld");
     this.spriteSet = map.getTileSet("Sprites");
     this.tilemap = cast new FlxTilemap().loadMapFromArray(
@@ -90,13 +94,20 @@ class CommonState extends FlxState {
       highScore = cast(FlxG.save.data.highScore, Int);
     }
 
-    this.highScoreLabel = new FlxBitmapText(this.textFont).init(
-      x = 260,
-      y = 32,
-      alignment = FlxTextAlign.RIGHT,
-      letterSpacing = -3,
-      text = Std.string(highScore)
-    );
+    this.guiLayer.objects.iter(function(object:TiledObject) {
+      switch (object.name) {
+        case "High Score Display":
+          this.highScoreLabel = new FlxBitmapText(this.textFont).init(
+            x = object.x,
+            y = object.y,
+            alignment = FlxTextAlign.LEFT,
+            letterSpacing = Std.parseInt(object.properties.letterSpacing),
+            text = 'TOP ${highScore}'
+          );
+        default:
+          // nop
+      }
+    });
 
     this.add(bgImage);
     this.add(tilemap);

@@ -139,6 +139,7 @@ class PlayState extends CommonState
           );
         case "Time Remaining":
           _timeDisplay = new FlxBitmapText(this.textFont).init(
+            text = "0",
             x = object.x,
             y = object.y,
             alignment = FlxTextAlign.RIGHT,
@@ -231,7 +232,7 @@ class PlayState extends CommonState
 
     if (this._blockGrid.readyForInput && this.gameRunning) {
       _time -= elapsed;
-      _timeDisplay.text = Printf.format("%.1f", [Math.max(0, _time)]);
+      _timeDisplay.text = Printf.format("⌚   %.1f", [Math.max(0, _time)]);
       // TODO: Come up with a better placement for the text
     }
 
