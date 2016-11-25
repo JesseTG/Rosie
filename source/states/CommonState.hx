@@ -37,6 +37,7 @@ class CommonState extends FlxState {
   private var bgLayer : TiledImageLayer;
   private var objectLayer : TiledObjectLayer;
   private var tileSet : TiledTileSet;
+  private var spriteSet : TiledTileSet;
 
   override public function create():Void {
     super.create();
@@ -67,6 +68,7 @@ class CommonState extends FlxState {
     this.bgLayer = cast(map.getLayer("Background"), TiledImageLayer);
     this.objectLayer = cast(map.getLayer("Objects"), TiledObjectLayer);
     this.tileSet = map.getTileSet("Overworld");
+    this.spriteSet = map.getTileSet("Sprites");
     this.tilemap = cast new FlxTilemap().loadMapFromArray(
       groundLayer.tileArray,
       groundLayer.width,

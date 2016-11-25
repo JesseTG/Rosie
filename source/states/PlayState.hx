@@ -50,6 +50,7 @@ class PlayState extends CommonState
 {
 
   private var _blockGrid : BlockGrid;
+  private var _playGui : TiledObjectLayer;
 
   private var _score : Int;
   private var _time : Float;
@@ -86,6 +87,7 @@ class PlayState extends CommonState
     this.OnScore.add(function(score) trace('OnScore(${score})'));
 #end
 
+    this._playGui = cast(this.map.getLayer("PlayState GUI"));
     this._gravityIndicators = [for (i in 0...GravityDirection.Count) null];
     this._gravityPanels = [for (i in 0...GravityDirection.Count) {
       new FlxTypedGroup<GravityPanel>().init(
@@ -93,7 +95,7 @@ class PlayState extends CommonState
       );
     }];
 
-    this.objectLayer.objects.iter(function(object:TiledObject) {
+    this.objectLayer.objects.iter(function(object) {
       switch (object.name) {
         case "Gravity Indicator":
           var direction = GravityDirection.createByName(object.type);
@@ -124,6 +126,56 @@ class PlayState extends CommonState
     this._gravityIndicators[_blockGrid.gravity.getIndex()].state = GravityIndicatorState.On;
     this._gravityIndicators[_blockGrid.gravity.getIndex()].visible = true;
 
+    _playGui.objects.iter(function(object:TiledObject) {
+      switch (object.name) {
+        case "Score Display":
+          _scoreDisplay = new FlxBitmapText(this.font).init(
+            text = "0",
+            x = object.x,
+            y = object.y - tileSet.tileHeight,
+            letterSpacing = Std.parseInt(object.properties.letterSpacing),
+            autoSize = object.properties.autoSize == "true",
+            alignment = FlxTextAlign.RIGHT
+          );
+        case "Time Remaining":
+        case "Hint Hand":          // default image load
+          var source = spriteSet.getImageSourceByGid(object.gid).source;
+          var index = source.lastIndexOf('/');
+
+          var hand = new FlxSprite().init(
+            x = object.x,
+            y = object.y - object.height,
+            frames = this.sprites,
+            frame = this.sprites.getByName(source.substr(index + 1))
+          );
+          this.add(hand);
+          FlxTween.linearMotion(
+            hand,
+            hand.x,
+            hand.y,
+            hand.x - 4,
+            hand.y,
+            0.5,
+            true,
+            {
+              type: FlxTween.PINGPONG,
+              ease: FlxEase.circInOut
+            }
+          );
+        default:
+          // default image load
+          var source = spriteSet.getImageSourceByGid(object.gid).source;
+          var index = source.lastIndexOf('/');
+
+          this.add(new FlxSprite().init(
+            x = object.x,
+            y = object.y - object.height,
+            frames = this.sprites,
+            frame = this.sprites.getByName(source.substr(index + 1))
+          ));
+      };
+    });
+
     _timeDisplay = new FlxBitmapText(this.textFont).init(
       x = 260,
       y = 8,
@@ -141,14 +193,6 @@ class PlayState extends CommonState
     _score = 0;
     _time = 60;
 
-    _scoreDisplay = new FlxBitmapText(this.font).init(
-      text = "0",
-      y = 8,
-      letterSpacing = 2
-    );
-    _scoreDisplay.screenCenter(FlxAxes.X);
-
-    this._initHints();
     this._initCallbacks();
 
     FlxG.console.registerObject("blockGrid", _blockGrid);
@@ -171,7 +215,6 @@ class PlayState extends CommonState
       this.add(g);
     }
     this.add(_timeDisplay);
-    this.add(_hints);
     this.add(_timeChangeDisplay);
     this.add(_scoreDisplay);
 
@@ -217,7 +260,7 @@ class PlayState extends CommonState
     this.OnScore.add(function(score:Int) {
       this._score += score;
       _scoreDisplay.text = Std.string(this._score);
-      _scoreDisplay.screenCenter(FlxAxes.X);
+      //_scoreDisplay.screenCenter(FlxAxes.X);
     });
     // TODO: Tween the score counter with FlxNumTween
 
@@ -300,41 +343,6 @@ class PlayState extends CommonState
     gameOver.screenCenter();
 
     this.add(gameOver);
-  }
-
-  private inline function _initHints() {
-    this._hints = new FlxSpriteGroup();
-
-    _hints.setPosition(8, 96);
-    var hint_yes = new FlxSprite(16, 0).init(
-      frame = sprites.getByName("icon-clear-yes.png")
-    );
-    _hints.add(hint_yes);
-
-    var hand1 = new FlxSprite(0, 0).init(
-      frame = sprites.getByName("hand.png")
-    );
-    _hints.add(hand1);
-
-    var yes = new FlxSprite(36, 0).init(
-      frame = sprites.getByName("ok.png")
-    );
-    _hints.add(yes);
-
-    var hint_no = new FlxSprite(16, 24).init(
-      frame = sprites.getByName("icon-clear-no.png")
-    );
-    _hints.add(hint_no);
-
-    var hand2 = new FlxSprite(0, 24).init(
-      frame = sprites.getByName("hand.png")
-    );
-    _hints.add(hand2);
-
-    var no = new FlxSprite(36, 24).init(
-      frame = sprites.getByName("no.png")
-    );
-    _hints.add(no);
   }
 
   private function _addBonusTime(blocksCreated:Int) {
