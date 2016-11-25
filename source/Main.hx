@@ -15,6 +15,8 @@ import states.MenuState;
 
 class Main extends Sprite
 {
+  public static inline var GAME_NAME = "Rosie";
+
   public function new()
   {
     super();

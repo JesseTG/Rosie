@@ -19,7 +19,7 @@ import flixel.tile.FlxBaseTilemap.FlxTilemapAutoTiling;
 import flixel.tile.FlxTilemap;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
-import flixel.ui.FlxButton;
+import flixel.ui.FlxBitmapTextButton;
 import flixel.util.FlxAxes;
 import flixel.util.FlxColor;
 import flixel.util.FlxSignal.FlxTypedSignal;
@@ -30,7 +30,7 @@ using ObjectInit;
 class MenuState extends CommonState
 {
   private var menuGuiLayer : TiledObjectLayer;
-  private var _start : FlxButton;
+  private var _start : FlxBitmapTextButton;
   private var _titleLetters : FlxTypedSpriteGroup<FlxBitmapText>;
 
 
@@ -38,57 +38,85 @@ class MenuState extends CommonState
   {
     super.create();
 
+    _titleLetters = new FlxTypedSpriteGroup<FlxBitmapText>(Main.GAME_NAME.length);
+
     this.menuGuiLayer = cast(this.map.getLayer("MenuState GUI"));
 
     this.menuGuiLayer.objects.iter(function(object) {
       switch (object.name) {
+        case "Title":
+          this._titleLetters.setPosition(object.x, object.y - object.height);
+          for (i in 0...Main.GAME_NAME.length) {
+            var text = new FlxBitmapText(this.font);
+            text.text = Main.GAME_NAME.charAt(i);
+            text.setPosition(16*i, 0);
+
+            var currentPoint = new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y);
+            FlxTween.linearPath(
+              text,
+              [
+                currentPoint,
+                new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y - 8),
+                currentPoint,
+                new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y + 8),
+                currentPoint
+              ],
+              0.75,
+              true,
+              {
+                startDelay: i * 0.1,
+                loopDelay: 1,
+                type: FlxTween.LOOPING
+              }
+            );
+            this._titleLetters.add(text);
+          }
+
         case "Play Button":
-          this._start = new FlxButton(function() {
+          var source = spriteSet.getImageSourceByGid(object.gid).source;
+          var index = source.lastIndexOf('/');
+          var frameName = source.substr(index + 1);
+
+          this._start = new FlxBitmapTextButton(object.properties.text, function() {
               FlxG.switchState(new PlayState());
           }).init(
             x = object.x,
             y = object.y - object.height,
-            width = object.width,
-            height = object.height,
-            text = object.properties.text
+            frames = this.sprites,
+            frame = this.sprites.getByName(frameName)
           );
+
+          _start.label.font = this.textFont;
+          _start.label.letterSpacing = -3;
+          _start.label.alignment = FlxTextAlign.CENTER;
+          _start.label.color = FlxColor.WHITE;
+          _start.label.autoSize = false;
+          _start.label.fieldWidth = object.width;
+
+          var normalAnim = _start.animation.getByName("normal");
+          normalAnim.frames = [sprites.getIndexByName(frameName)];
+
+          var pressedAnim = _start.animation.getByName("pressed");
+          pressedAnim.frames = [sprites.getIndexByName("button-01.png")];
+
+          var highlightAnim = _start.animation.getByName("highlight");
+          highlightAnim.frames = [sprites.getIndexByName("button-00.png")];
+
+          _start.labelAlphas = [1.0, 1.0, 1.0];
+          _start.labelOffsets = [
+            FlxPoint.get(0, _start.label.height),
+            FlxPoint.get(0, _start.label.height),
+            FlxPoint.get(0, _start.label.height + 1)
+          ];
+          _start.updateHitbox();
+
         default:
           // nop
       }
     });
 
-    _titleLetters = new FlxTypedSpriteGroup<FlxBitmapText>(5);
-
-
-    this._titleLetters.setPosition(160 - (18.0 * "Rosie".length) / 2.0, 32);
-    for (i in 0..."Rosie".length) {
-      var text = new FlxBitmapText(this.font);
-      text.text = "Rosie".charAt(i);
-      text.setPosition(18*i, 0);
-
-      var currentPoint = new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y);
-      FlxTween.linearPath(
-        text,
-        [
-          currentPoint,
-          new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y - 8),
-          currentPoint,
-          new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y + 8),
-          currentPoint
-        ],
-        0.75,
-        true,
-        {
-          startDelay: i * 0.1,
-          loopDelay: 1,
-          type: FlxTween.LOOPING
-        }
-      );
-      this._titleLetters.add(text);
-    }
-    this._titleLetters.screenCenter(FlxAxes.X);
-
     this.add(_start);
     this.add(this._titleLetters);
+    FlxG.console.registerObject("playButton", _start);
   }
 }
