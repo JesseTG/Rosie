@@ -138,8 +138,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
    * Given a block, which cell is it in
    */
   private function _getGridIndex(block:Block) : Array2Cell {
-    // TODO: Convert to an Array2Cell
-
     var x = Math.round(block.x / block.frameWidth) * block.frameWidth;
     var y = Math.round(block.y / block.frameHeight) * block.frameHeight;
 
