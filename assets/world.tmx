@@ -142,7 +142,7 @@
   <object id="87" name="Title" gid="7" x="168" y="80" width="80" height="32"/>
   <object id="90" name="Play Button" gid="70" x="176" y="192" width="64" height="32">
    <properties>
-    <property name="text" value="Start"/>
+    <property name="text" value="START"/>
    </properties>
   </object>
  </objectgroup>

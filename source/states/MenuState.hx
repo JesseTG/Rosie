@@ -73,6 +73,7 @@ class MenuState extends CommonState
           }
 
         case "Play Button":
+          // TODO: Clean up this part
           var source = spriteSet.getImageSourceByGid(object.gid).source;
           var index = source.lastIndexOf('/');
           var frameName = source.substr(index + 1);
@@ -100,13 +101,14 @@ class MenuState extends CommonState
           pressedAnim.frames = [sprites.getIndexByName("button-01.png")];
 
           var highlightAnim = _start.animation.getByName("highlight");
-          highlightAnim.frames = [sprites.getIndexByName("button-00.png")];
+          highlightAnim.frames = [sprites.getIndexByName("button-02.png")];
 
+          var point = new FlxPoint(0, _start.label.height);
           _start.labelAlphas = [1.0, 1.0, 1.0];
           _start.labelOffsets = [
-            FlxPoint.get(0, _start.label.height),
-            FlxPoint.get(0, _start.label.height),
-            FlxPoint.get(0, _start.label.height + 1)
+            point,
+            point,
+            FlxPoint.get(0, _start.label.height + 2)
           ];
           _start.updateHitbox();
 
