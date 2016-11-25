@@ -138,6 +138,19 @@ class PlayState extends CommonState
             alignment = FlxTextAlign.RIGHT
           );
         case "Time Remaining":
+          _timeDisplay = new FlxBitmapText(this.textFont).init(
+            x = object.x,
+            y = object.y,
+            alignment = FlxTextAlign.RIGHT,
+            letterSpacing = Std.parseInt(object.properties.letterSpacing)
+          );
+
+          _timeChangeDisplay = new FlxBitmapText(this.textFont).init(
+            x = _timeDisplay.x,
+            y = _timeDisplay.y,
+            alignment = _timeDisplay.alignment,
+            letterSpacing = _timeDisplay.letterSpacing
+          );
         case "Hint Hand":          // default image load
           var source = spriteSet.getImageSourceByGid(object.gid).source;
           var index = source.lastIndexOf('/');
@@ -176,19 +189,7 @@ class PlayState extends CommonState
       };
     });
 
-    _timeDisplay = new FlxBitmapText(this.textFont).init(
-      x = 260,
-      y = 8,
-      alignment = FlxTextAlign.RIGHT,
-      letterSpacing = -3
-    );
 
-    _timeChangeDisplay = new FlxBitmapText(this.textFont).init(
-      x = _timeDisplay.x,
-      y = _timeDisplay.y,
-      alignment = _timeDisplay.alignment,
-      letterSpacing = _timeDisplay.letterSpacing
-    );
 
     _score = 0;
     _time = 60;
