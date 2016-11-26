@@ -160,7 +160,9 @@ class PlayState extends CommonState
             x = object.x,
             y = object.y - object.height,
             frames = this.sprites,
-            frame = this.sprites.getByName(source.substr(index + 1))
+            frame = this.sprites.getByName(source.substr(index + 1)),
+            pixelPerfectPosition = true,
+            pixelPerfectRender = true
           );
           this.add(hand);
           FlxTween.linearMotion(
