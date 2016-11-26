@@ -247,6 +247,11 @@ class PlayState extends CommonState
       FlxMouseEventManager.removeAll();
       this.OnGameOver.dispatch();
     }
+    else if (!this.gameRunning) {
+      if (FlxG.mouse.justPressed) {
+        FlxG.switchState(new MenuState());
+      }
+    }
   }
 
   override public function destroy() {
@@ -333,11 +338,6 @@ class PlayState extends CommonState
         });
         FlxG.sound.play(AssetPaths.high_score__wav);
       }
-
-      // TODO: Wait for use input
-      new FlxTimer().start(3.0, function(_) {
-        FlxG.switchState(new MenuState());
-      }, 1);
     });
   }
 
