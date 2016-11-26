@@ -69,6 +69,8 @@ class PlayState extends CommonState
    */
   public var OnScore(default, null) : FlxTypedSignal<Int->Void>;
 
+  public var OnGameOverAnimationFinish(default, null) : FlxTypedSignal<Void->Void>;
+
   public var round(default, null) : Int;
 
   // TODO: Clarify the semantics
@@ -81,10 +83,12 @@ class PlayState extends CommonState
 
     this.OnGameOver = new FlxTypedSignal<Void->Void>();
     this.OnScore = new FlxTypedSignal<Int->Void>();
+    this.OnGameOverAnimationFinish = new FlxTypedSignal<Void->Void>();
 
 #if debug
     this.OnGameOver.add(function() trace("OnGameOver"));
     this.OnScore.add(function(score) trace('OnScore(${score})'));
+    this.OnGameOverAnimationFinish.add(function() trace("OnGameOverAnimationFinish"));
 #end
 
     this._playGui = cast(this.map.getLayer("PlayState GUI"));
