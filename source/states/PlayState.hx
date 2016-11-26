@@ -233,7 +233,10 @@ class PlayState extends CommonState
     if (this._blockGrid.readyForInput && this.gameRunning) {
       _time -= elapsed;
       _timeDisplay.text = Printf.format("⌚   %.1f", [Math.max(0, _time)]);
-      // TODO: Come up with a better placement for the text
+      if (_time <= 11 && Math.abs(_time - Math.fround(_time)) < 0.000001) {
+        // If we have under 10 seconds to go, and exactly one second has passed...
+        FlxG.sound.play(AssetPaths.time_running_out__wav);
+      }
     }
 
 
