@@ -241,7 +241,6 @@ class PlayState extends CommonState
       }
     }
 
-
     if (_time <= 0 && this.gameRunning) {
       this.gameRunning = false;
       FlxMouseEventManager.removeAll();
@@ -272,7 +271,6 @@ class PlayState extends CommonState
     this.OnScore.add(function(score:Int) {
       this._score += score;
       _scoreDisplay.text = Std.string(this._score);
-      //_scoreDisplay.screenCenter(FlxAxes.X);
     });
     // TODO: Tween the score counter with FlxNumTween
 
