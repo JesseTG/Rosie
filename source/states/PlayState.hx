@@ -329,6 +329,7 @@ class PlayState extends CommonState
         FlxG.save.flush(function(_) {
           trace('Saved high score of ${this._score}');
         });
+        FlxG.sound.play(AssetPaths.high_score__wav);
       }
 
       // TODO: Wait for use input

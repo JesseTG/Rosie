@@ -18,3 +18,4 @@ Rest in peace, Rosie.  You are not forgotten.
 - [Melancholy Melody](http://opengameart.org/content/melancholy-melody) by [Patrick Maney](http://opengameart.org/users/bbandrage)
 - [More NES-like Tiles](http://opengameart.org/content/more-nes-like-tiles) by [Carl Olsson](http://pixeljoint.com/p/2254.htm)
 - [Simple light graysacle cursors (16x16)](http://opengameart.org/content/simple-light-graysacle-cursors-16x16) by [Iwan Gabovitch](http://qubodup.net/)
+- [Level up sound effects](http://opengameart.org/content/level-up-sound-effects) by [Bart Kelsey](http://opengameart.org/users/bart)
