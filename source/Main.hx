@@ -27,7 +27,7 @@ class Main extends Sprite
     FlxG.signals.stateSwitched.add(function() trace("stateSwitched"));
 #end
 
-#if cpp || neko
+#if (cpp || neko)
     FlxG.signals.stateSwitched.add(function() Gc.run(true));
 #end
 
