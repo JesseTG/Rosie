@@ -2,6 +2,8 @@ package states;
 
 import flixel.addons.editors.tiled.TiledObject;
 import flixel.addons.editors.tiled.TiledObjectLayer;
+import flixel.addons.editors.tiled.TiledTileLayer;
+import flixel.addons.editors.tiled.TiledTileSet;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -32,7 +34,8 @@ class MenuState extends CommonState
   private var menuGuiLayer : TiledObjectLayer;
   private var _start : FlxBitmapTextButton;
   private var _titleLetters : FlxTypedSpriteGroup<FlxBitmapText>;
-
+  private var gate : FlxTilemap;
+  private var gateLayer : TiledTileLayer;
 
   override public function create():Void
   {
@@ -41,6 +44,17 @@ class MenuState extends CommonState
     _titleLetters = new FlxTypedSpriteGroup<FlxBitmapText>(Main.GAME_NAME.length);
 
     this.menuGuiLayer = cast(this.map.getLayer("MenuState GUI"));
+    this.gateLayer = cast(this.map.getLayer("Gate"));
+    this.gate = cast new FlxTilemap().loadMapFromArray(
+      gateLayer.tileArray,
+      gateLayer.width,
+      gateLayer.height,
+      'assets/${tileSet.imageSource}',
+      tileSet.tileWidth,
+      tileSet.tileHeight,
+      1 // Tiled uses 0-indexing, but I think FlxTilemap uses 1-indexing
+    );
+    this.gate.useScaleHack = false;
 
     this.menuGuiLayer.objects.iter(function(object) {
       switch (object.name) {
@@ -117,6 +131,7 @@ class MenuState extends CommonState
       }
     });
 
+    this.add(gate);
     this.add(_start);
     this.add(this._titleLetters);
     FlxG.console.registerObject("playButton", _start);

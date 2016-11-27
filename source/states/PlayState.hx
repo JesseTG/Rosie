@@ -32,6 +32,7 @@ import flixel.util.FlxAxes;
 
 import de.polygonal.Printf;
 import de.polygonal.core.util.Assert.D;
+import de.polygonal.ds.Array2;
 
 import entities.Block;
 import entities.BlockColor;
@@ -51,6 +52,10 @@ class PlayState extends CommonState
 
   private var _blockGrid : BlockGrid;
   private var _playGui : TiledObjectLayer;
+  private var _gate: Array2<FlxSprite>;
+  private var _gateGroup : FlxSpriteGroup;
+  private var _gridSize : Int;
+
 
   private var _score : Int;
   private var _time : Float;
@@ -61,6 +66,12 @@ class PlayState extends CommonState
   private var _gravityIndicators : Array<GravityIndicator>;
   private var _gravityPanels : Array<FlxTypedGroup<GravityPanel>>;
   // TODO: Organize this crap
+
+  public var OnGameStartAnimationStart(default, null) : FlxTypedSignal<Void->Void>;
+
+  public var OnGameStart(default, null) : FlxTypedSignal<Void->Void>;
+
+  public var OnGameStartAnimationFinish(default, null) : FlxTypedSignal<Void->Void>;
 
   public var OnGameOver(default, null) : FlxTypedSignal<Void->Void>;
 
@@ -83,12 +94,18 @@ class PlayState extends CommonState
 
     this.OnGameOver = new FlxTypedSignal<Void->Void>();
     this.OnScore = new FlxTypedSignal<Int->Void>();
+    this.OnGameStartAnimationStart = new FlxTypedSignal<Void->Void>();
     this.OnGameOverAnimationFinish = new FlxTypedSignal<Void->Void>();
+    this.OnGameStart = new FlxTypedSignal<Void->Void>();
+    this.OnGameStartAnimationFinish = new FlxTypedSignal<Void->Void>();
 
 #if debug
     this.OnGameOver.add(function() trace("OnGameOver"));
     this.OnScore.add(function(score) trace('OnScore(${score})'));
+    this.OnGameStartAnimationStart.add(function() trace("OnGameStartAnimationStart"));
     this.OnGameOverAnimationFinish.add(function() trace("OnGameOverAnimationFinish"));
+    this.OnGameStart.add(function() trace("OnGameStart"));
+    this.OnGameStartAnimationFinish.add(function() trace("OnGameStartAnimationFinish"));
 #end
 
     this._playGui = cast(this.map.getLayer("PlayState GUI"));
@@ -98,6 +115,7 @@ class PlayState extends CommonState
         visible = false
       );
     }];
+
 
     this.objectLayer.objects.iter(function(object) {
       switch (object.name) {
@@ -115,10 +133,25 @@ class PlayState extends CommonState
           var panel = new GravityPanel(object.x, object.y - object.height, sprites);
           this._gravityPanels[index].add(panel);
         case "Grid":
+          // TODO: Come up with a better way to render the grid
+          _gridSize = Std.parseInt(object.properties.size);
+          this._gateGroup = new FlxSpriteGroup(object.x, object.y - tileSet.tileHeight);
+          this._gate = new Array2<FlxSprite>(_gridSize, _gridSize);
+          this._gate.forEach(function(_,xIndex,yIndex) {
+            var sprite = new FlxSprite().init(
+              x = xIndex * tileSet.tileWidth,
+              y = yIndex * tileSet.tileHeight,
+              frames = sprites,
+              frame = sprites.getByName("gate.png")
+            );
+            _gateGroup.add(sprite);
+            return sprite;
+          });
+
           _blockGrid = new BlockGrid(
             object.x,
             object.y - 16,
-            Std.parseInt(object.properties.size),
+            _gridSize,
             sprites
           );
         default:
@@ -218,18 +251,17 @@ class PlayState extends CommonState
     for (p in _gravityPanels) {
       this.add(p);
     }
-    this.add(_blockGrid);
     for (g in _gravityIndicators) {
       this.add(g);
     }
+    this.add(_blockGrid);
+    this.add(_gateGroup);
     this.add(_timeDisplay);
     this.add(_timeChangeDisplay);
     this.add(_scoreDisplay);
 
-    this.gameRunning = true;
     this.round = 1;
-
-    FlxG.sound.playMusic(AssetPaths.music__ogg, 1, true);
+    this.OnGameStartAnimationStart.dispatch();
   }
 
   override public function update(elapsed:Float):Void
@@ -250,7 +282,7 @@ class PlayState extends CommonState
       FlxMouseEventManager.removeAll();
       this.OnGameOver.dispatch();
     }
-    else if (!this.gameRunning) {
+    else if (!this.gameRunning && _time <= 0) {
       if (FlxG.mouse.justPressed) {
         FlxG.switchState(new MenuState());
       }
@@ -267,11 +299,58 @@ class PlayState extends CommonState
     FlxG.watch.remove(_blockGrid, "numColors");
     FlxG.watch.remove(this, "round");
     FlxG.watch.remove(this, "_score");
+
+    this._blockGrid = null;
+    this._playGui = null;
+    this._gate = null;
+    this._gateGroup = null;
+    this._timeDisplay = null;
+    this._scoreDisplay = null;
+    this._timeChangeDisplay = null;
+    this._hints = null;
+    this._gravityIndicators = null;
+    this._gravityPanels = null;
   }
 
   // TODO: Unregister everything in the console, somehow
 
   private inline function _initCallbacks() {
+    this.OnGameStartAnimationStart.addOnce(function() {
+
+      FlxTween.num(
+        this._gridSize - 1,
+        0,
+        1,
+        {
+          type: FlxTween.ONESHOT,
+          onComplete: function(_) {
+
+            this.OnGameStartAnimationFinish.dispatch();
+          }
+        },
+        function(num:Float) {
+          var row = Math.round(num);
+
+            for (i in 0..._gridSize) {
+              var sprite = _gate.get(i, row);
+              sprite.kill();
+            }
+            FlxG.sound.play(AssetPaths.gate_move__wav);
+
+        }
+      );
+    });
+
+    this.OnGameStartAnimationFinish.addOnce(function() {
+      this.OnGameStart.dispatch();
+    });
+
+    this.OnGameStart.add(function() {
+      this.gameRunning = true;
+
+      FlxG.sound.playMusic(AssetPaths.music__ogg, 1, true);
+    });
+
     this.OnScore.add(function(score:Int) {
       this._score += score;
       _scoreDisplay.text = Std.string(this._score);
@@ -325,6 +404,31 @@ class PlayState extends CommonState
         // If there's music playing...
         FlxG.sound.music.stop();
       }
+
+      FlxTween.num(
+        0,
+        this._gridSize - 1,
+        1,
+        {
+          type: FlxTween.ONESHOT,
+          onComplete: function(_) {
+            this.OnGameOverAnimationFinish.dispatch();
+          }
+        },
+        function(num:Float) {
+          var row = Math.round(num);
+
+            for (i in 0..._gridSize) {
+              var sprite = _gate.get(i, row);
+              sprite.revive();
+            }
+            FlxG.sound.play(AssetPaths.gate_move__wav);
+        }
+      );
+    });
+
+    this.OnGameOverAnimationFinish.addOnce(function() {
+
 
       _displayGameOver();
 
