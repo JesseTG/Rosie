@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="8">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="91">
  <tileset firstgid="1" name="Overworld" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="images/tile-environment.png" width="128" height="128"/>
   <tile id="4">
@@ -33,18 +33,121 @@
    </properties>
   </tile>
  </tileset>
+ <tileset firstgid="65" name="Sprites" tilewidth="64" tileheight="32" tilecount="6" columns="0">
+  <tile id="0">
+   <image width="16" height="16" source="../assets-raw/raw/icon-clear-no.png"/>
+  </tile>
+  <tile id="1">
+   <image width="16" height="13" source="../assets-raw/raw/ok.png"/>
+  </tile>
+  <tile id="2">
+   <image width="16" height="16" source="../assets-raw/raw/no.png"/>
+  </tile>
+  <tile id="3">
+   <image width="16" height="16" source="../assets-raw/raw/icon-clear-yes.png"/>
+  </tile>
+  <tile id="4">
+   <image width="15" height="11" source="../assets-raw/raw/hand.png"/>
+  </tile>
+  <tile id="5">
+   <image width="64" height="32" source="../assets-raw/raw/button-00.png"/>
+  </tile>
+ </tileset>
  <imagelayer name="Background">
   <image source="images/bg.png" width="320" height="192"/>
  </imagelayer>
  <layer name="Ground" width="20" height="15">
   <data encoding="base64">
-   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAUAAAAFAAAABQAAAAUAAAAFAAAABQAAAAUAAAAFAAAABQAAAAUAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAA0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0AAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAADQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQAAAAQAAAAEAAAAHgAAACQAAAAkAAAAJAAAACQAAAAdAAAABAAAAAQAAAANAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANAAAABAAAAAQAAAAlAAAAAQAAAAEAAAABAAAAAQAAACwAAAAEAAAABAAAAA0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0AAAAEAAAABAAAACUAAAABAAAAAQAAAAEAAAABAAAALAAAAAQAAAAEAAAADQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQAAAAQAAAAEAAAAJQAAAAEAAAABAAAAAQAAAAEAAAAsAAAABAAAAAQAAAANAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANAAAABAAAAAQAAAAlAAAAAQAAAAEAAAABAAAAAQAAACwAAAAEAAAABAAAAA0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0AAAAEAAAABAAAAC0AAAAmAAAAJgAAACYAAAAmAAAALgAAAAQAAAAEAAAADQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAANAAAAAAAAAAAAAAACAAAAAwAAACoAAAAAAAAAEQAAABIAAAANAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAABAAAAA0AAAATAAAAAAAAAAoAAAALAAAAGgAAABoAAAAaAAAAGwAAAAYAAAAFAAAABQAAAAUAAAAFAAAABQAAAAUAAAAFAAAABQAAAAUAAAAFAAAADAAAABkAAAAaAAAAGgAAABoAAAAiAAAAIgAAACIAAAArAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAKQAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAAIgAAACIAAAAiAAAA
+   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAA0AAAAOAAAADgAAAA4AAAAPAAAAMQAAADIAAAANAAAADgAAAA4AAAAOAAAADwAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAAABAAAAAQAAAAEAAAABAAAAAQAAAAgAAAAIAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAAAAEAAAABAAAAAQAAAAEAAAABAAAACAAAAAgAAAABAAAAAQAAAAEAAAABAAAAAQAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAIAAAACAAAAAEAAAABAAAAAQAAAAEAAAABAAAABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAAABAAAAAQAAAAEAAAABAAAAAQAAAAgAAAAIAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAEAAAABAAAAAQAAAAEAAAABAAAACAAAAAgAAAABAAAAAQAAAAEAAAABAAAAAQAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAACAAAAAgAAAAIAAAACAAAAAgAAAAOgAAADoAAAAgAAAAIAAAACAAAAAgAAAAIAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAAIAAAACAAAAAgAAAAIAAAACAAAAA6AAAAOgAAACAAAAAgAAAAIAAAACAAAAAgAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAEAAAABAAAAAQAAAAEAAAABAAAACAAAAAgAAAABAAAAAQAAAAEAAAABAAAAAQAAAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAIAAAACAAAAAEAAAABAAAAAQAAAAEAAAABAAAABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAAABAAAAAQAAAAEAAAABAAAAAQAAAAgAAAAIAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAHAAAACoAAAAAAAAAEQAAABIAAAATAAAAAAAAABwAAAAEAAAABAAAAAQAAAAEAAAABAAAACAAAAAgAAAABAAAAAQAAAAEAAAABAAAAAQAAAAcAAAAGgAAABoAAAAaAAAAGgAAABoAAAAbAAAAJAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAIAAAACAAAAAEAAAABAAAAAQAAAAEAAAABAAAACQAAAAiAAAAIgAAACIAAAAiAAAAIgAAACMAAAAMAAAADQAAAA4AAAAOAAAADgAAAA8AAAAxAAAAMgAAAA0AAAAOAAAADgAAAA4AAAAPAAAADAAAACIAAAAiAAAAIgAAACIAAAAiAAAAKwAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAAGgAAABoAAAAaAAAA
   </data>
  </layer>
- <objectgroup name="Objects">
-  <object id="6" name="Grid" gid="7" x="80" y="48" width="16" height="16">
+ <layer name="Gate" width="20" height="15">
+  <data encoding="base64">
+   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAADMAAAAzAAAAMwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  </data>
+ </layer>
+ <objectgroup name="Objects" visible="0">
+  <object id="6" name="Grid" gid="7" x="112" y="32" width="16" height="16">
    <properties>
-    <property name="Size" type="int" value="10"/>
+    <property name="size" type="int" value="12"/>
+   </properties>
+  </object>
+  <object id="10" name="Gravity Indicator" type="Left" gid="1073741831" x="112" y="96" width="32" height="16" rotation="90"/>
+  <object id="12" name="Gravity Indicator" type="Right" gid="1073741831" x="320" y="96" width="32" height="16" rotation="90"/>
+  <object id="14" name="Gravity Indicator" type="Up" gid="7" x="192" y="0" width="32" height="16"/>
+  <object id="15" name="Gravity Indicator" type="Down" gid="7" x="192" y="208" width="32" height="16"/>
+  <object id="20" name="Gravity Panel" type="Left" gid="40" x="112" y="112" width="16" height="16"/>
+  <object id="22" name="Gravity Panel" type="Left" gid="40" x="128" y="112" width="16" height="16"/>
+  <object id="23" name="Gravity Panel" type="Left" gid="40" x="144" y="112" width="16" height="16"/>
+  <object id="24" name="Gravity Panel" type="Left" gid="40" x="160" y="112" width="16" height="16"/>
+  <object id="30" name="Gravity Panel" type="Left" gid="40" x="112" y="128" width="16" height="16"/>
+  <object id="31" name="Gravity Panel" type="Left" gid="40" x="128" y="128" width="16" height="16"/>
+  <object id="32" name="Gravity Panel" type="Left" gid="40" x="144" y="128" width="16" height="16"/>
+  <object id="33" name="Gravity Panel" type="Left" gid="40" x="160" y="128" width="16" height="16"/>
+  <object id="34" name="Gravity Panel" type="Right" gid="40" x="288" y="128" width="16" height="16"/>
+  <object id="35" name="Gravity Panel" type="Right" gid="40" x="272" y="112" width="16" height="16"/>
+  <object id="36" name="Gravity Panel" type="Right" gid="40" x="288" y="112" width="16" height="16"/>
+  <object id="37" name="Gravity Panel" type="Right" gid="40" x="240" y="128" width="16" height="16"/>
+  <object id="38" name="Gravity Panel" type="Right" gid="40" x="256" y="112" width="16" height="16"/>
+  <object id="39" name="Gravity Panel" type="Right" gid="40" x="272" y="128" width="16" height="16"/>
+  <object id="40" name="Gravity Panel" type="Right" gid="40" x="240" y="112" width="16" height="16"/>
+  <object id="41" name="Gravity Panel" type="Right" gid="40" x="256" y="128" width="16" height="16"/>
+  <object id="42" name="Gravity Panel" type="Up" gid="40" x="192" y="48" width="16" height="16"/>
+  <object id="43" name="Gravity Panel" type="Up" gid="40" x="208" y="48" width="16" height="16"/>
+  <object id="48" name="Gravity Panel" type="Up" gid="40" x="192" y="64" width="16" height="16"/>
+  <object id="49" name="Gravity Panel" type="Up" gid="40" x="208" y="64" width="16" height="16"/>
+  <object id="50" name="Gravity Panel" type="Up" gid="40" x="192" y="80" width="16" height="16"/>
+  <object id="51" name="Gravity Panel" type="Up" gid="40" x="208" y="80" width="16" height="16"/>
+  <object id="52" name="Gravity Panel" type="Up" gid="40" x="208" y="96" width="16" height="16"/>
+  <object id="53" name="Gravity Panel" type="Up" gid="40" x="192" y="96" width="16" height="16"/>
+  <object id="54" name="Gravity Panel" type="Down" gid="40" x="208" y="208" width="16" height="16"/>
+  <object id="55" name="Gravity Panel" type="Down" gid="40" x="208" y="192" width="16" height="16"/>
+  <object id="56" name="Gravity Panel" type="Down" gid="40" x="192" y="192" width="16" height="16"/>
+  <object id="57" name="Gravity Panel" type="Down" gid="40" x="208" y="176" width="16" height="16"/>
+  <object id="58" name="Gravity Panel" type="Down" gid="40" x="192" y="176" width="16" height="16"/>
+  <object id="59" name="Gravity Panel" type="Down" gid="40" x="192" y="208" width="16" height="16"/>
+  <object id="60" name="Gravity Panel" type="Down" gid="40" x="192" y="160" width="16" height="16"/>
+  <object id="61" name="Gravity Panel" type="Down" gid="40" x="208" y="160" width="16" height="16"/>
+  <object id="62" name="Gravity Panel" type="Left" gid="40" x="176" y="128" width="16" height="16"/>
+  <object id="63" name="Gravity Panel" type="Left" gid="40" x="176" y="112" width="16" height="16"/>
+  <object id="64" name="Gravity Panel" type="Up" gid="40" x="192" y="32" width="16" height="16"/>
+  <object id="65" name="Gravity Panel" type="Up" gid="40" x="208" y="32" width="16" height="16"/>
+  <object id="66" name="Gravity Panel" type="Right" gid="40" x="224" y="128" width="16" height="16"/>
+  <object id="67" name="Gravity Panel" type="Right" gid="40" x="224" y="112" width="16" height="16"/>
+  <object id="68" name="Gravity Panel" type="Down" gid="40" x="208" y="144" width="16" height="16"/>
+  <object id="69" name="Gravity Panel" type="Down" gid="40" x="192" y="144" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="GUI" visible="0">
+  <object id="72" name="High Score Display" gid="7" x="8" y="208" width="16" height="8">
+   <properties>
+    <property name="letterSpacing" type="int" value="-3"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="PlayState GUI" visible="0">
+  <object id="74" name="Score Display" gid="7" x="8" y="24" width="16" height="16">
+   <properties>
+    <property name="autoSize" type="bool" value="true"/>
+    <property name="letterSpacing" type="int" value="2"/>
+   </properties>
+  </object>
+  <object id="75" name="Time Remaining" gid="7" x="8" y="224" width="16" height="8">
+   <properties>
+    <property name="letterSpacing" type="int" value="-3"/>
+   </properties>
+  </object>
+  <object id="78" name="Hint" type="No" gid="65" x="32" y="128" width="16" height="16"/>
+  <object id="81" name="Hint" type="Yes" gid="68" x="32" y="160" width="16" height="16"/>
+  <object id="82" name="Hint" type="Yes" gid="66" x="64" y="160" width="16" height="13"/>
+  <object id="83" name="Hint" type="No" gid="67" x="64" y="128" width="16" height="16"/>
+  <object id="85" name="Hint Hand" gid="69" x="16" y="128" width="15" height="11"/>
+  <object id="86" name="Hint Hand" gid="69" x="16" y="160" width="15" height="11"/>
+ </objectgroup>
+ <objectgroup name="MenuState GUI">
+  <object id="87" name="Title" gid="7" x="168" y="80" width="80" height="32"/>
+  <object id="90" name="Play Button" gid="70" x="176" y="192" width="64" height="32">
+   <properties>
+    <property name="text" value="START"/>
    </properties>
   </object>
  </objectgroup>
