@@ -347,6 +347,7 @@ class PlayState extends CommonState
 
     this.OnGameStart.add(function() {
       this.gameRunning = true;
+      // TODO: Init the block event handlers in here
 
       FlxG.sound.playMusic(AssetPaths.music__ogg, 1, true);
     });
