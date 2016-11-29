@@ -41,6 +41,8 @@ import entities.BlockGrid;
 import entities.GravityIndicator.GravityIndicatorState;
 import entities.GravityPanel;
 import entities.GravityDirection;
+import util.ReverseIterator;
+import util.FlxAsyncIteratorLoop;
 import haxe.ds.ObjectMap;
 
 using Lambda;
@@ -317,28 +319,27 @@ class PlayState extends CommonState
   private inline function _initCallbacks() {
     this.OnGameStartAnimationStart.addOnce(function() {
 
-      FlxTween.num(
-        this._gridSize - 1,
-        0,
-        1,
-        {
-          type: FlxTween.ONESHOT,
-          onComplete: function(_) {
-
-            this.OnGameStartAnimationFinish.dispatch();
+      var _gameStartGate : FlxAsyncIteratorLoop<Int> = null;
+      _gameStartGate = new FlxAsyncIteratorLoop<Int>(
+        new ReverseIterator(_gridSize - 1, 0),
+        function(row) {
+          for (i in 0..._gridSize) {
+            var sprite = _gate.get(i, row);
+            sprite.kill();
           }
+
+          FlxG.sound.play(AssetPaths.gate_move__wav);
         },
-        function(num:Float) {
-          var row = Math.round(num);
-
-            for (i in 0..._gridSize) {
-              var sprite = _gate.get(i, row);
-              sprite.kill();
-            }
-            FlxG.sound.play(AssetPaths.gate_move__wav);
-
-        }
+        null,
+        function() {
+          this.remove(_gameStartGate);
+          new FlxTimer().start(1, function(_) this.OnGameStartAnimationFinish.dispatch());
+        },
+        8
       );
+
+      this.add(_gameStartGate);
+      _gameStartGate.start();
     });
 
     this.OnGameStartAnimationFinish.addOnce(function() {
@@ -406,26 +407,25 @@ class PlayState extends CommonState
         FlxG.sound.music.stop();
       }
 
-      FlxTween.num(
-        0,
-        this._gridSize - 1,
-        1,
-        {
-          type: FlxTween.ONESHOT,
-          onComplete: function(_) {
-            this.OnGameOverAnimationFinish.dispatch();
+      var _gameEndGate = new FlxAsyncIteratorLoop<Int>(
+        0..._gridSize,
+        function(row) {
+          for (i in 0..._gridSize) {
+            var sprite = _gate.get(i, row);
+            sprite.revive();
           }
-        },
-        function(num:Float) {
-          var row = Math.round(num);
 
-            for (i in 0..._gridSize) {
-              var sprite = _gate.get(i, row);
-              sprite.revive();
-            }
-            FlxG.sound.play(AssetPaths.gate_move__wav);
-        }
+          FlxG.sound.play(AssetPaths.gate_move__wav);
+        },
+        null,
+        function() {
+          new FlxTimer().start(0.5, function(_) this.OnGameOverAnimationFinish.dispatch());
+        },
+        8
       );
+
+      this.add(_gameEndGate);
+      _gameEndGate.start();
     });
 
     this.OnGameOverAnimationFinish.addOnce(function() {
