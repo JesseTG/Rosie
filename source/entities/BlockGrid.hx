@@ -110,6 +110,19 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.OnNoMoreMoves.add(this.OnBeforeBlocksGenerated.dispatch);
     this.OnNoMoreMoves.add(this._noMoreMoves);
     this.OnBadClick.add(this._shakeBlocks);
+    this.OnSuccessfulClick.add(function(blocks) {
+      this.readyForInput = false;
+      blocks.iter(function(block:Block) {
+        FlxMouseEventManager.remove(block);
+        _blockGrid.remove(block);
+        block.kill();
+        // TODO: Avoid a linear lookup whenever removing a block
+      });
+
+      this._startMovingBlocks();
+      this._rotateGravity();
+    });
+
 
     this._generateBlocks();
     // TODO: This doesn't feel right; mull it over
@@ -170,7 +183,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
     // TODO: Document this loop
     while (blocks.length > 0) {
-      var group = _getBlockGroup(blocks.pop());
+      var group = getBlockGroup(blocks.pop());
       if (group.length >= 3) return true;
       for (b in group) {
         var removed = blocks.remove(b);
@@ -184,9 +197,9 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
    * Given a block, return its flood-filled group of the same color.
    * Resulting array is not in any particular order.
    */
-  private function _getBlockGroup(clicked:Block) : Array<Block> {
+  public function getBlockGroup(clicked:Block) : Array<Block> {
     var blocks = new Array<Block>();
-    if (clicked == null) return blocks;
+    if (clicked == null || !clicked.alive || !clicked.exists) return blocks;
 
     var queue = new ArrayedQueue<Block>();
     queue.enqueue(clicked);
@@ -216,6 +229,17 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     }
 
     return blocks;
+  }
+
+  public function handleBlockGroup(blocks:Array<Block>) {
+    if (blocks != null && blocks.length >= 3) {
+      // If the selected block group has at least 3 blocks...
+
+      this.OnSuccessfulClick.dispatch(blocks);
+    }
+    else {
+      this.OnBadClick.dispatch(blocks);
+    }
   }
 
   private function _startMovingBlocks() {
@@ -371,31 +395,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
         // TODO: Don't do Std.random twice, just do it out here
 
         b.setPosition(gridX * 16, gridY * 16);
-
-        FlxMouseEventManager.add(b, function(block:Block) {
-          if (this.readyForInput) {
-            // If no blocks are moving...
-            var blocks = this._getBlockGroup(block);
-            this.readyForInput = false;
-
-            if (blocks.length >= 3) {
-              // If the selected block group has at least 3 blocks...
-              blocks.iter(function(toKill:Block) {
-                FlxMouseEventManager.remove(toKill);
-                _blockGrid.remove(toKill);
-                toKill.kill();
-                // TODO: Avoid a linear lookup whenever removing a block
-              });
-
-              this.OnSuccessfulClick.dispatch(blocks);
-              this._startMovingBlocks();
-              this._rotateGravity();
-            }
-            else {
-              this.OnBadClick.dispatch(blocks);
-            }
-          }
-        }, false, true, false);
 
         this.add(b);
         // TODO: Ensure I'm not adding the same block twice

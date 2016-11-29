@@ -340,6 +340,16 @@ class PlayState extends CommonState
     });
 
     this.OnGameStartAnimationFinish.addOnce(function() {
+      _blockGrid.forEach(function(b) {
+        FlxMouseEventManager.add(b, function(block:Block) {
+          if (_blockGrid.readyForInput) {
+            // If we're ready for the player to make a move...
+
+            _blockGrid.handleBlockGroup(_blockGrid.getBlockGroup(block));
+          }
+        }, false, true, false);
+      });
+
       this.OnGameStart.dispatch();
     });
 
