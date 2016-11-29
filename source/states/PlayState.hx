@@ -162,9 +162,6 @@ class PlayState extends CommonState
     });
     D.assert(!this._gravityIndicators.has(null));
 
-    this._gravityIndicators[_blockGrid.gravity.getIndex()].state = GravityIndicatorState.On;
-    this._gravityIndicators[_blockGrid.gravity.getIndex()].visible = true;
-
     _playGui.objects.iter(function(object:TiledObject) {
       switch (object.name) {
         case "Score Display":
@@ -351,6 +348,12 @@ class PlayState extends CommonState
       // TODO: Init the block event handlers in here
 
       FlxG.sound.playMusic(AssetPaths.music__ogg, 1, true);
+    });
+
+    this.OnGameStart.add(function() {
+      var indicator = _gravityIndicators[_blockGrid.gravity.getIndex()];
+      indicator.state = GravityIndicatorState.On;
+      indicator.visible = true;
     });
 
     this.OnScore.add(function(score:Int) {
