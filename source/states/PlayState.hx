@@ -278,7 +278,6 @@ class PlayState extends CommonState
 
     if (_time <= 0 && this.gameRunning) {
       this.gameRunning = false;
-      FlxMouseEventManager.removeAll();
       this.OnGameOver.dispatch();
     }
     else if (!this.gameRunning && _time <= 0) {
@@ -419,6 +418,8 @@ class PlayState extends CommonState
         // If there's music playing...
         FlxG.sound.music.stop();
       }
+
+      FlxMouseEventManager.removeAll();
 
       var _gameEndGate = new FlxAsyncIteratorLoop<Int>(
         0..._gridSize,
