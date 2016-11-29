@@ -88,7 +88,7 @@ ApplicationMain.init = function() {
 	}
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "1", company : "Corundum Games", file : "Rosie", fps : 60, name : "Rosie", orientation : "", packageName : "com.corundumgames.rosie", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : true, hardware : false, height : 480, parameters : "{}", resizable : true, stencilBuffer : true, title : "Rosie", vsync : true, width : 640, x : null, y : null}]};
+	ApplicationMain.config = { build : "2", company : "Corundum Games", file : "Rosie", fps : 60, name : "Rosie", orientation : "", packageName : "com.corundumgames.rosie", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : true, hardware : false, height : 480, parameters : "{}", resizable : true, stencilBuffer : true, title : "Rosie", vsync : true, width : 640, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
