@@ -57,6 +57,7 @@ class PlayState extends CommonState
   private var _gate: Array2<FlxSprite>;
   private var _gateGroup : FlxSpriteGroup;
   private var _gridSize : Int;
+  private var _gameOverText : FlxBitmapText;
 
 
   private var _score : Int;
@@ -190,6 +191,14 @@ class PlayState extends CommonState
             y = _timeDisplay.y,
             alignment = _timeDisplay.alignment,
             letterSpacing = _timeDisplay.letterSpacing
+          );
+        case "Game Over":
+          _gameOverText = new FlxBitmapText(this.font).init(
+            text = object.properties.text,
+            x = object.x,
+            y = object.y - object.height,
+            alignment = FlxTextAlign.CENTER,
+            letterSpacing = Std.parseInt(object.properties.letterSpacing)
           );
         case "Hint Hand":          // default image load
           var source = spriteSet.getImageSourceByGid(object.gid).source;
@@ -445,7 +454,7 @@ class PlayState extends CommonState
     this.OnGameOverAnimationFinish.addOnce(function() {
 
 
-      _displayGameOver();
+      this.add(_gameOverText);
       this.remove(_blockGrid);
 
       FlxG.sound.play(AssetPaths.game_over__ogg);
@@ -467,14 +476,6 @@ class PlayState extends CommonState
 
   public override function onFocusLost() {
     FlxG.camera.fill(FlxColor.BLACK, false);
-  }
-
-  private function _displayGameOver() {
-    var gameOver = new FlxBitmapText(font);
-    gameOver.text = "Game Over";
-    gameOver.screenCenter();
-
-    this.add(gameOver);
   }
 
   private function _addBonusTime(blocksCreated:Int) {
