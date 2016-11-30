@@ -313,6 +313,9 @@ class PlayState extends CommonState
 
   private inline function _initCallbacks() {
     this.OnGameStartAnimationStart.addOnce(function() {
+      _blockGrid.forEach(function(block) {
+        FlxMouseEventManager.setObjectMouseEnabled(block, false);
+      });
 
       var _gameStartGate : FlxAsyncIteratorLoop<Int> = null;
       _gameStartGate = new FlxAsyncIteratorLoop<Int>(
@@ -339,13 +342,7 @@ class PlayState extends CommonState
 
     this.OnGameStartAnimationFinish.addOnce(function() {
       _blockGrid.forEach(function(b) {
-        FlxMouseEventManager.add(b, function(block:Block) {
-          if (_blockGrid.readyForInput) {
-            // If we're ready for the player to make a move...
-
-            _blockGrid.handleBlockGroup(_blockGrid.getBlockGroup(block));
-          }
-        }, false, true, false);
+        FlxMouseEventManager.setObjectMouseEnabled(b, true);
       });
 
       this.OnGameStart.dispatch();
@@ -359,7 +356,9 @@ class PlayState extends CommonState
     });
 
     this.OnGameStart.add(function() {
-      var indicator = _gravityIndicators[_blockGrid.gravity.getIndex()];
+      var index = _blockGrid.gravity.getIndex();
+      _gravityPanels[index].visible = true;
+      var indicator = _gravityIndicators[index];
       indicator.state = GravityIndicatorState.On;
       indicator.visible = true;
     });

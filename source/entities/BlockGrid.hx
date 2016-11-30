@@ -113,7 +113,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.OnSuccessfulClick.add(function(blocks) {
       this.readyForInput = false;
       blocks.iter(function(block:Block) {
-        FlxMouseEventManager.remove(block);
+        FlxMouseEventManager.setObjectMouseEnabled(block, false);
         _blockGrid.remove(block);
         block.kill();
         // TODO: Avoid a linear lookup whenever removing a block
@@ -386,6 +386,13 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
           var blockColor = BlockColor.All[Std.random(this.numColors)];
           var bb = new Block(gridX * 16, gridY * 16, this._frames, blockColor);
           bb.ID = this._blocksCreated++;
+          FlxMouseEventManager.add(bb, function(bbb:Block) {
+            if (this.readyForInput) {
+              // If we're ready for the player to make a move...
+
+              this.handleBlockGroup(this.getBlockGroup(bbb));
+            }
+          }, false, true, false);
 
           trace('New block $bb created');
           return bb;
@@ -395,6 +402,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
         // TODO: Don't do Std.random twice, just do it out here
 
         b.setPosition(gridX * 16, gridY * 16);
+
+        FlxMouseEventManager.setObjectMouseEnabled(b, true);
 
         this.add(b);
         // TODO: Ensure I'm not adding the same block twice
