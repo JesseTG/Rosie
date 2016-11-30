@@ -447,6 +447,8 @@ class PlayState extends CommonState
 
       _displayGameOver();
 
+      FlxG.sound.play(AssetPaths.game_over__ogg);
+
       var highScore = 0;
       if (FlxG.save.data.highScore != null) {
         highScore = cast(FlxG.save.data.highScore, Int);
