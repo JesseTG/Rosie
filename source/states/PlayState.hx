@@ -245,6 +245,7 @@ class PlayState extends CommonState
     FlxG.watch.add(_blockGrid, "numColors", "# Colors");
     FlxG.watch.add(this, "round", "Round");
     FlxG.watch.add(this, "_score", "Score");
+    FlxG.watch.add(this, "_time", "Time");
 
     for (p in _gravityPanels) {
       this.add(p);
@@ -296,6 +297,7 @@ class PlayState extends CommonState
     FlxG.watch.remove(_blockGrid, "numColors");
     FlxG.watch.remove(this, "round");
     FlxG.watch.remove(this, "_score");
+    FlxG.watch.remove(this, "_time");
 
     this._blockGrid = null;
     this._playGui = null;
