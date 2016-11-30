@@ -446,6 +446,7 @@ class PlayState extends CommonState
 
 
       _displayGameOver();
+      this.remove(_blockGrid);
 
       FlxG.sound.play(AssetPaths.game_over__ogg);
 
