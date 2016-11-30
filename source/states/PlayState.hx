@@ -372,7 +372,7 @@ class PlayState extends CommonState
     // TODO: Tween the score counter with FlxNumTween
 
     _blockGrid.OnSuccessfulClick.add(function(blocks:Array<Block>) {
-      FlxG.sound.play(AssetPaths.clear_blocks__wav);
+      FlxG.sound.play(AssetPaths.clear_blocks__wav, false, true);
 
       if (blocks.length >= 3) {
         // If we cleared at least 3 blocks...
@@ -410,7 +410,7 @@ class PlayState extends CommonState
 
     this._blockGrid.OnBadClick.add(this._subtractTime);
     this._blockGrid.OnBadClick.add(function(_) {
-      FlxG.sound.play(AssetPaths.not_allowed__wav);
+      FlxG.sound.play(AssetPaths.not_allowed__wav, false, true);
     });
 
     this.OnGameOver.addOnce(function() {
@@ -429,7 +429,7 @@ class PlayState extends CommonState
             sprite.revive();
           }
 
-          FlxG.sound.play(AssetPaths.gate_move__wav);
+          FlxG.sound.play(AssetPaths.gate_move__wav, false, true);
         },
         null,
         function() {
