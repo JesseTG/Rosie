@@ -461,7 +461,11 @@ class PlayState extends CommonState
       this.add(_gameOverText);
       this.remove(_blockGrid);
 
-      FlxG.sound.playMusic(AssetPaths.game_over__ogg, false);
+      FlxG.sound.play(AssetPaths.game_over__ogg, false, function() {
+        new FlxTimer().start(1, function(_) {
+          FlxG.sound.playMusic(AssetPaths.game_over_loop__ogg);
+        });
+      });
 
       var highScore = 0;
       if (FlxG.save.data.highScore != null) {
