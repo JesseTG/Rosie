@@ -178,7 +178,7 @@ class PlayState extends CommonState
           );
         case "Time Remaining":
           _timeDisplay = new FlxBitmapText(this.textFont).init(
-            text = "0",
+            text = Printf.format("⌚   %.1f", [Math.max(0, _time)]),
             x = object.x,
             y = object.y,
             alignment = FlxTextAlign.RIGHT,
