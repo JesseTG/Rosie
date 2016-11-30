@@ -110,6 +110,9 @@ class PlayState extends CommonState
     this.OnGameStartAnimationFinish.add(function() trace("OnGameStartAnimationFinish"));
 #end
 
+    _score = 0;
+    _time = 60;
+
     this._playGui = cast(this.map.getLayer("PlayState GUI"));
     this._gravityIndicators = [for (i in 0...GravityDirection.Count) null];
     this._gravityPanels = [for (i in 0...GravityDirection.Count) {
@@ -228,10 +231,6 @@ class PlayState extends CommonState
       };
     });
 
-
-
-    _score = 0;
-    _time = 60;
 
     this._initCallbacks();
 
