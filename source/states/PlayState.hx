@@ -299,6 +299,10 @@ class PlayState extends CommonState
   override public function destroy() {
     super.destroy();
 
+    if (FlxG.sound.music != null) {
+      FlxG.sound.music.stop();
+    }
+
     FlxG.watch.remove(_blockGrid, "_blocksMoving");
     FlxG.watch.removeExpression("blockGrid.countLiving()");
     FlxG.watch.removeExpression("blockGrid.countDead()");
@@ -457,7 +461,7 @@ class PlayState extends CommonState
       this.add(_gameOverText);
       this.remove(_blockGrid);
 
-      FlxG.sound.play(AssetPaths.game_over__ogg);
+      FlxG.sound.playMusic(AssetPaths.game_over__ogg, false);
 
       var highScore = 0;
       if (FlxG.save.data.highScore != null) {
