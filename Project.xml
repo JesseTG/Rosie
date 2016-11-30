@@ -29,8 +29,7 @@
 
 	<set name="BUILD_DIR" value="export" />
 	<classpath name="source" />
-	<assets path="assets" unless="html5"/>
-	<assets path="assets" exclude="*.wav" if="html5" />
+	<assets path="assets" />
 
 	<haxedef name="analyzer"/>
 	<haxedef name="generic"/>
