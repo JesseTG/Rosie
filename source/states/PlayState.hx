@@ -29,6 +29,7 @@ import flixel.util.FlxSignal.FlxTypedSignal;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.util.FlxAxes;
+import flixel.addons.display.FlxTiledSprite;
 
 import de.polygonal.Printf;
 import de.polygonal.core.util.Assert.D;
@@ -54,8 +55,7 @@ class PlayState extends CommonState
 
   private var _blockGrid : BlockGrid;
   private var _playGui : TiledObjectLayer;
-  private var _gate: Array2<FlxSprite>;
-  private var _gateGroup : FlxSpriteGroup;
+  private var _gate : FlxTiledSprite;
   private var _gridSize : Int;
   private var _gameOverText : FlxBitmapText;
 
@@ -141,18 +141,20 @@ class PlayState extends CommonState
         case "Grid":
           // TODO: Come up with a better way to render the grid
           _gridSize = Std.parseInt(object.properties.size);
-          this._gateGroup = new FlxSpriteGroup(object.x, object.y - tileSet.tileHeight);
-          this._gate = new Array2<FlxSprite>(_gridSize, _gridSize);
-          this._gate.forEach(function(_,xIndex,yIndex) {
-            var sprite = new FlxSprite().init(
-              x = xIndex * tileSet.tileWidth,
-              y = yIndex * tileSet.tileHeight,
-              frames = sprites,
-              frame = sprites.getByName("gate.png")
-            );
-            _gateGroup.add(sprite);
-            return sprite;
-          });
+          this._gate = new FlxTiledSprite(
+            sprites.parent,
+            _gridSize * tileSet.tileWidth,
+            _gridSize * tileSet.tileHeight,
+            true,
+            true
+          )
+          .init(
+            x = object.x,
+            y = object.y - tileSet.tileHeight,
+            pixelPerfectRender = true,
+            pixelPerfectPosition = true
+          );
+          this._gate.loadFrame(sprites.getByName("gate.png"));
 
           _blockGrid = new BlockGrid(
             object.x,
@@ -247,6 +249,7 @@ class PlayState extends CommonState
     FlxG.console.registerObject("tileSet", tileSet);
     FlxG.console.registerObject("sprites", sprites);
     FlxG.console.registerObject("log", FlxG.log);
+    FlxG.console.registerObject("gate", _gate);
     FlxG.watch.add(_blockGrid, "_blocksMoving", "Blocks Moving");
     FlxG.watch.addExpression("blockGrid.countLiving()", "# Blocks Alive");
     FlxG.watch.addExpression("blockGrid.countDead()", "# Blocks Dead");
@@ -263,7 +266,7 @@ class PlayState extends CommonState
       this.add(g);
     }
     this.add(_blockGrid);
-    this.add(_gateGroup);
+    this.add(_gate);
     this.add(_timeDisplay);
     this.add(_timeChangeDisplay);
     this.add(_scoreDisplay);
@@ -315,7 +318,6 @@ class PlayState extends CommonState
     this._blockGrid = null;
     this._playGui = null;
     this._gate = null;
-    this._gateGroup = null;
     this._timeDisplay = null;
     this._scoreDisplay = null;
     this._timeChangeDisplay = null;
@@ -334,18 +336,18 @@ class PlayState extends CommonState
 
       var _gameStartGate : FlxAsyncIteratorLoop<Int> = null;
       _gameStartGate = new FlxAsyncIteratorLoop<Int>(
-        new ReverseIterator(_gridSize - 1, 0),
+        0..._gridSize,
         function(row) {
-          for (i in 0..._gridSize) {
-            var sprite = _gate.get(i, row);
-            sprite.kill();
-          }
-
-          FlxG.sound.play(AssetPaths.gate_move__wav);
+          _gate.height -= tileSet.tileHeight;
+          // NOTE: Can't set a sprite's height to 0, so we just remove it when
+          // it's only one row deep (see the callback below)
+          FlxG.sound.play(AssetPaths.gate_move__wav, false, true);
         },
         null,
         function() {
           this.remove(_gameStartGate);
+          this.remove(_gate);
+          _gate.kill();
           new FlxTimer().start(1, function(_) this.OnGameStartAnimationFinish.dispatch());
         },
         8
@@ -435,16 +437,22 @@ class PlayState extends CommonState
       FlxMouseEventManager.removeAll();
 
       var _gameEndGate = new FlxAsyncIteratorLoop<Int>(
-        0..._gridSize,
+        0..._gridSize - 1,
         function(row) {
-          for (i in 0..._gridSize) {
-            var sprite = _gate.get(i, row);
-            sprite.revive();
-          }
+          _gate.height += tileSet.tileHeight;
 
           FlxG.sound.play(AssetPaths.gate_move__wav, false, true);
         },
-        null,
+        function() {
+          // NOTE: When this animation starts, the gate will be of height 16,
+          // because you can't set a sprite's size to be 0.  So the OnStart
+          // callback will add the sprite to the screen.  (This is also why we
+          // run the animation for one LESS than the grid height)
+
+          FlxG.sound.play(AssetPaths.gate_move__wav, false, true);
+          _gate.revive();
+          this.add(_gate);
+        },
         function() {
           new FlxTimer().start(0.5, function(_) this.OnGameOverAnimationFinish.dispatch());
         },
