@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="91">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="92">
  <tileset firstgid="1" name="Overworld" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="images/tile-environment.png" width="128" height="128"/>
   <tile id="4">
@@ -142,6 +142,12 @@
   <object id="83" name="Hint" type="No" gid="67" x="64" y="128" width="16" height="16"/>
   <object id="85" name="Hint Hand" gid="69" x="16" y="128" width="15" height="11"/>
   <object id="86" name="Hint Hand" gid="69" x="16" y="160" width="15" height="11"/>
+  <object id="91" name="Game Over" gid="7" x="136" y="128" width="144" height="32">
+   <properties>
+    <property name="letterSpacing" type="int" value="0"/>
+    <property name="text" value="Game Over"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="MenuState GUI">
   <object id="87" name="Title" gid="7" x="168" y="80" width="80" height="32"/>
