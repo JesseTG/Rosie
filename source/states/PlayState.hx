@@ -42,6 +42,7 @@ import entities.BlockGrid;
 import entities.GravityIndicator.GravityIndicatorState;
 import entities.GravityPanel;
 import entities.GravityDirection;
+import entities.Rosie;
 import util.ReverseIterator;
 import util.FlxAsyncIteratorLoop;
 import haxe.ds.ObjectMap;
@@ -68,6 +69,7 @@ class PlayState extends CommonState
   private var _hints : FlxSpriteGroup;
   private var _gravityIndicators : Array<GravityIndicator>;
   private var _gravityPanels : Array<FlxTypedGroup<GravityPanel>>;
+  private var _rosie : Rosie;
   // TODO: Organize this crap
 
   public var OnGameStartAnimationStart(default, null) : FlxTypedSignal<Void->Void>;
@@ -162,6 +164,9 @@ class PlayState extends CommonState
             _gridSize,
             sprites
           );
+        case "Rosie":
+          _rosie = new Rosie(object.x, object.y - object.height, sprites).init(
+          );
         default:
           // nop
       }
@@ -250,6 +255,7 @@ class PlayState extends CommonState
     FlxG.console.registerObject("sprites", sprites);
     FlxG.console.registerObject("log", FlxG.log);
     FlxG.console.registerObject("gate", _gate);
+    FlxG.console.registerObject("rosie", _rosie);
     FlxG.watch.add(_blockGrid, "_blocksMoving", "Blocks Moving");
     FlxG.watch.addExpression("blockGrid.countLiving()", "# Blocks Alive");
     FlxG.watch.addExpression("blockGrid.countDead()", "# Blocks Dead");
@@ -266,6 +272,7 @@ class PlayState extends CommonState
       this.add(g);
     }
     this.add(_blockGrid);
+    this.add(_rosie);
     this.add(_gate);
     this.add(_timeDisplay);
     this.add(_timeChangeDisplay);

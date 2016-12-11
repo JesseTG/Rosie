@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="92">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="93">
  <tileset firstgid="1" name="Overworld" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="images/tile-environment.png" width="128" height="128"/>
   <tile id="4">
@@ -116,6 +116,7 @@
   <object id="67" name="Gravity Panel" type="Right" gid="40" x="224" y="112" width="16" height="16"/>
   <object id="68" name="Gravity Panel" type="Down" gid="40" x="208" y="144" width="16" height="16"/>
   <object id="69" name="Gravity Panel" type="Down" gid="40" x="192" y="144" width="16" height="16"/>
+  <object id="92" name="Rosie" gid="7" x="16" y="192" width="16" height="21"/>
  </objectgroup>
  <objectgroup name="GUI" visible="0">
   <object id="72" name="High Score Display" gid="7" x="8" y="208" width="16" height="8">
