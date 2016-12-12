@@ -79,7 +79,7 @@ class Rosie extends FlxNestedSprite {
     this.updateHitbox();
 
     this.emote = new RosieEmote(x, y, this.frames).init(
-      relativeX = this.width / 2.0,
+      relativeX = 5,
       relativeY = -this.height / 2
     );
 
