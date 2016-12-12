@@ -80,7 +80,9 @@ class CommonState extends FlxState {
       'assets/${tileSet.imageSource}',
       tileSet.tileWidth,
       tileSet.tileHeight,
-      1 // Tiled uses 0-indexing, but I think FlxTilemap uses 1-indexing
+      1, // Tiled uses 0-indexing, but I think FlxTilemap uses 1-indexing
+      1,
+      27
     );
 
     this.bgImage = new FlxBackdrop('assets/${bgLayer.imagePath}', 0, 0, false, false).init(
