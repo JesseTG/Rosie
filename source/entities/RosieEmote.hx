@@ -30,6 +30,7 @@ class RosieEmote extends FlxNestedSprite {
     this.animation.addByNames(cast Neutral, [for (i in 0...4) "emotes/neutral-00.png"], 1, false);
     this.animation.addByNames(cast Worried, [for (i in 0...4) "emotes/worried-00.png"], 1, false);
     this.animation.addByNames(cast Huh, [for (i in 0...4) "emotes/huh.png"], 1, false);
+    this.animation.addByNames(cast Sad, [for (i in 0...4) "emotes/sad-00.png"], 1, false);
     this.animation.addByStringIndices(
       cast Bored,
       "emotes/bored-",
@@ -108,4 +109,5 @@ abstract EmoteState(String) {
   var Neutral = "neutral";
   var Worried = "worried";
   var Huh = "huh";
+  var Sad = "sad";
 }
