@@ -43,6 +43,8 @@ import entities.GravityIndicator.GravityIndicatorState;
 import entities.GravityPanel;
 import entities.GravityDirection;
 import entities.Rosie;
+import entities.RosieEmote;
+import entities.RosieEmote.EmoteState;
 import util.ReverseIterator;
 import util.FlxAsyncIteratorLoop;
 import haxe.ds.ObjectMap;
@@ -407,6 +409,12 @@ class PlayState extends CommonState
 
       if (blocks.length >= 6) {
         this._addBonusTime(Std.int(blocks.length * 0.25));
+      }
+    });
+
+    _blockGrid.OnSuccessfulClick.add(function(blocks) {
+      if (_rosie.emote.state == EmoteState.None) {
+        _rosie.emote.state = EmoteState.Happy;
       }
     });
 
