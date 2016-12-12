@@ -35,6 +35,7 @@
 	<haxedef name="generic"/>
 	<haxeflag name="--times"/>
 	<haxeflag name="-dce" value="full" />
+	<haxeflag name="--macro" value="keep('entities.Rosie')" />
 	<haxeflag name="--macro" value="keep('flixel')" if="debug" />
 	<!-- _______________________________ Libraries ______________________________ -->
 
