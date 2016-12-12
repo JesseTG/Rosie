@@ -51,7 +51,7 @@ class RosieEmote extends FlxNestedSprite {
     this.animation.addByStringIndices(
       cast Doh,
       "emotes/doh-",
-      ["00", "01", "00", "01", "00", "00"],
+      ["00", "01", "00", "01",  "00", "01",  "00", "01", "00", "00", "00", "00"],
       ".png",
       1,
       false
