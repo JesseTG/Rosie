@@ -404,19 +404,20 @@ class PlayState extends CommonState
     _blockGrid.OnSuccessfulClick.add(function(blocks:Array<Block>) {
       FlxG.sound.play(AssetPaths.clear_blocks__wav, false, true);
 
-      if (blocks.length >= 3) {
-        // If we cleared at least 3 blocks...
-        this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
+      this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
+      // We'll always have cleared at least 3 blocks here.
+
+      if (blocks.length == 3 && _rosie.emote.state == EmoteState.None && FlxG.random.bool(60)) {
+        // If we cleared exactly 3 blocks, Rosie's not emoting, and then with 60% probability...
+        _rosie.emote.state = EmoteState.Neutral; // Rosie is not impressed
       }
 
       if (blocks.length >= 6) {
         this._addBonusTime(Std.int(blocks.length * 0.25));
       }
-    });
 
-    _blockGrid.OnSuccessfulClick.add(function(blocks) {
-      if (_rosie.emote.state == EmoteState.None && FlxG.random.bool(60)) {
-        _rosie.emote.state = EmoteState.Happy;
+      if (blocks.length >= 10) {
+        _rosie.emote.state = EmoteState.VeryHappy;
       }
     });
 
