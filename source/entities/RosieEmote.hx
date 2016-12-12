@@ -68,7 +68,7 @@ class RosieEmote extends FlxNestedSprite {
     this.animation.addByStringIndices(
       cast VeryHappy,
       "emotes/very-happy-",
-      ["00", "01", "00", "01", "00", "00"],
+      ["00", "01", "00", "01",  "00", "01",  "00", "01", "00", "00", "00", "00"],
       ".png",
       2,
       false
