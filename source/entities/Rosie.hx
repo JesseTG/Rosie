@@ -10,9 +10,12 @@ import flixel.addons.util.FlxFSM;
 import flixel.addons.util.FlxFSM.FlxFSMState;
 import flixel.addons.util.FlxFSM.FlxFSMTransitionTable;
 import flixel.FlxG;
+import flixel.addons.display.FlxNestedSprite;
 import flixel.math.FlxMath;
 
-class Rosie extends FlxSprite {
+using ObjectInit;
+
+class Rosie extends FlxNestedSprite {
   private static inline var IDLE_FPS = 6;
   private static inline var RUN_FPS = 12;
 
@@ -20,6 +23,8 @@ class Rosie extends FlxSprite {
 
   // TODO: Make this private and figure out how the @:access macro works
   public var tilemap: FlxObject;
+
+  public var emote : RosieEmote;
 
   public function new(x:Int, y:Int, sprites:FlxFramesCollection, tilemap:FlxObject) {
     super(x, y);
@@ -72,6 +77,13 @@ class Rosie extends FlxSprite {
     this.elasticity = 0.5;
     this.resetSizeFromFrame();
     this.updateHitbox();
+
+    this.emote = new RosieEmote(x, y, this.frames).init(
+      relativeX = this.width / 2.0,
+      relativeY = -this.height / 2
+    );
+
+    this.add(this.emote);
   }
 
   public override function update(elapsed:Float) {
@@ -82,6 +94,9 @@ class Rosie extends FlxSprite {
   public override function destroy() {
     this.fsm.destroy();
     this.fsm = null;
+    this.removeAll();
+    this.emote.destroy();
+    this.emote = null;
     super.destroy();
   }
 }
