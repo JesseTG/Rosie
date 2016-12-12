@@ -74,6 +74,7 @@ class PlayState extends CommonState
   private var _gravityIndicators : Array<GravityIndicator>;
   private var _gravityPanels : Array<FlxTypedGroup<GravityPanel>>;
   private var _rosie : Rosie;
+  private var _timeSinceLastGoodClick : Float;
   // TODO: Organize this crap
 
   public var OnGameStartAnimationStart(default, null) : FlxTypedSignal<Void->Void>;
@@ -271,6 +272,7 @@ class PlayState extends CommonState
     FlxG.watch.add(this, "_score", "Score");
     FlxG.watch.add(this, "_time", "Time");
     FlxG.watch.add(this._rosie.fsm, "age", "Rosie's State Age");
+    FlxG.watch.add(this, "_timeSinceLastGoodClick", "Time Since Last Good Click");
 
     for (p in _gravityPanels) {
       this.add(p);
@@ -285,6 +287,7 @@ class PlayState extends CommonState
     this.add(_timeChangeDisplay);
     this.add(_scoreDisplay);
 
+    this._timeSinceLastGoodClick = 0;
     this.round = 1;
     this.OnGameStartAnimationStart.dispatch();
   }
@@ -295,7 +298,16 @@ class PlayState extends CommonState
 
     if (this._blockGrid.readyForInput && this.gameRunning) {
       _time -= elapsed;
+      _timeSinceLastGoodClick += elapsed;
       _timeDisplay.text = Printf.format("⌚   %.1f", [Math.max(0, _time)]);
+
+      if (_timeSinceLastGoodClick >= 10 && _rosie.emote.state == EmoteState.None && FlxG.random.bool(1)) {
+        _rosie.emote.state = FlxG.random.getObject([
+          EmoteState.Bored,
+          EmoteState.Confused,
+          EmoteState.Huh
+        ]);
+      }
       if (_time <= 11 && Math.abs(_time - Math.fround(_time)) < 0.000001) {
         // If we have under 10 seconds to go, and exactly one second has passed...
         FlxG.sound.play(AssetPaths.time_running_out__wav);
@@ -329,6 +341,8 @@ class PlayState extends CommonState
     FlxG.watch.remove(this, "_score");
     FlxG.watch.remove(this, "_time");
     FlxG.watch.remove(this._rosie.fsm, "age");
+    FlxG.watch.remove(this, "_timeSinceLastGoodClick");
+
 
     this._blockGrid = null;
     this._playGui = null;
@@ -402,6 +416,7 @@ class PlayState extends CommonState
     // TODO: Tween the score counter with FlxNumTween
 
     _blockGrid.OnSuccessfulClick.add(function(blocks:Array<Block>) {
+      this._timeSinceLastGoodClick = 0;
       FlxG.sound.play(AssetPaths.clear_blocks__wav, false, true);
 
       this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
