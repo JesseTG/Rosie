@@ -12,6 +12,8 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.math.FlxMath;
+import flixel.math.FlxRandom;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.graphics.FlxGraphic;
@@ -413,8 +415,14 @@ class PlayState extends CommonState
     });
 
     _blockGrid.OnSuccessfulClick.add(function(blocks) {
-      if (_rosie.emote.state == EmoteState.None) {
+      if (_rosie.emote.state == EmoteState.None && FlxG.random.bool(60)) {
         _rosie.emote.state = EmoteState.Happy;
+      }
+    });
+
+    _blockGrid.OnBadClick.add(function(_) {
+      if (_rosie.emote.state == EmoteState.None && FlxG.random.bool(40)) {
+        _rosie.emote.state = EmoteState.Confused;
       }
     });
 
