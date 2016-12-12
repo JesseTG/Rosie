@@ -9,6 +9,8 @@ import flixel.graphics.frames.FlxFramesCollection;
 import flixel.addons.util.FlxFSM;
 import flixel.addons.util.FlxFSM.FlxFSMState;
 import flixel.addons.util.FlxFSM.FlxFSMTransitionTable;
+import flixel.FlxG;
+import flixel.math.FlxMath;
 
 class Rosie extends FlxSprite {
   private static inline var IDLE_FPS = 6;
@@ -16,12 +18,14 @@ class Rosie extends FlxSprite {
 
   public var fsm : FlxFSM<Rosie>;
 
-  public function new(x:Int, y:Int, sprites:FlxFramesCollection) {
+  // TODO: Make this private and figure out how the @:access macro works
+  public var tilemap: FlxObject;
+
+  public function new(x:Int, y:Int, sprites:FlxFramesCollection, tilemap:FlxObject) {
     super(x, y);
 
+    this.tilemap = tilemap;
     this.frames = sprites;
-    this.resetSizeFromFrame();
-    this.updateHitbox();
     this.setFacingFlip(FlxObject.LEFT, true, false);
     this.setFacingFlip(FlxObject.RIGHT, false, false);
     this.facing = FlxObject.RIGHT;
@@ -46,7 +50,7 @@ class Rosie extends FlxSprite {
     this.fsm = new FlxFSM<Rosie>(this);
     this.fsm.transitions
       .add(RosieIdleState, RosieRunState, function(rosie) {
-        return Math.random() < 0.004;
+        return (rosie.fsm.age >= 1.0 && rosie.animation.frameIndex == 4) ? Math.random() < 0.4 : false;
       })
       .add(RosieRunState, RosieIdleState, function(rosie) {
         return (rosie.fsm.age >= 1.0) ? Math.random() < 0.4 : false;
@@ -64,6 +68,10 @@ class Rosie extends FlxSprite {
         return false;
       })
       .start(RosieIdleState);
+
+    this.elasticity = 0.5;
+    this.resetSizeFromFrame();
+    this.updateHitbox();
   }
 
   public override function update(elapsed:Float) {
@@ -81,6 +89,7 @@ class Rosie extends FlxSprite {
 private class RosieIdleState extends FlxFSMState<Rosie> {
   public override function enter(owner:Rosie, fsm:FlxFSM<Rosie>) {
     owner.animation.play("idle");
+    owner.velocity.x = 0;
   }
 
   public override function update(elapsed:Float, owner:Rosie, fsm:FlxFSM<Rosie>) {
@@ -90,9 +99,14 @@ private class RosieIdleState extends FlxFSMState<Rosie> {
 private class RosieRunState extends FlxFSMState<Rosie> {
   public override function enter(owner:Rosie, fsm:FlxFSM<Rosie>) {
     owner.animation.play("run");
+    owner.velocity.x = ((owner.facing & FlxObject.RIGHT != 0) ? 1 : -1) * 32;
   }
 
   public override function update(elapsed:Float, owner:Rosie, fsm:FlxFSM<Rosie>) {
+    if (owner.x <= 0 || FlxObject.separateX(owner, owner.tilemap)) {
+      owner.velocity.x = (owner.touching & FlxObject.RIGHT != 0) ? -32 : 32;
+      owner.facing = (owner.velocity.x > 0) ? FlxObject.RIGHT : FlxObject.LEFT;
+    }
   }
 }
 

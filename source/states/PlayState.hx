@@ -165,7 +165,7 @@ class PlayState extends CommonState
             sprites
           );
         case "Rosie":
-          _rosie = new Rosie(object.x, object.y - object.height, sprites).init(
+          _rosie = new Rosie(object.x, object.y - object.height, sprites, tilemap).init(
           );
         default:
           // nop
