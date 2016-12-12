@@ -31,7 +31,7 @@ class RosieEmote extends FlxNestedSprite {
     this.animation.addByStringIndices(
       cast Bored,
       "emotes/bored-",
-      ["00", "01", "00", "01", "00", "01", "00", "01", "00", "00", "00"],
+      ["00", "01", "00", "01", "00", "00"],
       ".png",
       1,
       false
@@ -40,7 +40,7 @@ class RosieEmote extends FlxNestedSprite {
     this.animation.addByStringIndices(
       cast Confused,
       "emotes/confused-",
-      ["00", "01", "00", "01", "00", "01", "00", "01", "00", "00", "00"],
+      ["00", "01", "00", "01", "00", "00"],
       ".png",
       1,
       false
@@ -49,7 +49,7 @@ class RosieEmote extends FlxNestedSprite {
     this.animation.addByStringIndices(
       cast Doh,
       "emotes/doh-",
-      ["00", "01", "00", "01", "00", "01", "00", "01", "00", "00", "00"],
+      ["00", "01", "00", "01", "00", "00"],
       ".png",
       1,
       false
@@ -58,7 +58,7 @@ class RosieEmote extends FlxNestedSprite {
     this.animation.addByStringIndices(
       cast Angry,
       "emotes/angry-",
-      ["00", "01", "00", "01", "00", "01", "00", "01", "00", "00", "00"],
+      ["00", "01", "00", "01", "00", "00"],
       ".png",
       1,
       false
@@ -67,7 +67,7 @@ class RosieEmote extends FlxNestedSprite {
     this.animation.addByStringIndices(
       cast VeryHappy,
       "emotes/very-happy-",
-      ["00", "01", "00", "01", "00", "01", "00", "01", "00", "00", "00"],
+      ["00", "01", "00", "01", "00", "00"],
       ".png",
       2,
       false
