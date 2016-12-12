@@ -74,7 +74,7 @@ class RosieEmote extends FlxNestedSprite {
     this.animation.finishCallback = function(_) {
       this.state = None;
     };
-    this.state = Angry;
+    this.state = None;
   }
 
   private inline function set_state(s:EmoteState) {
