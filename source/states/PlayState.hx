@@ -166,6 +166,8 @@ class PlayState extends CommonState
           );
         case "Rosie":
           _rosie = new Rosie(object.x, object.y - object.height, sprites, tilemap).init(
+            pixelPerfectPosition = true,
+            pixelPerfectRender = true
           );
         default:
           // nop
