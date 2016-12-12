@@ -481,6 +481,7 @@ class PlayState extends CommonState
         FlxG.sound.music.stop();
       }
 
+      this._rosie.emote.state = EmoteState.Doh;
       FlxMouseEventManager.removeAll();
 
       var _gameEndGate = new FlxAsyncIteratorLoop<Int>(
