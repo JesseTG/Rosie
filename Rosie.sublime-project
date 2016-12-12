@@ -17,7 +17,7 @@
   [
     {
       "name": "Build (HTML5)",
-      "shell_cmd": "haxelib run lime build $project_path/Project.xml html5"
+      "shell_cmd": "haxelib run lime build $project_path/Project.xml html5 -minify"
     },
     {
       "name": "Build (Windows)",
@@ -46,7 +46,7 @@
 
     {
       "name": "Test (HTML5)",
-      "shell_cmd": "haxelib run lime test $project_path/Project.xml html5"
+      "shell_cmd": "haxelib run lime test $project_path/Project.xml html5 -minify"
     },
     {
       "name": "Test (Windows)",
