@@ -328,7 +328,7 @@ class PlayState extends CommonState
     FlxG.watch.remove(this, "round");
     FlxG.watch.remove(this, "_score");
     FlxG.watch.remove(this, "_time");
-    FlxG.watch.add(this._rosie.fsm, "age");
+    FlxG.watch.remove(this._rosie.fsm, "age");
 
     this._blockGrid = null;
     this._playGui = null;
