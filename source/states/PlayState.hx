@@ -441,8 +441,12 @@ class PlayState extends CommonState
     });
 
     _blockGrid.OnBadClick.add(function(_) {
-      if (_rosie.emote.state == EmoteState.None && FlxG.random.bool(40)) {
-        _rosie.emote.state = EmoteState.Confused;
+      if (_rosie.emote.state == EmoteState.None && FlxG.random.bool(30)) {
+        _rosie.emote.state = FlxG.random.getObject([
+          EmoteState.Sad,
+          EmoteState.Confused,
+          EmoteState.Angry,
+        ], [3.0, 2.0, 1.0]);
       }
     });
 
