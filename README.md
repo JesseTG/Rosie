@@ -23,3 +23,4 @@ Rest in peace, Rosie.  You are not forgotten.
 - [This Game Is Over](http://opengameart.org/content/this-game-is-over) by [Joseph Pueyo](http://www.josephpueyo.com/)
 - [witch, bluehat girl and kittens plaformer [sic]](http://opengameart.org/content/witch-bluehat-girl-and-kittens-plaformer) by [nosok](http://opengameart.org/users/nosok), with ad-hoc edits by Noah Talavera-Greenberg
 - [16x16 Emotes for RPGs and Digital Pets](http://opengameart.org/content/16x16-emotes-for-rpgs-and-digital-pets) by [Tomcat94](http://opengameart.org/users/tomcat94)
+- [Arcade Platformer Assets](http://opengameart.org/content/arcade-platformer-assets) by [GrafxKid](http://grafxkid.tumblr.com/)
