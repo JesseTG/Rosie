@@ -421,10 +421,6 @@ class PlayState extends CommonState
 
       this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
       // We'll always have cleared at least 3 blocks here.
-
-      if (blocks.length >= 6) {
-        this._addBonusTime(Std.int(blocks.length * 0.25));
-      }
     });
 
     _blockGrid.OnSuccessfulClick.add(function(blocks) {
@@ -473,6 +469,17 @@ class PlayState extends CommonState
 
     // TODO: Handle the case where the grid is full and no groups exist
     this._blockGrid.OnBlocksGenerated.add(this._addBonusTime);
+    this._blockGrid.OnBlocksGenerated.add(function(blocks) {
+      blocks.iter(function(block) {
+        block.animation.finishCallback = function(_) {
+          FlxMouseEventManager.setObjectMouseEnabled(block, true);
+          block.animation.finishCallback = null;
+          block.frame = block.frames.getByName(cast block.blockColor);
+        };
+
+        block.animation.play(cast BlockAnimation.Appear);
+      });
+    });
 
     this._blockGrid.OnBadClick.add(this._subtractTime);
     this._blockGrid.OnBadClick.add(function(_) {
@@ -546,7 +553,8 @@ class PlayState extends CommonState
     FlxG.camera.fill(FlxColor.BLACK, false);
   }
 
-  private function _addBonusTime(blocksCreated:Int) {
+  private function _addBonusTime(blocks:Array<Block>) {
+    var blocksCreated = blocks.length;
     var bonus = blocksCreated * 0.05;
 
     _time = Math.min(_time + bonus, 60);

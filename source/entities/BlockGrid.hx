@@ -67,7 +67,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
    * Called when blocks are generated, except for the first time (i.e. when the
    * game starts).
    */
-  public var OnBlocksGenerated(default, null) : FlxTypedSignal<Int->Void>;
+  public var OnBlocksGenerated(default, null) : FlxTypedSignal<Array<Block>->Void>;
 
   // TODO: Enforce a max size with this.maxSize
   // TODO: Don't hard-code the block size in this class
@@ -80,7 +80,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.OnStopMoving = new FlxTypedSignal<Void->Void>();
     this.OnNoMoreMoves = new FlxTypedSignal<Void->Void>();
     this.OnBeforeBlocksGenerated = new FlxTypedSignal<Void->Void>();
-    this.OnBlocksGenerated = new FlxTypedSignal<Int->Void>();
+    this.OnBlocksGenerated = new FlxTypedSignal<Array<Block>->Void>();
 
 #if debug
     this.OnSuccessfulClick.add(function(_) trace("OnSuccessfulClick"));
@@ -116,8 +116,19 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
       this.readyForInput = false;
       blocks.iter(function(block:Block) {
         FlxMouseEventManager.setObjectMouseEnabled(block, false);
+        block.alive = false;
+        // alive == ready to be used.  The vanish effect is like the corpse
+
         _blockGrid.remove(block);
-        block.kill();
+        // The block is still on-screen but not in our grid data structure (so
+        // it won't be moved by the tweens in startMovingBlocks)
+
+        block.animation.finishCallback = function(_) {
+          block.animation.finishCallback = null;
+          block.kill();
+        };
+
+        block.animation.play(cast BlockAnimation.Vanish);
         // TODO: Avoid a linear lookup whenever removing a block
       });
 
@@ -375,30 +386,19 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
    * Fills all null spaces in the grid with blocks and puts them on-screen.
    * Returns the number of blocks that were created
    */
-  private function _generateBlocks() : Int {
-    var created = 0;
+  private function _generateBlocks() {
+    var created : Array<Block> = [];
+    this.readyForInput = false;
 
     // TODO: Simplify this function
     _blockGrid.forEach(function(blockInGrid:Block, gridX:Int, gridY:Int) {
       if (blockInGrid == null) {
         // If there's no block at this grid cell..
 
-        created++;
         var block = this.recycle(Block, function() {
           var blockColor = BlockColor.All[Std.random(this.numColors)];
           var newBlock = new Block(gridX * 16, gridY * 16, this._frames, blockColor);
           newBlock.ID = this._blocksCreated++;
-          newBlock.animation.addByNames(
-            cast BlockAnimation.Appear,
-            [for (i in 0...13) Printf.format("block-appear-%02d.png", [i])],
-            false
-          );
-
-          newBlock.animation.addByNames(
-            cast BlockAnimation.Vanish,
-            [for (i in 0...5) Printf.format("block-vanish-%02d.png", [i])],
-            false
-          );
 
           FlxMouseEventManager.add(newBlock, function(bbb:Block) {
             if (this.readyForInput) {
@@ -412,12 +412,11 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
           return newBlock;
         });
 
+        created.push(block);
         block.blockColor = BlockColor.All[Std.random(this.numColors)];
         // TODO: Don't do Std.random twice, just do it out here
 
         block.setPosition(gridX * 16, gridY * 16);
-
-        FlxMouseEventManager.setObjectMouseEnabled(block, true);
 
         this.add(block);
         // TODO: Ensure I'm not adding the same block twice
