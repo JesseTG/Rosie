@@ -1,9 +1,17 @@
 package entities;
 
+import de.polygonal.Printf;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxFramesCollection;
 
 class Block extends FlxSprite {
+
+  private static var BLOCK_APPEAR_FRAME_NAMES =
+    [for (i in 0...13) Printf.format("block-appear-%02d.png", [i])];
+
+  private static var BLOCK_VANISH_FRAME_NAMES =
+    [for (i in 0...5) Printf.format("block-vanish-%02d.png", [i])];
+
   public var blockColor(default, set) : BlockColor;
 
   public function new(x:Float = 0, y:Float = 0, sprites:FlxFramesCollection, blockColor:BlockColor) {
@@ -13,6 +21,20 @@ class Block extends FlxSprite {
     this.blockColor = blockColor;
     this.updateHitbox();
     this.resetSizeFromFrame();
+
+    this.animation.addByNames(
+      cast BlockAnimation.Appear,
+      BLOCK_APPEAR_FRAME_NAMES,
+      60,
+      false
+    );
+
+    this.animation.addByNames(
+      cast BlockAnimation.Vanish,
+      BLOCK_VANISH_FRAME_NAMES,
+      15,
+      false
+    );
   }
 
   public function set_blockColor(blockColor:BlockColor) {
