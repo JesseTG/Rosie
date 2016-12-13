@@ -29,3 +29,11 @@ class Block extends FlxSprite {
     // TODO: Come up with a better string representation that doesn't rely on filename
   }
 }
+
+@:enum
+@:notNull
+abstract BlockAnimation(String) {
+  var None = "none";
+  var Appear = "appear";
+  var Vanish = "vanish";
+}

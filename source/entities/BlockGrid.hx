@@ -13,7 +13,9 @@ import flixel.util.FlxSignal.FlxTypedSignal;
 import de.polygonal.ds.Array2;
 import de.polygonal.ds.Array2.Array2Cell;
 import de.polygonal.ds.ArrayedQueue;
+import de.polygonal.Printf;
 import de.polygonal.core.util.Assert;
+import entities.Block.BlockAnimation;
 
 import util.ReverseIterator;
 
@@ -377,16 +379,28 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     var created = 0;
 
     // TODO: Simplify this function
-    _blockGrid.forEach(function(block:Block, gridX:Int, gridY:Int) {
-      if (block == null) {
+    _blockGrid.forEach(function(blockInGrid:Block, gridX:Int, gridY:Int) {
+      if (blockInGrid == null) {
         // If there's no block at this grid cell..
 
         created++;
-        var b = this.recycle(Block, function() {
+        var block = this.recycle(Block, function() {
           var blockColor = BlockColor.All[Std.random(this.numColors)];
-          var bb = new Block(gridX * 16, gridY * 16, this._frames, blockColor);
-          bb.ID = this._blocksCreated++;
-          FlxMouseEventManager.add(bb, function(bbb:Block) {
+          var newBlock = new Block(gridX * 16, gridY * 16, this._frames, blockColor);
+          newBlock.ID = this._blocksCreated++;
+          newBlock.animation.addByNames(
+            cast BlockAnimation.Appear,
+            [for (i in 0...13) Printf.format("block-appear-%02d.png", [i])],
+            false
+          );
+
+          newBlock.animation.addByNames(
+            cast BlockAnimation.Vanish,
+            [for (i in 0...5) Printf.format("block-vanish-%02d.png", [i])],
+            false
+          );
+
+          FlxMouseEventManager.add(newBlock, function(bbb:Block) {
             if (this.readyForInput) {
               // If we're ready for the player to make a move...
 
@@ -394,24 +408,24 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
             }
           }, false, true, false);
 
-          trace('New block $bb created');
-          return bb;
+          trace('New block $newBlock created');
+          return newBlock;
         });
 
-        b.blockColor = BlockColor.All[Std.random(this.numColors)];
+        block.blockColor = BlockColor.All[Std.random(this.numColors)];
         // TODO: Don't do Std.random twice, just do it out here
 
-        b.setPosition(gridX * 16, gridY * 16);
+        block.setPosition(gridX * 16, gridY * 16);
 
-        FlxMouseEventManager.setObjectMouseEnabled(b, true);
+        FlxMouseEventManager.setObjectMouseEnabled(block, true);
 
-        this.add(b);
+        this.add(block);
         // TODO: Ensure I'm not adding the same block twice
 
-        return b;
+        return block;
       }
       else {
-        return block;
+        return blockInGrid;
       }
     });
 
