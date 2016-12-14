@@ -95,7 +95,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this._frames = sprites;
     // TODO: Why doesn't this.frames (note the lack of _) work?  Is it overridden?
 
-    this.readyForInput = true;
+    this.readyForInput = false;
     // TODO: Come up with a better name and clarify semantics
 
     this._blockGrid = new Array2<Block>(size, size);
