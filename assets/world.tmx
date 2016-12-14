@@ -129,7 +129,7 @@
   <object id="74" name="Score Display" gid="7" x="8" y="24" width="16" height="16">
    <properties>
     <property name="autoSize" type="bool" value="true"/>
-    <property name="letterSpacing" type="int" value="2"/>
+    <property name="letterSpacing" type="int" value="0"/>
    </properties>
   </object>
   <object id="75" name="Time Remaining" gid="7" x="8" y="224" width="16" height="8">
