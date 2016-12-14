@@ -494,6 +494,14 @@ class PlayState extends CommonState
         FlxG.sound.music.stop();
       }
 
+      for (i in this._gravityIndicators) {
+        i.visible = false;
+      }
+
+      for (i in this._gravityPanels) {
+        i.visible = false;
+      }
+
       this._rosie.emote.state = EmoteState.Doh;
       FlxMouseEventManager.removeAll();
 
@@ -529,6 +537,14 @@ class PlayState extends CommonState
 
       this.add(_gameOverText);
       this.remove(_blockGrid);
+
+      for (i in this._gravityIndicators) {
+        this.remove(i);
+      }
+
+      for (i in this._gravityPanels) {
+        this.remove(i);
+      }
 
       FlxG.sound.play(AssetPaths.game_over__ogg, false, function() {
         new FlxTimer().start(1, function(_) {
