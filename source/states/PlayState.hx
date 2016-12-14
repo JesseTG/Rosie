@@ -416,7 +416,7 @@ class PlayState extends CommonState
     });
     // TODO: Tween the score counter with FlxNumTween
 
-    _blockGrid.OnSuccessfulClick.add(function(blocks:Array<Block>) {
+    _blockGrid.OnSuccessfulClick.add(function(blocks) {
       this._timeSinceLastGoodClick = 0;
       FlxG.sound.play(AssetPaths.clear_blocks__wav, false, false);
 
@@ -586,7 +586,7 @@ class PlayState extends CommonState
     FlxG.camera.fill(FlxColor.BLACK, false);
   }
 
-  private function _addBonusTime(blocks:Array<Block>) {
+  private function _addBonusTime(blocks) {
     var blocksCreated = blocks.length;
     var bonus = blocksCreated * 0.05;
 
@@ -614,7 +614,7 @@ class PlayState extends CommonState
     );
   }
 
-  private function _subtractTime(blocks:Array<Block>) {
+  private function _subtractTime(blocks) {
     _time -= 1.0;
 
     _timeChangeDisplay.color = FlxColor.RED;
