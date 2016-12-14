@@ -83,8 +83,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.OnBlocksGenerated = new FlxTypedSignal<Array<Block>->Void>();
 
 #if debug
-    this.OnSuccessfulClick.add(function(_) trace("OnSuccessfulClick"));
-    this.OnBadClick.add(function(_) trace("OnBadClick"));
+    this.OnSuccessfulClick.add(function(blocks) trace('OnSuccessfulClick(${blocks})'));
+    this.OnBadClick.add(function(blocks) trace('OnBadClick(${blocks})'));
     this.OnStartMoving.add(function() trace("OnStartMoving"));
     this.OnStopMoving.add(function() trace("OnStopMoving"));
     this.OnNoMoreMoves.add(function() trace("OnNoMoreMoves"));
