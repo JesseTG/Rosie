@@ -400,11 +400,11 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
           var newBlock = new Block(gridX * 16, gridY * 16, this._frames, blockColor);
           newBlock.ID = this._blocksCreated++;
 
-          FlxMouseEventManager.add(newBlock, function(bbb:Block) {
+          FlxMouseEventManager.add(newBlock, function(blockClicked:Block) {
             if (this.readyForInput) {
               // If we're ready for the player to make a move...
 
-              this.handleBlockGroup(this.getBlockGroup(bbb));
+              this.handleBlockGroup(this.getBlockGroup(blockClicked));
             }
           }, false, true, false);
 
