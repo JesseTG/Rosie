@@ -217,7 +217,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     var queue = new ArrayedQueue<Block>();
     queue.enqueue(clicked);
 
-    // TODO: Better document this loop
     while (!queue.isEmpty()) {
       // Until we we've run out of blocks to search...
 
