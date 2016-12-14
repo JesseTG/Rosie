@@ -23,6 +23,19 @@ class ArrayTools {
     return array[0];
   }
 
+  public static inline function hasFront<T>(array:Array<T>, element:T) : Bool {
+    assert(array != null);
+
+    var index = array.indexOf(element);
+    if (index == -1) {
+      return false;
+    }
+    else {
+      swap(array, index, 0);
+      return true;
+    }
+  }
+
   private function new() {
 
   }
