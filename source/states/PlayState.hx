@@ -153,13 +153,13 @@ class PlayState extends CommonState
             hand,
             hand.x,
             hand.y,
-            hand.x - 4,
-            hand.y,
+            hand.x,
+            hand.y + 4,
             0.5,
             true,
             {
               type: FlxTween.PINGPONG,
-              ease: FlxEase.circInOut
+              ease: FlxEase.quadOut
             }
           );
         case "Hint Text":

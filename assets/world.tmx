@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="106">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="107">
  <tileset firstgid="1" name="Overworld" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="images/tile-environment.png" width="128" height="128"/>
   <tile id="4">
@@ -153,25 +153,25 @@
   </object>
  </objectgroup>
  <objectgroup name="Hints">
-  <object id="98" name="Hint Text" x="32" y="96" width="64" height="8">
+  <object id="99" name="Hint Text" x="16" y="116" width="64" height="8">
    <properties>
     <property name="autoSize" type="bool" value="true"/>
     <property name="letterSpacing" type="int" value="-3"/>
-    <property name="text" value="Same colors"/>
+    <property name="text" value="Match 3+ of"/>
    </properties>
   </object>
-  <object id="99" name="Hint Text" x="32" y="68" width="64" height="8">
+  <object id="100" name="Hint Hand" gid="69" x="64" y="112" width="16" height="16"/>
+  <object id="101" name="Hint Hand" gid="69" x="16" y="112" width="16" height="16"/>
+  <object id="102" name="Hint" type="No" gid="67" x="64" y="72" width="16" height="16"/>
+  <object id="103" name="Hint" type="Yes" gid="66" x="16" y="72" width="16" height="13"/>
+  <object id="104" name="Hint" type="Yes" gid="68" x="16" y="96" width="16" height="16"/>
+  <object id="105" name="Hint" type="No" gid="65" x="64" y="96" width="16" height="16"/>
+  <object id="106" name="Hint Text" x="16" y="128" width="64" height="8">
    <properties>
     <property name="autoSize" type="bool" value="true"/>
     <property name="letterSpacing" type="int" value="-3"/>
-    <property name="text" value="Match 3"/>
+    <property name="text" value="same color"/>
    </properties>
   </object>
-  <object id="100" name="Hint Hand" gid="69" x="16" y="96" width="16" height="16"/>
-  <object id="101" name="Hint Hand" gid="69" x="16" y="64" width="16" height="16"/>
-  <object id="102" name="Hint" type="No" gid="67" x="64" y="96" width="16" height="16"/>
-  <object id="103" name="Hint" type="Yes" gid="66" x="64" y="64" width="16" height="13"/>
-  <object id="104" name="Hint" type="Yes" gid="68" x="32" y="64" width="16" height="16"/>
-  <object id="105" name="Hint" type="No" gid="65" x="32" y="96" width="16" height="16"/>
  </objectgroup>
 </map>
