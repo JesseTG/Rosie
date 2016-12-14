@@ -3,7 +3,7 @@ package util;
 import de.polygonal.core.util.Assert.assert;
 
 class ArrayTools {
-  public static function swap<T>(array:Array<T>, a:Int, b:Int) {
+  public static inline function swap<T>(array:Array<T>, a:Int, b:Int) {
     assert(array != null);
     assert(0 <= a && a < array.length);
     assert(0 <= b && b < array.length);
@@ -15,7 +15,7 @@ class ArrayTools {
     }
   }
 
-  public static function getFront<T>(array:Array<T>, index:Int) : T {
+  public static inline function getFront<T>(array:Array<T>, index:Int) : T {
     assert(array != null);
     assert(0 <= index && index < array.length);
 
