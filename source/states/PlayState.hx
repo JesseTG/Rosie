@@ -310,7 +310,7 @@ class PlayState extends CommonState
       }
       if (_time <= 11 && Math.abs(_time - Math.fround(_time)) < 0.000001) {
         // If we have under 10 seconds to go, and exactly one second has passed...
-        FlxG.sound.play(AssetPaths.time_running_out__wav);
+        FlxG.sound.play(AssetPaths.time_running_out__wav, false, false);
       }
     }
 
@@ -370,7 +370,7 @@ class PlayState extends CommonState
           _gate.height -= tileSet.tileHeight;
           // NOTE: Can't set a sprite's height to 0, so we just remove it when
           // it's only one row deep (see the callback below)
-          FlxG.sound.play(AssetPaths.gate_move__wav, false, true);
+          FlxG.sound.play(AssetPaths.gate_move__wav, false, false);
         },
         null,
         function() {
@@ -417,7 +417,7 @@ class PlayState extends CommonState
 
     _blockGrid.OnSuccessfulClick.add(function(blocks:Array<Block>) {
       this._timeSinceLastGoodClick = 0;
-      FlxG.sound.play(AssetPaths.clear_blocks__wav, false, true);
+      FlxG.sound.play(AssetPaths.clear_blocks__wav, false, false);
 
       this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
       // We'll always have cleared at least 3 blocks here.
@@ -484,7 +484,7 @@ class PlayState extends CommonState
 
     this._blockGrid.OnBadClick.add(this._subtractTime);
     this._blockGrid.OnBadClick.add(function(_) {
-      FlxG.sound.play(AssetPaths.not_allowed__wav, false, true);
+      FlxG.sound.play(AssetPaths.not_allowed__wav, false, false);
     });
 
     this.OnGameOver.addOnce(function() {
@@ -501,7 +501,7 @@ class PlayState extends CommonState
         function(row) {
           _gate.height += tileSet.tileHeight;
 
-          FlxG.sound.play(AssetPaths.gate_move__wav, false, true);
+          FlxG.sound.play(AssetPaths.gate_move__wav, false, false);
         },
         function() {
           // NOTE: When this animation starts, the gate will be of height 16,
@@ -509,7 +509,7 @@ class PlayState extends CommonState
           // callback will add the sprite to the screen.  (This is also why we
           // run the animation for one LESS than the grid height)
 
-          FlxG.sound.play(AssetPaths.gate_move__wav, false, true);
+          FlxG.sound.play(AssetPaths.gate_move__wav, false, false);
           _gate.revive();
           this.add(_gate);
         },
