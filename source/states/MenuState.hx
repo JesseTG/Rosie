@@ -59,7 +59,7 @@ class MenuState extends CommonState
     this.menuGuiLayer.objects.iter(function(object) {
       switch (object.name) {
         case "Title":
-          this._titleLetters.setPosition(object.x, object.y - object.height);
+          this._titleLetters.setPosition(object.x, object.y);
           for (i in 0...Main.GAME_NAME.length) {
             var text = new FlxBitmapText(this.font);
             text.text = Main.GAME_NAME.charAt(i);

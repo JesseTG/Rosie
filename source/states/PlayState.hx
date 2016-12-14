@@ -198,8 +198,8 @@ class PlayState extends CommonState
           var index = GravityDirection.getIndex(direction);
           this._gravityIndicators[index] = new GravityIndicator(object.x, object.y, sprites, direction).init(
             angle = object.angle,
-            flipX = object.flippedHorizontally,
-            flipY = object.flippedVertically
+            flipX = object.properties.flipX == "true",
+            flipY = object.properties.flipY == "true"
           );
         case "Gravity Panel":
           var direction = GravityDirection.createByName(object.type);
@@ -218,7 +218,7 @@ class PlayState extends CommonState
           )
           .init(
             x = object.x,
-            y = object.y - tileSet.tileHeight,
+            y = object.y,
             pixelPerfectRender = true,
             pixelPerfectPosition = true
           );
@@ -226,7 +226,7 @@ class PlayState extends CommonState
 
           _blockGrid = new BlockGrid(
             object.x,
-            object.y - 16,
+            object.y,
             _gridSize,
             sprites
           );
@@ -247,7 +247,7 @@ class PlayState extends CommonState
           _scoreDisplay = new FlxBitmapText(this.font).init(
             text = "0",
             x = object.x,
-            y = object.y - object.height, // TODO: Make this depend on font size
+            y = object.y,
             letterSpacing = Std.parseInt(object.properties.letterSpacing),
             autoSize = object.properties.autoSize == "true",
             alignment = FlxTextAlign.RIGHT
@@ -271,7 +271,7 @@ class PlayState extends CommonState
           _gameOverText = new FlxBitmapText(this.font).init(
             text = object.properties.text,
             x = object.x,
-            y = object.y - object.height,
+            y = object.y,
             alignment = FlxTextAlign.CENTER,
             letterSpacing = Std.parseInt(object.properties.letterSpacing)
           );
