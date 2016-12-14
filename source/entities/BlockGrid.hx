@@ -19,6 +19,7 @@ import entities.Block.BlockAnimation;
 
 import util.ReverseIterator;
 
+using util.ArrayTools;
 using Lambda;
 
 class BlockGrid extends FlxTypedSpriteGroup<Block> {
@@ -251,13 +252,23 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   }
 
   public function handleBlockGroup(blocks:Array<Block>) {
-    if (blocks != null && blocks.length >= 3) {
-      // If the selected block group has at least 3 blocks...
+    if (blocks != null) {
+      // If we actually got a blocks array...
 
-      this.OnSuccessfulClick.dispatch(blocks);
-    }
-    else {
-      this.OnBadClick.dispatch(blocks);
+      for (i in 0...blocks.length) {
+        // For each block in the group...
+        this.members.swap(this.members.length - i - 1, this.members.indexOf(blocks[i]));
+        // ...Swap it so it's one of the last members so it'll render above the others
+      }
+
+      if (blocks.length >= 3) {
+        // If the selected block group has at least 3 blocks...
+
+        this.OnSuccessfulClick.dispatch(blocks);
+      }
+      else {
+        this.OnBadClick.dispatch(blocks);
+      }
     }
   }
 
