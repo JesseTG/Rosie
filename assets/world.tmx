@@ -125,8 +125,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="PlayState GUI" visible="0">
-  <object id="74" name="Score Display" gid="7" x="8" y="24" width="16" height="16">
+ <objectgroup name="PlayState GUI">
+  <object id="74" name="Score Display" gid="7" x="8" y="40" width="16" height="32">
    <properties>
     <property name="autoSize" type="bool" value="true"/>
     <property name="letterSpacing" type="int" value="0"/>

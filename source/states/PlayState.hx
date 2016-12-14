@@ -187,7 +187,7 @@ class PlayState extends CommonState
           _scoreDisplay = new FlxBitmapText(this.font).init(
             text = "0",
             x = object.x,
-            y = object.y - tileSet.tileHeight,
+            y = object.y - object.height, // TODO: Make this depend on font size
             letterSpacing = Std.parseInt(object.properties.letterSpacing),
             autoSize = object.properties.autoSize == "true",
             alignment = FlxTextAlign.RIGHT
