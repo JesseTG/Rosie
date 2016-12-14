@@ -542,6 +542,9 @@ class PlayState extends CommonState
       }
 
       if (this._score > highScore) {
+        // If we got a high score...
+        this.highScoreLabel.text = 'TOP ${this._score}';
+
         FlxG.save.data.highScore = this._score;
         FlxG.save.flush(function(success) {
           // Save the high score, THEN let the player exit
