@@ -219,9 +219,13 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
     // TODO: Better document this loop
     while (!queue.isEmpty()) {
+      // Until we we've run out of blocks to search...
+
       var current = queue.dequeue();
+      // The block we're expanding out from right now
 
       if (current.blockColor == clicked.blockColor) {
+        // If the block we're expanding out from is the color we want...
         blocks.push(current);
 
         var indices = _getGridIndex(current);
