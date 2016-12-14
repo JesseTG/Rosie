@@ -470,6 +470,7 @@ class PlayState extends CommonState
     // TODO: Handle the case where the grid is full and no groups exist
     this._blockGrid.OnBlocksGenerated.add(this._addBonusTime);
     this._blockGrid.OnBlocksGenerated.add(function(blocks) {
+      FlxG.sound.play(AssetPaths.blocks_appear__wav, false, false);
       blocks.iter(function(block) {
         block.animation.finishCallback = function(_) {
           FlxMouseEventManager.setObjectMouseEnabled(block, true);
