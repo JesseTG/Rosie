@@ -226,7 +226,10 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
       if (current.blockColor == clicked.blockColor) {
         // If the block we're expanding out from is the color we want...
-        blocks.push(current);
+        if (!blocks.has(current)) {
+          // TODO: See if there's a constant-time way to answer this
+          blocks.push(current);
+        }
 
         var indices = _getGridIndex(current);
         var x = indices.x;
