@@ -762,7 +762,7 @@
 },
 "emotes/bang.png":
 {
-	"frame": {"x":593,"y":105,"w":6,"h":14},
+	"frame": {"x":633,"y":105,"w":6,"h":14},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":4,"y":1,"w":6,"h":14},
@@ -858,7 +858,7 @@
 },
 "emotes/very-happy-01.png":
 {
-	"frame": {"x":626,"y":105,"w":12,"h":12},
+	"frame": {"x":621,"y":105,"w":12,"h":12},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":2,"y":0,"w":12,"h":12},
@@ -866,7 +866,7 @@
 },
 "emotes/worried-00.png":
 {
-	"frame": {"x":614,"y":105,"w":12,"h":12},
+	"frame": {"x":609,"y":105,"w":12,"h":12},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":2,"y":0,"w":12,"h":12},
@@ -930,11 +930,11 @@
 },
 "hand.png":
 {
-	"frame": {"x":599,"y":105,"w":15,"h":11},
+	"frame": {"x":593,"y":105,"w":16,"h":12},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":11},
-	"sourceSize": {"w":15,"h":11}
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":16,"h":12},
+	"sourceSize": {"w":16,"h":16}
 },
 "icon-clear-no.png":
 {
@@ -1359,6 +1359,6 @@
 	"format": "RGBA5551",
 	"size": {"w":991,"h":119},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:a35a509c58dfd680e0b8d791641dcbfb:040abaea51c3feb93cb4ff176df0a8fb:3d1ab9fc13e1be0b14dbd849cdb94733$"
+	"smartupdate": "$TexturePacker:SmartUpdate:493f0736a9a8cc1f687bb024312e0ac4:1f25d8e59676cf3b4d8aee012ec45495:3d1ab9fc13e1be0b14dbd849cdb94733$"
 }
 }

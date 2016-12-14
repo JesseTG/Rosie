@@ -60,6 +60,7 @@ class PlayState extends CommonState
 
   private var _blockGrid : BlockGrid;
   private var _playGui : TiledObjectLayer;
+  private var _hintGui : TiledObjectLayer;
   private var _gate : FlxTiledSprite;
   private var _gridSize : Int;
   private var _gameOverText : FlxBitmapText;
@@ -123,6 +124,8 @@ class PlayState extends CommonState
     _readyToLeaveState = false;
 
     this._playGui = cast(this.map.getLayer("PlayState GUI"));
+    this._hintGui = cast(this.map.getLayer("Hints"));
+
     this._gravityIndicators = [for (i in 0...GravityDirection.Count) null];
     this._gravityPanels = [for (i in 0...GravityDirection.Count) {
       new FlxTypedGroup<GravityPanel>().init(
@@ -130,6 +133,63 @@ class PlayState extends CommonState
       );
     }];
 
+    this._hints = new FlxSpriteGroup();
+    this._hintGui.objects.iter(function(object) {
+      switch (object.name) {
+        case "Hint Hand":
+          var source = spriteSet.getImageSourceByGid(object.gid).source;
+          var index = source.lastIndexOf('/');
+
+          var hand = new FlxSprite().init(
+            x = object.x,
+            y = object.y - object.height,
+            frames = this.sprites,
+            frame = this.sprites.getByName(source.substr(index + 1)),
+            pixelPerfectPosition = true,
+            pixelPerfectRender = true
+          );
+          this._hints.add(hand);
+          FlxTween.linearMotion(
+            hand,
+            hand.x,
+            hand.y,
+            hand.x - 4,
+            hand.y,
+            0.5,
+            true,
+            {
+              type: FlxTween.PINGPONG,
+              ease: FlxEase.circInOut
+            }
+          );
+        case "Hint Text":
+          var text = new FlxBitmapText(this.textFont).init(
+            x = object.x,
+            y = object.y,
+            pixelPerfectPosition = true,
+            pixelPerfectRender = true,
+            text = object.properties.text,
+            alignment = FlxTextAlign.LEFT,
+            width = object.width,
+            letterSpacing = Std.parseInt(object.properties.letterSpacing),
+            autoSize = object.properties.autoSize == "true"
+          );
+
+          this._hints.add(text);
+        default:
+          // default image load
+          var source = spriteSet.getImageSourceByGid(object.gid).source;
+          var index = source.lastIndexOf('/');
+
+          this._hints.add(new FlxSprite().init(
+            x = object.x,
+            y = object.y - object.height,
+            frames = this.sprites,
+            frame = this.sprites.getByName(source.substr(index + 1))
+          ));
+      }
+    });
+    this.add(_hints);
 
     this.objectLayer.objects.iter(function(object) {
       switch (object.name) {
@@ -215,43 +275,6 @@ class PlayState extends CommonState
             alignment = FlxTextAlign.CENTER,
             letterSpacing = Std.parseInt(object.properties.letterSpacing)
           );
-        case "Hint Hand":          // default image load
-          var source = spriteSet.getImageSourceByGid(object.gid).source;
-          var index = source.lastIndexOf('/');
-
-          var hand = new FlxSprite().init(
-            x = object.x,
-            y = object.y - object.height,
-            frames = this.sprites,
-            frame = this.sprites.getByName(source.substr(index + 1)),
-            pixelPerfectPosition = true,
-            pixelPerfectRender = true
-          );
-          this.add(hand);
-          FlxTween.linearMotion(
-            hand,
-            hand.x,
-            hand.y,
-            hand.x - 4,
-            hand.y,
-            0.5,
-            true,
-            {
-              type: FlxTween.PINGPONG,
-              ease: FlxEase.circInOut
-            }
-          );
-        default:
-          // default image load
-          var source = spriteSet.getImageSourceByGid(object.gid).source;
-          var index = source.lastIndexOf('/');
-
-          this.add(new FlxSprite().init(
-            x = object.x,
-            y = object.y - object.height,
-            frames = this.sprites,
-            frame = this.sprites.getByName(source.substr(index + 1))
-          ));
       };
     });
 

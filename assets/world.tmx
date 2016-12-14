@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="95">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="106">
  <tileset firstgid="1" name="Overworld" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="images/tile-environment.png" width="128" height="128"/>
   <tile id="4">
@@ -47,7 +47,7 @@
    <image width="16" height="16" source="../assets-raw/raw/icon-clear-yes.png"/>
   </tile>
   <tile id="4">
-   <image width="15" height="11" source="../assets-raw/raw/hand.png"/>
+   <image width="16" height="16" source="../assets-raw/raw/hand.png"/>
   </tile>
   <tile id="5">
    <image width="64" height="32" source="../assets-raw/raw/button-00.png"/>
@@ -137,12 +137,6 @@
     <property name="letterSpacing" type="int" value="-3"/>
    </properties>
   </object>
-  <object id="78" name="Hint" type="No" gid="65" x="32" y="112" width="16" height="16"/>
-  <object id="81" name="Hint" type="Yes" gid="68" x="32" y="80" width="16" height="16"/>
-  <object id="82" name="Hint" type="Yes" gid="66" x="64" y="80" width="16" height="13"/>
-  <object id="83" name="Hint" type="No" gid="67" x="64" y="112" width="16" height="16"/>
-  <object id="85" name="Hint Hand" gid="69" x="16" y="80" width="15" height="11"/>
-  <object id="86" name="Hint Hand" gid="69" x="16" y="112" width="15" height="11"/>
   <object id="91" name="Game Over" gid="7" x="136" y="128" width="144" height="32">
    <properties>
     <property name="letterSpacing" type="int" value="0"/>
@@ -157,5 +151,27 @@
     <property name="text" value="START"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup name="Hints">
+  <object id="98" name="Hint Text" x="32" y="96" width="64" height="8">
+   <properties>
+    <property name="autoSize" type="bool" value="true"/>
+    <property name="letterSpacing" type="int" value="-3"/>
+    <property name="text" value="Same colors"/>
+   </properties>
+  </object>
+  <object id="99" name="Hint Text" x="32" y="68" width="64" height="8">
+   <properties>
+    <property name="autoSize" type="bool" value="true"/>
+    <property name="letterSpacing" type="int" value="-3"/>
+    <property name="text" value="Match 3"/>
+   </properties>
+  </object>
+  <object id="100" name="Hint Hand" gid="69" x="16" y="96" width="16" height="16"/>
+  <object id="101" name="Hint Hand" gid="69" x="16" y="64" width="16" height="16"/>
+  <object id="102" name="Hint" type="No" gid="67" x="64" y="96" width="16" height="16"/>
+  <object id="103" name="Hint" type="Yes" gid="66" x="64" y="64" width="16" height="13"/>
+  <object id="104" name="Hint" type="Yes" gid="68" x="32" y="64" width="16" height="16"/>
+  <object id="105" name="Hint" type="No" gid="65" x="32" y="96" width="16" height="16"/>
  </objectgroup>
 </map>
