@@ -122,6 +122,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
         _blockGrid.remove(block);
         // The block is still on-screen but not in our grid data structure (so
         // it won't be moved by the tweens in startMovingBlocks)
+        // TODO: Avoid a linear lookup whenever removing a block
 
         block.animation.finishCallback = function(_) {
           block.animation.finishCallback = null;
@@ -129,7 +130,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
         };
 
         block.animation.play(cast BlockAnimation.Vanish);
-        // TODO: Avoid a linear lookup whenever removing a block
       });
 
       this._startMovingBlocks();
