@@ -63,7 +63,7 @@ class PlayState extends CommonState
   private var _gate : FlxTiledSprite;
   private var _gridSize : Int;
   private var _gameOverText : FlxBitmapText;
-
+  private var _readyToLeaveState : Bool;
 
   private var _score : Int;
   private var _time : Float;
@@ -120,6 +120,7 @@ class PlayState extends CommonState
 
     _score = 0;
     _time = 60;
+    _readyToLeaveState = false;
 
     this._playGui = cast(this.map.getLayer("PlayState GUI"));
     this._gravityIndicators = [for (i in 0...GravityDirection.Count) null];
@@ -319,7 +320,7 @@ class PlayState extends CommonState
       this.OnGameOver.dispatch();
     }
     else if (!this.gameRunning && _time <= 0) {
-      if (FlxG.mouse.justPressed) {
+      if (_readyToLeaveState && FlxG.mouse.justPressed) {
         FlxG.switchState(new MenuState());
       }
     }
@@ -542,10 +543,22 @@ class PlayState extends CommonState
 
       if (this._score > highScore) {
         FlxG.save.data.highScore = this._score;
-        FlxG.save.flush(function(_) {
-          trace('Saved high score of ${this._score}');
+        FlxG.save.flush(function(success) {
+          // Save the high score, THEN let the player exit
+          this._readyToLeaveState = true;
+          if (success) {
+            // If the high score was successfully written...
+            trace('Saved high score of ${this._score}');
+          }
+          else {
+            trace('Failed to save high score of ${this._score}');
+          }
         });
         FlxG.sound.play(AssetPaths.high_score__wav);
+      }
+      else {
+        // If we got no high score, just let the player exit
+        this._readyToLeaveState = true;
       }
     });
   }
