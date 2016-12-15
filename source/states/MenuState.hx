@@ -33,6 +33,7 @@ class MenuState extends CommonState
 {
   private var menuGuiLayer : TiledObjectLayer;
   private var _start : FlxBitmapTextButton;
+  private var _about : FlxBitmapTextButton;
   private var _titleLetters : FlxTypedSpriteGroup<FlxBitmapText>;
   private var gate : FlxTilemap;
   private var gateLayer : TiledTileLayer;
@@ -126,6 +127,45 @@ class MenuState extends CommonState
           ];
           _start.updateHitbox();
 
+        case "About Button":
+          // TODO: Clean up this part
+          var source = spriteSet.getImageSourceByGid(object.gid).source;
+          var index = source.lastIndexOf('/');
+          var frameName = source.substr(index + 1);
+
+          this._about = new FlxBitmapTextButton(object.properties.text, function() {
+              FlxG.switchState(new AboutState());
+          }).init(
+            x = object.x,
+            y = object.y - object.height,
+            frames = this.sprites,
+            frame = this.sprites.getByName(frameName)
+          );
+
+          _about.label.font = this.textFont;
+          _about.label.letterSpacing = -3;
+          _about.label.alignment = FlxTextAlign.CENTER;
+          _about.label.color = FlxColor.WHITE;
+          _about.label.autoSize = false;
+          _about.label.fieldWidth = object.width;
+
+          var normalAnim = _about.animation.getByName("normal");
+          normalAnim.frames = [sprites.getIndexByName(frameName)];
+
+          var pressedAnim = _about.animation.getByName("pressed");
+          pressedAnim.frames = [sprites.getIndexByName("button-01.png")];
+
+          var highlightAnim = _about.animation.getByName("highlight");
+          highlightAnim.frames = [sprites.getIndexByName("button-02.png")];
+
+          var point = new FlxPoint(0, _about.label.height);
+          _about.labelAlphas = [1.0, 1.0, 1.0];
+          _about.labelOffsets = [
+            point,
+            point,
+            FlxPoint.get(0, _about.label.height + 2)
+          ];
+          _about.updateHitbox();
         default:
           // nop
       }
@@ -133,6 +173,7 @@ class MenuState extends CommonState
 
     this.add(gate);
     this.add(_start);
+    this.add(_about);
     this.add(this._titleLetters);
     FlxG.console.registerObject("playButton", _start);
   }
