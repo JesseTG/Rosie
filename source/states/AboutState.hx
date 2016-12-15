@@ -187,6 +187,7 @@ class AboutState extends FlxState {
     this._starfield.bgColor = map.backgroundColor;
 
     FlxG.console.registerObject("starfield", this._starfield);
+    FlxG.console.registerObject("credits", credits);
 
     this.add(_starfield);
     this.add(tilemap);
