@@ -179,7 +179,9 @@ class AboutState extends FlxState {
             alignment = FlxTextAlign.CENTER,
             pixelPerfectPosition = false,
             pixelPerfectRender = false,
-            letterSpacing = Std.parseInt(object.properties.letterSpacing)
+            letterSpacing = Std.parseInt(object.properties.letterSpacing),
+            useTextColor = (object.properties.textColor != null),
+            textColor = (object.properties.textColor == null) ? FlxColor.WHITE : FlxColor.fromString(object.properties.textColor)
           );
 
           credits.add(text);
