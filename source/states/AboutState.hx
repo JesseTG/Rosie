@@ -88,7 +88,6 @@ class AboutState extends FlxState {
       switch (object.name) {
         case "Rosie":
           var idleFrames = [for (i in 1...62) Printf.format("cat/idle/rosie-idle-%02d.png", [i])];
-          var effect = new FlxOutlineEffect(FlxOutlineMode.PIXEL_BY_PIXEL, 0xffEEEEEE, 2);
           rosie = new FlxSprite(object.x, object.y - object.height).init(
             frames = sprites,
             frame = sprites.getByName(idleFrames[0]),
@@ -101,9 +100,6 @@ class AboutState extends FlxState {
             IDLE_FPS,
             true
           );
-          rosie.animation.callback = function(_, _, _) {
-            effect.dirty = true;
-          }
           rosie.animation.play("idle");
           rosie.resetSizeFromFrame();
           rosie.updateHitbox();
