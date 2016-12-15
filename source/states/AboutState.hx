@@ -163,8 +163,8 @@ class AboutState extends FlxState {
             fieldWidth = object.width,
             text = object.properties.text,
             alignment = FlxTextAlign.CENTER,
-            pixelPerfectPosition = true,
-            pixelPerfectRender = true,
+            pixelPerfectPosition = false,
+            pixelPerfectRender = false,
             letterSpacing = Std.parseInt(object.properties.letterSpacing)
           );
           credits.add(title);
@@ -177,15 +177,15 @@ class AboutState extends FlxState {
             fieldWidth = object.width,
             text = object.properties.text,
             alignment = FlxTextAlign.CENTER,
-            pixelPerfectPosition = true,
-            pixelPerfectRender = true,
+            pixelPerfectPosition = false,
+            pixelPerfectRender = false,
             letterSpacing = Std.parseInt(object.properties.letterSpacing)
           );
 
           credits.add(text);
         case "Image":
           var image = new FlxSprite(object.x, object.y, 'assets/images/${object.properties.image}').init(
-            pixelPerfectPosition = true,
+            pixelPerfectPosition = false,
             pixelPerfectRender = false
           );
 
