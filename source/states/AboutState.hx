@@ -156,6 +156,9 @@ class AboutState extends FlxState {
           var title = new FlxBitmapText(this.font).init(
             x = object.x,
             y = object.y,
+            autoSize = false,
+            width = object.width,
+            fieldWidth = object.width,
             text = object.properties.text,
             alignment = FlxTextAlign.CENTER,
             pixelPerfectPosition = true,
