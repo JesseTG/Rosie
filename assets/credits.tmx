@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" backgroundcolor="#000000" nextobjectid="7">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" backgroundcolor="#0f0f0f" nextobjectid="9">
  <properties>
   <property name="numStars" type="int" value="100"/>
  </properties>
@@ -20,7 +20,21 @@
   </data>
  </layer>
  <objectgroup name="Credits">
-  <object id="5" name="Logo" x="144" y="80" width="80" height="32"/>
+  <properties>
+   <property name="scrollSpeed" type="float" value="16"/>
+  </properties>
+  <object id="5" name="Title" type="Title" x="168" y="240" width="80" height="32">
+   <properties>
+    <property name="letterSpacing" type="int" value="0"/>
+    <property name="text" value="Rosie"/>
+   </properties>
+  </object>
+  <object id="7" name="Copyright" type="Text" x="96" y="288" width="224" height="16">
+   <properties>
+    <property name="letterSpacing" type="int" value="-3"/>
+    <property name="text" value="Copyright 2016 Corundum Games"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="GUI">
   <object id="1" name="Return Button" gid="1" x="16" y="224" width="64" height="32">
