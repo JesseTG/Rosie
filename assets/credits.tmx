@@ -152,12 +152,14 @@
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="corundumgames.com"/>
+    <property name="url" value="corundumgames.com"/>
    </properties>
   </object>
   <object id="29" name="jessetg.github.io" type="Text" x="96" y="400" width="224" height="16">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="jessetg.github.io"/>
+    <property name="url" value="jessetg.github.io"/>
    </properties>
   </object>
  </objectgroup>

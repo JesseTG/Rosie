@@ -27,6 +27,7 @@ import flixel.addons.display.FlxStarField.FlxStarField3D;
 import flixel.addons.effects.chainable.FlxOutlineEffect;
 import flixel.addons.effects.chainable.FlxOutlineEffect.FlxOutlineMode;
 import flixel.tweens.FlxEase;
+import flixel.input.mouse.FlxMouseEventManager;
 import flixel.tweens.FlxTween;
 
 using ObjectInit;
@@ -169,6 +170,7 @@ class AboutState extends FlxState {
           );
           credits.add(title);
         case "Text":
+          var textColor = (object.properties.textColor == null) ? FlxColor.WHITE : FlxColor.fromString(object.properties.textColor);
           var text = new FlxBitmapText(this.textFont).init(
             x = object.x,
             y = object.y,
@@ -181,8 +183,29 @@ class AboutState extends FlxState {
             pixelPerfectRender = false,
             letterSpacing = Std.parseInt(object.properties.letterSpacing),
             useTextColor = (object.properties.textColor != null),
-            textColor = (object.properties.textColor == null) ? FlxColor.WHITE : FlxColor.fromString(object.properties.textColor)
+            textColor = textColor
           );
+
+          if (object.properties.url != null) {
+            text.useTextColor = true;
+            // TODO: This doesn't cause a leak, does it?
+            FlxMouseEventManager.add(
+              text,
+              function(t) {
+                FlxG.openURL(object.properties.url);
+              },
+              null, // No OnMouseUp
+              function(t) {
+                t.textColor = FlxColor.BLUE;
+              },
+              function(t) {
+                t.textColor = textColor;
+              },
+              true,
+              true,
+              false
+            );
+          }
 
           credits.add(text);
         case "Image":
