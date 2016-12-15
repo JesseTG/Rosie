@@ -11,7 +11,7 @@ import cpp.vm.Gc;
 import neko.vm.Gc;
 #end
 
-import states.MenuState;
+import states.SplashScreenState;
 
 class Main extends Sprite
 {
@@ -36,7 +36,7 @@ class Main extends Sprite
       FlxG.camera.pixelPerfectRender = true;
     });
 
-    addChild(new FlxGame(320, 240, MenuState, 2.0));
+    addChild(new FlxGame(320, 240, SplashScreenState, 2.0));
 
     // TODO: Make exceptions bring the player to an error screen gracefully
     // TODO: Make a proper package hierarchy
