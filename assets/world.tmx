@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="95">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" nextobjectid="124">
  <tileset firstgid="1" name="Overworld" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="images/tile-environment.png" width="128" height="128"/>
   <tile id="4">
@@ -47,7 +47,7 @@
    <image width="16" height="16" source="../assets-raw/raw/icon-clear-yes.png"/>
   </tile>
   <tile id="4">
-   <image width="15" height="11" source="../assets-raw/raw/hand.png"/>
+   <image width="16" height="16" source="../assets-raw/raw/hand.png"/>
   </tile>
   <tile id="5">
    <image width="64" height="32" source="../assets-raw/raw/button-00.png"/>
@@ -67,15 +67,11 @@
   </data>
  </layer>
  <objectgroup name="Objects" visible="0">
-  <object id="6" name="Grid" gid="7" x="112" y="32" width="16" height="16">
+  <object id="122" name="Grid" x="112" y="16" width="192" height="192">
    <properties>
     <property name="size" type="int" value="12"/>
    </properties>
   </object>
-  <object id="10" name="Gravity Indicator" type="Left" gid="1073741831" x="112" y="96" width="32" height="16" rotation="90"/>
-  <object id="12" name="Gravity Indicator" type="Right" gid="1073741831" x="320" y="96" width="32" height="16" rotation="90"/>
-  <object id="14" name="Gravity Indicator" type="Up" gid="7" x="192" y="0" width="32" height="16"/>
-  <object id="15" name="Gravity Indicator" type="Down" gid="7" x="192" y="208" width="32" height="16"/>
   <object id="20" name="Gravity Panel" type="Left" gid="40" x="112" y="112" width="16" height="16"/>
   <object id="22" name="Gravity Panel" type="Left" gid="40" x="128" y="112" width="16" height="16"/>
   <object id="23" name="Gravity Panel" type="Left" gid="40" x="144" y="112" width="16" height="16"/>
@@ -100,12 +96,12 @@
   <object id="51" name="Gravity Panel" type="Up" gid="40" x="208" y="80" width="16" height="16"/>
   <object id="52" name="Gravity Panel" type="Up" gid="40" x="208" y="96" width="16" height="16"/>
   <object id="53" name="Gravity Panel" type="Up" gid="40" x="192" y="96" width="16" height="16"/>
-  <object id="54" name="Gravity Panel" type="Down" gid="40" x="208" y="208" width="16" height="16"/>
+  <object id="54" name="Gravity Panel" type="Down" gid="40" x="192" y="208" width="16" height="16"/>
   <object id="55" name="Gravity Panel" type="Down" gid="40" x="208" y="192" width="16" height="16"/>
   <object id="56" name="Gravity Panel" type="Down" gid="40" x="192" y="192" width="16" height="16"/>
   <object id="57" name="Gravity Panel" type="Down" gid="40" x="208" y="176" width="16" height="16"/>
   <object id="58" name="Gravity Panel" type="Down" gid="40" x="192" y="176" width="16" height="16"/>
-  <object id="59" name="Gravity Panel" type="Down" gid="40" x="192" y="208" width="16" height="16"/>
+  <object id="59" name="Gravity Panel" type="Down" gid="40" x="208" y="208" width="16" height="16"/>
   <object id="60" name="Gravity Panel" type="Down" gid="40" x="192" y="160" width="16" height="16"/>
   <object id="61" name="Gravity Panel" type="Down" gid="40" x="208" y="160" width="16" height="16"/>
   <object id="62" name="Gravity Panel" type="Left" gid="40" x="176" y="128" width="16" height="16"/>
@@ -117,44 +113,86 @@
   <object id="68" name="Gravity Panel" type="Down" gid="40" x="208" y="144" width="16" height="16"/>
   <object id="69" name="Gravity Panel" type="Down" gid="40" x="192" y="144" width="16" height="16"/>
   <object id="92" name="Rosie" gid="7" x="16" y="192" width="16" height="21"/>
+  <object id="118" name="Gravity Indicator" type="Down" x="192" y="208" width="32" height="16">
+   <properties>
+    <property name="flipY" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="119" name="Gravity Indicator" type="Left" x="112" y="96" width="32" height="16" rotation="90">
+   <properties>
+    <property name="flipX" type="bool" value="false"/>
+    <property name="flipY" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="120" name="Gravity Indicator" type="Up" x="192" y="0" width="32" height="16">
+   <properties>
+    <property name="flipY" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="121" name="Gravity Indicator" type="Right" x="320" y="96" width="32" height="16" rotation="90">
+   <properties>
+    <property name="flipY" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="GUI" visible="0">
-  <object id="72" name="High Score Display" gid="7" x="8" y="208" width="16" height="8">
+ <objectgroup name="GUI">
+  <object id="117" name="High Score Display" x="8" y="208" width="56" height="8">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="PlayState GUI" visible="0">
-  <object id="74" name="Score Display" gid="7" x="8" y="24" width="16" height="16">
-   <properties>
-    <property name="autoSize" type="bool" value="true"/>
-    <property name="letterSpacing" type="int" value="2"/>
-   </properties>
-  </object>
-  <object id="75" name="Time Remaining" gid="7" x="8" y="224" width="16" height="8">
-   <properties>
-    <property name="letterSpacing" type="int" value="-3"/>
-   </properties>
-  </object>
-  <object id="78" name="Hint" type="No" gid="65" x="32" y="128" width="16" height="16"/>
-  <object id="81" name="Hint" type="Yes" gid="68" x="32" y="160" width="16" height="16"/>
-  <object id="82" name="Hint" type="Yes" gid="66" x="64" y="160" width="16" height="13"/>
-  <object id="83" name="Hint" type="No" gid="67" x="64" y="128" width="16" height="16"/>
-  <object id="85" name="Hint Hand" gid="69" x="16" y="128" width="15" height="11"/>
-  <object id="86" name="Hint Hand" gid="69" x="16" y="160" width="15" height="11"/>
-  <object id="91" name="Game Over" gid="7" x="136" y="128" width="144" height="32">
+  <object id="107" name="Game Over" x="136" y="96" width="144" height="32">
    <properties>
     <property name="letterSpacing" type="int" value="0"/>
     <property name="text" value="Game Over"/>
    </properties>
   </object>
+  <object id="111" name="Time Remaining" x="8" y="224" width="56" height="8">
+   <properties>
+    <property name="letterSpacing" type="int" value="-3"/>
+   </properties>
+  </object>
+  <object id="113" name="Score Display" x="8" y="8" width="80" height="48">
+   <properties>
+    <property name="autoSize" type="bool" value="true"/>
+    <property name="letterSpacing" type="int" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="MenuState GUI">
-  <object id="87" name="Title" gid="7" x="168" y="80" width="80" height="32"/>
-  <object id="90" name="Play Button" gid="70" x="176" y="192" width="64" height="32">
+  <object id="90" name="Play Button" gid="70" x="176" y="144" width="64" height="32">
    <properties>
     <property name="text" value="START"/>
+   </properties>
+  </object>
+  <object id="115" name="Title" x="168" y="48" width="80" height="32"/>
+  <object id="123" name="About Button" gid="70" x="176" y="192" width="64" height="32">
+   <properties>
+    <property name="text" value="About"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Hints">
+  <object id="99" name="Hint Text" x="16" y="116" width="64" height="8">
+   <properties>
+    <property name="autoSize" type="bool" value="true"/>
+    <property name="letterSpacing" type="int" value="-3"/>
+    <property name="text" value="Match 3+ of"/>
+   </properties>
+  </object>
+  <object id="100" name="Hint Hand" gid="69" x="64" y="112" width="16" height="16"/>
+  <object id="101" name="Hint Hand" gid="69" x="16" y="112" width="16" height="16"/>
+  <object id="102" name="Hint" type="No" gid="67" x="64" y="72" width="16" height="16"/>
+  <object id="103" name="Hint" type="Yes" gid="66" x="16" y="72" width="16" height="13"/>
+  <object id="104" name="Hint" type="Yes" gid="68" x="16" y="96" width="16" height="16"/>
+  <object id="105" name="Hint" type="No" gid="65" x="64" y="96" width="16" height="16"/>
+  <object id="106" name="Hint Text" x="16" y="128" width="64" height="8">
+   <properties>
+    <property name="autoSize" type="bool" value="true"/>
+    <property name="letterSpacing" type="int" value="-3"/>
+    <property name="text" value="same color"/>
    </properties>
   </object>
  </objectgroup>
