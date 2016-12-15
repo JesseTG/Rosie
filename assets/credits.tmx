@@ -35,6 +35,47 @@
     <property name="text" value="Copyright 2016 Corundum Games"/>
    </properties>
   </object>
+  <object id="9" name="Photo" type="Image" x="128" y="416" width="160" height="120">
+   <properties>
+    <property name="image" value="rosie.jpg"/>
+   </properties>
+  </object>
+  <object id="11" name="Dates" type="Text" x="96" y="544" width="224" height="16">
+   <properties>
+    <property name="letterSpacing" type="int" value="-3"/>
+    <property name="text" value="April 1 2007 - August 31 2016"/>
+   </properties>
+  </object>
+  <object id="12" name="RIP" type="Text" x="96" y="560" width="224" height="16">
+   <properties>
+    <property name="letterSpacing" type="int" value="-3"/>
+    <property name="text" value="R.I.P."/>
+   </properties>
+  </object>
+  <object id="13" name="Namesake" type="Text" x="96" y="400" width="224" height="16">
+   <properties>
+    <property name="letterSpacing" type="int" value="-3"/>
+    <property name="text" value="Rosie"/>
+   </properties>
+  </object>
+  <object id="14" name="Thanks 1" type="Title" x="96" y="592" width="224" height="32">
+   <properties>
+    <property name="letterSpacing" type="int" value="0"/>
+    <property name="text" value="Thanks for"/>
+   </properties>
+  </object>
+  <object id="15" name="Thanks 2" type="Title" x="96" y="624" width="224" height="32">
+   <properties>
+    <property name="letterSpacing" type="int" value="0"/>
+    <property name="text" value="playing!"/>
+   </properties>
+  </object>
+  <object id="16" name="License" type="Text" x="96" y="304" width="224" height="16">
+   <properties>
+    <property name="letterSpacing" type="int" value="-3"/>
+    <property name="text" value="Released under the MIT license"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="GUI">
   <object id="1" name="Return Button" gid="1" x="16" y="224" width="64" height="32">
