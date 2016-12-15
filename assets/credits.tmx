@@ -16,7 +16,7 @@
  </tileset>
  <layer name="Ground" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFIwXwA7EgFcxhAWJWIGaDYkoBDxDzUsk8GSxYlgLzVLBg1VHzBsw8AOVfBUE=
+   eJxjYBgFo4B0wALErFQ0jweIealgjgwWLEuBeSpYsOqoeQNmHgBVqwUJ
   </data>
  </layer>
  <objectgroup name="Credits">
@@ -28,6 +28,6 @@
     <property name="text" value="⇦ Back"/>
    </properties>
   </object>
-  <object id="2" name="Rosie" gid="2" x="48" y="144" width="23" height="21"/>
+  <object id="2" name="Rosie" gid="2" x="64" y="144" width="23" height="21"/>
  </objectgroup>
 </map>
