@@ -16,6 +16,7 @@ import flixel.math.FlxMath;
 using ObjectInit;
 
 class Rosie extends FlxNestedSprite {
+  private static inline var RUN_SPEED = 32.0;
   private static inline var IDLE_FPS = 6;
   private static inline var RUN_FPS = 12;
 
@@ -114,12 +115,12 @@ private class RosieIdleState extends FlxFSMState<Rosie> {
 private class RosieRunState extends FlxFSMState<Rosie> {
   public override function enter(owner:Rosie, fsm:FlxFSM<Rosie>) {
     owner.animation.play("run");
-    owner.velocity.x = ((owner.facing & FlxObject.RIGHT != 0) ? 1 : -1) * 32;
+    owner.velocity.x = ((owner.facing & FlxObject.RIGHT != 0) ? 1 : -1) * Rosie.RUN_SPEED;
   }
 
   public override function update(elapsed:Float, owner:Rosie, fsm:FlxFSM<Rosie>) {
     if (owner.x <= 0 || FlxObject.separateX(owner, owner.tilemap)) {
-      owner.velocity.x = (owner.touching & FlxObject.RIGHT != 0) ? -32 : 32;
+      owner.velocity.x = (owner.touching & FlxObject.RIGHT != 0) ? -Rosie.RUN_SPEED : Rosie.RUN_SPEED;
       owner.facing = (owner.velocity.x > 0) ? FlxObject.RIGHT : FlxObject.LEFT;
     }
   }
