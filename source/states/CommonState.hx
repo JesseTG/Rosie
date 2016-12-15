@@ -55,7 +55,7 @@ class CommonState extends FlxState {
 
     this.textFont = FlxBitmapFont.fromMonospace(
       this.sprites.getByName("text-font.png"),
-      '${FlxBitmapFont.DEFAULT_CHARS}⌚',
+      '${FlxBitmapFont.DEFAULT_CHARS}⌚⇦',
       TEXT_FONT_SIZE,
       null,
       TEXT_FONT_SPACING
