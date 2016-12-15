@@ -26,6 +26,8 @@ import flixel.addons.display.FlxStarField.FlxStarField2D;
 import flixel.addons.display.FlxStarField.FlxStarField3D;
 import flixel.addons.effects.chainable.FlxOutlineEffect;
 import flixel.addons.effects.chainable.FlxOutlineEffect.FlxOutlineMode;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 
 using ObjectInit;
 using Lambda;
@@ -191,7 +193,6 @@ class AboutState extends FlxState {
       }
     }
 
-    credits.velocity.y = -Std.parseFloat(creditsLayer.properties.scrollSpeed);
     this._starfield = new FlxStarField2D(0, 0, FlxG.width, FlxG.height, Std.parseInt(map.properties.numStars));
     this._starfield.bgColor = map.backgroundColor;
 
@@ -203,6 +204,22 @@ class AboutState extends FlxState {
     this.add(rosie);
     this.add(returnButton);
     this.add(credits);
+
+    FlxTween.linearMotion(
+      credits,
+      credits.x,
+      credits.y,
+      credits.x,
+      credits.y - credits.height - FlxG.height,
+      Std.parseFloat(creditsLayer.properties.scrollSpeed),
+      creditsLayer.properties.useDuration == "true",
+      {
+        startDelay: Std.parseFloat(creditsLayer.properties.startDelay),
+        type: FlxTween.LOOPING,
+        loopDelay: Std.parseFloat(creditsLayer.properties.loopDelay),
+      }
+
+    );
 
     FlxG.sound.playMusic(AssetPaths.game_over_loop__ogg);
   }

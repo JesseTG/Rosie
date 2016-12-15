@@ -21,7 +21,10 @@
  </layer>
  <objectgroup name="Credits">
   <properties>
+   <property name="loopDelay" type="float" value="1"/>
    <property name="scrollSpeed" type="float" value="16"/>
+   <property name="startDelay" type="float" value="1"/>
+   <property name="useDuration" type="bool" value="false"/>
   </properties>
   <object id="5" name="Title" type="Title" x="168" y="240" width="80" height="32">
    <properties>
