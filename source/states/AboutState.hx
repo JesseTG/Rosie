@@ -182,6 +182,12 @@ class AboutState extends FlxState {
 
           credits.add(text);
         case "Image":
+          var image = new FlxSprite(object.x, object.y, 'assets/images/${object.properties.image}').init(
+            pixelPerfectPosition = true,
+            pixelPerfectRender = false
+          );
+
+          credits.add(image);
       }
     }
 
