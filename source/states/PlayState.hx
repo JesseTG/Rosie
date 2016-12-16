@@ -74,7 +74,7 @@ class PlayState extends CommonState
   private var _timeChangeDisplay : FlxBitmapText;
   private var _hints : FlxSpriteGroup;
   private var _gravityIndicators : Vector<GravityIndicator>;
-  private var _gravityPanels : Vector<FlxTypedGroup<GravityPanel>>;
+  private var _gravityPanels : Vector<FlxTiledSprite>;
   private var _rosie : Rosie;
   private var _timeSinceLastGoodClick : Float;
   // TODO: Organize this crap
@@ -128,12 +128,7 @@ class PlayState extends CommonState
     this._hintGui = cast(this.map.getLayer("Hints"));
 
     this._gravityIndicators = new Vector<GravityIndicator>(GravityDirection.Count);
-    this._gravityPanels = new Vector<FlxTypedGroup<GravityPanel>>(GravityDirection.Count);
-    for (i in 0...GravityDirection.Count) {
-      this._gravityPanels[i] = new FlxTypedGroup<GravityPanel>().init(
-        visible = false
-      );
-    }
+    this._gravityPanels = new Vector<FlxTiledSprite>(GravityDirection.Count);
 
     this._hints = new FlxSpriteGroup();
     for (object in _hintGui.objects) {
@@ -203,8 +198,13 @@ class PlayState extends CommonState
         case "Gravity Panel":
           var direction = GravityDirection.createByName(object.type);
           var index = GravityDirection.getIndex(direction);
-          var panel = new GravityPanel(object.x, object.y - object.height, sprites);
-          this._gravityPanels[index].add(panel);
+          var panel = new GravityPanel(object.x, object.y, object.width, object.height, sprites).init(
+            width = object.width,
+            height = object.height
+          );
+          panel.exists = false;
+          this._gravityPanels[index] = panel;
+          this.add(panel);
         case "Grid":
           // TODO: Come up with a better way to render the grid
           _gridSize = Std.parseInt(object.properties.size);
@@ -483,8 +483,8 @@ class PlayState extends CommonState
       this._gravityIndicators[prevIndex].state = GravityIndicatorState.Off;
       this._gravityIndicators[index].state = GravityIndicatorState.On;
 
-      this._gravityPanels[prevIndex].visible = false;
-      this._gravityPanels[index].visible = true;
+      this._gravityPanels[prevIndex].exists = false;
+      this._gravityPanels[index].exists = true;
     });
 
     // TODO: Handle the case where the grid is full and no groups exist
@@ -511,11 +511,11 @@ class PlayState extends CommonState
       }
 
       for (i in this._gravityIndicators) {
-        i.visible = false;
+        i.exists = false;
       }
 
       for (i in this._gravityPanels) {
-        i.visible = false;
+        i.exists = false;
       }
 
       this._rosie.emote.state = EmoteState.Doh;
@@ -644,10 +644,10 @@ class PlayState extends CommonState
   // End OnBadClick Callbacks //////////////////////////////////////////////////
   private function _initGravityIndicators() {
     var index = _blockGrid.gravity.getIndex();
-    _gravityPanels[index].visible = true;
+    _gravityPanels[index].exists = true;
     var indicator = _gravityIndicators[index];
     indicator.state = GravityIndicatorState.On;
-    indicator.visible = true;
+    indicator.exists = true;
   }
   private function _addBonusTime(blocks) {
     var blocksCreated = blocks.length;
