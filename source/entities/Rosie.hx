@@ -16,7 +16,7 @@ import flixel.math.FlxMath;
 using ObjectInit;
 
 class Rosie extends FlxNestedSprite {
-  private static inline var RUN_SPEED = 32.0;
+  public static inline var RUN_SPEED = 32.0;
   private static inline var IDLE_FPS = 6;
   private static inline var RUN_FPS = 12;
 
