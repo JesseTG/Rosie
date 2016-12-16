@@ -16,6 +16,7 @@ import flixel.group.FlxSpriteGroup;
 import flixel.ui.FlxBitmapTextButton;
 import flixel.text.FlxBitmapText;
 import flixel.FlxG;
+import flixel.util.FlxSignal;
 import flixel.FlxState;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;
@@ -42,14 +43,23 @@ class SplashScreenState extends FlxState {
   private static inline var RUN_FPS = 12;
 
   private var logo : FlxSprite;
-  private var logoExpanding : Bool;
+  private var rosie : FlxSprite;
+  private var animationDone : Bool;
+  private var timer : FlxTimer;
+  private var OnAnimationDone : FlxSignal;
 
   public override function create() {
     super.create();
 
+    this.OnAnimationDone = new FlxSignal();
+
+#if debug
+    this.OnAnimationDone.add(function() trace("OnAnimationDone"));
+#end
+
+    this.animationDone = false;
     this.bgColor = 0xff070707;
 
-    this.logoExpanding = false;
     var map = new TiledMap(AssetPaths.splash__tmx);
     var sprites = FlxAtlasFrames.fromTexturePackerJson(AssetPaths.gfx__png, AssetPaths.gfx__json);
     var idleFrames = [for (i in 1...62) Printf.format("cat/idle/rosie-idle-%02d.png", [i])];
@@ -59,7 +69,7 @@ class SplashScreenState extends FlxState {
     for (object in objects.objects) {
       switch (object.type) {
         case "Rosie":
-          var rosie = new FlxSprite(object.x, object.y - object.height);
+          rosie = new FlxSprite(object.x, object.y - object.height);
           rosie.frames = sprites;
           rosie.animation.addByNames(
             "idle",
@@ -90,7 +100,7 @@ class SplashScreenState extends FlxState {
               type: FlxTween.PERSIST,
               onComplete: function(_) {
                 rosie.animation.play("idle");
-                new FlxTimer().start(5, function(_) { FlxG.switchState(new MenuState()); });
+                this.OnAnimationDone.dispatch();
               },
               onUpdate: function(_) {
                 if (rosie.x >= logo.x) {
@@ -110,6 +120,34 @@ class SplashScreenState extends FlxState {
       }
     }
 
+    this.OnAnimationDone.addOnce(function() {
+      this.animationDone = true;
+      this.timer = new FlxTimer();
+      timer.start(5, function(_) { FlxG.switchState(new MenuState()); });
+    });
+
+  }
+
+  public override function update(elapsed:Float) {
+    if (FlxG.mouse.justPressed) {
+      if (this.animationDone) {
+        this.timer.cancel();
+        FlxG.switchState(new MenuState());
+      }
+      else {
+        FlxTween.globalManager.clear();
+        rosie.x = 256; // TODO: Don't hard-code
+        rosie.animation.play("idle");
+
+        var rect = logo.clipRect;
+        rect.width = logo.width;
+        logo.clipRect = rect;
+
+        this.OnAnimationDone.dispatch();
+      }
+    }
+
+    super.update(elapsed);
   }
 
   public override function destroy() {
