@@ -24,7 +24,7 @@ class GravityIndicator extends FlxSprite {
     this.animation.addByNames(cast GravityIndicatorState.Off, ["gravity-indicator-04.png"]);
     this.animation.addByStringIndices(
       cast GravityIndicatorState.On,
-      "gravity-indicator-",
+      "gravity-indicator-h-",
       ["00", "01", "02", "02", "02", "02", "01", "00", "00", "00"],
       ".png",
       4
