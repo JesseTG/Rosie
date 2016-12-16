@@ -428,6 +428,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
     // TODO: Simplify this function
     _blockGrid.forEach(function(blockInGrid:Block, gridX:Int, gridY:Int) {
+      // This anonymous function is okay; on JavaScript it's inlined
+
       if (blockInGrid == null) {
         // If there's no block at this grid cell..
 
