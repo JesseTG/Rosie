@@ -389,10 +389,6 @@ class PlayState extends CommonState
   }
 
   // TODO: Unregister everything in the console, somehow
-
-  private function _playNotAllowed(_) {
-    FlxG.sound.play(AssetPaths.not_allowed__wav, false, false);
-  }
   private inline function _initCallbacks() {
     this.OnGameStartAnimationStart.addOnce(function() {
       for (block in _blockGrid) {
@@ -466,15 +462,9 @@ class PlayState extends CommonState
       }
     });
 
-    _blockGrid.OnBadClick.add(function(_) {
-      if (_rosie.emote.state == EmoteState.None && FlxG.random.bool(30)) {
-        _rosie.emote.state = FlxG.random.getObject([
-          EmoteState.Sad,
-          EmoteState.Confused,
-          EmoteState.Angry,
-        ], [3.0, 2.0, 1.0]);
-      }
-    });
+    _blockGrid.OnBadClick.add(_subtractTime);
+    _blockGrid.OnBadClick.add(_playNotAllowed);
+    _blockGrid.OnBadClick.add(_rosieEmoteBadClick);
 
     this._blockGrid.OnBeforeBlocksGenerated.add(function() {
       this.round++;
@@ -512,8 +502,7 @@ class PlayState extends CommonState
       }
     });
 
-    this._blockGrid.OnBadClick.add(this._subtractTime);
-    this._blockGrid.OnBadClick.add(_playNotAllowed);
+
 
     this.OnGameOver.addOnce(function() {
       if (FlxG.sound.music != null) {
@@ -613,6 +602,46 @@ class PlayState extends CommonState
     FlxG.camera.fill(FlxColor.BLACK, false);
   }
 
+  // OnBadClick Callbacks //////////////////////////////////////////////////////
+
+  private function _subtractTime(blocks) {
+    _time -= 1.0;
+
+    _timeChangeDisplay.color = FlxColor.RED;
+    _timeChangeDisplay.text = Printf.format("-%.1f", [1.0]);
+    FlxTween.linearMotion(
+      _timeChangeDisplay,
+      _timeDisplay.x,
+      _timeDisplay.y,
+      _timeDisplay.x,
+      _timeDisplay.y + 8,
+      0.5,
+      true
+    );
+
+    FlxTween.color(
+      _timeChangeDisplay,
+      0.5,
+      FlxColor.RED,
+      FlxColor.fromRGB(255, 0, 0, 0),
+      {
+        startDelay: 0.1
+      }
+    );
+  }
+
+  private function _playNotAllowed(_) {
+    FlxG.sound.play(AssetPaths.not_allowed__wav, false, false);
+  }
+
+  private static var BadClickEmotes = [EmoteState.Sad, EmoteState.Confused, EmoteState.Angry];
+  private static var BadClickEmoteWeights = [3.0, 2.0, 1.0];
+  private function _rosieEmoteBadClick(_) {
+    if (_rosie.emote.state == EmoteState.None && FlxG.random.bool(30)) {
+      _rosie.emote.state = FlxG.random.getObject(BadClickEmotes, BadClickEmoteWeights);
+    }
+  }
+  // End OnBadClick Callbacks //////////////////////////////////////////////////
   private function _initGravityIndicators() {
     var index = _blockGrid.gravity.getIndex();
     _gravityPanels[index].visible = true;
@@ -648,29 +677,4 @@ class PlayState extends CommonState
     );
   }
 
-  private function _subtractTime(blocks) {
-    _time -= 1.0;
-
-    _timeChangeDisplay.color = FlxColor.RED;
-    _timeChangeDisplay.text = Printf.format("-%.1f", [1.0]);
-    FlxTween.linearMotion(
-      _timeChangeDisplay,
-      _timeDisplay.x,
-      _timeDisplay.y,
-      _timeDisplay.x,
-      _timeDisplay.y + 8,
-      0.5,
-      true
-    );
-
-    FlxTween.color(
-      _timeChangeDisplay,
-      0.5,
-      FlxColor.RED,
-      FlxColor.fromRGB(255, 0, 0, 0),
-      {
-        startDelay: 0.1
-      }
-    );
-  }
 }
