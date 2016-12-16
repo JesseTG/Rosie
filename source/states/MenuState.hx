@@ -57,7 +57,7 @@ class MenuState extends CommonState
     );
     this.gate.useScaleHack = false;
 
-    this.menuGuiLayer.objects.iter(function(object) {
+    for (object in this.menuGuiLayer.objects) {
       switch (object.name) {
         case "Title":
           this._titleLetters.setPosition(object.x, object.y);
@@ -169,7 +169,7 @@ class MenuState extends CommonState
         default:
           // nop
       }
-    });
+    }
 
     this.add(gate);
     this.add(_start);
