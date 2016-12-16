@@ -96,7 +96,7 @@ class CommonState extends FlxState {
       highScore = cast(FlxG.save.data.highScore, Int);
     }
 
-    this.guiLayer.objects.iter(function(object:TiledObject) {
+    for (object in this.guiLayer.objects) {
       switch (object.name) {
         case "High Score Display":
           this.highScoreLabel = new FlxBitmapText(this.textFont).init(
@@ -109,7 +109,7 @@ class CommonState extends FlxState {
         default:
           // nop
       }
-    });
+    };
 
     this.add(bgImage);
     this.add(tilemap);
