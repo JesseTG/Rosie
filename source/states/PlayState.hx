@@ -392,9 +392,9 @@ class PlayState extends CommonState
 
   private inline function _initCallbacks() {
     this.OnGameStartAnimationStart.addOnce(function() {
-      _blockGrid.forEach(function(block) {
+      for (block in _blockGrid) {
         FlxMouseEventManager.setObjectMouseEnabled(block, false);
-      });
+      }
 
       var _gameStartGate : FlxAsyncIteratorLoop<Int> = null;
       _gameStartGate = new FlxAsyncIteratorLoop<Int>(
