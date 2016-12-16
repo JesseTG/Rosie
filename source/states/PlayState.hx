@@ -51,6 +51,7 @@ import util.ReverseIterator;
 import util.FlxAsyncIteratorLoop;
 import haxe.ds.ObjectMap;
 
+import haxe.ds.Vector;
 using Lambda;
 using ObjectInit;
 using entities.GravityDirection;
@@ -72,8 +73,8 @@ class PlayState extends CommonState
   private var _scoreDisplay : FlxBitmapText;
   private var _timeChangeDisplay : FlxBitmapText;
   private var _hints : FlxSpriteGroup;
-  private var _gravityIndicators : Array<GravityIndicator>;
-  private var _gravityPanels : Array<FlxTypedGroup<GravityPanel>>;
+  private var _gravityIndicators : Vector<GravityIndicator>;
+  private var _gravityPanels : Vector<FlxTypedGroup<GravityPanel>>;
   private var _rosie : Rosie;
   private var _timeSinceLastGoodClick : Float;
   // TODO: Organize this crap
@@ -126,12 +127,13 @@ class PlayState extends CommonState
     this._playGui = cast(this.map.getLayer("PlayState GUI"));
     this._hintGui = cast(this.map.getLayer("Hints"));
 
-    this._gravityIndicators = [for (i in 0...GravityDirection.Count) null];
-    this._gravityPanels = [for (i in 0...GravityDirection.Count) {
-      new FlxTypedGroup<GravityPanel>().init(
+    this._gravityIndicators = new Vector<GravityIndicator>(GravityDirection.Count);
+    this._gravityPanels = new Vector<FlxTypedGroup<GravityPanel>>(GravityDirection.Count);
+    for (i in 0...GravityDirection.Count) {
+      this._gravityPanels[i] = new FlxTypedGroup<GravityPanel>().init(
         visible = false
       );
-    }];
+    }
 
     this._hints = new FlxSpriteGroup();
     this._hintGui.objects.iter(function(object) {
@@ -239,8 +241,12 @@ class PlayState extends CommonState
           // nop
       }
     });
-    D.assert(!this._gravityIndicators.has(null));
 
+#if debug
+    for (g in _gravityIndicators) {
+      D.assert(g != null);
+    }
+#end
     _playGui.objects.iter(function(object:TiledObject) {
       switch (object.name) {
         case "Score Display":
