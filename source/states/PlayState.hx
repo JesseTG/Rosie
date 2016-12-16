@@ -12,6 +12,7 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.util.FlxPool;
 import flixel.math.FlxMath;
 import flixel.math.FlxRandom;
 import flixel.tweens.FlxTween;
@@ -75,7 +76,8 @@ class PlayState extends CommonState
   private var _timeChangeDisplay : FlxBitmapText;
   private var _hints : FlxSpriteGroup;
   private var _gravityIndicators : Vector<GravityIndicator>;
-  private var _gravityPanels : Vector<FlxTiledSprite>;
+  private var _gravityPanel : GravityPanel;
+  private var _gravityPanelCoordinates : Vector<FlxRect>;
   private var _rosie : Rosie;
   private var _timeSinceLastGoodClick : Float;
   // TODO: Organize this crap
@@ -129,7 +131,8 @@ class PlayState extends CommonState
     this._hintGui = cast(this.map.getLayer("Hints"));
 
     this._gravityIndicators = new Vector<GravityIndicator>(GravityDirection.Count);
-    this._gravityPanels = new Vector<FlxTiledSprite>(GravityDirection.Count);
+    this._gravityPanel = new GravityPanel(0, 0, 0, 0, sprites);
+    this._gravityPanelCoordinates = new Vector<FlxRect>(GravityDirection.Count);
 
     this._hints = new FlxSpriteGroup();
     for (object in _hintGui.objects) {
@@ -205,15 +208,10 @@ class PlayState extends CommonState
             flipY = object.properties.flipY == "true"
           );
         case "Gravity Panel":
+          var coords = FlxRect.get(object.x, object.y, object.width, object.height);
           var direction = GravityDirection.createByName(object.type);
           var index = GravityDirection.getIndex(direction);
-          var panel = new GravityPanel(object.x, object.y, object.width, object.height, sprites).init(
-            width = object.width,
-            height = object.height
-          );
-          panel.exists = false;
-          this._gravityPanels[index] = panel;
-          this.add(panel);
+          this._gravityPanelCoordinates[index] = coords;
         case "Grid":
           // TODO: Come up with a better way to render the grid
           _gridSize = Std.parseInt(object.properties.size);
@@ -323,9 +321,7 @@ class PlayState extends CommonState
     FlxG.watch.add(FlxPoint.pool, "length", "# Pooled FlxPoints");
     FlxG.watch.add(FlxRect.pool, "length", "# Pooled FlxRects");
 
-    for (p in _gravityPanels) {
-      this.add(p);
-    }
+    this.add(_gravityPanel);
     for (g in _gravityIndicators) {
       this.add(g);
     }
@@ -399,6 +395,10 @@ class PlayState extends CommonState
     FlxG.watch.remove(FlxPoint.pool, "length");
     FlxG.watch.remove(FlxRect.pool, "length");
 
+    for (rect in this._gravityPanelCoordinates) {
+      (cast (FlxRect.pool, FlxPool<FlxRect>)).put(rect);
+    }
+
     this._blockGrid = null;
     this._playGui = null;
     this._gate = null;
@@ -407,7 +407,8 @@ class PlayState extends CommonState
     this._timeChangeDisplay = null;
     this._hints = null;
     this._gravityIndicators = null;
-    this._gravityPanels = null;
+    this._gravityPanel = null;
+    this._gravityPanelCoordinates = null;
   }
 
   // TODO: Unregister everything in the console, somehow
@@ -505,8 +506,9 @@ class PlayState extends CommonState
       this._gravityIndicators[prevIndex].state = GravityIndicatorState.Off;
       this._gravityIndicators[index].state = GravityIndicatorState.On;
 
-      this._gravityPanels[prevIndex].exists = false;
-      this._gravityPanels[index].exists = true;
+      var coords = this._gravityPanelCoordinates.get(index);
+      this._gravityPanel.setPosition(coords.x, coords.y);
+      this._gravityPanel.setSize(coords.width, coords.height);
     });
 
     // TODO: Handle the case where the grid is full and no groups exist
@@ -536,9 +538,7 @@ class PlayState extends CommonState
         i.exists = false;
       }
 
-      for (i in this._gravityPanels) {
-        i.exists = false;
-      }
+      this._gravityPanel.exists = false;
 
       this._rosie.emote.state = EmoteState.Doh;
       FlxMouseEventManager.removeAll();
@@ -580,9 +580,7 @@ class PlayState extends CommonState
         this.remove(i);
       }
 
-      for (i in this._gravityPanels) {
-        this.remove(i);
-      }
+      this.remove(this._gravityPanel);
 
       FlxG.sound.play(AssetPaths.game_over__ogg, false, function() {
         new FlxTimer().start(1, function(_) {
@@ -666,7 +664,6 @@ class PlayState extends CommonState
   // End OnBadClick Callbacks //////////////////////////////////////////////////
   private function _initGravityIndicators() {
     var index = _blockGrid.gravity.getIndex();
-    _gravityPanels[index].exists = true;
     var indicator = _gravityIndicators[index];
     indicator.state = GravityIndicatorState.On;
     indicator.exists = true;
