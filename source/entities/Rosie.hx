@@ -54,12 +54,8 @@ class Rosie extends FlxNestedSprite {
     this.frame = sprites.getByName(IDLE_FRAMES[0]);
     this.fsm = new FlxFSM<Rosie>(this);
     this.fsm.transitions
-      .add(RosieIdleState, RosieRunState, function(rosie) {
-        return (rosie.fsm.age >= 1.0 && rosie.animation.frameIndex == 4) ? Math.random() < 0.4 : false;
-      })
-      .add(RosieRunState, RosieIdleState, function(rosie) {
-        return (rosie.fsm.age >= 1.0) ? Math.random() < 0.4 : false;
-      })
+      .add(RosieIdleState, RosieRunState, _switchBetweenIdleAndRun)
+      .add(RosieRunState, RosieIdleState, _switchBetweenIdleAndRun)
       .add(RosieIdleState, RosieJumpState, function(rosie) {
         return false;
       })
@@ -84,6 +80,11 @@ class Rosie extends FlxNestedSprite {
     );
 
     this.add(this.emote);
+  }
+
+  private static function _switchBetweenIdleAndRun(rosie:Rosie) {
+    var frame = rosie.animation.curAnim.curFrame;
+    return (rosie.fsm.age >= 1.0 && Math.round(frame) == 4) ? Math.random() < 0.1 : false;
   }
 
   public override function update(elapsed:Float) {
