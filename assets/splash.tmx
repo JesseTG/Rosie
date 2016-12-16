@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" backgroundcolor="#070707" nextobjectid="32">
+ <properties>
+  <property name="numStars" type="int" value="100"/>
+ </properties>
+ <tileset firstgid="1" name="Sprites" tilewidth="23" tileheight="21" tilecount="1" columns="0">
+  <tile id="1">
+   <image width="23" height="21" source="../assets-raw/raw/cat/idle/rosie-idle-01.png"/>
+  </tile>
+ </tileset>
+ <objectgroup name="Splash Screen">
+  <object id="2" name="Rosie" type="Rosie" gid="2" x="-32" y="144" width="23" height="21">
+   <properties>
+    <property name="endX" type="float" value="256"/>
+   </properties>
+  </object>
+  <object id="30" name="Logo" type="Logo" x="80" y="80" width="160" height="59">
+   <properties>
+    <property name="image" value="logo.png"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
