@@ -390,6 +390,9 @@ class PlayState extends CommonState
 
   // TODO: Unregister everything in the console, somehow
 
+  private function _playNotAllowed(_) {
+    FlxG.sound.play(AssetPaths.not_allowed__wav, false, false);
+  }
   private inline function _initCallbacks() {
     this.OnGameStartAnimationStart.addOnce(function() {
       for (block in _blockGrid) {
@@ -516,9 +519,7 @@ class PlayState extends CommonState
     });
 
     this._blockGrid.OnBadClick.add(this._subtractTime);
-    this._blockGrid.OnBadClick.add(function(_) {
-      FlxG.sound.play(AssetPaths.not_allowed__wav, false, false);
-    });
+    this._blockGrid.OnBadClick.add(_playNotAllowed);
 
     this.OnGameOver.addOnce(function() {
       if (FlxG.sound.music != null) {
