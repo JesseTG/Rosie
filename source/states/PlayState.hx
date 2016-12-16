@@ -159,10 +159,7 @@ class PlayState extends CommonState
             hand.y + 4,
             0.5,
             true,
-            {
-              type: FlxTween.PINGPONG,
-              ease: FlxEase.quadOut
-            }
+            _handTweenOptions
           );
         case "Hint Text":
           var text = new FlxBitmapText(this.textFont).init(
@@ -321,6 +318,11 @@ class PlayState extends CommonState
     this.round = 1;
     this.OnGameStartAnimationStart.dispatch();
   }
+
+  private static var _handTweenOptions = {
+    type: FlxTween.PINGPONG,
+    ease: FlxEase.quadOut
+  };
 
   override public function update(elapsed:Float):Void
   {
