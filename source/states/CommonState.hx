@@ -85,12 +85,17 @@ class CommonState extends FlxState {
       1,
       27
     );
-
-    this.bgImage = new FlxBackdrop('assets/${bgLayer.imagePath}', 0, 0, false, false).init(
-      useScaleHack = false
-    );
+    this.tilemap.immovable = true;
+    this.tilemap.moves = false;
     this.tilemap.useScaleHack = false;
     // Game looks like ass with this scale hack on
+
+    this.bgImage = new FlxBackdrop('assets/${bgLayer.imagePath}', 0, 0, false, false).init(
+      useScaleHack = false,
+      solid = false,
+      immovable = true,
+      moves = false
+    );
 
     var highScore = 0;
     if (FlxG.save.data.highScore != null) {
@@ -105,7 +110,10 @@ class CommonState extends FlxState {
             y = object.y,
             alignment = FlxTextAlign.LEFT,
             letterSpacing = Std.parseInt(object.properties.letterSpacing),
-            text = 'TOP ${highScore}'
+            text = 'TOP ${highScore}',
+            moves = false,
+            immovable = true,
+            solid = false
           );
         default:
           // nop

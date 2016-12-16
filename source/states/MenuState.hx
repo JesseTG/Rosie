@@ -61,10 +61,14 @@ class MenuState extends CommonState
       switch (object.name) {
         case "Title":
           this._titleLetters.setPosition(object.x, object.y);
+          this._titleLetters.solid = false;
+          this._titleLetters.immovable = true;
           for (i in 0...Main.GAME_NAME.length) {
             var text = new FlxBitmapText(this.font);
             text.text = Main.GAME_NAME.charAt(i);
             text.setPosition(16*i, 0);
+            text.solid = false;
+            text.immovable = true;
 
             var currentPoint = FlxPoint.weak(_titleLetters.x + text.x, _titleLetters.y + text.y);
             FlxTween.linearPath(
@@ -94,12 +98,14 @@ class MenuState extends CommonState
           var frameName = source.substr(index + 1);
 
           this._start = new FlxBitmapTextButton(object.properties.text, function() {
-              FlxG.switchState(new PlayState());
+            FlxG.switchState(new PlayState());
           }).init(
             x = object.x,
             y = object.y - object.height,
             frames = this.sprites,
-            frame = this.sprites.getByName(frameName)
+            frame = this.sprites.getByName(frameName),
+            solid = false,
+            immovable = true
           );
 
           _start.label.font = this.textFont;
@@ -108,6 +114,8 @@ class MenuState extends CommonState
           _start.label.color = FlxColor.WHITE;
           _start.label.autoSize = false;
           _start.label.fieldWidth = object.width;
+          _start.label.solid = false;
+          _start.label.immovable = true;
 
           var normalAnim = _start.animation.getByName("normal");
           normalAnim.frames = [sprites.getIndexByName(frameName)];
@@ -139,7 +147,9 @@ class MenuState extends CommonState
             x = object.x,
             y = object.y - object.height,
             frames = this.sprites,
-            frame = this.sprites.getByName(frameName)
+            frame = this.sprites.getByName(frameName),
+            solid = false,
+            immovable = true
           );
 
           _about.label.font = this.textFont;
@@ -148,6 +158,8 @@ class MenuState extends CommonState
           _about.label.color = FlxColor.WHITE;
           _about.label.autoSize = false;
           _about.label.fieldWidth = object.width;
+          _about.label.solid = false;
+          _about.label.immovable = true;
 
           var normalAnim = _about.animation.getByName("normal");
           normalAnim.frames = [sprites.getIndexByName(frameName)];

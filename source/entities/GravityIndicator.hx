@@ -30,6 +30,9 @@ class GravityIndicator extends FlxSprite {
       4
     );
 
+    this.immovable = true;
+    this.solid = false;
+    this.moves = false;
     this.state = GravityIndicatorState.Off;
   }
 

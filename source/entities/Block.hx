@@ -35,6 +35,9 @@ class Block extends FlxSprite {
       15,
       false
     );
+
+    this.immovable = true;
+    this.solid = false;
   }
 
   public function set_blockColor(blockColor:BlockColor) {

@@ -144,7 +144,9 @@ class PlayState extends CommonState
             frames = this.sprites,
             frame = this.sprites.getByName(source.substr(index + 1)),
             pixelPerfectPosition = true,
-            pixelPerfectRender = true
+            pixelPerfectRender = true,
+            solid = false,
+            immovable = true
           );
           this._hints.add(hand);
           FlxTween.linearMotion(
@@ -167,7 +169,10 @@ class PlayState extends CommonState
             alignment = FlxTextAlign.LEFT,
             width = object.width,
             letterSpacing = Std.parseInt(object.properties.letterSpacing),
-            autoSize = object.properties.autoSize == "true"
+            autoSize = object.properties.autoSize == "true",
+            solid = false,
+            moves = false,
+            immovable = true
           );
 
           this._hints.add(text);
@@ -180,7 +185,10 @@ class PlayState extends CommonState
             x = object.x,
             y = object.y - object.height,
             frames = this.sprites,
-            frame = this.sprites.getByName(source.substr(index + 1))
+            frame = this.sprites.getByName(source.substr(index + 1)),
+            moves = false,
+            immovable = true,
+            solid = false
           ));
       }
     }
@@ -220,16 +228,14 @@ class PlayState extends CommonState
             x = object.x,
             y = object.y,
             pixelPerfectRender = true,
-            pixelPerfectPosition = true
+            pixelPerfectPosition = true,
+            moves = false,
+            immovable = true,
+            solid = false
           );
           this._gate.loadFrame(sprites.getByName("gate.png"));
 
-          _blockGrid = new BlockGrid(
-            object.x,
-            object.y,
-            _gridSize,
-            sprites
-          );
+          _blockGrid = new BlockGrid(object.x, object.y, _gridSize, sprites);
         case "Rosie":
           _rosie = new Rosie(object.x, object.y - object.height, sprites, tilemap).init(
             pixelPerfectPosition = true,
@@ -255,7 +261,10 @@ class PlayState extends CommonState
             y = object.y,
             letterSpacing = Std.parseInt(object.properties.letterSpacing),
             autoSize = object.properties.autoSize == "true",
-            alignment = FlxTextAlign.RIGHT
+            alignment = FlxTextAlign.RIGHT,
+            moves = false,
+            immovable = true,
+            solid = false
           );
         case "Time Remaining":
           _timeDisplay = new FlxBitmapText(this.textFont).init(
@@ -263,14 +272,20 @@ class PlayState extends CommonState
             x = object.x,
             y = object.y,
             alignment = FlxTextAlign.RIGHT,
-            letterSpacing = Std.parseInt(object.properties.letterSpacing)
+            letterSpacing = Std.parseInt(object.properties.letterSpacing),
+            moves = false,
+            immovable = true,
+            solid = false
           );
 
           _timeChangeDisplay = new FlxBitmapText(this.textFont).init(
             x = _timeDisplay.x,
             y = _timeDisplay.y,
             alignment = _timeDisplay.alignment,
-            letterSpacing = _timeDisplay.letterSpacing
+            letterSpacing = _timeDisplay.letterSpacing,
+            moves = false,
+            immovable = true,
+            solid = false
           );
         case "Game Over":
           _gameOverText = new FlxBitmapText(this.font).init(
@@ -278,7 +293,10 @@ class PlayState extends CommonState
             x = object.x,
             y = object.y,
             alignment = FlxTextAlign.CENTER,
-            letterSpacing = Std.parseInt(object.properties.letterSpacing)
+            letterSpacing = Std.parseInt(object.properties.letterSpacing),
+            moves = false,
+            immovable = true,
+            solid = false
           );
       };
     }

@@ -86,6 +86,9 @@ class AboutState extends FlxState {
       3
     );
     this.tilemap.useScaleHack = false;
+    this.tilemap.moves = false;
+    this.tilemap.immovable = true;
+    this.tilemap.solid = false;
 
     var gui : TiledObjectLayer = cast map.getLayer("GUI");
     for (object in gui.objects) {
@@ -96,6 +99,10 @@ class AboutState extends FlxState {
             frames = sprites,
             frame = sprites.getByName(idleFrames[0]),
             pixelPerfectRender = true,
+            pixelPerfectPosition = true,
+            moves = false,
+            immovable = true,
+            solid = false,
             flipX = object.flippedHorizontally
           );
           rosie.animation.addByNames(
@@ -121,7 +128,9 @@ class AboutState extends FlxState {
             x = object.x,
             y = object.y - object.height,
             frames = this.sprites,
-            frame = this.sprites.getByName(frameName)
+            frame = this.sprites.getByName(frameName),
+            immovable = true,
+            solid = false
           );
 
           returnButton.label.font = this.textFont;
@@ -167,7 +176,9 @@ class AboutState extends FlxState {
             alignment = FlxTextAlign.CENTER,
             pixelPerfectPosition = false,
             pixelPerfectRender = false,
-            letterSpacing = Std.parseInt(object.properties.letterSpacing)
+            letterSpacing = Std.parseInt(object.properties.letterSpacing),
+            solid = false,
+            immovable = true
           );
           credits.add(title);
         case "Text":
@@ -184,7 +195,9 @@ class AboutState extends FlxState {
             pixelPerfectRender = false,
             letterSpacing = Std.parseInt(object.properties.letterSpacing),
             useTextColor = (object.properties.textColor != null),
-            textColor = textColor
+            textColor = textColor,
+            immovable = true,
+            solid = false
           );
 
           if (object.properties.url != null) {
@@ -212,15 +225,21 @@ class AboutState extends FlxState {
         case "Image":
           var image = new FlxSprite(object.x, object.y, 'assets/images/${object.properties.image}').init(
             pixelPerfectPosition = false,
-            pixelPerfectRender = false
+            pixelPerfectRender = false,
+            immovable = true,
+            solid = false
           );
 
           credits.add(image);
       }
     }
 
-    this._starfield = new FlxStarField2D(0, 0, FlxG.width, FlxG.height, Std.parseInt(map.properties.numStars));
-    this._starfield.bgColor = map.backgroundColor;
+    this._starfield = new FlxStarField2D(0, 0, FlxG.width, FlxG.height, Std.parseInt(map.properties.numStars)).init(
+      bgColor = map.backgroundColor,
+      immovable = true,
+      solid = false,
+      moves = false
+    );
 
     FlxG.console.registerObject("starfield", this._starfield);
     FlxG.console.registerObject("credits", credits);

@@ -79,6 +79,8 @@ class RosieEmote extends FlxNestedSprite {
       this.state = None;
     };
     this.state = None;
+    this.solid = false;
+    this.immovable = true;
   }
 
   private inline function set_state(s:EmoteState) {

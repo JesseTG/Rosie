@@ -69,8 +69,11 @@ class SplashScreenState extends FlxState {
     for (object in objects.objects) {
       switch (object.type) {
         case "Rosie":
-          rosie = new FlxSprite(object.x, object.y - object.height);
-          rosie.frames = sprites;
+          rosie = new FlxSprite(object.x, object.y - object.height).init(
+            frames = sprites,
+            solid = false,
+            immovable = true
+          );
           rosie.animation.addByNames(
             "idle",
             idleFrames,
@@ -114,7 +117,9 @@ class SplashScreenState extends FlxState {
           this.add(rosie);
         case "Logo":
           this.logo = new FlxSprite(object.x, object.y, 'assets/images/${object.properties.image}').init(
-            clipRect = FlxRect.weak(0, 0, 0, object.height)
+            clipRect = FlxRect.weak(0, 0, 0, object.height),
+            solid = false,
+            immovable = true
           );
           this.add(logo);
       }

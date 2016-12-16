@@ -17,6 +17,9 @@ abstract GravityPanel(FlxTiledSprite) to FlxTiledSprite {
       y = y
     ); // TODO: Stop hardcoding this
 
+    this.immovable = true;
+    this.solid = false;
+    this.moves = false;
     this.loadFrame(sprites.getByName("gravity-panel-00.png"));
   }
 }
