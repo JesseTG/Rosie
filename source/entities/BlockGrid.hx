@@ -193,8 +193,12 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   }
 
   private function _anyGroupsRemaining() : Bool {
-    var blocks = new Array<Block>();
-    forEachAlive(function(b:Block) { return blocks.push(b); });
+    var blocks = [for (block in this.members) {
+      if (block != null && block.alive) {
+        block;
+      }
+    }];
+    // Didn't use forEachAlive because anonymous functions make the GC cry
     // TODO: Can I pre-allocate memory?
 
     // TODO: Document this loop
@@ -395,12 +399,23 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   private function _noMoreMoves() {
     // If the player can't make a move...
     var blockCount = 0;
-    this.forEachExists(function(block:Block) {
-      blockCount++;
-    });
+    for (block in this.members) {
+      if (block != null && block.exists) {
+        blockCount++;
+      }
+    }
+    // Didn't use forEachExists because anonymous function overhead in JS
     // TODO: Keep a block count instead of doing linear iteration like this
 
     this.OnBlocksGenerated.dispatch(this._generateBlocks());
+  }
+
+  private function _handleClickedBlock(block:Block) {
+    if (this.readyForInput) {
+      // If we're ready for the player to make a move...
+
+      this.handleBlockGroup(this.getBlockGroup(block));
+    }
   }
 
   /**
@@ -421,13 +436,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
           var newBlock = new Block(gridX * 16, gridY * 16, this._frames, blockColor);
           newBlock.ID = this._blocksCreated++;
 
-          FlxMouseEventManager.add(newBlock, function(blockClicked:Block) {
-            if (this.readyForInput) {
-              // If we're ready for the player to make a move...
-
-              this.handleBlockGroup(this.getBlockGroup(blockClicked));
-            }
-          }, false, true, false);
+          FlxMouseEventManager.add(newBlock, _handleClickedBlock, false, true, false);
 
           trace('New block $newBlock created');
           return newBlock;
