@@ -126,6 +126,8 @@ class SplashScreenState extends FlxState {
       timer.start(5, function(_) { FlxG.switchState(new MenuState()); });
     });
 
+    FlxG.watch.add(FlxPoint.pool, "length", "# Pooled FlxPoints");
+    FlxG.watch.add(FlxRect.pool, "length", "# Pooled FlxRects");
   }
 
   public override function update(elapsed:Float) {
@@ -152,5 +154,7 @@ class SplashScreenState extends FlxState {
 
   public override function destroy() {
     super.destroy();
+    FlxG.watch.remove(FlxPoint.pool, "length");
+    FlxG.watch.remove(FlxRect.pool, "length");
   }
 }
