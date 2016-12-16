@@ -87,7 +87,7 @@ class AboutState extends FlxState {
     this.tilemap.useScaleHack = false;
 
     var gui : TiledObjectLayer = cast map.getLayer("GUI");
-    gui.objects.iter(function(object) {
+    for (object in gui.objects) {
       switch (object.name) {
         case "Rosie":
           var idleFrames = [for (i in 1...62) Printf.format("cat/idle/rosie-idle-%02d.png", [i])];
@@ -148,7 +148,7 @@ class AboutState extends FlxState {
           ];
           returnButton.updateHitbox();
       }
-    });
+    }
 
 
     var credits = new FlxSpriteGroup();

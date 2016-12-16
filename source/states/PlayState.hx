@@ -504,7 +504,7 @@ class PlayState extends CommonState
     this._blockGrid.OnBlocksGenerated.add(this._addBonusTime);
     this._blockGrid.OnBlocksGenerated.add(function(blocks) {
       FlxG.sound.play(AssetPaths.blocks_appear__wav, false, false);
-      blocks.iter(function(block) {
+      for (block in blocks) {
         block.animation.finishCallback = function(_) {
           FlxMouseEventManager.setObjectMouseEnabled(block, true);
           block.animation.finishCallback = null;
@@ -512,7 +512,7 @@ class PlayState extends CommonState
         };
 
         block.animation.play(cast BlockAnimation.Appear);
-      });
+      }
     });
 
     this._blockGrid.OnBadClick.add(this._subtractTime);
