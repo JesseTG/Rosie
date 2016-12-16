@@ -109,7 +109,7 @@ class CommonState extends FlxState {
         default:
           // nop
       }
-    };
+    }
 
     this.add(bgImage);
     this.add(tilemap);
