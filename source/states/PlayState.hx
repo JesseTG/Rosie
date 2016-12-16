@@ -437,13 +437,7 @@ class PlayState extends CommonState
       FlxG.sound.playMusic(AssetPaths.music__ogg, 1, true);
     });
 
-    this.OnGameStart.add(function() {
-      var index = _blockGrid.gravity.getIndex();
-      _gravityPanels[index].visible = true;
-      var indicator = _gravityIndicators[index];
-      indicator.state = GravityIndicatorState.On;
-      indicator.visible = true;
-    });
+    this.OnGameStart.add(_initGravityIndicators);
 
     this.OnScore.add(function(score:Int) {
       this._score += score;
@@ -619,6 +613,13 @@ class PlayState extends CommonState
     FlxG.camera.fill(FlxColor.BLACK, false);
   }
 
+  private function _initGravityIndicators() {
+    var index = _blockGrid.gravity.getIndex();
+    _gravityPanels[index].visible = true;
+    var indicator = _gravityIndicators[index];
+    indicator.state = GravityIndicatorState.On;
+    indicator.visible = true;
+  }
   private function _addBonusTime(blocks) {
     var blocksCreated = blocks.length;
     var bonus = blocksCreated * 0.05;
