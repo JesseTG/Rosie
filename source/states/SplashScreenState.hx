@@ -114,7 +114,7 @@ class SplashScreenState extends FlxState {
           this.add(rosie);
         case "Logo":
           this.logo = new FlxSprite(object.x, object.y, 'assets/images/${object.properties.image}').init(
-            clipRect = new FlxRect(0, 0, 0, object.height)
+            clipRect = FlxRect.weak(0, 0, 0, object.height)
           );
           this.add(logo);
       }

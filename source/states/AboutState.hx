@@ -35,10 +35,10 @@ using ObjectInit;
 using Lambda;
 
 class AboutState extends FlxState {
-  private static var BLOCK_FONT_SIZE = new FlxPoint(16, 32);
-  private static var BLOCK_FONT_SPACING = new FlxPoint(2, 0);
-  private static var TEXT_FONT_SIZE = new FlxPoint(10, 9);
-  private static var TEXT_FONT_SPACING = new FlxPoint(0, 0);
+  private static var BLOCK_FONT_SIZE = FlxPoint.get(16, 32);
+  private static var BLOCK_FONT_SPACING = FlxPoint.get(2, 0);
+  private static var TEXT_FONT_SIZE = FlxPoint.get(10, 9);
+  private static var TEXT_FONT_SPACING = FlxPoint.get(0, 0);
   private static inline var NUM_STARS = 100;
   private static inline var IDLE_FPS = 6;
 
@@ -140,12 +140,12 @@ class AboutState extends FlxState {
           var highlightAnim = returnButton.animation.getByName("highlight");
           highlightAnim.frames = [sprites.getIndexByName("button-02.png")];
 
-          var point = new FlxPoint(0, returnButton.label.height);
+          var point = FlxPoint.weak(0, returnButton.label.height);
           returnButton.labelAlphas = [1.0, 1.0, 1.0];
           returnButton.labelOffsets = [
             point,
             point,
-            FlxPoint.get(0, returnButton.label.height + 2)
+            FlxPoint.weak(0, returnButton.label.height + 2)
           ];
           returnButton.updateHitbox();
       }

@@ -22,11 +22,11 @@ using Lambda;
 using ObjectInit;
 
 class CommonState extends FlxState {
-  private static var BLOCK_FONT_SIZE = new FlxPoint(16, 32);
-  private static var BLOCK_FONT_SPACING = new FlxPoint(2, 0);
+  private static var BLOCK_FONT_SIZE = FlxPoint.get(16, 32);
+  private static var BLOCK_FONT_SPACING = FlxPoint.get(2, 0);
 
-  private static var TEXT_FONT_SIZE = new FlxPoint(10, 9);
-  private static var TEXT_FONT_SPACING = new FlxPoint(0, 0);
+  private static var TEXT_FONT_SIZE = FlxPoint.get(10, 9);
+  private static var TEXT_FONT_SPACING = FlxPoint.get(0, 0);
 
   private var map : TiledMap;
   private var tilemap : FlxTilemap;

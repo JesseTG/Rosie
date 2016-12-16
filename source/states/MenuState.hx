@@ -66,14 +66,14 @@ class MenuState extends CommonState
             text.text = Main.GAME_NAME.charAt(i);
             text.setPosition(16*i, 0);
 
-            var currentPoint = new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y);
+            var currentPoint = FlxPoint.weak(_titleLetters.x + text.x, _titleLetters.y + text.y);
             FlxTween.linearPath(
               text,
               [
                 currentPoint,
-                new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y - 8),
+                FlxPoint.weak(_titleLetters.x + text.x, _titleLetters.y + text.y - 8),
                 currentPoint,
-                new FlxPoint(_titleLetters.x + text.x, _titleLetters.y + text.y + 8),
+                FlxPoint.weak(_titleLetters.x + text.x, _titleLetters.y + text.y + 8),
                 currentPoint
               ],
               0.75,
@@ -118,12 +118,12 @@ class MenuState extends CommonState
           var highlightAnim = _start.animation.getByName("highlight");
           highlightAnim.frames = [sprites.getIndexByName("button-02.png")];
 
-          var point = new FlxPoint(0, _start.label.height);
+          var point = FlxPoint.weak(0, _start.label.height);
           _start.labelAlphas = [1.0, 1.0, 1.0];
           _start.labelOffsets = [
             point,
             point,
-            FlxPoint.get(0, _start.label.height + 2)
+            FlxPoint.weak(0, _start.label.height + 2)
           ];
           _start.updateHitbox();
 
@@ -158,12 +158,12 @@ class MenuState extends CommonState
           var highlightAnim = _about.animation.getByName("highlight");
           highlightAnim.frames = [sprites.getIndexByName("button-02.png")];
 
-          var point = new FlxPoint(0, _about.label.height);
+          var point = FlxPoint.weak(0, _about.label.height);
           _about.labelAlphas = [1.0, 1.0, 1.0];
           _about.labelOffsets = [
             point,
             point,
-            FlxPoint.get(0, _about.label.height + 2)
+            FlxPoint.weak(0, _about.label.height + 2)
           ];
           _about.updateHitbox();
         default:

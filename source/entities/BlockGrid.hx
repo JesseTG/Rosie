@@ -183,7 +183,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
    * Given absolute cell coordinates, convert it to absolute world coordinates.
    */
   private inline function cellToPoint(x:Int, y:Int) : FlxPoint {
-    return new FlxPoint(this.x + x * 16, this.y + y * 16);
+    return FlxPoint.weak(this.x + x * 16, this.y + y * 16);
     // TODO: Stop hardcoding block size
   }
 
@@ -491,14 +491,15 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     };
 
     for (block in blocks) {
+      var point = block.getPosition(); // uses FlxPoint.get() internally
       FlxTween.linearPath(
         block,
         [
-          block.getPosition(),
-          new FlxPoint(block.x + block.width / 4, block.y),
-          block.getPosition(),
-          new FlxPoint(block.x - block.width / 4, block.y),
-          block.getPosition()
+          point,
+          FlxPoint.weak(block.x + block.width / 4, block.y),
+          point,
+          FlxPoint.weak(block.x - block.width / 4, block.y),
+          point,
         ],
         0.25,
         true,
