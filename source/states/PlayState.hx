@@ -136,7 +136,7 @@ class PlayState extends CommonState
     }
 
     this._hints = new FlxSpriteGroup();
-    this._hintGui.objects.iter(function(object) {
+    for (object in _hintGui.objects) {
       switch (object.name) {
         case "Hint Hand":
           var source = spriteSet.getImageSourceByGid(object.gid).source;
@@ -187,10 +187,10 @@ class PlayState extends CommonState
             frame = this.sprites.getByName(source.substr(index + 1))
           ));
       }
-    });
+    }
     this.add(_hints);
 
-    this.objectLayer.objects.iter(function(object) {
+    for (object in this.objectLayer.objects) {
       switch (object.name) {
         case "Gravity Indicator":
           var direction = GravityDirection.createByName(object.type);
@@ -237,14 +237,15 @@ class PlayState extends CommonState
         default:
           // nop
       }
-    });
+    }
 
 #if debug
     for (g in _gravityIndicators) {
       D.assert(g != null);
     }
 #end
-    _playGui.objects.iter(function(object:TiledObject) {
+
+    for (object in _playGui.objects) {
       switch (object.name) {
         case "Score Display":
           _scoreDisplay = new FlxBitmapText(this.font).init(
@@ -279,7 +280,7 @@ class PlayState extends CommonState
             letterSpacing = Std.parseInt(object.properties.letterSpacing)
           );
       };
-    });
+    }
 
 
     this._initCallbacks();
