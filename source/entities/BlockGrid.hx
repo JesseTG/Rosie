@@ -113,29 +113,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.OnNoMoreMoves.add(this.OnBeforeBlocksGenerated.dispatch);
     this.OnNoMoreMoves.add(this._noMoreMoves);
     this.OnBadClick.add(this._shakeBlocks);
-    this.OnSuccessfulClick.add(function(blocks) {
-      this.readyForInput = false;
-      blocks.iter(function(block:Block) {
-        FlxMouseEventManager.setObjectMouseEnabled(block, false);
-        block.alive = false;
-        // alive == ready to be used.  The vanish effect is like the corpse
-
-        _blockGrid.remove(block);
-        // The block is still on-screen but not in our grid data structure (so
-        // it won't be moved by the tweens in startMovingBlocks)
-        // TODO: Avoid a linear lookup whenever removing a block
-
-        block.animation.finishCallback = function(_) {
-          block.animation.finishCallback = null;
-          block.kill();
-        };
-
-        block.animation.play(cast BlockAnimation.Vanish);
-      });
-
-      this._startMovingBlocks();
-      this._rotateGravity();
-    });
+    this.OnSuccessfulClick.add(this._handleSuccessfulClick);
 
 
     this._generateBlocks();
@@ -149,6 +127,30 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     }
 
     super.update(elapsed);
+  }
+
+  private function _handleSuccessfulClick(blocks:Array<Block>) {
+    this.readyForInput = false;
+    for (block in blocks) {
+      FlxMouseEventManager.setObjectMouseEnabled(block, false);
+      block.alive = false;
+      // alive == ready to be used.  The vanish effect is like the corpse
+
+      _blockGrid.remove(block);
+      // The block is still on-screen but not in our grid data structure (so
+      // it won't be moved by the tweens in startMovingBlocks)
+      // TODO: Avoid a linear lookup whenever removing a block
+
+      block.animation.finishCallback = function(_) {
+        block.animation.finishCallback = null;
+        block.kill();
+      };
+
+      block.animation.play(cast BlockAnimation.Vanish);
+    }
+
+    this._startMovingBlocks();
+    this._rotateGravity();
   }
 
   private function set_numColors(numColors:Int) {
@@ -272,6 +274,12 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     }
   }
 
+  private function _stopMovingBlock(_) {
+    this._blocksMoving--;
+    D.assert(this._blocksMoving >= 0);
+    D.assert(this._blocksMoving <= this.group.length);
+  }
+
   private function _startMovingBlocks() {
     var newGrid = new Array2<Block>(this.gridSize, this.gridSize);
 
@@ -300,11 +308,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
           {
             ease: FlxEase.quadIn,
             type: FlxTween.ONESHOT,
-            onComplete: function(_) {
-              this._blocksMoving--;
-              D.assert(this._blocksMoving >= 0);
-              D.assert(this._blocksMoving <= this.group.length);
-            }
+            onComplete: _stopMovingBlock
           }
         );
         this._blocksMoving++;
