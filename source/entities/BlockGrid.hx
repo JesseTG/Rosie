@@ -278,10 +278,30 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     }
   }
 
-  private function _stopMovingBlock(_) {
+  private inline function _stopMovingBlock(_) {
     this._blocksMoving--;
     D.assert(this._blocksMoving >= 0);
     D.assert(this._blocksMoving <= this.group.length);
+  }
+
+  private inline function tweenIt(block:Block, targetPoint:FlxPoint) {
+    if (!block.getPosition().equals(targetPoint)) {
+      FlxTween.linearMotion(
+        block,
+        block.x,
+        block.y,
+        targetPoint.x,
+        targetPoint.y,
+        0.5,
+        true,
+        {
+          ease: FlxEase.quadIn,
+          type: FlxTween.ONESHOT,
+          onComplete: _stopMovingBlock
+        }
+      );
+      this._blocksMoving++;
+    }
   }
 
   private function _startMovingBlocks() {
@@ -298,26 +318,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
     // Last resort: Code each direction individually
     // Then merge them together later when I notice a pattern
-
-    var tweenIt = function(block:Block, targetPoint:FlxPoint) {
-      if (!block.getPosition().equals(targetPoint)) {
-        FlxTween.linearMotion(
-          block,
-          block.x,
-          block.y,
-          targetPoint.x,
-          targetPoint.y,
-          0.5,
-          true,
-          {
-            ease: FlxEase.quadIn,
-            type: FlxTween.ONESHOT,
-            onComplete: _stopMovingBlock
-          }
-        );
-        this._blocksMoving++;
-      }
-    };
 
     // TODO: Ask on #haxe if this part can be made better
     switch (this.gravity) {
