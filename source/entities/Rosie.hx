@@ -19,6 +19,8 @@ class Rosie extends FlxNestedSprite {
   public static inline var RUN_SPEED = 32.0;
   private static inline var IDLE_FPS = 6;
   private static inline var RUN_FPS = 12;
+  private static var IDLE_FRAMES = [for (i in 1...62) Printf.format("cat/idle/rosie-idle-%02d.png", [i])];
+  private static var RUN_FRAMES = [for (i in 1...7) Printf.format("cat/run/rosie-run-%02d.png", [i])];
 
   public var fsm : FlxFSM<Rosie>;
 
@@ -36,23 +38,20 @@ class Rosie extends FlxNestedSprite {
     this.setFacingFlip(FlxObject.RIGHT, false, false);
     this.facing = FlxObject.RIGHT;
 
-    var idleFrames = [for (i in 1...62) Printf.format("cat/idle/rosie-idle-%02d.png", [i])];
-    var runFrames = [for (i in 1...7) Printf.format("cat/run/rosie-run-%02d.png", [i])];
-
     this.animation.addByNames(
       "idle",
-      idleFrames,
+      IDLE_FRAMES,
       IDLE_FPS,
       true
     );
     this.animation.addByNames(
       "run",
-      runFrames,
+      RUN_FRAMES,
       RUN_FPS,
       true
     );
 
-    this.frame = sprites.getByName(idleFrames[0]);
+    this.frame = sprites.getByName(IDLE_FRAMES[0]);
     this.fsm = new FlxFSM<Rosie>(this);
     this.fsm.transitions
       .add(RosieIdleState, RosieRunState, function(rosie) {
