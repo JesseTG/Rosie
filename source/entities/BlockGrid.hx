@@ -471,7 +471,23 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this._blockGrid = null;
   }
 
+  private function _shakeBlocks_onComplete(_) {
+    this._blocksMoving--;
+    this.readyForInput = true;
+  }
+
+  private function _shakeBlocks_onStart(_) {
+    this._blocksMoving++;
+    this.readyForInput = false;
+  }
+
   private function _shakeBlocks(blocks:Array<Block>) {
+    var tweenOptions = {
+      type: FlxTween.ONESHOT,
+      onComplete: _shakeBlocks_onComplete,
+      onStart: _shakeBlocks_onStart,
+    };
+
     for (block in blocks) {
       FlxTween.linearPath(
         block,
@@ -484,17 +500,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
         ],
         0.25,
         true,
-        {
-          type: FlxTween.ONESHOT,
-          onComplete: function(_) {
-            this._blocksMoving--;
-            this.readyForInput = true;
-          },
-          onStart: function(_) {
-            this._blocksMoving++;
-            this.readyForInput = false;
-          }
-        }
+        tweenOptions
       );
     }
   }
