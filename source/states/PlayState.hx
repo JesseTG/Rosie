@@ -25,6 +25,7 @@ import flixel.input.mouse.FlxMouseEventManager;
 import flixel.text.FlxText;
 import flixel.text.FlxBitmapText;
 import flixel.math.FlxPoint;
+import flixel.math.FlxRect;
 import flixel.tile.FlxBaseTilemap.FlxTilemapAutoTiling;
 import flixel.tile.FlxTilemap;
 import flixel.util.FlxSignal.FlxTypedSignal;
@@ -301,6 +302,8 @@ class PlayState extends CommonState
     FlxG.watch.add(this, "_time", "Time");
     FlxG.watch.add(this._rosie.fsm, "age", "Rosie's State Age");
     FlxG.watch.add(this, "_timeSinceLastGoodClick", "Time Since Last Good Click");
+    FlxG.watch.add(FlxPoint.pool, "length", "# Pooled FlxPoints");
+    FlxG.watch.add(FlxRect.pool, "length", "# Pooled FlxRects");
 
     for (p in _gravityPanels) {
       this.add(p);
@@ -375,7 +378,8 @@ class PlayState extends CommonState
     FlxG.watch.remove(this, "_time");
     FlxG.watch.remove(this._rosie.fsm, "age");
     FlxG.watch.remove(this, "_timeSinceLastGoodClick");
-
+    FlxG.watch.remove(FlxPoint.pool, "length");
+    FlxG.watch.remove(FlxRect.pool, "length");
 
     this._blockGrid = null;
     this._playGui = null;

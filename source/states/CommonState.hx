@@ -10,6 +10,7 @@ import flixel.addons.editors.tiled.TiledTileLayer;
 import flixel.addons.editors.tiled.TiledTileSet;
 import flixel.FlxG;
 import flixel.FlxState;
+import flixel.math.FlxRect;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxBitmapFont;
 import flixel.math.FlxPoint;
@@ -114,9 +115,15 @@ class CommonState extends FlxState {
     this.add(bgImage);
     this.add(tilemap);
     this.add(highScoreLabel);
+
+    FlxG.watch.add(FlxPoint.pool, "length", "# Pooled FlxPoints");
+    FlxG.watch.add(FlxRect.pool, "length", "# Pooled FlxRects");
+
   }
 
   override public function destroy() {
     super.destroy();
+    FlxG.watch.remove(FlxPoint.pool, "length");
+    FlxG.watch.remove(FlxRect.pool, "length");
   }
 }

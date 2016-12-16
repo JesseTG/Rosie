@@ -18,6 +18,7 @@ import flixel.FlxG;
 import flixel.FlxState;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;
+import flixel.math.FlxRect;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.util.FlxColor;
 import flixel.graphics.frames.FlxBitmapFont;
@@ -224,6 +225,9 @@ class AboutState extends FlxState {
     FlxG.console.registerObject("starfield", this._starfield);
     FlxG.console.registerObject("credits", credits);
 
+    FlxG.watch.add(FlxPoint.pool, "length", "# Pooled FlxPoints");
+    FlxG.watch.add(FlxRect.pool, "length", "# Pooled FlxRects");
+
     this.add(_starfield);
     this.add(tilemap);
     this.add(rosie);
@@ -258,5 +262,7 @@ class AboutState extends FlxState {
     super.destroy();
 
     this._starfield = null;
+    FlxG.watch.remove(FlxPoint.pool, "length");
+    FlxG.watch.remove(FlxRect.pool, "length");
   }
 }
