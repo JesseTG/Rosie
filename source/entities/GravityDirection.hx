@@ -1,5 +1,6 @@
 package entities;
 
+// TODO: Turn this back into an ordinary enum
 @:enum
 @:notNull
 abstract GravityDirection(Float) {
@@ -43,6 +44,19 @@ abstract GravityDirection(Float) {
       case "Left": Left;
       case _: {
         trace('Warning: Invalid gravity direction ${gravity} given');
+        null;
+      }
+    };
+  }
+
+  public static inline function createByIndex(index:Int) {
+    return switch(index) {
+      case 0: Down;
+      case 1: Right;
+      case 2: Up;
+      case 3: Left;
+      case _: {
+        trace('Warning: Invalid gravity index ${index} given');
         null;
       }
     };

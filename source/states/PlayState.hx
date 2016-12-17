@@ -75,7 +75,10 @@ class PlayState extends CommonState
   private var _scoreDisplay : FlxBitmapText;
   private var _timeChangeDisplay : FlxBitmapText;
   private var _hints : FlxSpriteGroup;
-  private var _gravityIndicators : Vector<GravityIndicator>;
+
+  private var _gravityIndicator : GravityIndicator;
+  private var _gravityIndicatorCoordinates : Vector<FlxPoint>;
+
   private var _gravityPanel : GravityPanel;
   private var _gravityPanelCoordinates : Vector<FlxRect>;
   private var _rosie : Rosie;
@@ -130,7 +133,8 @@ class PlayState extends CommonState
     this._playGui = cast(this.map.getLayer("PlayState GUI"));
     this._hintGui = cast(this.map.getLayer("Hints"));
 
-    this._gravityIndicators = new Vector<GravityIndicator>(GravityDirection.Count);
+    this._gravityIndicator = new GravityIndicator(0, 0, sprites);
+    this._gravityIndicatorCoordinates = new Vector<FlxPoint>(GravityDirection.Count);
     this._gravityPanel = new GravityPanel(0, 0, 0, 0, sprites);
     this._gravityPanelCoordinates = new Vector<FlxRect>(GravityDirection.Count);
 
@@ -200,13 +204,10 @@ class PlayState extends CommonState
     for (object in this.objectLayer.objects) {
       switch (object.name) {
         case "Gravity Indicator":
+          var coords = FlxPoint.get(object.x, object.y);
           var direction = GravityDirection.createByName(object.type);
           var index = GravityDirection.getIndex(direction);
-          this._gravityIndicators[index] = new GravityIndicator(object.x, object.y, sprites, direction).init(
-            angle = object.angle,
-            flipX = object.properties.flipX == "true",
-            flipY = object.properties.flipY == "true"
-          );
+          this._gravityIndicatorCoordinates[index] = coords;
         case "Gravity Panel":
           var coords = FlxRect.get(object.x, object.y, object.width, object.height);
           var direction = GravityDirection.createByName(object.type);
@@ -245,8 +246,9 @@ class PlayState extends CommonState
     }
 
 #if debug
-    for (g in _gravityIndicators) {
-      D.assert(g != null);
+    for (i in 0...GravityDirection.Count) {
+      D.assert(this._gravityIndicatorCoordinates.get(i) != null);
+      D.assert(this._gravityPanelCoordinates.get(i) != null);
     }
 #end
 
@@ -322,9 +324,7 @@ class PlayState extends CommonState
     FlxG.watch.add(FlxRect.pool, "length", "# Pooled FlxRects");
 
     this.add(_gravityPanel);
-    for (g in _gravityIndicators) {
-      this.add(g);
-    }
+    this.add(_gravityIndicator);
     this.add(_blockGrid);
     this.add(_rosie);
     this.add(_gate);
@@ -399,6 +399,10 @@ class PlayState extends CommonState
       (cast (FlxRect.pool, FlxPool<FlxRect>)).put(rect);
     }
 
+    for (point in this._gravityIndicatorCoordinates) {
+      (cast (FlxPoint.pool, FlxPool<FlxPoint>)).put(point);
+    }
+
     this._blockGrid = null;
     this._playGui = null;
     this._gate = null;
@@ -406,8 +410,9 @@ class PlayState extends CommonState
     this._scoreDisplay = null;
     this._timeChangeDisplay = null;
     this._hints = null;
-    this._gravityIndicators = null;
+    this._gravityIndicatorCoordinates = null;
     this._gravityPanel = null;
+    this._gravityIndicator = null;
     this._gravityPanelCoordinates = null;
   }
 
@@ -456,8 +461,6 @@ class PlayState extends CommonState
       FlxG.sound.playMusic(AssetPaths.music__ogg, 1, true);
     });
 
-    this.OnGameStart.add(_initGravityIndicators);
-
     this.OnScore.add(function(score:Int) {
       this._score += score;
       _scoreDisplay.text = Std.string(this._score);
@@ -500,15 +503,22 @@ class PlayState extends CommonState
     });
 
     this._blockGrid.OnStopMoving.add(function() {
-      var prevIndex = this._blockGrid.gravity.previous().getIndex();
       var index = _blockGrid.gravity.getIndex();
 
-      this._gravityIndicators[prevIndex].state = GravityIndicatorState.Off;
-      this._gravityIndicators[index].state = GravityIndicatorState.On;
+      var indicatorCoords = this._gravityIndicatorCoordinates.get(index);
+      this._gravityIndicator.setPosition(indicatorCoords.x, indicatorCoords.y);
 
-      var coords = this._gravityPanelCoordinates.get(index);
-      this._gravityPanel.setPosition(coords.x, coords.y);
-      this._gravityPanel.setSize(coords.width, coords.height);
+      switch (GravityDirection.createByIndex(index)) {
+        case GravityDirection.Up | GravityDirection.Down:
+          this._gravityIndicator.animation.play(cast GravityIndicatorState.Horizontal);
+        case GravityDirection.Left | GravityDirection.Right:
+          this._gravityIndicator.animation.play(cast GravityIndicatorState.Vertical);
+      }
+      this._gravityIndicator.resetSizeFromFrame();
+
+      var panelCoords = this._gravityPanelCoordinates.get(index);
+      this._gravityPanel.setPosition(panelCoords.x, panelCoords.y);
+      this._gravityPanel.setSize(panelCoords.width, panelCoords.height);
     });
 
     // TODO: Handle the case where the grid is full and no groups exist
@@ -534,10 +544,7 @@ class PlayState extends CommonState
         FlxG.sound.music.stop();
       }
 
-      for (i in this._gravityIndicators) {
-        i.exists = false;
-      }
-
+      this._gravityIndicator.exists = false;
       this._gravityPanel.exists = false;
 
       this._rosie.emote.state = EmoteState.Doh;
@@ -571,16 +578,10 @@ class PlayState extends CommonState
     });
 
     this.OnGameOverAnimationFinish.addOnce(function() {
-
-
       this.add(_gameOverText);
       this.remove(_blockGrid);
-
-      for (i in this._gravityIndicators) {
-        this.remove(i);
-      }
-
-      this.remove(this._gravityPanel);
+      this.remove(_gravityIndicator);
+      this.remove(_gravityPanel);
 
       FlxG.sound.play(AssetPaths.game_over__ogg, false, function() {
         new FlxTimer().start(1, function(_) {
@@ -662,12 +663,7 @@ class PlayState extends CommonState
     }
   }
   // End OnBadClick Callbacks //////////////////////////////////////////////////
-  private function _initGravityIndicators() {
-    var index = _blockGrid.gravity.getIndex();
-    var indicator = _gravityIndicators[index];
-    indicator.state = GravityIndicatorState.On;
-    indicator.exists = true;
-  }
+
   private function _addBonusTime(blocks) {
     var blocksCreated = blocks.length;
     var bonus = blocksCreated * 0.05;

@@ -7,41 +7,38 @@ import flixel.graphics.frames.FlxFramesCollection;
 
 using ObjectInit;
 
-class GravityIndicator extends FlxSprite {
+@:forward
+abstract GravityIndicator(FlxSprite) to FlxSprite {
   public var state(get, set) : GravityIndicatorState;
-  public var direction(default, null) : GravityDirection;
 
-  public function new(x:Float = 0, y:Float = 0, sprites:FlxFramesCollection, direction:GravityDirection) {
-    super(x, y);
-    this.frames = sprites;
-    this.frame = sprites.getByName("gravity-indicator-00.png");
-    this.direction = direction;
-    this.angle = cast(direction);
-    this.resetSizeFromFrame();
-    this.updateHitbox();
-    this.origin.set(0, 0);
+  public function new(x:Float = 0, y:Float = 0, sprites:FlxFramesCollection) {
+    this = new FlxSprite(x, y).init(
+      frames = sprites,
+      frame = sprites.getByName("gravity-indicator-h-00.png")
+    );
 
-    this.animation.addByNames(cast GravityIndicatorState.Off, ["gravity-indicator-04.png"]);
     this.animation.addByStringIndices(
-      cast GravityIndicatorState.On,
+      cast GravityIndicatorState.Horizontal,
       "gravity-indicator-h-",
       ["00", "01", "02", "02", "02", "02", "01", "00", "00", "00"],
       ".png",
       4
     );
-
-    this.immovable = true;
-    this.solid = false;
-    this.moves = false;
-    this.state = GravityIndicatorState.Off;
+    this.animation.addByStringIndices(
+      cast GravityIndicatorState.Vertical,
+      "gravity-indicator-v-",
+      ["00", "01", "02", "02", "02", "02", "01", "00", "00", "00"],
+      ".png",
+      4
+    );
   }
 
-  private function get_state() {
+  private inline function get_state() {
     return cast this.animation.name;
   }
 
-  private function set_state(state:GravityIndicatorState) {
-    this.animation.name = cast state;
+  private inline function set_state(state:GravityIndicatorState) {
+    this.animation.play(cast state, true);
     return state;
   }
 }
@@ -49,7 +46,6 @@ class GravityIndicator extends FlxSprite {
 @:enum
 @:notNull
 abstract GravityIndicatorState(String) {
-  var On = "on";
-  var Off = "off";
-  var Next = "next";
+  var Horizontal = "horizontal";
+  var Vertical = "vertical";
 }

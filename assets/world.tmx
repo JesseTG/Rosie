@@ -78,10 +78,10 @@
     <property name="flipY" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="119" name="Gravity Indicator" type="Left" x="112" y="96" width="32" height="16" rotation="90">
+  <object id="119" name="Gravity Indicator" type="Left" x="96" y="96" width="16" height="32">
    <properties>
     <property name="flipX" type="bool" value="false"/>
-    <property name="flipY" type="bool" value="true"/>
+    <property name="flipY" type="bool" value="false"/>
    </properties>
   </object>
   <object id="120" name="Gravity Indicator" type="Up" x="192" y="0" width="32" height="16">
@@ -89,9 +89,9 @@
     <property name="flipY" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="121" name="Gravity Indicator" type="Right" x="320" y="96" width="32" height="16" rotation="90">
+  <object id="121" name="Gravity Indicator" type="Right" x="304" y="96" width="16" height="32">
    <properties>
-    <property name="flipY" type="bool" value="true"/>
+    <property name="flipY" type="bool" value="false"/>
    </properties>
   </object>
   <object id="124" name="Gravity Panel" type="Left" x="112" y="96" width="80" height="32"/>
