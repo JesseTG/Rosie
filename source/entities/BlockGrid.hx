@@ -421,6 +421,16 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     }
   }
 
+  private function _createBlock() {
+    var block = new Block(0, 0, this._frames, BlockColor.Red);
+    block.ID = this._blocksCreated++;
+
+    FlxMouseEventManager.add(block, _handleClickedBlock, false, true, false);
+    trace('New Block $block created');
+
+    return block;
+  }
+
   /**
    * Fills all null spaces in the grid with blocks and puts them on-screen.
    * Returns the number of blocks that were created
@@ -435,20 +445,11 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
       if (blockInGrid == null) {
         // If there's no block at this grid cell..
 
-        var block = this.recycle(Block, function() {
-          var newBlock = new Block(gridX * 16, gridY * 16, this._frames, BlockColor.Red);
-          newBlock.ID = this._blocksCreated++;
-
-          FlxMouseEventManager.add(newBlock, _handleClickedBlock, false, true, false);
-
-          trace('New block $newBlock created');
-          return newBlock;
-        });
+        var block = this.recycle(Block, _createBlock);
 
         created.push(block);
         block.blockColor = BlockColor.All[Std.random(this.numColors)];
-
-        block.setPosition(gridX * 16, gridY * 16);
+        block.setPosition(gridX * block.frameWidth, gridY * block.frameHeight);
 
         this.add(block);
         // TODO: Ensure I'm not adding the same block twice
