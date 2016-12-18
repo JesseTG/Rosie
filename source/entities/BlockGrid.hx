@@ -429,7 +429,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     var created : Array<Block> = [];
     this.readyForInput = false;
 
-    // TODO: Simplify this function
     _blockGrid.forEach(function(blockInGrid:Block, gridX:Int, gridY:Int) {
       // This anonymous function is okay; on JavaScript it's inlined
 
