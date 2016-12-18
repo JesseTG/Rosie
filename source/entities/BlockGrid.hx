@@ -14,7 +14,7 @@ import de.polygonal.ds.Array2;
 import de.polygonal.ds.Array2.Array2Cell;
 import de.polygonal.ds.ArrayedQueue;
 import de.polygonal.Printf;
-import de.polygonal.core.util.Assert;
+import de.polygonal.ds.tools.Assert.assert;
 import entities.Block.BlockAnimation;
 
 import util.ReverseIterator;
@@ -280,8 +280,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
   private inline function _stopMovingBlock(_) {
     this._blocksMoving--;
-    D.assert(this._blocksMoving >= 0);
-    D.assert(this._blocksMoving <= this.group.length);
+    assert(this._blocksMoving >= 0);
+    assert(this._blocksMoving <= this.group.length);
   }
 
   private inline function tweenIt(block:Block, targetPoint:FlxPoint) {

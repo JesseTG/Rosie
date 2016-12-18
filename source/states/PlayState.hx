@@ -36,7 +36,7 @@ import flixel.util.FlxAxes;
 import flixel.addons.display.FlxTiledSprite;
 
 import de.polygonal.Printf;
-import de.polygonal.core.util.Assert.D;
+import de.polygonal.ds.tools.Assert.assert;
 import de.polygonal.ds.Array2;
 
 import entities.Block;
@@ -247,8 +247,8 @@ class PlayState extends CommonState
 
 #if debug
     for (i in 0...GravityDirection.Count) {
-      D.assert(this._gravityIndicatorCoordinates.get(i) != null);
-      D.assert(this._gravityPanelCoordinates.get(i) != null);
+      assert(this._gravityIndicatorCoordinates.get(i) != null);
+      assert(this._gravityPanelCoordinates.get(i) != null);
     }
 #end
 

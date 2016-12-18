@@ -1,6 +1,6 @@
 package util;
 
-import de.polygonal.core.util.Assert.assert;
+import de.polygonal.ds.tools.Assert.assert;
 
 class ArrayTools {
   public static inline function swap<T>(array:Array<T>, a:Int, b:Int) {

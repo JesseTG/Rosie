@@ -130,6 +130,7 @@ class SplashScreenState extends FlxState {
 
     FlxG.watch.add(FlxPoint.pool, "length", "# Pooled FlxPoints");
     FlxG.watch.add(FlxRect.pool, "length", "# Pooled FlxRects");
+    FlxG.console.registerObject("rosie", this.rosie);
   }
 
   public override function update(elapsed:Float) {
