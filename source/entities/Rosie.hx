@@ -56,18 +56,6 @@ class Rosie extends FlxNestedSprite {
     this.fsm.transitions
       .add(RosieIdleState, RosieRunState, _switchBetweenIdleAndRun)
       .add(RosieRunState, RosieIdleState, _switchBetweenIdleAndRun)
-      .add(RosieIdleState, RosieJumpState, function(rosie) {
-        return false;
-      })
-      .add(RosieJumpState, RosieIdleState, function(rosie) {
-        return false;
-      })
-      .add(RosieRunState, RosieJumpState, function(rosie) {
-        return false;
-      })
-      .add(RosieJumpState, RosieRunState, function(rosie) {
-        return false;
-      })
       .start(RosieIdleState);
 
     this.elasticity = 0.5;
