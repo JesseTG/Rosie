@@ -437,8 +437,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
         // If there's no block at this grid cell..
 
         var block = this.recycle(Block, function() {
-          var blockColor = BlockColor.All[Std.random(this.numColors)];
-          var newBlock = new Block(gridX * 16, gridY * 16, this._frames, blockColor);
+          var newBlock = new Block(gridX * 16, gridY * 16, this._frames, BlockColor.Red);
           newBlock.ID = this._blocksCreated++;
 
           FlxMouseEventManager.add(newBlock, _handleClickedBlock, false, true, false);
@@ -449,7 +448,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
         created.push(block);
         block.blockColor = BlockColor.All[Std.random(this.numColors)];
-        // TODO: Don't do Std.random twice, just do it out here
 
         block.setPosition(gridX * 16, gridY * 16);
 
