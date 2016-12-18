@@ -94,7 +94,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 #end
 
     this._frames = sprites;
-    // TODO: Why doesn't this.frames (note the lack of _) work?  Is it overridden?
+    // the "frames" field is not supported in FlxTypedSpriteGroup, so we use our own
 
     this.readyForInput = false;
     // TODO: Come up with a better name and clarify semantics
@@ -453,6 +453,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
         this.add(block);
         // TODO: Ensure I'm not adding the same block twice
+        // TODO: Is this a linear lookup for space?  Can I just make it constant
+        // by adding all blocks at once?
 
         return block;
       }
