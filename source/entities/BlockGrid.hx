@@ -467,7 +467,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   public override function destroy() {
     super.destroy();
 
-    FlxMouseEventManager.remove(this);
     // TODO: Revisit the semantics of this function and see if I can move parts
     // of it to another file
 

@@ -3,6 +3,7 @@ package entities;
 import de.polygonal.Printf;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxFramesCollection;
+import flixel.input.mouse.FlxMouseEventManager;
 
 class Block extends FlxSprite {
 
@@ -38,6 +39,12 @@ class Block extends FlxSprite {
 
     this.immovable = true;
     this.solid = false;
+  }
+
+  public override function destroy() {
+    super.destroy();
+
+    FlxMouseEventManager.remove(this);
   }
 
   private inline function set_blockColor(blockColor:BlockColor) {
