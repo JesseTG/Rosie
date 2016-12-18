@@ -166,7 +166,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   /**
    * Given a block, which cell is it in
    */
-  private function _getGridIndex(block:Block) : Array2Cell {
+  private inline function _getGridIndex(block:Block, cell:Array2Cell) : Array2Cell {
     var x = Math.round(block.x / block.frameWidth) * block.frameWidth;
     var y = Math.round(block.y / block.frameHeight) * block.frameHeight;
 
@@ -176,7 +176,9 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     x = Math.round(x / block.frameWidth);
     y = Math.round(y / block.frameHeight);
 
-    return new Array2Cell(x, y);
+    cell.x = x;
+    cell.y = y;
+    return cell;
   }
 
   /**
@@ -221,6 +223,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     var blocks = new Array<Block>();
     if (clicked == null || !clicked.alive || !clicked.exists) return blocks;
 
+    var cell = new Array2Cell(); // Appease the garbage collector
     var queue = new ArrayedQueue<Block>();
     queue.enqueue(clicked);
 
@@ -237,7 +240,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
           blocks.push(current);
         }
 
-        var indices = _getGridIndex(current);
+        var indices = _getGridIndex(current, cell);
         var x = indices.x;
         var y = indices.y;
 
