@@ -34,13 +34,12 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 
 import entities.Rosie;
+import entities.Rosie.AnimationState;
 
 using ObjectInit;
 using Lambda;
 
 class SplashScreenState extends FlxState {
-  private static inline var IDLE_FPS = 6;
-  private static inline var RUN_FPS = 12;
 
   private var logo : FlxSprite;
   private var rosie : FlxSprite;
@@ -62,32 +61,30 @@ class SplashScreenState extends FlxState {
 
     var map = new TiledMap(AssetPaths.splash__tmx);
     var sprites = FlxAtlasFrames.fromTexturePackerJson(AssetPaths.gfx__png, AssetPaths.gfx__json);
-    var idleFrames = [for (i in 1...62) Printf.format("cat/idle/rosie-idle-%02d.png", [i])];
-    var runFrames = [for (i in 1...7) Printf.format("cat/run/rosie-run-%02d.png", [i])];
-
     var objects : TiledObjectLayer = cast map.getLayer("Splash Screen");
     for (object in objects.objects) {
       switch (object.type) {
         case "Rosie":
           rosie = new FlxSprite(object.x, object.y - object.height).init(
             frames = sprites,
+            frame = sprites.getByName(Rosie.IDLE_FRAMES[0]),
             solid = false,
             immovable = true
           );
           rosie.animation.addByNames(
-            "idle",
-            idleFrames,
-            IDLE_FPS,
+            cast AnimationState.Idle,
+            Rosie.IDLE_FRAMES,
+            Rosie.IDLE_FPS,
             true
           );
           rosie.animation.addByNames(
-            "run",
-            runFrames,
-            RUN_FPS,
+            cast AnimationState.Run,
+            Rosie.RUN_FRAMES,
+            Rosie.RUN_FPS,
             true
           );
 
-          rosie.animation.play("run");
+          rosie.animation.play(cast AnimationState.Run);
           rosie.resetSizeFromFrame();
           rosie.updateHitbox();
 
@@ -102,7 +99,7 @@ class SplashScreenState extends FlxState {
             {
               type: FlxTween.PERSIST,
               onComplete: function(_) {
-                rosie.animation.play("idle");
+                rosie.animation.play(cast AnimationState.Idle);
                 this.OnAnimationDone.dispatch();
               },
               onUpdate: function(_) {
@@ -144,7 +141,7 @@ class SplashScreenState extends FlxState {
       else {
         FlxTween.globalManager.clear();
         rosie.x = 256; // TODO: Don't hard-code
-        rosie.animation.play("idle");
+        rosie.animation.play(cast AnimationState.Idle);
 
         var rect = logo.clipRect;
         rect.width = logo.width;

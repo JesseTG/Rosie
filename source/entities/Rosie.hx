@@ -17,10 +17,10 @@ using ObjectInit;
 
 class Rosie extends FlxNestedSprite {
   public static inline var RUN_SPEED = 32.0;
-  private static inline var IDLE_FPS = 6;
-  private static inline var RUN_FPS = 12;
-  private static var IDLE_FRAMES = [for (i in 1...62) Printf.format("cat/idle/rosie-idle-%02d.png", [i])];
-  private static var RUN_FRAMES = [for (i in 1...7) Printf.format("cat/run/rosie-run-%02d.png", [i])];
+  public static inline var IDLE_FPS = 6;
+  public static inline var RUN_FPS = 12;
+  public static var IDLE_FRAMES = [for (i in 1...62) Printf.format("cat/idle/rosie-idle-%02d.png", [i])];
+  public static var RUN_FRAMES = [for (i in 1...7) Printf.format("cat/run/rosie-run-%02d.png", [i])];
 
   public var fsm : FlxFSM<Rosie>;
 
@@ -39,13 +39,13 @@ class Rosie extends FlxNestedSprite {
     this.facing = FlxObject.RIGHT;
 
     this.animation.addByNames(
-      "idle",
+      cast AnimationState.Idle,
       IDLE_FRAMES,
       IDLE_FPS,
       true
     );
     this.animation.addByNames(
-      "run",
+      cast AnimationState.Run,
       RUN_FRAMES,
       RUN_FPS,
       true
@@ -102,9 +102,16 @@ class Rosie extends FlxNestedSprite {
   }
 }
 
+@:enum
+@:notNull
+abstract AnimationState(String) {
+  var Run = "run";
+  var Idle = "idle";
+}
+
 private class RosieIdleState extends FlxFSMState<Rosie> {
   public override function enter(owner:Rosie, fsm:FlxFSM<Rosie>) {
-    owner.animation.play("idle");
+    owner.animation.play(cast AnimationState.Idle);
     owner.velocity.x = 0;
   }
 

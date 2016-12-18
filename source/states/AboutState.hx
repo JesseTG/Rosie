@@ -31,6 +31,9 @@ import flixel.tweens.FlxEase;
 import flixel.input.mouse.FlxMouseEventManager;
 import flixel.tweens.FlxTween;
 
+import entities.Rosie;
+import entities.Rosie.AnimationState;
+
 using ObjectInit;
 using Lambda;
 
@@ -40,7 +43,6 @@ class AboutState extends FlxState {
   private static var TEXT_FONT_SIZE = FlxPoint.get(10, 9);
   private static var TEXT_FONT_SPACING = FlxPoint.get(0, 0);
   private static inline var NUM_STARS = 100;
-  private static inline var IDLE_FPS = 6;
 
   private var _starfield : FlxStarField2D;
   private var rosie : FlxSprite;
@@ -94,10 +96,9 @@ class AboutState extends FlxState {
     for (object in gui.objects) {
       switch (object.name) {
         case "Rosie":
-          var idleFrames = [for (i in 1...62) Printf.format("cat/idle/rosie-idle-%02d.png", [i])];
           rosie = new FlxSprite(object.x, object.y - object.height).init(
             frames = sprites,
-            frame = sprites.getByName(idleFrames[0]),
+            frame = sprites.getByName(Rosie.IDLE_FRAMES[0]),
             pixelPerfectRender = true,
             pixelPerfectPosition = true,
             moves = false,
@@ -106,12 +107,12 @@ class AboutState extends FlxState {
             flipX = object.flippedHorizontally
           );
           rosie.animation.addByNames(
-            "idle",
-            idleFrames,
-            IDLE_FPS,
+            cast AnimationState.Idle,
+            Rosie.IDLE_FRAMES,
+            Rosie.IDLE_FPS,
             true
           );
-          rosie.animation.play("idle");
+          rosie.animation.play(cast AnimationState.Idle);
           rosie.resetSizeFromFrame();
           rosie.updateHitbox();
         case "Return Button":
