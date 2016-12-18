@@ -32,7 +32,7 @@
 	<assets path="assets/sounds" type="sound" />
 	<assets path="assets/images" />
 	<assets path="assets/music" type="music" />
-	<assets path="assets" include="*.tmx"/>
+	<assets path="assets" include="*.tmx|gfx.json|gfx.png"/>
 
 	<haxedef name="analyzer"/>
 	<haxedef name="generic"/>
