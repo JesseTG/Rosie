@@ -470,7 +470,23 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     // TODO: Revisit the semantics of this function and see if I can move parts
     // of it to another file
 
+    this.OnBadClick.removeAll();
+    this.OnBlocksGenerated.removeAll();
+    this.OnStartMoving.removeAll();
+    this.OnStopMoving.removeAll();
+    this.OnSuccessfulClick.removeAll();
+    this.OnBeforeBlocksGenerated.removeAll();
+    this.OnNoMoreMoves.removeAll();
+
     this._blockGrid = null;
+    this._frames = null;
+    this.OnBadClick = null;
+    this.OnBlocksGenerated = null;
+    this.OnStartMoving = null;
+    this.OnStopMoving = null;
+    this.OnSuccessfulClick = null;
+    this.OnBeforeBlocksGenerated = null;
+    this.OnNoMoreMoves = null;
   }
 
   private function _shakeBlocks_onComplete(_) {
