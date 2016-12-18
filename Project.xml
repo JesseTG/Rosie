@@ -29,7 +29,10 @@
 
 	<set name="BUILD_DIR" value="export" />
 	<classpath name="source" />
-	<assets path="assets" />
+	<assets path="assets/sounds" />
+	<assets path="assets/images" />
+	<assets path="assets/music" />
+	<assets path="assets" include="*.tmx"/>
 
 	<haxedef name="analyzer"/>
 	<haxedef name="generic"/>
