@@ -461,32 +461,10 @@ class PlayState extends CommonState
       FlxG.sound.playMusic(AssetPaths.music__ogg, 1, true);
     });
 
-    this.OnScore.add(function(score:Int) {
-      this._score += score;
-      _scoreDisplay.text = Std.string(this._score);
-    });
-    // TODO: Tween the score counter with FlxNumTween
+    this.OnScore.add(_increaseScore);
 
-    _blockGrid.OnSuccessfulClick.add(function(blocks) {
-      this._timeSinceLastGoodClick = 0;
-      FlxG.sound.play(AssetPaths.clear_blocks__wav, false, false);
-
-      this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
-      // We'll always have cleared at least 3 blocks here.
-    });
-
-    _blockGrid.OnSuccessfulClick.add(function(blocks) {
-      if (blocks.length == 3 && _rosie.emote.state == EmoteState.None && FlxG.random.bool(60)) {
-        // If we cleared exactly 3 blocks, Rosie's not emoting, and then with 60% probability...
-        _rosie.emote.state = EmoteState.Neutral; // Rosie is not impressed
-      }
-      else if (blocks.length >= 10) {
-        _rosie.emote.state = EmoteState.VeryHappy;
-      }
-      else if (blocks.length >= 7 && _rosie.emote.state != EmoteState.VeryHappy) {
-        _rosie.emote.state = EmoteState.Happy;
-      }
-    });
+    _blockGrid.OnSuccessfulClick.add(_getReadyToComputeScore);
+    _blockGrid.OnSuccessfulClick.add(_setRosieEmote);
 
     _blockGrid.OnBadClick.add(_subtractTime);
     _blockGrid.OnBadClick.add(_playNotAllowed);
@@ -622,6 +600,37 @@ class PlayState extends CommonState
   public override function onFocusLost() {
     FlxG.camera.fill(FlxColor.BLACK, false);
   }
+
+  // OnSuccessfulClick callbacks ///////////////////////////////////////////////
+  private function _getReadyToComputeScore(blocks) {
+    this._timeSinceLastGoodClick = 0;
+    FlxG.sound.play(AssetPaths.clear_blocks__wav, false, false);
+
+    this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
+    // We'll always have cleared at least 3 blocks here.
+  }
+
+  private function _setRosieEmote(blocks) {
+    if (blocks.length == 3 && _rosie.emote.state == EmoteState.None && FlxG.random.bool(60)) {
+      // If we cleared exactly 3 blocks, Rosie's not emoting, and then with 60% probability...
+      _rosie.emote.state = EmoteState.Neutral; // Rosie is not impressed
+    }
+    else if (blocks.length >= 10) {
+      _rosie.emote.state = EmoteState.VeryHappy;
+    }
+    else if (blocks.length >= 7 && _rosie.emote.state != EmoteState.VeryHappy) {
+      _rosie.emote.state = EmoteState.Happy;
+    }
+  }
+  // End OnSuccessfulClick callbacks ///////////////////////////////////////////
+
+  // OnScore callbacks
+  private function _increaseScore(score:Int) {
+    this._score += score;
+    _scoreDisplay.text = Std.string(this._score);
+    // TODO: Tween the score counter with FlxNumTween
+  }
+  // End OnScore callbacks
 
   // OnBadClick Callbacks //////////////////////////////////////////////////////
 
