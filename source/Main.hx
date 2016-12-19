@@ -32,7 +32,8 @@ class Main extends Sprite
 #end
 
     FlxG.signals.gameStarted.add(function() {
-      FlxG.fixedTimestep = true;
+      FlxG.fixedTimestep = false;
+      FlxG.cameras.useBufferLocking = true;
       FlxG.camera.pixelPerfectRender = true;
       FlxG.camera.filtersEnabled = false;
       FlxG.game.filtersEnabled = false;
