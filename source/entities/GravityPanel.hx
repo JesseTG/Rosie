@@ -8,7 +8,7 @@ import flixel.graphics.frames.FlxFramesCollection;
 
 using ObjectInit;
 
-// TODO: Recycle these
+
 @:forward
 abstract GravityPanel(FlxTiledSprite) to FlxTiledSprite {
   public inline function new(x:Float = 0, y:Float = 0, width:Float, height:Float, sprites:FlxFramesCollection) {
