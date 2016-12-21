@@ -508,12 +508,6 @@ class PlayState extends CommonState
     this._blockGrid.OnBlocksGenerated.add(function(blocks) {
       FlxG.sound.play(AssetPaths.blocks_appear__wav, 1, false, false);
       for (block in blocks) {
-        block.animation.finishCallback = function(_) {
-          FlxMouseEventManager.setObjectMouseEnabled(block, true);
-          block.animation.finishCallback = null;
-          block.frame = block.frames.getByName(cast block.blockColor);
-        };
-
         block.animation.play(cast BlockAnimation.Appear);
       }
     });
@@ -535,7 +529,7 @@ class PlayState extends CommonState
       var _gameEndGate = new FlxAsyncIteratorLoop<Int>(
         0..._gridSize - 1,
         function(row) {
-          _gate.height += tileSet.tileHeight;
+          _gate.height += Assets.TileSet.tileHeight;
 
           FlxG.sound.play(AssetPaths.gate_move__wav, 1, false, false);
         },

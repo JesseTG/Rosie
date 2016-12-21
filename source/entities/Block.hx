@@ -37,6 +37,7 @@ class Block extends FlxSprite {
       false
     );
 
+    this.animation.finishCallback = this._handleAnimationFinish;
     this.immovable = true;
     this.solid = false;
   }
@@ -55,6 +56,16 @@ class Block extends FlxSprite {
     return blockColor;
   }
 
+  private function _handleAnimationFinish(name:String) {
+    switch (cast name) {
+      case Appear:
+        FlxMouseEventManager.setObjectMouseEnabled(this, true);
+        this.frame = this.frames.getByName(cast this.blockColor);
+      case Vanish:
+        this.kill();
+      default: //nop
+    }
+  }
   public override inline function toString() : String {
     var letter = Std.string(blockColor).charAt(5).toUpperCase(); // HACK
     return '${letter}-${this.ID}';

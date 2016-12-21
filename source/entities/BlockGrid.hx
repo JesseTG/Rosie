@@ -141,11 +141,6 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
       // it won't be moved by the tweens in startMovingBlocks)
       // TODO: Avoid a linear lookup whenever removing a block
 
-      block.animation.finishCallback = function(_) {
-        block.animation.finishCallback = null;
-        block.kill();
-      };
-
       block.animation.play(cast BlockAnimation.Vanish);
     }
 
