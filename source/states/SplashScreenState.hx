@@ -159,5 +159,12 @@ class SplashScreenState extends FlxState {
     super.destroy();
     FlxG.watch.remove(FlxPoint.pool, "length");
     FlxG.watch.remove(FlxRect.pool, "length");
+
+    this.OnAnimationDone.removeAll();
+
+    this.rosie = null;
+    this.logo = null;
+    this.timer = null;
+    this.OnAnimationDone = null;
   }
 }

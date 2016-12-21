@@ -403,6 +403,10 @@ class PlayState extends CommonState
       (cast (FlxPoint.pool, FlxPool<FlxPoint>)).put(point);
     }
 
+    this._blockGrid.destroy();
+    this._gravityIndicator.destroy();
+    this._gravityPanel.destroy();
+
     this._blockGrid = null;
     this._playGui = null;
     this._gate = null;

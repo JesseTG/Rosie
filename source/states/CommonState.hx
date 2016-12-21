@@ -131,7 +131,12 @@ class CommonState extends FlxState {
 
   override public function destroy() {
     super.destroy();
+
     FlxG.watch.remove(FlxPoint.pool, "length");
     FlxG.watch.remove(FlxRect.pool, "length");
+
+    this.tilemap = null;
+    this.bgImage = null;
+    this.highScoreLabel = null;
   }
 }

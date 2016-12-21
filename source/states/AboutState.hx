@@ -282,6 +282,11 @@ class AboutState extends FlxState {
     super.destroy();
 
     this._starfield = null;
+    this.rosie = null;
+    this.returnButton = null;
+    this.tilemap = null;
+    this.map = null;
+
     FlxG.watch.remove(FlxPoint.pool, "length");
     FlxG.watch.remove(FlxRect.pool, "length");
   }
