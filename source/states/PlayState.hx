@@ -360,7 +360,7 @@ class PlayState extends CommonState
       }
       if (_time <= 11 && Math.abs(_time - Math.fround(_time)) < 0.000001) {
         // If we have under 10 seconds to go, and exactly one second has passed...
-        FlxG.sound.play(AssetPaths.time_running_out__wav, false, false);
+        FlxG.sound.play(AssetPaths.time_running_out__wav, 1, false, false);
       }
     }
 
@@ -430,7 +430,7 @@ class PlayState extends CommonState
           _gate.height -= tileSet.tileHeight;
           // NOTE: Can't set a sprite's height to 0, so we just remove it when
           // it's only one row deep (see the callback below)
-          FlxG.sound.play(AssetPaths.gate_move__wav, false, false);
+          FlxG.sound.play(AssetPaths.gate_move__wav, 1, false, false);
         },
         null,
         function() {
@@ -502,7 +502,7 @@ class PlayState extends CommonState
     // TODO: Handle the case where the grid is full and no groups exist
     this._blockGrid.OnBlocksGenerated.add(this._addBonusTime);
     this._blockGrid.OnBlocksGenerated.add(function(blocks) {
-      FlxG.sound.play(AssetPaths.blocks_appear__wav, false, false);
+      FlxG.sound.play(AssetPaths.blocks_appear__wav, 1, false, false);
       for (block in blocks) {
         block.animation.finishCallback = function(_) {
           FlxMouseEventManager.setObjectMouseEnabled(block, true);
@@ -533,7 +533,7 @@ class PlayState extends CommonState
         function(row) {
           _gate.height += tileSet.tileHeight;
 
-          FlxG.sound.play(AssetPaths.gate_move__wav, false, false);
+          FlxG.sound.play(AssetPaths.gate_move__wav, 1, false, false);
         },
         function() {
           // NOTE: When this animation starts, the gate will be of height 16,
@@ -541,7 +541,7 @@ class PlayState extends CommonState
           // callback will add the sprite to the screen.  (This is also why we
           // run the animation for one LESS than the grid height)
 
-          FlxG.sound.play(AssetPaths.gate_move__wav, false, false);
+          FlxG.sound.play(AssetPaths.gate_move__wav, 1, false, false);
           _gate.revive();
           this.add(_gate);
         },
@@ -561,7 +561,7 @@ class PlayState extends CommonState
       this.remove(_gravityIndicator);
       this.remove(_gravityPanel);
 
-      FlxG.sound.play(AssetPaths.game_over__ogg, false, function() {
+      FlxG.sound.play(AssetPaths.game_over__ogg, 1, false, true, function() {
         new FlxTimer().start(1, function(_) {
           FlxG.sound.playMusic(AssetPaths.game_over_loop__ogg);
         });
@@ -577,7 +577,7 @@ class PlayState extends CommonState
         this.highScoreLabel.text = 'TOP ${this._score}';
 
         FlxG.save.data.highScore = this._score;
-        FlxG.save.flush(function(success) {
+        FlxG.save.flush(1, function(success) {
           // Save the high score, THEN let the player exit
           this._readyToLeaveState = true;
           if (success) {
@@ -588,7 +588,7 @@ class PlayState extends CommonState
             trace('Failed to save high score of ${this._score}');
           }
         });
-        FlxG.sound.play(AssetPaths.high_score__wav);
+        FlxG.sound.play(AssetPaths.high_score__wav, 1);
       }
       else {
         // If we got no high score, just let the player exit
@@ -604,7 +604,7 @@ class PlayState extends CommonState
   // OnSuccessfulClick callbacks ///////////////////////////////////////////////
   private function _getReadyToComputeScore(blocks) {
     this._timeSinceLastGoodClick = 0;
-    FlxG.sound.play(AssetPaths.clear_blocks__wav, false, false);
+    FlxG.sound.play(AssetPaths.clear_blocks__wav, 1, false, false);
 
     this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
     // We'll always have cleared at least 3 blocks here.
@@ -661,7 +661,7 @@ class PlayState extends CommonState
   }
 
   private function _playNotAllowed(_) {
-    FlxG.sound.play(AssetPaths.not_allowed__wav, false, false);
+    FlxG.sound.play(AssetPaths.not_allowed__wav, 1, false, false);
   }
 
   private static var BadClickEmotes = [EmoteState.Sad, EmoteState.Confused, EmoteState.Angry];

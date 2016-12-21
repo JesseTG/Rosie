@@ -120,7 +120,7 @@ class AboutState extends FlxState {
           var index = source.lastIndexOf('/');
           var frameName = source.substr(index + 1);
 
-          returnButton = new FlxBitmapTextButton(object.properties.text, function() {
+          returnButton = new FlxBitmapTextButton(0, 0, object.properties.text, function() {
               if (FlxG.sound.music != null) {
                 FlxG.sound.music.stop();
               }

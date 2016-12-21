@@ -97,7 +97,7 @@ class MenuState extends CommonState
           var index = source.lastIndexOf('/');
           var frameName = source.substr(index + 1);
 
-          this._start = new FlxBitmapTextButton(object.properties.text, function() {
+          this._start = new FlxBitmapTextButton(0, 0, object.properties.text, function() {
             FlxG.switchState(new PlayState());
           }).init(
             x = object.x,
@@ -141,7 +141,7 @@ class MenuState extends CommonState
           var index = source.lastIndexOf('/');
           var frameName = source.substr(index + 1);
 
-          this._about = new FlxBitmapTextButton(object.properties.text, function() {
+          this._about = new FlxBitmapTextButton(0, 0, object.properties.text, function() {
               FlxG.switchState(new AboutState());
           }).init(
             x = object.x,
