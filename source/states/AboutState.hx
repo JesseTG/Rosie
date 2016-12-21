@@ -38,18 +38,11 @@ using ObjectInit;
 using Lambda;
 
 class AboutState extends FlxState {
-  private static var BLOCK_FONT_SIZE = FlxPoint.get(16, 32);
-  private static var BLOCK_FONT_SPACING = FlxPoint.get(2, 0);
-  private static var TEXT_FONT_SIZE = FlxPoint.get(10, 9);
-  private static var TEXT_FONT_SPACING = FlxPoint.get(0, 0);
   private static inline var NUM_STARS = 100;
 
   private var _starfield : FlxStarField2D;
   private var rosie : FlxSprite;
   private var returnButton : FlxBitmapTextButton;
-  private var sprites : FlxAtlasFrames;
-  private var font : FlxBitmapFont;
-  private var textFont : FlxBitmapFont;
   private var map : TiledMap;
   private var tilemap : FlxTilemap;
 
@@ -59,23 +52,6 @@ class AboutState extends FlxState {
     this.map = new TiledMap(AssetPaths.credits__tmx);
     var spriteSet = map.getTileSet("Sprites");
     var tileSet = map.getTileSet("Overworld");
-    this.sprites = FlxAtlasFrames.fromTexturePackerJson(AssetPaths.gfx__png, AssetPaths.gfx__json);
-    this.font = FlxBitmapFont.fromMonospace(
-      this.sprites.getByName("block-font.png"),
-      FlxBitmapFont.DEFAULT_CHARS,
-      BLOCK_FONT_SIZE,
-      null,
-      BLOCK_FONT_SPACING
-    );
-
-
-    this.textFont = FlxBitmapFont.fromMonospace(
-      this.sprites.getByName("text-font.png"),
-      '${FlxBitmapFont.DEFAULT_CHARS}⌚⇦',
-      TEXT_FONT_SIZE,
-      null,
-      TEXT_FONT_SPACING
-    );
 
     var ground : TiledTileLayer = cast map.getLayer("Ground");
     this.tilemap = cast new FlxTilemap().loadMapFromArray(
@@ -97,8 +73,8 @@ class AboutState extends FlxState {
       switch (object.name) {
         case "Rosie":
           rosie = new FlxSprite(object.x, object.y - object.height).init(
-            frames = sprites,
-            frame = sprites.getByName(Rosie.IDLE_FRAMES[0]),
+            frames = Assets.TextureAtlas,
+            frame = Assets.TextureAtlas.getByName(Rosie.IDLE_FRAMES[0]),
             pixelPerfectRender = true,
             pixelPerfectPosition = true,
             moves = false,
@@ -128,13 +104,13 @@ class AboutState extends FlxState {
           }).init(
             x = object.x,
             y = object.y - object.height,
-            frames = this.sprites,
-            frame = this.sprites.getByName(frameName),
+            frames = Assets.TextureAtlas,
+            frame = Assets.TextureAtlas.getByName(frameName),
             immovable = true,
             solid = false
           );
 
-          returnButton.label.font = this.textFont;
+          returnButton.label.font = Assets.TextFont;
           returnButton.label.letterSpacing = -3;
           returnButton.label.alignment = FlxTextAlign.CENTER;
           returnButton.label.color = FlxColor.WHITE;
@@ -142,13 +118,13 @@ class AboutState extends FlxState {
           returnButton.label.fieldWidth = object.width;
 
           var normalAnim = returnButton.animation.getByName("normal");
-          normalAnim.frames = [sprites.getIndexByName(frameName)];
+          normalAnim.frames = [Assets.TextureAtlas.getIndexByName(frameName)];
 
           var pressedAnim = returnButton.animation.getByName("pressed");
-          pressedAnim.frames = [sprites.getIndexByName("button-01.png")];
+          pressedAnim.frames = [Assets.TextureAtlas.getIndexByName("button-01.png")];
 
           var highlightAnim = returnButton.animation.getByName("highlight");
-          highlightAnim.frames = [sprites.getIndexByName("button-02.png")];
+          highlightAnim.frames = [Assets.TextureAtlas.getIndexByName("button-02.png")];
 
           var point = FlxPoint.weak(0, returnButton.label.height);
           returnButton.labelAlphas = [1.0, 1.0, 1.0];
@@ -167,7 +143,7 @@ class AboutState extends FlxState {
     for (object in creditsLayer.objects) {
       switch (object.type) {
         case "Title":
-          var title = new FlxBitmapText(this.font).init(
+          var title = new FlxBitmapText(Assets.TitleFont).init(
             x = object.x,
             y = object.y,
             autoSize = false,
@@ -184,7 +160,7 @@ class AboutState extends FlxState {
           credits.add(title);
         case "Text":
           var textColor = (object.properties.textColor == null) ? FlxColor.WHITE : FlxColor.fromString(object.properties.textColor);
-          var text = new FlxBitmapText(this.textFont).init(
+          var text = new FlxBitmapText(Assets.TextFont).init(
             x = object.x,
             y = object.y,
             autoSize = false,

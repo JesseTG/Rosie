@@ -32,6 +32,7 @@ import flixel.tweens.FlxEase;
 import flixel.input.mouse.FlxMouseEventManager;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
+import de.polygonal.ds.tools.Assert.assert;
 
 import entities.Rosie;
 import entities.Rosie.AnimationState;
@@ -49,6 +50,12 @@ class SplashScreenState extends FlxState {
 
   public override function create() {
     super.create();
+    Assets.init();
+    // FlxG.signals.gameStarted would be a better place to put this, but the
+    // main texture atlas won't load and then the game crashes after the splash
+    // screen.
+
+    assert(Assets.initialized);
 
     this.OnAnimationDone = new FlxSignal();
 
@@ -60,14 +67,13 @@ class SplashScreenState extends FlxState {
     this.bgColor = 0xff070707;
 
     var map = new TiledMap(AssetPaths.splash__tmx);
-    var sprites = FlxAtlasFrames.fromTexturePackerJson(AssetPaths.gfx__png, AssetPaths.gfx__json);
     var objects : TiledObjectLayer = cast map.getLayer("Splash Screen");
     for (object in objects.objects) {
       switch (object.type) {
         case "Rosie":
           rosie = new FlxSprite(object.x, object.y - object.height).init(
-            frames = sprites,
-            frame = sprites.getByName(Rosie.IDLE_FRAMES[0]),
+            frames = Assets.TextureAtlas,
+            frame = Assets.TextureAtlas.getByName(Rosie.IDLE_FRAMES[0]),
             solid = false,
             immovable = true
           );

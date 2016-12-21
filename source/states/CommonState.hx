@@ -17,70 +17,32 @@ import flixel.math.FlxPoint;
 import flixel.text.FlxBitmapText;
 import flixel.text.FlxText.FlxTextAlign;
 import flixel.tile.FlxTilemap;
+import de.polygonal.ds.tools.Assert.assert;
 
 using Lambda;
 using ObjectInit;
 
 class CommonState extends FlxState {
-  private static var BLOCK_FONT_SIZE = FlxPoint.get(16, 32);
-  private static var BLOCK_FONT_SPACING = FlxPoint.get(2, 0);
 
-  private static var TEXT_FONT_SIZE = FlxPoint.get(10, 9);
-  private static var TEXT_FONT_SPACING = FlxPoint.get(0, 0);
-
-  private var map : TiledMap;
   private var tilemap : FlxTilemap;
   private var bgImage : FlxBackdrop;
-  private var sprites : FlxAtlasFrames;
-  private var font : FlxBitmapFont;
-  private var textFont : FlxBitmapFont;
   private var highScoreLabel : FlxBitmapText;
-  private var groundLayer : TiledTileLayer;
-  private var bgLayer : TiledImageLayer;
-  private var objectLayer : TiledObjectLayer;
-  private var guiLayer : TiledObjectLayer;
-  private var tileSet : TiledTileSet;
-  private var spriteSet : TiledTileSet;
 
   override public function create():Void {
     super.create();
 
-    this.sprites = FlxAtlasFrames.fromTexturePackerJson(AssetPaths.gfx__png, AssetPaths.gfx__json);
-    this.font = FlxBitmapFont.fromMonospace(
-      this.sprites.getByName("block-font.png"),
-      FlxBitmapFont.DEFAULT_CHARS,
-      BLOCK_FONT_SIZE,
-      null,
-      BLOCK_FONT_SPACING
-    );
-
-    this.textFont = FlxBitmapFont.fromMonospace(
-      this.sprites.getByName("text-font.png"),
-      '${FlxBitmapFont.DEFAULT_CHARS}⌚⇦',
-      TEXT_FONT_SIZE,
-      null,
-      TEXT_FONT_SPACING
-    );
-
-    // TODO: Handle a missing tileset (or invalid data, e.g. unsupported format)
-    this.map = new TiledMap(AssetPaths.world__tmx);
+    assert(Assets.initialized);
 
     // TODO: Store the tiled map on the texture atlas and load from there, instead of a separate image
     // TODO: Handle the layers/tilesets not being named in the way I want them to be
-    this.groundLayer = cast(map.getLayer("Ground"), TiledTileLayer);
-    this.bgLayer = cast(map.getLayer("Background"), TiledImageLayer);
-    this.objectLayer = cast(map.getLayer("Objects"), TiledObjectLayer);
-    this.guiLayer = cast(map.getLayer("GUI"), TiledObjectLayer);
 
-    this.tileSet = map.getTileSet("Overworld");
-    this.spriteSet = map.getTileSet("Sprites");
     this.tilemap = cast new FlxTilemap().loadMapFromArray(
-      groundLayer.tileArray,
-      groundLayer.width,
-      groundLayer.height,
-      'assets/${tileSet.imageSource}',
-      tileSet.tileWidth,
-      tileSet.tileHeight,
+      Assets.MainGroundLayer.tileArray,
+      Assets.MainGroundLayer.width,
+      Assets.MainGroundLayer.height,
+      'assets/${Assets.TileSet.imageSource}',
+      Assets.TileSet.tileWidth,
+      Assets.TileSet.tileHeight,
       1, // Tiled uses 0-indexing, but I think FlxTilemap uses 1-indexing
       1,
       27
@@ -90,7 +52,7 @@ class CommonState extends FlxState {
     this.tilemap.useScaleHack = false;
     // Game looks like ass with this scale hack on
 
-    this.bgImage = new FlxBackdrop('assets/${bgLayer.imagePath}', 0, 0, false, false).init(
+    this.bgImage = new FlxBackdrop('assets/${Assets.MainBackgroundLayer.imagePath}', 0, 0, false, false).init(
       useScaleHack = false,
       solid = false,
       immovable = true,
@@ -102,10 +64,10 @@ class CommonState extends FlxState {
       highScore = cast(FlxG.save.data.highScore, Int);
     }
 
-    for (object in this.guiLayer.objects) {
+    for (object in Assets.MainGuiLayer.objects) {
       switch (object.name) {
         case "High Score Display":
-          this.highScoreLabel = new FlxBitmapText(this.textFont).init(
+          this.highScoreLabel = new FlxBitmapText(Assets.TextFont).init(
             x = object.x,
             y = object.y,
             alignment = FlxTextAlign.LEFT,

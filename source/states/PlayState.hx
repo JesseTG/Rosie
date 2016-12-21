@@ -130,26 +130,26 @@ class PlayState extends CommonState
     _time = 60;
     _readyToLeaveState = false;
 
-    this._playGui = cast(this.map.getLayer("PlayState GUI"));
-    this._hintGui = cast(this.map.getLayer("Hints"));
+    this._playGui = cast(Assets.MainTilemap.getLayer("PlayState GUI"));
+    this._hintGui = cast(Assets.MainTilemap.getLayer("Hints"));
 
-    this._gravityIndicator = new GravityIndicator(0, 0, sprites);
+    this._gravityIndicator = new GravityIndicator(0, 0, Assets.TextureAtlas);
     this._gravityIndicatorCoordinates = new Vector<FlxPoint>(GravityDirection.Count);
-    this._gravityPanel = new GravityPanel(0, 0, 0, 0, sprites);
+    this._gravityPanel = new GravityPanel(0, 0, 0, 0, Assets.TextureAtlas);
     this._gravityPanelCoordinates = new Vector<FlxRect>(GravityDirection.Count);
 
     this._hints = new FlxSpriteGroup();
     for (object in _hintGui.objects) {
       switch (object.name) {
         case "Hint Hand":
-          var source = spriteSet.getImageSourceByGid(object.gid).source;
+          var source = Assets.SpriteSet.getImageSourceByGid(object.gid).source;
           var index = source.lastIndexOf('/');
 
           var hand = new FlxSprite().init(
             x = object.x,
             y = object.y - object.height,
-            frames = this.sprites,
-            frame = this.sprites.getByName(source.substr(index + 1)),
+            frames = Assets.TextureAtlas,
+            frame = Assets.TextureAtlas.getByName(source.substr(index + 1)),
             pixelPerfectPosition = true,
             pixelPerfectRender = true,
             solid = false,
@@ -167,7 +167,7 @@ class PlayState extends CommonState
             _handTweenOptions
           );
         case "Hint Text":
-          var text = new FlxBitmapText(this.textFont).init(
+          var text = new FlxBitmapText(Assets.TextFont).init(
             x = object.x,
             y = object.y,
             pixelPerfectPosition = true,
@@ -185,14 +185,14 @@ class PlayState extends CommonState
           this._hints.add(text);
         default:
           // default image load
-          var source = spriteSet.getImageSourceByGid(object.gid).source;
+          var source = Assets.SpriteSet.getImageSourceByGid(object.gid).source;
           var index = source.lastIndexOf('/');
 
           this._hints.add(new FlxSprite().init(
             x = object.x,
             y = object.y - object.height,
-            frames = this.sprites,
-            frame = this.sprites.getByName(source.substr(index + 1)),
+            frames = Assets.TextureAtlas,
+            frame = Assets.TextureAtlas.getByName(source.substr(index + 1)),
             moves = false,
             immovable = true,
             solid = false
@@ -201,7 +201,7 @@ class PlayState extends CommonState
     }
     this.add(_hints);
 
-    for (object in this.objectLayer.objects) {
+    for (object in Assets.MainObjectLayer.objects) {
       switch (object.name) {
         case "Gravity Indicator":
           var coords = FlxPoint.get(object.x, object.y);
@@ -217,9 +217,9 @@ class PlayState extends CommonState
           // TODO: Come up with a better way to render the grid
           _gridSize = Std.parseInt(object.properties.size);
           this._gate = new FlxTiledSprite(
-            sprites.parent,
-            _gridSize * tileSet.tileWidth,
-            _gridSize * tileSet.tileHeight,
+            Assets.TextureAtlas.parent,
+            _gridSize * Assets.TileSet.tileWidth,
+            _gridSize * Assets.TileSet.tileHeight,
             true,
             true
           )
@@ -232,11 +232,11 @@ class PlayState extends CommonState
             immovable = true,
             solid = false
           );
-          this._gate.loadFrame(sprites.getByName("gate.png"));
+          this._gate.loadFrame(Assets.TextureAtlas.getByName("gate.png"));
 
-          _blockGrid = new BlockGrid(object.x, object.y, _gridSize, sprites);
+          _blockGrid = new BlockGrid(object.x, object.y, _gridSize, Assets.TextureAtlas);
         case "Rosie":
-          _rosie = new Rosie(object.x, object.y - object.height, sprites, tilemap).init(
+          _rosie = new Rosie(object.x, object.y - object.height, Assets.TextureAtlas, tilemap).init(
             pixelPerfectPosition = true,
             pixelPerfectRender = true
           );
@@ -255,7 +255,7 @@ class PlayState extends CommonState
     for (object in _playGui.objects) {
       switch (object.name) {
         case "Score Display":
-          _scoreDisplay = new FlxBitmapText(this.font).init(
+          _scoreDisplay = new FlxBitmapText(Assets.TitleFont).init(
             text = "0",
             x = object.x,
             y = object.y,
@@ -267,7 +267,7 @@ class PlayState extends CommonState
             solid = false
           );
         case "Time Remaining":
-          _timeDisplay = new FlxBitmapText(this.textFont).init(
+          _timeDisplay = new FlxBitmapText(Assets.TextFont).init(
             text = Printf.format("⌚   %.1f", [Math.max(0, _time)]),
             x = object.x,
             y = object.y,
@@ -278,7 +278,7 @@ class PlayState extends CommonState
             solid = false
           );
 
-          _timeChangeDisplay = new FlxBitmapText(this.textFont).init(
+          _timeChangeDisplay = new FlxBitmapText(Assets.TextFont).init(
             x = _timeDisplay.x,
             y = _timeDisplay.y,
             alignment = _timeDisplay.alignment,
@@ -288,7 +288,7 @@ class PlayState extends CommonState
             solid = false
           );
         case "Game Over":
-          _gameOverText = new FlxBitmapText(this.font).init(
+          _gameOverText = new FlxBitmapText(Assets.TitleFont).init(
             text = object.properties.text,
             x = object.x,
             y = object.y,
@@ -305,8 +305,8 @@ class PlayState extends CommonState
     this._initCallbacks();
 
     FlxG.console.registerObject("blockGrid", _blockGrid);
-    FlxG.console.registerObject("tileSet", tileSet);
-    FlxG.console.registerObject("sprites", sprites);
+    FlxG.console.registerObject("tileSet", Assets.TileSet);
+    FlxG.console.registerObject("sprites", Assets.TextureAtlas);
     FlxG.console.registerObject("log", FlxG.log);
     FlxG.console.registerObject("gate", _gate);
     FlxG.console.registerObject("rosie", _rosie);
@@ -431,7 +431,7 @@ class PlayState extends CommonState
       _gameStartGate = new FlxAsyncIteratorLoop<Int>(
         0..._gridSize,
         function(row) {
-          _gate.height -= tileSet.tileHeight;
+          _gate.height -= Assets.TileSet.tileHeight;
           // NOTE: Can't set a sprite's height to 0, so we just remove it when
           // it's only one row deep (see the callback below)
           FlxG.sound.play(AssetPaths.gate_move__wav, 1, false, false);
