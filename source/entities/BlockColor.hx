@@ -1,5 +1,7 @@
 package entities;
 
+// TODO: Turn this back into an ordinary enum (each flood-fill is doing string
+// comparisons!)
 @:enum
 @:notNull
 abstract BlockColor(String) {
