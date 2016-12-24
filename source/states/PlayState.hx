@@ -38,6 +38,7 @@ import flixel.addons.display.FlxTiledSprite;
 import de.polygonal.Printf;
 import de.polygonal.ds.tools.Assert.assert;
 import de.polygonal.ds.Array2;
+import de.polygonal.ds.List;
 
 import entities.Block;
 import entities.BlockColor;
@@ -600,23 +601,23 @@ class PlayState extends CommonState
   }
 
   // OnSuccessfulClick callbacks ///////////////////////////////////////////////
-  private function _getReadyToComputeScore(blocks) {
+  private function _getReadyToComputeScore(blocks:List<Block>) {
     this._timeSinceLastGoodClick = 0;
     FlxG.sound.play(AssetPaths.clear_blocks__wav, 1, false, false);
 
-    this.OnScore.dispatch((blocks.length - 2) * (blocks.length - 2));
+    this.OnScore.dispatch((blocks.size - 2) * (blocks.size - 2));
     // We'll always have cleared at least 3 blocks here.
   }
 
-  private function _setRosieEmote(blocks) {
-    if (blocks.length == 3 && _rosie.emote.state == EmoteState.None && FlxG.random.bool(60)) {
+  private function _setRosieEmote(blocks:List<Block>) {
+    if (blocks.size == 3 && _rosie.emote.state == EmoteState.None && FlxG.random.bool(60)) {
       // If we cleared exactly 3 blocks, Rosie's not emoting, and then with 60% probability...
       _rosie.emote.state = EmoteState.Neutral; // Rosie is not impressed
     }
-    else if (blocks.length >= 10) {
+    else if (blocks.size >= 10) {
       _rosie.emote.state = EmoteState.VeryHappy;
     }
-    else if (blocks.length >= 7 && _rosie.emote.state != EmoteState.VeryHappy) {
+    else if (blocks.size >= 7 && _rosie.emote.state != EmoteState.VeryHappy) {
       _rosie.emote.state = EmoteState.Happy;
     }
   }
@@ -671,8 +672,8 @@ class PlayState extends CommonState
   }
   // End OnBadClick Callbacks //////////////////////////////////////////////////
 
-  private function _addBonusTime(blocks) {
-    var blocksCreated = blocks.length;
+  private function _addBonusTime(blocks:List<Block>) {
+    var blocksCreated = blocks.size;
     var bonus = blocksCreated * 0.05;
 
     _time = Math.min(_time + bonus, 60);

@@ -14,8 +14,10 @@ import de.polygonal.ds.Array2;
 import de.polygonal.ds.Array2.Array2Cell;
 import de.polygonal.ds.ArrayedQueue;
 import de.polygonal.Printf;
+import de.polygonal.ds.ArrayList;
 import de.polygonal.ds.tools.Assert.assert;
 import entities.Block.BlockAnimation;
+import de.polygonal.ds.List;
 
 import util.ReverseIterator;
 
@@ -24,6 +26,9 @@ using Lambda;
 
 class BlockGrid extends FlxTypedSpriteGroup<Block> {
   private var _blockGrid : Array2<Block>;
+  private var _blockArray : ArrayList<Block>;
+  private var _blockArray2 : ArrayList<Block>;
+  private var _blockQueue : ArrayedQueue<Block>;
   private var _blocksMoving : Int;
   private var _blocksCreated : Int;
   private var _frames: FlxFramesCollection;
@@ -37,12 +42,12 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
    * Called when an allowed group of blocks is clicked.  Parameter is the array
    * of blocks in the group, in no particular order.
    */
-  public var OnSuccessfulClick(default, null) : FlxTypedSignal<Array<Block>->Void>;
+  public var OnSuccessfulClick(default, null) : FlxTypedSignal<List<Block>->Void>;
 
   /**
    * Called when the player clicks on a block but it's not enough to make a group.
    */
-  public var OnBadClick(default, null) : FlxTypedSignal<Array<Block>->Void>;
+  public var OnBadClick(default, null) : FlxTypedSignal<List<Block>->Void>;
 
   /**
    * Called when the first block starts moving.
@@ -68,20 +73,20 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
    * Called when blocks are generated, except for the first time (i.e. when the
    * game starts).
    */
-  public var OnBlocksGenerated(default, null) : FlxTypedSignal<Array<Block>->Void>;
+  public var OnBlocksGenerated(default, null) : FlxTypedSignal<List<Block>->Void>;
 
   // TODO: Enforce a max size with this.maxSize
   // TODO: Don't hard-code the block size in this class
   public function new(x:Int, y:Int, size:Int, sprites:FlxFramesCollection) {
     super(x, y, 0);
 
-    this.OnSuccessfulClick = new FlxTypedSignal<Array<Block>->Void>();
-    this.OnBadClick = new FlxTypedSignal<Array<Block>->Void>();
-    this.OnStartMoving = new FlxTypedSignal<Void->Void>();
-    this.OnStopMoving = new FlxTypedSignal<Void->Void>();
-    this.OnNoMoreMoves = new FlxTypedSignal<Void->Void>();
-    this.OnBeforeBlocksGenerated = new FlxTypedSignal<Void->Void>();
-    this.OnBlocksGenerated = new FlxTypedSignal<Array<Block>->Void>();
+    this.OnSuccessfulClick = new FlxTypedSignal();
+    this.OnBadClick = new FlxTypedSignal();
+    this.OnStartMoving = new FlxTypedSignal();
+    this.OnStopMoving = new FlxTypedSignal();
+    this.OnNoMoreMoves = new FlxTypedSignal();
+    this.OnBeforeBlocksGenerated = new FlxTypedSignal();
+    this.OnBlocksGenerated = new FlxTypedSignal();
 
 #if debug
     this.OnSuccessfulClick.add(function(blocks) trace('OnSuccessfulClick(${blocks})'));
@@ -99,7 +104,18 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.readyForInput = false;
     // TODO: Come up with a better name and clarify semantics
 
-    this._blockGrid = new Array2<Block>(size, size);
+    this._blockGrid = new Array2(size, size);
+    this._blockGrid.reuseIterator = true;
+
+    this._blockArray = new ArrayList(size * size, null, true);
+    this._blockArray.reuseIterator = true;
+
+    this._blockArray2 = new ArrayList(size * size, null, true);
+    this._blockArray.reuseIterator = true;
+
+    this._blockQueue = new ArrayedQueue(size * size, null, true);
+    this._blockQueue.reuseIterator = true;
+
     this.gravity = GravityDirection.Down;
     this.gridSize = size;
     this._blocksMoving = 0;
@@ -129,7 +145,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     super.update(elapsed);
   }
 
-  private function _handleSuccessfulClick(blocks:Array<Block>) {
+  private function _handleSuccessfulClick(blocks:List<Block>) {
     this.readyForInput = false;
     for (block in blocks) {
       FlxMouseEventManager.setObjectMouseEnabled(block, false);
@@ -190,20 +206,21 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
   }
 
   private function _anyGroupsRemaining() : Bool {
-    var blocks = [for (block in this.members) {
+    _blockArray2.clear();
+
+    for (block in this.members) {
       if (block != null && block.alive) {
-        block;
+        _blockArray2.pushBack(block);
       }
-    }];
+    }
     // Didn't use forEachAlive because anonymous functions make the GC cry
-    // TODO: Can I pre-allocate memory?
 
     // TODO: Document this loop
-    while (blocks.length > 0) {
-      var group = getBlockGroup(blocks.pop());
-      if (group.length >= 3) return true;
+    while (_blockArray2.size > 0) {
+      var group = getBlockGroup(_blockArray2.popBack());
+      if (group.size >= 3) return true;
       for (b in group) {
-        var removed = blocks.remove(b);
+        _blockArray2.remove(b);
       }
     }
 
@@ -214,25 +231,26 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
    * Given a block, return its flood-filled group of the same color.
    * Resulting array is not in any particular order.
    */
-  public function getBlockGroup(clicked:Block) : Array<Block> {
-    var blocks = new Array<Block>();
-    if (clicked == null || !clicked.alive || !clicked.exists) return blocks;
+  public function getBlockGroup(clicked:Block) {
+    this._blockArray.clear();
+    if (clicked == null || !clicked.alive || !clicked.exists) return _blockArray;
 
     var cell = new Array2Cell(); // Appease the garbage collector
-    var queue = new ArrayedQueue<Block>();
-    queue.enqueue(clicked);
+    _blockQueue.clear();
+    _blockQueue.enqueue(clicked);
 
-    while (!queue.isEmpty()) {
+    while (!_blockQueue.isEmpty()) {
       // Until we we've run out of blocks to search...
 
-      var current = queue.dequeue();
+      var current = _blockQueue.dequeue();
       // The block we're expanding out from right now
 
       if (current.blockColor == clicked.blockColor) {
         // If the block we're expanding out from is the color we want...
-        if (!blocks.has(current)) {
+        if (!_blockArray.contains(current)) {
           // TODO: See if there's a constant-time way to answer this
-          blocks.push(current);
+          _blockArray.pushBack(current);
+          // TODO: Will unsafePushBack be adequate?
         }
 
         var indices = _getGridIndex(current, cell);
@@ -244,28 +262,28 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
         var north = _blockGrid.inRange(x, y - 1) ? _blockGrid.get(x, y - 1) : null;
         var south = _blockGrid.inRange(x, y + 1) ? _blockGrid.get(x, y + 1) : null;
 
-        if (west != null && !blocks.has(west)) queue.enqueue(west);
-        if (east != null && !blocks.has(east)) queue.enqueue(east);
-        if (north != null && !blocks.has(north)) queue.enqueue(north);
-        if (south != null && !blocks.has(south)) queue.enqueue(south);
+        if (west != null && !_blockArray.contains(west)) _blockQueue.enqueue(west);
+        if (east != null && !_blockArray.contains(east)) _blockQueue.enqueue(east);
+        if (north != null && !_blockArray.contains(north)) _blockQueue.enqueue(north);
+        if (south != null && !_blockArray.contains(south)) _blockQueue.enqueue(south);
       }
 
     }
 
-    return blocks;
+    return _blockArray;
   }
 
-  public function handleBlockGroup(blocks:Array<Block>) {
+  public function handleBlockGroup(blocks:List<Block>) {
     if (blocks != null) {
       // If we actually got a blocks array...
 
-      for (i in 0...blocks.length) {
+      for (i in 0...blocks.size) {
         // For each block in the group...
-        this.members.swap(this.members.length - i - 1, this.members.indexOf(blocks[i]));
+        this.members.swap(this.members.length - i - 1, this.members.indexOf(blocks.get(i)));
         // ...Swap it so it's one of the last members so it'll render above the others
       }
 
-      if (blocks.length >= 3) {
+      if (blocks.size >= 3) {
         // If the selected block group has at least 3 blocks...
 
         this.OnSuccessfulClick.dispatch(blocks);
@@ -304,6 +322,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
   private function _startMovingBlocks() {
     var newGrid = new Array2<Block>(this.gridSize, this.gridSize);
+    newGrid.reuseIterator = true;
 
     // rotate gravity in old grid
     // for each localColumn in old grid:
@@ -431,7 +450,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
    * Returns the number of blocks that were created
    */
   private function _generateBlocks() {
-    var created : Array<Block> = [];
+    this._blockArray.clear();
     this.readyForInput = false;
 
     _blockGrid.forEach(function(blockInGrid:Block, gridX:Int, gridY:Int) {
@@ -442,7 +461,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
         var block = this.recycle(Block, _createBlock);
 
-        created.push(block);
+        _blockArray.pushBack(block);
         block.blockColor = BlockColor.All[Std.random(this.numColors)];
         block.setPosition(gridX * block.frameWidth, gridY * block.frameHeight);
 
@@ -458,7 +477,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
       }
     });
 
-    return created;
+    return _blockArray;
   }
 
   public override function destroy() {
@@ -475,6 +494,8 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.OnBeforeBlocksGenerated.removeAll();
     this.OnNoMoreMoves.removeAll();
 
+    this._blockArray2 = null;
+    this._blockArray = null;
     this._blockGrid = null;
     this._frames = null;
     this.OnBadClick = null;
@@ -496,7 +517,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
     this.readyForInput = false;
   }
 
-  private function _shakeBlocks(blocks:Array<Block>) {
+  private function _shakeBlocks(blocks:List<Block>) {
     var tweenOptions = {
       type: FlxTween.ONESHOT,
       onComplete: _shakeBlocks_onComplete,
