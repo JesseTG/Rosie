@@ -42,7 +42,7 @@
 	<haxeflag name="--macro" value="keep('flixel')" if="debug" />
 	<!-- _______________________________ Libraries ______________________________ -->
 
-	<haxelib name="hxcpp" version="git" />
+	<haxelib name="hxcpp" version="git" if="cpp" />
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
 	<haxelib name="objectinit" />
