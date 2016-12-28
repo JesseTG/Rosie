@@ -61,6 +61,9 @@ using entities.GravityDirection;
 
 class PlayState extends CommonState
 {
+  private var _formatArray : Array<Float>;
+  // for some reason, Printf.eformat or .format without an array doesn't work
+  // it might be bugs in Printf
 
   private var _blockGrid : BlockGrid;
   private var _playGui : TiledObjectLayer;
@@ -127,6 +130,7 @@ class PlayState extends CommonState
     this.OnGameStartAnimationFinish.add(function() trace("OnGameStartAnimationFinish"));
 #end
 
+    _formatArray = [0.0];
     _score = 0;
     _time = 60;
     _readyToLeaveState = false;
@@ -268,8 +272,9 @@ class PlayState extends CommonState
             solid = false
           );
         case "Time Remaining":
+          _formatArray[0] = Math.max(0, _time);
           _timeDisplay = new FlxBitmapText(Assets.TextFont).init(
-            text = Printf.format("⌚   %.1f", [Math.max(0, _time)]),
+            text = Printf.format("⌚   %.1f", _formatArray),
             x = object.x,
             y = object.y,
             alignment = FlxTextAlign.RIGHT,
@@ -350,7 +355,8 @@ class PlayState extends CommonState
     if (this._blockGrid.readyForInput && this.gameRunning) {
       _time -= elapsed;
       _timeSinceLastGoodClick += elapsed;
-      _timeDisplay.text = Printf.format("⌚   %.1f", [Math.max(0, _time)]);
+      _formatArray[0] = Math.max(0, _time);
+      _timeDisplay.text = Printf.format("⌚   %.1f", _formatArray);
 
       if (_timeSinceLastGoodClick >= 10 && _rosie.emote.state == EmoteState.None && FlxG.random.bool(1)) {
         _rosie.emote.state = FlxG.random.getObject([
@@ -637,7 +643,8 @@ class PlayState extends CommonState
     _time -= 1.0;
 
     _timeChangeDisplay.color = FlxColor.RED;
-    _timeChangeDisplay.text = Printf.format("-%.1f", [1.0]);
+    _formatArray[0] = 1.0;
+    _timeChangeDisplay.text = Printf.format("-%.1f", _formatArray);
     FlxTween.linearMotion(
       _timeChangeDisplay,
       _timeDisplay.x,
@@ -677,8 +684,9 @@ class PlayState extends CommonState
     var bonus = blocksCreated * 0.05;
 
     _time = Math.min(_time + bonus, 60);
+    _formatArray[0] = bonus;
     _timeChangeDisplay.color = FlxColor.GREEN;
-    _timeChangeDisplay.text = Printf.format("+%.1f", [bonus]);
+    _timeChangeDisplay.text = Printf.format("+%.1f", _formatArray);
     FlxTween.linearMotion(
       _timeChangeDisplay,
       _timeDisplay.x,
