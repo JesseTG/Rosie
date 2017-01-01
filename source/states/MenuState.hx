@@ -6,6 +6,7 @@ import flixel.FlxG;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.math.FlxPoint;
 import flixel.text.FlxBitmapText;
+import flixel.text.FlxText.FlxTextAlign;
 import flixel.tile.FlxTilemap;
 import flixel.tweens.FlxTween;
 import flixel.ui.FlxBitmapTextButton;
