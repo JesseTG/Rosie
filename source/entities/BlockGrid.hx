@@ -1,30 +1,27 @@
 package entities;
 
-import haxe.EnumTools;
-import haxe.EnumTools.EnumValueTools;
+using haxe.EnumTools.EnumValueTools;
 
-import flixel.FlxG;
-import flixel.math.FlxPoint;
-import flixel.tweens.FlxTween;
-import flixel.tweens.FlxEase;
 import flixel.graphics.frames.FlxFramesCollection;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.input.mouse.FlxMouseEventManager;
+import flixel.math.FlxPoint;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 import flixel.util.FlxSignal.FlxTypedSignal;
-import de.polygonal.ds.Array2;
-import de.polygonal.ds.Array2.Array2Cell;
-import de.polygonal.ds.ArrayedQueue;
-import de.polygonal.Printf;
-import de.polygonal.ds.ArrayList;
-import de.polygonal.ds.tools.Assert.assert;
-import entities.Block.BlockAnimation;
-import de.polygonal.ds.List;
 
+import de.polygonal.ds.Array2.Array2Cell;
+import de.polygonal.ds.Array2;
+import de.polygonal.ds.ArrayedQueue;
+import de.polygonal.ds.ArrayList;
+import de.polygonal.ds.List;
+import de.polygonal.ds.tools.Assert.assert;
+
+import entities.Block.BlockAnimation;
 import entities.GravityDirection.GravityDirectionTools;
 import util.ReverseIterator;
 
 using util.ArrayTools;
-using haxe.EnumTools.EnumValueTools;
 using entities.GravityDirection.GravityDirectionTools;
 using Lambda;
 

@@ -1,17 +1,12 @@
 package entities;
 
-import de.polygonal.Printf;
-import flixel.animation.FlxAnimation;
-import flixel.animation.FlxAnimationController;
-import flixel.FlxSprite;
+import flixel.addons.display.FlxNestedSprite;
+import flixel.addons.util.FlxFSM.FlxFSMState;
+import flixel.addons.util.FlxFSM;
 import flixel.FlxObject;
 import flixel.graphics.frames.FlxFramesCollection;
-import flixel.addons.util.FlxFSM;
-import flixel.addons.util.FlxFSM.FlxFSMState;
-import flixel.addons.util.FlxFSM.FlxFSMTransitionTable;
-import flixel.FlxG;
-import flixel.addons.display.FlxNestedSprite;
-import flixel.math.FlxMath;
+
+import de.polygonal.Printf;
 
 using ObjectInit;
 

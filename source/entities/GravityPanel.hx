@@ -1,8 +1,5 @@
 package entities;
 
-import flixel.animation.FlxAnimation;
-import flixel.animation.FlxAnimationController;
-import flixel.FlxSprite;
 import flixel.addons.display.FlxTiledSprite;
 import flixel.graphics.frames.FlxFramesCollection;
 

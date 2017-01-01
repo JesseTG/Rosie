@@ -1,30 +1,15 @@
 package states;
 
-import flixel.addons.editors.tiled.TiledObject;
 import flixel.addons.editors.tiled.TiledObjectLayer;
 import flixel.addons.editors.tiled.TiledTileLayer;
-import flixel.addons.editors.tiled.TiledTileSet;
 import flixel.FlxG;
-import flixel.FlxObject;
-import flixel.FlxSprite;
-import flixel.FlxState;
-import flixel.graphics.FlxGraphic;
-import flixel.graphics.frames.FlxAtlasFrames;
-import flixel.graphics.frames.FlxBitmapFont;
-import flixel.group.FlxGroup;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
-import flixel.input.mouse.FlxMouseEventManager;
 import flixel.math.FlxPoint;
 import flixel.text.FlxBitmapText;
-import flixel.text.FlxText;
-import flixel.tile.FlxBaseTilemap.FlxTilemapAutoTiling;
 import flixel.tile.FlxTilemap;
-import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.ui.FlxBitmapTextButton;
-import flixel.util.FlxAxes;
 import flixel.util.FlxColor;
-import flixel.util.FlxSignal.FlxTypedSignal;
 
 using Lambda;
 using ObjectInit;

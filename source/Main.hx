@@ -1,9 +1,9 @@
 package;
 
-import flixel.FlxGame;
-import flixel.FlxG;
 import openfl.display.Sprite;
-import flixel.system.scaleModes.PixelPerfectScaleMode;
+
+import flixel.FlxG;
+import flixel.FlxGame;
 
 #if cpp
 import cpp.vm.Gc;

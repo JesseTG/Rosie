@@ -7,15 +7,10 @@ import flixel.addons.editors.tiled.TiledObjectLayer;
 import flixel.addons.editors.tiled.TiledPropertySet;
 import flixel.addons.editors.tiled.TiledTileLayer;
 import flixel.addons.editors.tiled.TiledTileSet;
-import flixel.FlxG;
-import flixel.FlxState;
-import flixel.math.FlxRect;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxBitmapFont;
 import flixel.math.FlxPoint;
-import flixel.text.FlxBitmapText;
-import flixel.text.FlxText.FlxTextAlign;
-import flixel.tile.FlxTilemap;
+
 import de.polygonal.ds.tools.Assert.assert;
 
 @:final

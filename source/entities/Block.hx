@@ -1,9 +1,10 @@
 package entities;
 
-import de.polygonal.Printf;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxFramesCollection;
 import flixel.input.mouse.FlxMouseEventManager;
+
+import de.polygonal.Printf;
 
 class Block extends FlxSprite {
 
