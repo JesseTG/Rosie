@@ -17,7 +17,7 @@
   [
     {
       "name": "Checkstyle",
-      "shell_cmd": "haxelib run checkstyle -c checkstyle.json -s ./source -nostyle"
+      "shell_cmd": "haxelib run checkstyle -c $project_path/checkstyle.json -s $project_path/source -nostyle"
     },
     {
       "name": "Build (HTML5)",
