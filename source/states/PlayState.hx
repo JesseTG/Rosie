@@ -548,19 +548,15 @@ class PlayState extends CommonState
       this.remove(_gravityIndicator);
       this.remove(_gravityPanel);
 
-      FlxG.sound.play(AssetPaths.game_over__ogg, 1, false, true, function() {
-        new FlxTimer().start(1, function(_) {
-          FlxG.sound.playMusic(AssetPaths.game_over_loop__ogg);
-        });
-      });
-
       var highScore = 0;
       if (FlxG.save.data.highScore != null) {
         highScore = cast(FlxG.save.data.highScore, Int);
       }
 
+      var soundToPlay : String;
       if (this._score > highScore) {
         // If we got a high score...
+        soundToPlay = AssetPaths.high_score__wav;
         this.highScoreLabel.text = 'TOP ${this._score}';
 
         FlxG.save.data.highScore = this._score;
@@ -579,8 +575,15 @@ class PlayState extends CommonState
       }
       else {
         // If we got no high score, just let the player exit
+        soundToPlay = AssetPaths.game_over__ogg;
         this._readyToLeaveState = true;
       }
+
+      FlxG.sound.play(soundToPlay, 1, false, true, function() {
+        new FlxTimer().start(1, function(_) {
+          FlxG.sound.playMusic(AssetPaths.game_over_loop__ogg);
+        });
+      });
     });
   }
 
