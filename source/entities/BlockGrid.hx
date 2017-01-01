@@ -1,6 +1,7 @@
 package entities;
 
 import haxe.EnumTools;
+import haxe.EnumTools.EnumValueTools;
 
 import flixel.FlxG;
 import flixel.math.FlxPoint;
@@ -19,9 +20,12 @@ import de.polygonal.ds.tools.Assert.assert;
 import entities.Block.BlockAnimation;
 import de.polygonal.ds.List;
 
+import entities.GravityDirection.GravityDirectionTools;
 import util.ReverseIterator;
 
 using util.ArrayTools;
+using haxe.EnumTools.EnumValueTools;
+using entities.GravityDirection.GravityDirectionTools;
 using Lambda;
 
 class BlockGrid extends FlxTypedSpriteGroup<Block> {
@@ -202,7 +206,7 @@ class BlockGrid extends FlxTypedSpriteGroup<Block> {
 
   private inline function _rotateGravity() {
     // TODO: Do I even need this function?
-    this.gravity = GravityDirection.counterClockwise(this.gravity);
+    this.gravity = this.gravity.counterClockwise();
   }
 
   private function _anyGroupsRemaining() : Bool {

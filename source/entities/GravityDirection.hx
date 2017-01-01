@@ -1,14 +1,14 @@
 package entities;
 
-// TODO: Turn this back into an ordinary enum
-@:enum
-@:notNull
-abstract GravityDirection(Float) {
-  var Down = 0;
-  var Right = 270;
-  var Up = 180;
-  var Left = 90;
-  public static inline var Count = 4;
+enum GravityDirection {
+  Down;
+  Right;
+  Up;
+  Left;
+}
+
+class GravityDirectionTools {
+  private function new() {}
 
   public static inline function counterClockwise(gravity:GravityDirection) {
     return switch(gravity) {
@@ -36,38 +36,5 @@ abstract GravityDirection(Float) {
     return clockwise(gravity);
   }
 
-  public static inline function createByName(gravity:String) {
-    return switch(gravity) {
-      case "Down": Down;
-      case "Right": Right;
-      case "Up": Up;
-      case "Left": Left;
-      case _: {
-        trace('Warning: Invalid gravity direction ${gravity} given');
-        null;
-      }
-    };
-  }
-
-  public static inline function createByIndex(index:Int) {
-    return switch(index) {
-      case 0: Down;
-      case 1: Right;
-      case 2: Up;
-      case 3: Left;
-      case _: {
-        trace('Warning: Invalid gravity index ${index} given');
-        null;
-      }
-    };
-  }
-
-  public static inline function getIndex(gravity:GravityDirection) {
-    return switch(gravity) {
-      case Down: 0;
-      case Right: 1;
-      case Up: 2;
-      case Left: 3;
-    };
-  }
+  public static inline var Count = 4;
 }

@@ -139,9 +139,9 @@ class PlayState extends CommonState
     this._hintGui = cast(Assets.MainTilemap.getLayer("Hints"));
 
     this._gravityIndicator = new GravityIndicator(0, 0, Assets.TextureAtlas);
-    this._gravityIndicatorCoordinates = new Vector<FlxPoint>(GravityDirection.Count);
+    this._gravityIndicatorCoordinates = new Vector<FlxPoint>(GravityDirectionTools.Count);
     this._gravityPanel = new GravityPanel(0, 0, 0, 0, Assets.TextureAtlas);
-    this._gravityPanelCoordinates = new Vector<FlxRect>(GravityDirection.Count);
+    this._gravityPanelCoordinates = new Vector<FlxRect>(GravityDirectionTools.Count);
 
     this._hints = new FlxSpriteGroup();
     for (object in _hintGui.objects) {
@@ -211,12 +211,12 @@ class PlayState extends CommonState
         case "Gravity Indicator":
           var coords = FlxPoint.get(object.x, object.y);
           var direction = GravityDirection.createByName(object.type);
-          var index = GravityDirection.getIndex(direction);
+          var index = direction.getIndex();
           this._gravityIndicatorCoordinates[index] = coords;
         case "Gravity Panel":
           var coords = FlxRect.get(object.x, object.y, object.width, object.height);
           var direction = GravityDirection.createByName(object.type);
-          var index = GravityDirection.getIndex(direction);
+          var index = direction.getIndex();
           this._gravityPanelCoordinates[index] = coords;
         case "Grid":
           // TODO: Come up with a better way to render the grid
@@ -251,7 +251,7 @@ class PlayState extends CommonState
     }
 
 #if debug
-    for (i in 0...GravityDirection.Count) {
+    for (i in 0...GravityDirectionTools.Count) {
       assert(this._gravityIndicatorCoordinates.get(i) != null);
       assert(this._gravityPanelCoordinates.get(i) != null);
     }
