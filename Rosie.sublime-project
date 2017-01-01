@@ -16,6 +16,10 @@
   "build_systems":
   [
     {
+      "name": "Checkstyle",
+      "shell_cmd": "haxelib run checkstyle -c checkstyle.json -s ./source -nostyle"
+    },
+    {
       "name": "Build (HTML5)",
       "shell_cmd": "haxelib run lime build $project_path/Project.xml html5 -minify"
     },
