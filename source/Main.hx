@@ -21,15 +21,15 @@ class Main extends Sprite
   {
     super();
 
-#if debug
+    #if debug
     FlxG.signals.focusGained.add(function() trace("focusGained"));
     FlxG.signals.focusLost.add(function() trace("focusLost"));
     FlxG.signals.stateSwitched.add(function() trace("stateSwitched"));
-#end
+    #end
 
-#if (cpp || neko)
+    #if (cpp || neko)
     FlxG.signals.stateSwitched.add(function() Gc.run(true));
-#end
+    #end
 
     FlxG.signals.gameStarted.add(function() {
       FlxG.fixedTimestep = false;
@@ -40,9 +40,9 @@ class Main extends Sprite
       trace('Render Mode: ${FlxG.renderMethod}');
       trace('Mobile Device: ${FlxG.onMobile}');
 
-#if FLX_RENDER_TRIANGLE
+      #if FLX_RENDER_TRIANGLE
       trace("FLX_RENDER_TRIANGLE enabled");
-#end
+      #end
     });
 
     addChild(new FlxGame(320, 240, SplashScreenState, 2.0, 60, 60, true));

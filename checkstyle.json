@@ -470,18 +470,8 @@
 			}
 		},
 		{
-			"type": "Trace",
-			"props": {}
-		},
-		{
 			"type": "TrailingWhitespace",
 			"props": {}
-		},
-		{
-			"type": "Type",
-			"props": {
-				"ignoreEnumAbstractValues": true
-			}
 		},
 		{
 			"type": "TypeName",

@@ -2,9 +2,7 @@ package;
 
 import flixel.addons.editors.tiled.TiledImageLayer;
 import flixel.addons.editors.tiled.TiledMap;
-import flixel.addons.editors.tiled.TiledObject;
 import flixel.addons.editors.tiled.TiledObjectLayer;
-import flixel.addons.editors.tiled.TiledPropertySet;
 import flixel.addons.editors.tiled.TiledTileLayer;
 import flixel.addons.editors.tiled.TiledTileSet;
 import flixel.graphics.frames.FlxAtlasFrames;
@@ -15,6 +13,7 @@ import de.polygonal.ds.tools.Assert.assert;
 
 @:final
 class Assets {
+
   public static var initialized(default, null) = false;
 
   public static var TitleFont : FlxBitmapFont;
@@ -64,8 +63,6 @@ class Assets {
       MainBackgroundLayer = cast(MainTilemap.getLayer("Background"), TiledImageLayer);
       MainObjectLayer = cast(MainTilemap.getLayer("Objects"), TiledObjectLayer);
       MainGuiLayer = cast(MainTilemap.getLayer("GUI"), TiledObjectLayer);
-
-
       assert(MainTilemap != null);
       assert(MainGroundLayer != null);
       assert(MainBackgroundLayer != null);
@@ -77,8 +74,8 @@ class Assets {
       assert(TileSet != null);
       assert(SpriteSet != null);
 
-      trace("Assets initialized");
       initialized = true;
+      trace("Assets initialized");
     }
   }
 }

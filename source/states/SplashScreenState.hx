@@ -43,7 +43,7 @@ class SplashScreenState extends FlxState {
 #end
 
     this.animationDone = false;
-    this.bgColor = 0xff070707;
+    this.bgColor = 0xFF070707;
 
     var map = new TiledMap(AssetPaths.splash__tmx);
     var objects : TiledObjectLayer = cast map.getLayer("Splash Screen");
