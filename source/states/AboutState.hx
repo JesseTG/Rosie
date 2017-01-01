@@ -4,6 +4,7 @@ import flixel.addons.display.FlxStarField.FlxStarField2D;
 import flixel.addons.editors.tiled.TiledMap;
 import flixel.addons.editors.tiled.TiledObjectLayer;
 import flixel.addons.editors.tiled.TiledTileLayer;
+import flixel.addons.transition.FlxTransitionableState;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -24,7 +25,7 @@ import entities.Rosie.AnimationState;
 using ObjectInit;
 using Lambda;
 
-class AboutState extends FlxState {
+class AboutState extends FlxTransitionableState {
   private static inline var NUM_STARS = 100;
 
   private var _starfield : FlxStarField2D;

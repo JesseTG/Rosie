@@ -4,6 +4,7 @@ import haxe.ds.Vector;
 
 import flixel.addons.display.FlxTiledSprite;
 import flixel.addons.editors.tiled.TiledObjectLayer;
+import flixel.addons.transition.FlxTransitionableState;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
@@ -357,6 +358,8 @@ class PlayState extends CommonState
     }
     else if (!this.gameRunning && _time <= 0) {
       if (_readyToLeaveState && FlxG.mouse.justPressed) {
+        FlxTransitionableState.skipNextTransIn = true;
+        FlxTransitionableState.skipNextTransOut = true;
         FlxG.switchState(new MenuState());
       }
     }

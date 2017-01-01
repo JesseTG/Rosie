@@ -2,6 +2,7 @@ package states;
 
 import flixel.addons.editors.tiled.TiledMap;
 import flixel.addons.editors.tiled.TiledObjectLayer;
+import flixel.addons.transition.FlxTransitionableState;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -19,7 +20,7 @@ import entities.Rosie;
 using ObjectInit;
 using Lambda;
 
-class SplashScreenState extends FlxState {
+class SplashScreenState extends FlxTransitionableState {
 
   private var logo : FlxSprite;
   private var rosie : FlxSprite;

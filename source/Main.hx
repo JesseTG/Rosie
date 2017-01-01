@@ -2,6 +2,11 @@ package;
 
 import openfl.display.Sprite;
 
+import flixel.math.FlxPoint;
+import flixel.addons.transition.FlxTransitionableState;
+import flixel.addons.transition.TransitionData.TransitionType;
+import flixel.addons.transition.TransitionData;
+import flixel.addons.transition.TransitionTiles;
 import flixel.FlxG;
 import flixel.FlxGame;
 
@@ -12,6 +17,8 @@ import neko.vm.Gc;
 #end
 
 import states.SplashScreenState;
+
+using ObjectInit;
 
 class Main extends Sprite
 {
@@ -37,6 +44,17 @@ class Main extends Sprite
       FlxG.camera.pixelPerfectRender = true;
       FlxG.camera.filtersEnabled = false;
       FlxG.game.filtersEnabled = false;
+
+      FlxTransitionableState.defaultTransIn = new TransitionData().init(
+        color = 0xFFFFFFFF,
+        type = TransitionType.TILES,
+        direction = FlxPoint.get(1, 1),
+        duration = 0.25
+      );
+
+      FlxTransitionableState.defaultTransOut = FlxTransitionableState.defaultTransIn;
+
+
       trace('Render Mode: ${FlxG.renderMethod}');
       trace('Mobile Device: ${FlxG.onMobile}');
 
