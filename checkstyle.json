@@ -20,10 +20,6 @@
 			"props": {}
 		},
 		{
-			"type": "AvoidInlineConditionals",
-			"props": {}
-		},
-		{
 			"type": "AvoidStarImport",
 			"props": {}
 		},
@@ -137,14 +133,8 @@
 		{
 			"type": "IndentationCharacter",
 			"props": {
-				"character": "tab",
+				"character": "space",
 				"ignorePattern": "^$"
-			}
-		},
-		{
-			"type": "InnerAssignment",
-			"props": {
-				"ignoreReturnAssignments": false
 			}
 		},
 		{
@@ -313,7 +303,7 @@
 				"boolOpPolicy": "around",
 				"intervalOpPolicy": "none",
 				"assignOpPolicy": "around",
-				"functionArgPolicy": "around",
+				"functionArgPolicy": "none",
 				"bitwiseOpPolicy": "around",
 				"arithmeticOpPolicy": "around",
 				"compareOpPolicy": "around",
@@ -500,10 +490,6 @@
 				"format": "^[A-Z]+[a-zA-Z0-9]*$",
 				"tokens": []
 			}
-		},
-		{
-			"type": "UnnecessaryConstructor",
-			"props": {}
 		},
 		{
 			"type": "UnusedImport",
