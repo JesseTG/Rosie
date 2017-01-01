@@ -117,8 +117,10 @@ class PlayState extends CommonState
     this._hintGui = cast(Assets.MainTilemap.getLayer("Hints"));
 
     this._gravityIndicator = new GravityIndicator(0, 0, Assets.TextureAtlas);
+    this._gravityIndicator.exists = false;
     this._gravityIndicatorCoordinates = new Vector<FlxPoint>(GravityDirectionTools.Count);
     this._gravityPanel = new GravityPanel(0, 0, 0, 0, Assets.TextureAtlas);
+    this._gravityPanel.exists = false;
     this._gravityPanelCoordinates = new Vector<FlxRect>(GravityDirectionTools.Count);
 
     this._hints = new FlxSpriteGroup();
@@ -447,6 +449,8 @@ class PlayState extends CommonState
       this.gameRunning = true;
       // TODO: Init the block event handlers in here
 
+      this._gravityIndicator.exists = true;
+      this._gravityPanel.exists = true;
       FlxG.sound.playMusic(AssetPaths.music__ogg, 1, true);
     });
 
