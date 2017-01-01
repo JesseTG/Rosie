@@ -70,4 +70,7 @@
 
 	<!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
 	<template path="assets/template/index.html" rename="index.html" if="flash"/>
+	<icon path="assets/icons/rosie-icon-16.png" size="16" />
+	<icon path="assets/icons/rosie-icon-32.png" size="32" />
+	<icon path="assets/icons/rosie-icon-64.png" size="64" />
 </project>
