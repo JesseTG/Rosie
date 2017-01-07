@@ -2,11 +2,14 @@ package;
 
 import openfl.display.Sprite;
 
-import flixel.math.FlxPoint;
+#if (!html5) // No transitions on HTML5 target https://github.com/HaxeFlixel/flixel-addons/issues/285
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.transition.TransitionData.TransitionType;
 import flixel.addons.transition.TransitionData;
 import flixel.addons.transition.TransitionTiles;
+#end
+
+import flixel.math.FlxPoint;
 import flixel.FlxG;
 import flixel.FlxGame;
 
@@ -45,6 +48,7 @@ class Main extends Sprite
       FlxG.camera.filtersEnabled = false;
       FlxG.game.filtersEnabled = false;
 
+      #if (!html5)
       FlxTransitionableState.defaultTransIn = new TransitionData().init(
         color = 0xFFFFFFFF,
         type = TransitionType.TILES,
@@ -53,7 +57,7 @@ class Main extends Sprite
       );
 
       FlxTransitionableState.defaultTransOut = FlxTransitionableState.defaultTransIn;
-
+      #end
 
       trace('Render Mode: ${FlxG.renderMethod}');
       trace('Mobile Device: ${FlxG.onMobile}');

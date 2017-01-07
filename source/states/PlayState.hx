@@ -2,9 +2,11 @@ package states;
 
 import haxe.ds.Vector;
 
+#if (!html5)
+import flixel.addons.transition.FlxTransitionableState;
+#end
 import flixel.addons.display.FlxTiledSprite;
 import flixel.addons.editors.tiled.TiledObjectLayer;
-import flixel.addons.transition.FlxTransitionableState;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
@@ -358,8 +360,10 @@ class PlayState extends CommonState
     }
     else if (!this.gameRunning && _time <= 0) {
       if (_readyToLeaveState && FlxG.mouse.justPressed) {
+        #if (!html5)
         FlxTransitionableState.skipNextTransIn = true;
         FlxTransitionableState.skipNextTransOut = true;
+        #end
         FlxG.switchState(new MenuState());
       }
     }

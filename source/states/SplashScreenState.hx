@@ -1,8 +1,10 @@
 package states;
 
+#if (!html5)
+import flixel.addons.transition.FlxTransitionableState;
+#end
 import flixel.addons.editors.tiled.TiledMap;
 import flixel.addons.editors.tiled.TiledObjectLayer;
-import flixel.addons.transition.FlxTransitionableState;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -20,7 +22,7 @@ import entities.Rosie;
 using ObjectInit;
 using Lambda;
 
-class SplashScreenState extends FlxTransitionableState {
+class SplashScreenState extends #if html5 FlxState #else FlxTransitionableState #end {
 
   private var logo : FlxSprite;
   private var rosie : FlxSprite;

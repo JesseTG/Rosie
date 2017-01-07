@@ -1,8 +1,11 @@
 package states;
 
+#if (!html5)
+import flixel.addons.transition.FlxTransitionableState;
+#end
+
 import flixel.addons.editors.tiled.TiledObjectLayer;
 import flixel.addons.editors.tiled.TiledTileLayer;
-import flixel.addons.transition.FlxTransitionableState;
 import flixel.FlxG;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.math.FlxPoint;
@@ -85,8 +88,10 @@ class MenuState extends CommonState
           var frameName = source.substr(index + 1);
 
           this._start = new FlxBitmapTextButton(0, 0, object.properties.text, function() {
+            #if (!html5)
             FlxTransitionableState.skipNextTransIn = true;
             FlxTransitionableState.skipNextTransOut = true;
+            #end
             FlxG.switchState(new PlayState());
           }).init(
             x = object.x,

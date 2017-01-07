@@ -1,7 +1,10 @@
 package states;
 
-import flixel.addons.display.FlxBackdrop;
+#if (!html5)
 import flixel.addons.transition.FlxTransitionableState;
+#end
+
+import flixel.addons.display.FlxBackdrop;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.math.FlxPoint;
@@ -15,7 +18,7 @@ import de.polygonal.ds.tools.Assert.assert;
 using Lambda;
 using ObjectInit;
 
-class CommonState extends FlxTransitionableState {
+class CommonState extends #if html5 FlxState #else FlxTransitionableState #end  {
 
   private var tilemap : FlxTilemap;
   private var bgImage : FlxBackdrop;
