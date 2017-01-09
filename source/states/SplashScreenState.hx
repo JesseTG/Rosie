@@ -114,6 +114,7 @@ class SplashScreenState extends #if html5 FlxState #else FlxTransitionableState 
       this.animationDone = true;
       this.timer = new FlxTimer();
       timer.start(5, function(_) { FlxG.switchState(new MenuState()); });
+      timer.start(1, function(_) { FlxG.sound.play(AssetPaths.meow__wav, 1, false, true); });
     });
 
     FlxG.watch.add(FlxPoint.pool, "length", "# Pooled FlxPoints");
