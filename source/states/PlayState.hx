@@ -264,7 +264,8 @@ class PlayState extends CommonState
             letterSpacing = Std.parseInt(object.properties.letterSpacing),
             moves = false,
             immovable = true,
-            solid = false
+            solid = false,
+            useTextColor = true
           );
 
           _timeChangeDisplay = new FlxBitmapText(Assets.TextFont).init(
@@ -340,7 +341,7 @@ class PlayState extends CommonState
       _timeSinceLastGoodClick += elapsed;
       _formatArray[0] = Math.max(0, _time);
       _timeDisplay.text = Printf.format("⌚   %.1f", _formatArray);
-
+      _timeDisplay.textColor = (_time >= 10) ? FlxColor.WHITE : FlxColor.RED;
       if (_timeSinceLastGoodClick >= 10 && _rosie.emote.state == EmoteState.None && FlxG.random.bool(1)) {
         _rosie.emote.state = FlxG.random.getObject([
           EmoteState.Bored,
