@@ -517,6 +517,7 @@ class PlayState extends CommonState
         FlxG.sound.music.stop();
       }
 
+      FlxG.sound.play(AssetPaths.time_out__wav, 1, false, false);
       this._gravityIndicator.exists = false;
       this._gravityPanel.exists = false;
 
