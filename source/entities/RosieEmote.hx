@@ -1,5 +1,6 @@
 package entities;
 
+import flixel.FlxG;
 import flixel.addons.display.FlxNestedSprite;
 import flixel.graphics.frames.FlxFramesCollection;
 
@@ -81,6 +82,7 @@ class RosieEmote extends FlxNestedSprite {
     this.state = s;
     this.visible = (this.state != None);
     if (s != None) {
+      FlxG.sound.play(AssetPaths.meow__wav, 1, false, false);
       this.animation.play(cast this.state);
     }
     return this.state;
