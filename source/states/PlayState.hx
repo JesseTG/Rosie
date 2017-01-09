@@ -348,7 +348,8 @@ class PlayState extends CommonState
           EmoteState.Huh
         ]);
       }
-      if (_time <= 11 && Math.abs(_time - Math.fround(_time)) < 0.000001) {
+
+      if (_time >= 1 && _time <= 10 && Math.abs(_time - Math.fround(_time)) < elapsed) {
         // If we have under 10 seconds to go, and exactly one second has passed...
         FlxG.sound.play(AssetPaths.time_running_out__wav, 1, false, false);
       }
