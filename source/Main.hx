@@ -55,6 +55,7 @@ class Main extends Sprite
       }
 
       FlxG.fixedTimestep = false;
+      FlxGraphic.defaultPersist = true;
       FlxG.cameras.useBufferLocking = true;
       FlxG.camera.pixelPerfectRender = true;
       FlxG.camera.filtersEnabled = false;
