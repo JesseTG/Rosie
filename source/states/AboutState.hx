@@ -83,6 +83,7 @@ class AboutState extends #if html5 FlxState #else FlxTransitionableState #end {
           rosie.resetSizeFromFrame();
           rosie.updateHitbox();
         case "Return Button":
+          // TODO: Clean this up
           var source = spriteSet.getImageSourceByGid(object.gid).source;
           var index = source.lastIndexOf('/');
           var frameName = source.substr(index + 1);
