@@ -7,6 +7,7 @@ import flixel.addons.transition.FlxTransitionableState;
 import flixel.addons.editors.tiled.TiledObjectLayer;
 import flixel.addons.editors.tiled.TiledTileLayer;
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.math.FlxPoint;
 import flixel.text.FlxBitmapText;
@@ -25,6 +26,8 @@ class MenuState extends CommonState
   private var _start : FlxBitmapTextButton;
   private var _about : FlxBitmapTextButton;
   private var _titleLetters : FlxTypedSpriteGroup<FlxBitmapText>;
+  private var _logo : FlxSprite;
+  private var _copyright : FlxBitmapText;
   private var gate : FlxTilemap;
   private var gateLayer : TiledTileLayer;
 
@@ -172,6 +175,35 @@ class MenuState extends CommonState
             FlxPoint.weak(0, _about.label.height + 2)
           ];
           _about.updateHitbox();
+        case "Logo":
+          var source = Assets.SpriteSet.getImageSourceByGid(object.gid).source;
+          var index = source.lastIndexOf('/');
+          var frameName = source.substr(index + 1);
+
+          this._logo = new FlxSprite(object.x, object.y - object.height, 'assets/images/${frameName}').init(
+            pixelPerfectPosition = false,
+            pixelPerfectRender = false,
+            immovable = true,
+            solid = false
+          );
+        case "Copyright":
+          var textColor = (object.properties.textColor == null) ? FlxColor.WHITE : FlxColor.fromString(object.properties.textColor);
+          this._copyright = new FlxBitmapText(Assets.TextFont).init(
+            x = object.x,
+            y = object.y,
+            autoSize = false,
+            width = object.width,
+            fieldWidth = object.width,
+            text = object.properties.text,
+            alignment = FlxTextAlign.LEFT,
+            pixelPerfectPosition = false,
+            pixelPerfectRender = false,
+            letterSpacing = Std.parseInt(object.properties.letterSpacing),
+            useTextColor = (object.properties.textColor != null),
+            textColor = textColor,
+            immovable = true,
+            solid = false
+          );
         default:
           // nop
       }
@@ -180,6 +212,8 @@ class MenuState extends CommonState
     this.add(gate);
     this.add(_start);
     this.add(_about);
+    this.add(_logo);
+    this.add(_copyright);
     this.add(this._titleLetters);
     FlxG.console.registerObject("playButton", _start);
   }
