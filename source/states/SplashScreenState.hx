@@ -29,6 +29,7 @@ class SplashScreenState extends #if html5 FlxState #else FlxTransitionableState 
   private var animationDone : Bool;
   private var timer : FlxTimer;
   private var OnAnimationDone : FlxSignal;
+  private var endX : Float;
 
   public override function create() {
     super.create();
@@ -76,11 +77,12 @@ class SplashScreenState extends #if html5 FlxState #else FlxTransitionableState 
           rosie.resetSizeFromFrame();
           rosie.updateHitbox();
 
+          this.endX = Std.parseFloat(object.properties.endX);
           FlxTween.linearMotion(
             rosie,
             rosie.x,
             rosie.y,
-            Std.parseFloat(object.properties.endX),
+            this.endX,
             rosie.y,
             64,
             false,
@@ -132,7 +134,7 @@ class SplashScreenState extends #if html5 FlxState #else FlxTransitionableState 
       }
       else {
         FlxTween.globalManager.clear();
-        rosie.x = 256; // TODO: Don't hard-code
+        rosie.x = this.endX;
         rosie.animation.play(cast AnimationState.Idle);
 
         var rect = logo.clipRect;

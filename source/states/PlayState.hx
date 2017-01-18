@@ -247,9 +247,11 @@ class PlayState extends CommonState
             text = "0",
             x = object.x,
             y = object.y,
+            width = object.width,
+            fieldWidth = object.width,
             letterSpacing = Std.parseInt(object.properties.letterSpacing),
             autoSize = object.properties.autoSize == "true",
-            alignment = FlxTextAlign.RIGHT,
+            alignment = FlxTextAlign.CENTER,
             moves = false,
             immovable = true,
             solid = false

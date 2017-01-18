@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="16" tileheight="16" backgroundcolor="#070707" nextobjectid="30">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="16" tileheight="16" backgroundcolor="#000055" nextobjectid="30">
  <properties>
   <property name="numStars" type="int" value="100"/>
  </properties>
  <tileset firstgid="1" name="Sprites" tilewidth="64" tileheight="32" tilecount="2" columns="0">
   <tile id="0">
-   <image width="64" height="32" source="../assets-raw/raw/button-00.png"/>
+   <image width="64" height="32" source="../../../../code/Rosie/assets/images-raw/button-00.png"/>
   </tile>
   <tile id="1">
-   <image width="23" height="21" source="../assets-raw/raw/cat/idle/rosie-idle-01.png"/>
+   <image width="23" height="21" source="../../../../code/Rosie/assets/images-raw/cat/idle/rosie-idle-01.png"/>
   </tile>
  </tileset>
  <tileset firstgid="3" name="Overworld" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="images/tile-environment.png" width="128" height="128"/>
  </tileset>
- <layer name="Ground" width="20" height="15">
+ <layer name="Ground" width="32" height="18">
   <data encoding="base64">
-   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAA0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAABwAAAAcAAAAHAAAABwAAAAdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAJAAAACQAAAAkAAAAJAAAACUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJAAAACQAAAAkAAAAJAAAACQAAAAlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAJAAAACQAAAAkAAAAJAAAACUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAA0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAABwAAAAcAAAAHAAAABwAAAAdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAJAAAACQAAAAkAAAAJAAAACUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJAAAACQAAAAkAAAAJAAAACQAAAAlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAJAAAACQAAAAkAAAAJAAAACUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJAAAACQAAAAkAAAAJAAAACQAAAAlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAJAAAACQAAAAkAAAAJAAAACUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
   </data>
  </layer>
  <objectgroup name="Credits">
@@ -26,136 +26,136 @@
    <property name="startDelay" type="float" value="1"/>
    <property name="useDuration" type="bool" value="false"/>
   </properties>
-  <object id="5" name="Title" type="Title" x="168" y="240" width="80" height="32">
+  <object id="5" name="Title" type="Title" x="344" y="240" width="80" height="32">
    <properties>
     <property name="letterSpacing" type="int" value="0"/>
     <property name="text" value="Rosie"/>
    </properties>
   </object>
-  <object id="7" name="Copyright" type="Text" x="96" y="288" width="224" height="16">
+  <object id="7" name="Copyright" type="Text" x="272" y="288" width="224" height="16">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="Copyright 2016 Corundum Games"/>
    </properties>
   </object>
-  <object id="9" name="Photo" type="Image" x="128" y="672" width="160" height="120">
+  <object id="9" name="Photo" type="Image" x="304" y="672" width="160" height="120">
    <properties>
     <property name="image" value="rosie.jpg"/>
    </properties>
   </object>
-  <object id="11" name="Dates" type="Text" x="96" y="800" width="224" height="16">
+  <object id="11" name="Dates" type="Text" x="272" y="800" width="224" height="16">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="April 1 2007 - August 31 2016"/>
    </properties>
   </object>
-  <object id="12" name="RIP" type="Text" x="96" y="816" width="224" height="16">
+  <object id="12" name="RIP" type="Text" x="272" y="816" width="224" height="16">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="Rest in peace..."/>
    </properties>
   </object>
-  <object id="13" name="Namesake" type="Text" x="96" y="640" width="224" height="16">
+  <object id="13" name="Namesake" type="Text" x="272" y="640" width="224" height="16">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="Rosie"/>
     <property name="textColor" type="color" value="#ffff0000"/>
    </properties>
   </object>
-  <object id="14" name="Thanks 1" type="Title" x="96" y="848" width="224" height="32">
+  <object id="14" name="Thanks 1" type="Title" x="272" y="848" width="224" height="32">
    <properties>
     <property name="letterSpacing" type="int" value="0"/>
     <property name="text" value="Thanks for"/>
    </properties>
   </object>
-  <object id="15" name="Thanks 2" type="Title" x="96" y="880" width="224" height="32">
+  <object id="15" name="Thanks 2" type="Title" x="272" y="880" width="224" height="32">
    <properties>
     <property name="letterSpacing" type="int" value="0"/>
     <property name="text" value="playing!"/>
    </properties>
   </object>
-  <object id="16" name="License" type="Text" x="96" y="304" width="224" height="16">
+  <object id="16" name="License" type="Text" x="272" y="304" width="224" height="16">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="Released under the MIT license"/>
    </properties>
   </object>
-  <object id="17" name="Not Just Family" type="Text" x="96" y="656" width="224" height="16">
+  <object id="17" name="Not Just Family" type="Text" x="272" y="656" width="224" height="16">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="Not just a cat, but family"/>
    </properties>
   </object>
-  <object id="18" name="Jesse" type="Text" x="96" y="448" width="224" height="16">
+  <object id="18" name="Jesse" type="Text" x="272" y="448" width="224" height="16">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="Jesse Talavera-Greenberg"/>
     <property name="textColor" type="color" value="#ffff0000"/>
    </properties>
   </object>
-  <object id="19" name="Design and Implementation" type="Text" x="96" y="464" width="224" height="16">
+  <object id="19" name="Design and Implementation" type="Text" x="272" y="464" width="224" height="16">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="Game design and implementation"/>
    </properties>
   </object>
-  <object id="20" name="Logo" type="Image" x="128" y="320" width="160" height="59">
+  <object id="20" name="Logo" type="Image" x="304" y="320" width="160" height="59">
    <properties>
     <property name="image" value="logo.png"/>
    </properties>
   </object>
-  <object id="21" name="Noah" type="Text" x="96" y="528" width="224" height="16">
+  <object id="21" name="Noah" type="Text" x="272" y="528" width="224" height="16">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="Noah Talavera-Greenberg"/>
     <property name="textColor" type="color" value="#ffff0000"/>
    </properties>
   </object>
-  <object id="22" name="Noah's Role" type="Text" x="96" y="544" width="224" height="16">
+  <object id="22" name="Noah's Role" type="Text" x="272" y="544" width="224" height="16">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="Assistance with Rosie's sprite"/>
    </properties>
   </object>
-  <object id="23" name="Sound effects" type="Text" x="96" y="480" width="224" height="16">
+  <object id="23" name="Sound effects" type="Text" x="272" y="480" width="224" height="16">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="Sound effects"/>
    </properties>
   </object>
-  <object id="24" name="Graphics" type="Text" x="96" y="496" width="224" height="16">
+  <object id="24" name="Graphics" type="Text" x="272" y="496" width="224" height="16">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="Ad-hoc graphics edits"/>
    </properties>
   </object>
-  <object id="25" name="OpenGameArt" type="Text" x="96" y="576" width="224" height="16">
+  <object id="25" name="OpenGameArt" type="Text" x="272" y="576" width="224" height="16">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="OpenGameArt"/>
     <property name="textColor" type="color" value="#ffff0000"/>
    </properties>
   </object>
-  <object id="26" name="Other Assets" type="Text" x="96" y="592" width="224" height="16">
+  <object id="26" name="Other Assets" type="Text" x="272" y="592" width="224" height="16">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="All other assets"/>
    </properties>
   </object>
-  <object id="27" name="See README" type="Text" x="96" y="608" width="224" height="16">
+  <object id="27" name="See README" type="Text" x="272" y="608" width="224" height="16">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="(See the README for more details)"/>
    </properties>
   </object>
-  <object id="28" name="www.corundumgames.com" type="Text" x="96" y="384" width="224" height="16">
+  <object id="28" name="www.corundumgames.com" type="Text" x="272" y="384" width="224" height="16">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="corundumgames.com"/>
     <property name="url" value="corundumgames.com"/>
    </properties>
   </object>
-  <object id="29" name="jessetg.github.io" type="Text" x="96" y="400" width="224" height="16">
+  <object id="29" name="jessetg.github.io" type="Text" x="272" y="400" width="224" height="16">
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="jessetg.github.io"/>
@@ -164,7 +164,7 @@
   </object>
  </objectgroup>
  <objectgroup name="GUI">
-  <object id="1" name="Return Button" gid="1" x="16" y="224" width="64" height="32">
+  <object id="1" name="Return Button" gid="1" x="16" y="256" width="64" height="32">
    <properties>
     <property name="text" value="⇦ Back"/>
    </properties>

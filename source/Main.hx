@@ -67,7 +67,7 @@ class Main extends Sprite
       #end
     });
 
-    addChild(new FlxGame(320, 240, SplashScreenState, 2.0, 60, 60, true));
+    addChild(new FlxGame(512, 288, SplashScreenState, 2.0, 60, 60, true));
 
     // TODO: Make exceptions bring the player to an error screen gracefully
     // TODO: Make a proper package hierarchy
