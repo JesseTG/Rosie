@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="16" tileheight="16" nextobjectid="133">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="16" tileheight="16" nextobjectid="138">
  <tileset firstgid="1" name="Overworld" tilewidth="16" tileheight="16" tilecount="64" columns="8">
   <image source="images/tile-environment.png" width="128" height="128"/>
   <tile id="4">
@@ -129,6 +129,18 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="Options GUI" visible="0">
+  <object id="135" name="Back Button" type="Back" gid="70" x="224" y="240" width="64" height="32">
+   <properties>
+    <property name="text" value="⇦ Back"/>
+   </properties>
+  </object>
+  <object id="136" name="Fullscreen Button" gid="70" x="272" y="112" width="64" height="32">
+   <properties>
+    <property name="text" value="Fullscreen"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="MenuState GUI">
   <object id="90" name="Play Button" gid="70" x="176" y="112" width="64" height="32">
    <properties>
@@ -146,6 +158,16 @@
    <properties>
     <property name="letterSpacing" type="int" value="-3"/>
     <property name="text" value="Copyright 2017"/>
+   </properties>
+  </object>
+  <object id="133" name="Options Button" gid="70" x="176" y="176" width="64" height="32">
+   <properties>
+    <property name="text" value="Options"/>
+   </properties>
+  </object>
+  <object id="137" name="Exit Button" gid="70" x="272" y="176" width="64" height="32">
+   <properties>
+    <property name="text" value="Exit"/>
    </properties>
   </object>
  </objectgroup>

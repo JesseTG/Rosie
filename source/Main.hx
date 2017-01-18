@@ -12,6 +12,7 @@ import flixel.addons.transition.TransitionTiles;
 import flixel.math.FlxPoint;
 import flixel.FlxG;
 import flixel.FlxGame;
+import flixel.graphics.FlxGraphic;
 
 #if cpp
 import cpp.vm.Gc;
@@ -35,13 +36,24 @@ class Main extends Sprite
     FlxG.signals.focusGained.add(function() trace("focusGained"));
     FlxG.signals.focusLost.add(function() trace("focusLost"));
     FlxG.signals.stateSwitched.add(function() trace("stateSwitched"));
+    FlxG.signals.gameStarted.add(function() trace("gameStarted"));
     #end
 
     #if (cpp || neko)
     FlxG.signals.stateSwitched.add(function() Gc.run(true));
     #end
 
+    FlxG.signals.stateSwitched.add(function() {
+      if (FlxG.save.data.antialiasing != null) {
+        FlxG.camera.antialiasing = FlxG.save.data.antialiasing;
+      }
+    });
+
     FlxG.signals.gameStarted.add(function() {
+      if (FlxG.save.data.fullscreen != null) {
+        FlxG.fullscreen = FlxG.save.data.fullscreen;
+      }
+
       FlxG.fixedTimestep = false;
       FlxG.cameras.useBufferLocking = true;
       FlxG.camera.pixelPerfectRender = true;

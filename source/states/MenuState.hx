@@ -6,6 +6,7 @@ import flixel.addons.transition.FlxTransitionableState;
 
 import flixel.addons.editors.tiled.TiledObjectLayer;
 import flixel.addons.editors.tiled.TiledTileLayer;
+import flixel.addons.editors.tiled.TiledObject;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
@@ -25,6 +26,10 @@ class MenuState extends CommonState
   private var menuGuiLayer : TiledObjectLayer;
   private var _start : FlxBitmapTextButton;
   private var _about : FlxBitmapTextButton;
+  private var _optionsButton : FlxBitmapTextButton;
+  #if !html5
+  private var _exitButton : FlxBitmapTextButton;
+  #end
   private var _titleLetters : FlxTypedSpriteGroup<FlxBitmapText>;
   private var _logo : FlxSprite;
   private var _copyright : FlxBitmapText;
@@ -85,96 +90,35 @@ class MenuState extends CommonState
           }
 
         case "Play Button":
-          // TODO: Clean up this part
-          var source = Assets.SpriteSet.getImageSourceByGid(object.gid).source;
-          var index = source.lastIndexOf('/');
-          var frameName = source.substr(index + 1);
-
-          this._start = new FlxBitmapTextButton(0, 0, object.properties.text, function() {
+          this._start = makeButton(object, function() {
             #if (!html5)
             FlxTransitionableState.skipNextTransIn = true;
             FlxTransitionableState.skipNextTransOut = true;
             #end
             FlxG.switchState(new PlayState());
-          }).init(
-            x = object.x,
-            y = object.y - object.height,
-            frames = Assets.TextureAtlas,
-            frame = Assets.TextureAtlas.getByName(frameName),
-            solid = false,
-            immovable = true
-          );
-
-          _start.label.font = Assets.TextFont;
-          _start.label.letterSpacing = -3;
-          _start.label.alignment = FlxTextAlign.CENTER;
-          _start.label.color = FlxColor.WHITE;
-          _start.label.autoSize = false;
-          _start.label.fieldWidth = object.width;
-          _start.label.solid = false;
-          _start.label.immovable = true;
-
-          var normalAnim = _start.animation.getByName("normal");
-          normalAnim.frames = [Assets.TextureAtlas.getIndexByName(frameName)];
-
-          var pressedAnim = _start.animation.getByName("pressed");
-          pressedAnim.frames = [Assets.TextureAtlas.getIndexByName("button-01.png")];
-
-          var highlightAnim = _start.animation.getByName("highlight");
-          highlightAnim.frames = [Assets.TextureAtlas.getIndexByName("button-02.png")];
-
-          var point = FlxPoint.weak(0, _start.label.height);
-          _start.labelAlphas = [1.0, 1.0, 1.0];
-          _start.labelOffsets = [
-            point,
-            point,
-            FlxPoint.weak(0, _start.label.height + 2)
-          ];
-          _start.updateHitbox();
+          });
 
         case "About Button":
-          // TODO: Clean up this part
-          var source = Assets.SpriteSet.getImageSourceByGid(object.gid).source;
-          var index = source.lastIndexOf('/');
-          var frameName = source.substr(index + 1);
+          this._about = makeButton(object, function() {
+            FlxG.switchState(new AboutState());
+          });
 
-          this._about = new FlxBitmapTextButton(0, 0, object.properties.text, function() {
-              FlxG.switchState(new AboutState());
-          }).init(
-            x = object.x,
-            y = object.y - object.height,
-            frames = Assets.TextureAtlas,
-            frame = Assets.TextureAtlas.getByName(frameName),
-            solid = false,
-            immovable = true
-          );
+        case "Options Button":
+          this._optionsButton = makeButton(object, function() {
+            #if (!html5)
+            FlxTransitionableState.skipNextTransIn = true;
+            FlxTransitionableState.skipNextTransOut = true;
+            #end
+            FlxG.switchState(new OptionsState());
+          });
+        #if !html5
+        case "Exit Button":
+          this._exitButton = makeButton(object, function() {
+            Sys.exit(0);
+          });
+        #end
 
-          _about.label.font = Assets.TextFont;
-          _about.label.letterSpacing = -3;
-          _about.label.alignment = FlxTextAlign.CENTER;
-          _about.label.color = FlxColor.WHITE;
-          _about.label.autoSize = false;
-          _about.label.fieldWidth = object.width;
-          _about.label.solid = false;
-          _about.label.immovable = true;
 
-          var normalAnim = _about.animation.getByName("normal");
-          normalAnim.frames = [Assets.TextureAtlas.getIndexByName(frameName)];
-
-          var pressedAnim = _about.animation.getByName("pressed");
-          pressedAnim.frames = [Assets.TextureAtlas.getIndexByName("button-01.png")];
-
-          var highlightAnim = _about.animation.getByName("highlight");
-          highlightAnim.frames = [Assets.TextureAtlas.getIndexByName("button-02.png")];
-
-          var point = FlxPoint.weak(0, _about.label.height);
-          _about.labelAlphas = [1.0, 1.0, 1.0];
-          _about.labelOffsets = [
-            point,
-            point,
-            FlxPoint.weak(0, _about.label.height + 2)
-          ];
-          _about.updateHitbox();
         case "Logo":
           var source = Assets.SpriteSet.getImageSourceByGid(object.gid).source;
           var index = source.lastIndexOf('/');
@@ -212,6 +156,10 @@ class MenuState extends CommonState
     this.add(gate);
     this.add(_start);
     this.add(_about);
+    this.add(_optionsButton);
+    #if !html5
+    this.add(_exitButton);
+    #end
     this.add(_logo);
     this.add(_copyright);
     this.add(this._titleLetters);
